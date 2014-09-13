@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  EtreCheck
+
+  Created by John Daniel on 12/31/2013.
+  Copyright (c) 2013 Etresoft. All rights reserved.
+*/
+
+"timemachineneedslion" = "\tTime Machine information requires OS X 10.7 \"Lion\" or later.\n\n";
+"linkstyle" = "<head><style>a { font-family: sans-serif; } a:active { color: blue; } a:hover { color: blue; } </style></head>";
+"updateavailable" = "There is a new version of EtreCheck available. Do you want to quit now and download the new version?";
+"etrecheckreport" = "The EtreCheck report is most useful as a snapshot of the overall state of your system. If you are having problems, the best course of action is to go to the Apple support forums, post a detailed description of your problem, explain what is happening, explain what you would like to see happen, and include this report.";
+"applesupportforums" = "https://discussions.apple.com";
+"gatekeeperneedslion" = "\tGatekeeper information requires OS X 10.7.5 \"Lion\" or later.\n\n";
+"machineattributes" = "/System/Library/PrivateFrameworks/ServerInformation.framework/Versions/A/Resources/English.lproj/SIMachineAttributes.plist";
+"oldmachineattributes" = "/System/Library/PrivateFrameworks/ServerKit.framework/Versions/A/Resources/English.lproj/XSMachineAttributes.plist";
+"info" = " ℹ️";
+"startupitemsdeprecated" = "\tStartup items are obsolete and will not work in future versions of OS X\n";
+"%d day (plural rule: zero)" = "";
+"%d day (plural rule: one)" = "one day ";
+"%d day (plural rule: other)" = "%d days ";

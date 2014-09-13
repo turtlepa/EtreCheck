@@ -1,0 +1,86 @@
+/***********************************************************************
+ ** Etresoft
+ ** John Daniel
+ ** Copyright (c) 2014. All rights reserved.
+ **********************************************************************/
+
+#import <QuartzCore/CAAnimation.h>
+#import <QuartzCore/CoreImage.h>
+
+#import "SlideshowView.h"
+
+@implementation SlideshowView
+
+@synthesize maskView = myMaskView;
+
+// Set the transition style.
+- (void) updateSubviewsWithTransition: (NSString *) transition
+  {
+  CIFilter * transitionFilter = [CIFilter filterWithName: transition];
+    
+  [transitionFilter setDefaults];
+    
+	CATransition * newTransition = [CATransition animation];
+    
+  // We want to specify one of Core Animation's built-in transitions.
+  //[newTransition setFilter:transitionFilter];
+  [newTransition setType: transition];
+  [newTransition setSubtype: kCATransitionFromLeft];
+
+  // Specify an explicit duration for the transition.
+  [newTransition setDuration: 0.2];
+
+  // Associate the CATransition with the "subviews" key for this
+  // SlideshowView instance, so that when we swap ImageView instances in
+  // the -transitionToImage: method below (via -replaceSubview:with:).
+	[self
+    setAnimations:
+      [NSDictionary
+        dictionaryWithObject: newTransition forKey: @"subviews"]];
+  }
+
+// Create a new NSImageView and swap it into the view in place of the
+// previous NSImageView. This will trigger the transition animation wired
+// up in -updateSubviewsTransition, which fires on changes in the "subviews"
+// property.
+- (void) transitionToImage: (NSImage *) newImage
+  {
+  NSImageView * newImageView = nil;
+  
+  if(newImage)
+	  {
+    newImageView = [[NSImageView alloc] initWithFrame: [self bounds]];
+    [newImageView setImage: newImage];
+    [newImageView
+      setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+    }
+    
+  if(currentImageView && newImageView)
+    [[self animator] replaceSubview: currentImageView with: newImageView];
+    
+	else
+	  {
+    if(currentImageView)
+			[[currentImageView animator] removeFromSuperview];
+    
+    NSView * maskView = self.maskView;
+    
+    if(!maskView)
+      maskView = self;
+      
+    if(newImageView)
+      {
+      if(currentImageView)
+        [[self animator]
+          addSubview: newImageView
+          positioned: NSWindowBelow
+          relativeTo: maskView];
+      else
+        [self addSubview: newImageView];
+      }
+    }
+    
+  currentImageView = newImageView;
+  }
+
+@end

@@ -1,0 +1,659 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A50C9DAD19A2ACB600BA6A25 /* StartupItemsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C9DAC19A2ACB600BA6A25 /* StartupItemsCollector.m */; };
+		A50C9DB019A2DFDB00BA6A25 /* DiskCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C9DAF19A2DFDB00BA6A25 /* DiskCollector.m */; };
+		A50C9DB319A2E68C00BA6A25 /* USBCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C9DB219A2E68C00BA6A25 /* USBCollector.m */; };
+		A50C9DB619A2E69B00BA6A25 /* FirewireCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C9DB519A2E69B00BA6A25 /* FirewireCollector.m */; };
+		A50C9DB919A2E6AB00BA6A25 /* ThunderboltCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C9DB819A2E6AB00BA6A25 /* ThunderboltCollector.m */; };
+		A50C9DBC19A3690F00BA6A25 /* ConfigFileCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C9DBB19A3690F00BA6A25 /* ConfigFileCollector.m */; };
+		A50C9DBF19A36CC400BA6A25 /* GatekeeperCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C9DBE19A36CC400BA6A25 /* GatekeeperCollector.m */; };
+		A50C9DC219A36F3D00BA6A25 /* KernelExtensionCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C9DC119A36F3D00BA6A25 /* KernelExtensionCollector.m */; };
+		A50C9DC519A4052000BA6A25 /* LoginItemsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C9DC419A4052000BA6A25 /* LoginItemsCollector.m */; };
+		A50C9DC819A4063E00BA6A25 /* PlugInsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C9DC719A4063E00BA6A25 /* PlugInsCollector.m */; };
+		A50C9DCB19A4065B00BA6A25 /* InternetPlugInsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C9DCA19A4065B00BA6A25 /* InternetPlugInsCollector.m */; };
+		A5257D2E19AB51BE003084C8 /* ProcessesCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D2D19AB51BE003084C8 /* ProcessesCollector.m */; };
+		A5257D3119AB5251003084C8 /* CPUUsageCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3019AB5251003084C8 /* CPUUsageCollector.m */; };
+		A5257D3419AB525D003084C8 /* MemoryUsageCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3319AB525D003084C8 /* MemoryUsageCollector.m */; };
+		A5257D3719AB53FF003084C8 /* SystemInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3619AB53FF003084C8 /* SystemInformation.m */; };
+		A5257D3A19ABE02A003084C8 /* VirtualMemoryCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3919ABE02A003084C8 /* VirtualMemoryCollector.m */; };
+		A5257D3D19AC0AA3003084C8 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3C19AC0AA3003084C8 /* Utilities.m */; };
+		A5257D4019AC10E3003084C8 /* Checker.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3F19AC10E3003084C8 /* Checker.m */; };
+		A5409E9B186F271500B1727E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5409E9A186F271500B1727E /* SystemConfiguration.framework */; };
+		A540C6FE1873D5F800497BDE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A540C7001873D5F800497BDE /* Localizable.strings */; };
+		A54509FB19BE88B600D60758 /* Magnifying Glass Shade.png in Resources */ = {isa = PBXBuildFile; fileRef = A54509F919BE88B600D60758 /* Magnifying Glass Shade.png */; };
+		A54509FC19BE88B600D60758 /* Magnifying Glass.png in Resources */ = {isa = PBXBuildFile; fileRef = A54509FA19BE88B600D60758 /* Magnifying Glass.png */; };
+		A552A31D1818BDAE00829BA3 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A552A3161818BC7F00829BA3 /* CoreServices.framework */; };
+		A55BC16E15BF987D00D42EF1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55BC16D15BF987D00D42EF1 /* Cocoa.framework */; };
+		A55BC17815BF987D00D42EF1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A55BC17615BF987D00D42EF1 /* InfoPlist.strings */; };
+		A55BC17A15BF987D00D42EF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BC17915BF987D00D42EF1 /* main.m */; };
+		A55BC17E15BF987D00D42EF1 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A55BC17C15BF987D00D42EF1 /* Credits.rtf */; };
+		A55BC18115BF987D00D42EF1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BC18015BF987D00D42EF1 /* AppDelegate.m */; };
+		A55BC18415BF987D00D42EF1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55BC18215BF987D00D42EF1 /* MainMenu.xib */; };
+		A55BC1B915C0E0A400D42EF1 /* EtreCheck.iconset in Resources */ = {isa = PBXBuildFile; fileRef = A55BC1B815C0E0A400D42EF1 /* EtreCheck.iconset */; };
+		A59B506D15C45EC000250772 /* NSMutableAttributedString+Etresoft.m in Sources */ = {isa = PBXBuildFile; fileRef = A59B506C15C45EC000250772 /* NSMutableAttributedString+Etresoft.m */; };
+		A5C00A2819BFF2D500140404 /* NSAttributedString+Etresoft.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C00A2719BFF2D500140404 /* NSAttributedString+Etresoft.m */; };
+		A5C1492519B88192002890F1 /* SlideshowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C1492419B88192002890F1 /* SlideshowView.m */; };
+		A5C1492719B88625002890F1 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C1492619B88625002890F1 /* Quartz.framework */; };
+		A5C1497119BBFD10002890F1 /* Demon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5C1496F19BBFD10002890F1 /* Demon.png */; };
+		A5C1497219BBFD10002890F1 /* Agent.png in Resources */ = {isa = PBXBuildFile; fileRef = A5C1497019BBFD10002890F1 /* Agent.png */; };
+		A5C292DD19A02A8800464E86 /* LaunchdCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292DC19A02A8800464E86 /* LaunchdCollector.m */; };
+		A5C292E019A02B2700464E86 /* Collector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292DF19A02B2700464E86 /* Collector.m */; };
+		A5C292E319A039AB00464E86 /* SystemLaunchAgentsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292E219A039AB00464E86 /* SystemLaunchAgentsCollector.m */; };
+		A5C292E619A039BD00464E86 /* SystemLaunchDaemonsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292E519A039BD00464E86 /* SystemLaunchDaemonsCollector.m */; };
+		A5C292E919A039CB00464E86 /* LaunchAgentsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292E819A039CB00464E86 /* LaunchAgentsCollector.m */; };
+		A5C292EC19A039D900464E86 /* LaunchDaemonsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292EB19A039D900464E86 /* LaunchDaemonsCollector.m */; };
+		A5C292EF19A039E700464E86 /* UserLaunchAgentsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292EE19A039E700464E86 /* UserLaunchAgentsCollector.m */; };
+		A5C292F219A13D0800464E86 /* HardwareCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292F119A13D0800464E86 /* HardwareCollector.m */; };
+		A5C292F519A2214E00464E86 /* VideoCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292F419A2214E00464E86 /* VideoCollector.m */; };
+		A5C292F819A2220400464E86 /* SystemSoftwareCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292F719A2220400464E86 /* SystemSoftwareCollector.m */; };
+		A5CC608F19B4BF9E006D7E94 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55BC1AF15C0901800D42EF1 /* ServiceManagement.framework */; };
+		A5D25B2D19C4D11F006728B8 /* TTTLocalizedPluralString.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D25B2C19C4D11F006728B8 /* TTTLocalizedPluralString.m */; };
+		A5E33C3F184CEBDF00ED59A0 /* ByteCountFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E33C3E184CEBDF00ED59A0 /* ByteCountFormatter.m */; };
+		A5FC11EE19A4BFDC00E81E9C /* AudioPlugInsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FC11ED19A4BFDC00E81E9C /* AudioPlugInsCollector.m */; };
+		A5FC11F119A4BFF500E81E9C /* UserAudioPlugInsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FC11F019A4BFF500E81E9C /* UserAudioPlugInsCollector.m */; };
+		A5FC11F419A4C00F00E81E9C /* ITunesPlugInsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FC11F319A4C00F00E81E9C /* ITunesPlugInsCollector.m */; };
+		A5FC11F719A4C02300E81E9C /* UserITunesPlugInsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FC11F619A4C02300E81E9C /* UserITunesPlugInsCollector.m */; };
+		A5FC11FA19A4C03E00E81E9C /* UserInternetPlugInsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FC11F919A4C03E00E81E9C /* UserInternetPlugInsCollector.m */; };
+		A5FC11FD19A4C30600E81E9C /* SafariExtensionsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FC11FC19A4C30600E81E9C /* SafariExtensionsCollector.m */; };
+		A5FC120019A4C4E900E81E9C /* PreferencePanesCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FC11FF19A4C4E900E81E9C /* PreferencePanesCollector.m */; };
+		A5FC120319A5431D00E81E9C /* FontsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FC120219A5431D00E81E9C /* FontsCollector.m */; };
+		A5FC120619A5443500E81E9C /* ApplicationsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FC120519A5443500E81E9C /* ApplicationsCollector.m */; };
+		A5FC120919A5509700E81E9C /* TimeMachineCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FC120819A5509700E81E9C /* TimeMachineCollector.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A50C9DAB19A2ACB600BA6A25 /* StartupItemsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupItemsCollector.h; sourceTree = "<group>"; };
+		A50C9DAC19A2ACB600BA6A25 /* StartupItemsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupItemsCollector.m; sourceTree = "<group>"; };
+		A50C9DAE19A2DFDB00BA6A25 /* DiskCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiskCollector.h; sourceTree = "<group>"; };
+		A50C9DAF19A2DFDB00BA6A25 /* DiskCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiskCollector.m; sourceTree = "<group>"; };
+		A50C9DB119A2E68C00BA6A25 /* USBCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USBCollector.h; sourceTree = "<group>"; };
+		A50C9DB219A2E68C00BA6A25 /* USBCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USBCollector.m; sourceTree = "<group>"; };
+		A50C9DB419A2E69B00BA6A25 /* FirewireCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirewireCollector.h; sourceTree = "<group>"; };
+		A50C9DB519A2E69B00BA6A25 /* FirewireCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirewireCollector.m; sourceTree = "<group>"; };
+		A50C9DB719A2E6AB00BA6A25 /* ThunderboltCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThunderboltCollector.h; sourceTree = "<group>"; };
+		A50C9DB819A2E6AB00BA6A25 /* ThunderboltCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThunderboltCollector.m; sourceTree = "<group>"; };
+		A50C9DBA19A3690F00BA6A25 /* ConfigFileCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFileCollector.h; sourceTree = "<group>"; };
+		A50C9DBB19A3690F00BA6A25 /* ConfigFileCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFileCollector.m; sourceTree = "<group>"; };
+		A50C9DBD19A36CC400BA6A25 /* GatekeeperCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GatekeeperCollector.h; sourceTree = "<group>"; };
+		A50C9DBE19A36CC400BA6A25 /* GatekeeperCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GatekeeperCollector.m; sourceTree = "<group>"; };
+		A50C9DC019A36F3D00BA6A25 /* KernelExtensionCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelExtensionCollector.h; sourceTree = "<group>"; };
+		A50C9DC119A36F3D00BA6A25 /* KernelExtensionCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KernelExtensionCollector.m; sourceTree = "<group>"; };
+		A50C9DC319A4052000BA6A25 /* LoginItemsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginItemsCollector.h; sourceTree = "<group>"; };
+		A50C9DC419A4052000BA6A25 /* LoginItemsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginItemsCollector.m; sourceTree = "<group>"; };
+		A50C9DC619A4063E00BA6A25 /* PlugInsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugInsCollector.h; sourceTree = "<group>"; };
+		A50C9DC719A4063E00BA6A25 /* PlugInsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugInsCollector.m; sourceTree = "<group>"; };
+		A50C9DC919A4065B00BA6A25 /* InternetPlugInsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InternetPlugInsCollector.h; sourceTree = "<group>"; };
+		A50C9DCA19A4065B00BA6A25 /* InternetPlugInsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InternetPlugInsCollector.m; sourceTree = "<group>"; };
+		A5257D2C19AB51BE003084C8 /* ProcessesCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessesCollector.h; sourceTree = "<group>"; };
+		A5257D2D19AB51BE003084C8 /* ProcessesCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessesCollector.m; sourceTree = "<group>"; };
+		A5257D2F19AB5251003084C8 /* CPUUsageCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUUsageCollector.h; sourceTree = "<group>"; };
+		A5257D3019AB5251003084C8 /* CPUUsageCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPUUsageCollector.m; sourceTree = "<group>"; };
+		A5257D3219AB525D003084C8 /* MemoryUsageCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryUsageCollector.h; sourceTree = "<group>"; };
+		A5257D3319AB525D003084C8 /* MemoryUsageCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryUsageCollector.m; sourceTree = "<group>"; };
+		A5257D3519AB53FF003084C8 /* SystemInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemInformation.h; sourceTree = "<group>"; };
+		A5257D3619AB53FF003084C8 /* SystemInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemInformation.m; sourceTree = "<group>"; };
+		A5257D3819ABE02A003084C8 /* VirtualMemoryCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualMemoryCollector.h; sourceTree = "<group>"; };
+		A5257D3919ABE02A003084C8 /* VirtualMemoryCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualMemoryCollector.m; sourceTree = "<group>"; };
+		A5257D3B19AC0AA3003084C8 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		A5257D3C19AC0AA3003084C8 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
+		A5257D3E19AC10E3003084C8 /* Checker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checker.h; sourceTree = "<group>"; };
+		A5257D3F19AC10E3003084C8 /* Checker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Checker.m; sourceTree = "<group>"; };
+		A5409E9A186F271500B1727E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		A540C6FF1873D5F800497BDE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A540C7011873D5FC00497BDE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A54509F919BE88B600D60758 /* Magnifying Glass Shade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Magnifying Glass Shade.png"; sourceTree = "<group>"; };
+		A54509FA19BE88B600D60758 /* Magnifying Glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Magnifying Glass.png"; sourceTree = "<group>"; };
+		A552A3161818BC7F00829BA3 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/CoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		A552A3181818BD1F00829BA3 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Carbon.framework; sourceTree = DEVELOPER_DIR; };
+		A552A31B1818BD8300829BA3 /* CarbonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CarbonCore.framework; path = ../../../../System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework; sourceTree = "<group>"; };
+		A55BC16915BF987D00D42EF1 /* EtreCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EtreCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A55BC16D15BF987D00D42EF1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		A55BC17015BF987D00D42EF1 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		A55BC17115BF987D00D42EF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A55BC17215BF987D00D42EF1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A55BC17515BF987D00D42EF1 /* EtreCheck-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EtreCheck-Info.plist"; sourceTree = "<group>"; };
+		A55BC17715BF987D00D42EF1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A55BC17915BF987D00D42EF1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A55BC17B15BF987D00D42EF1 /* EtreCheck-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EtreCheck-Prefix.pch"; sourceTree = "<group>"; };
+		A55BC17D15BF987D00D42EF1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		A55BC17F15BF987D00D42EF1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A55BC18015BF987D00D42EF1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A55BC18315BF987D00D42EF1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		A55BC1AF15C0901800D42EF1 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		A55BC1B815C0E0A400D42EF1 /* EtreCheck.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = EtreCheck.iconset; sourceTree = SOURCE_ROOT; };
+		A55BC1C815C0F4FA00D42EF1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		A55BC1C915C0F4FA00D42EF1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A55BC1CA15C0F4FA00D42EF1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = fr; path = fr.lproj/Credits.rtf; sourceTree = "<group>"; };
+		A59B506B15C45EC000250772 /* NSMutableAttributedString+Etresoft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+Etresoft.h"; sourceTree = "<group>"; };
+		A59B506C15C45EC000250772 /* NSMutableAttributedString+Etresoft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+Etresoft.m"; sourceTree = "<group>"; };
+		A5C00A2619BFF2D500140404 /* NSAttributedString+Etresoft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Etresoft.h"; sourceTree = "<group>"; };
+		A5C00A2719BFF2D500140404 /* NSAttributedString+Etresoft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Etresoft.m"; sourceTree = "<group>"; };
+		A5C1492319B88192002890F1 /* SlideshowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowView.h; sourceTree = "<group>"; };
+		A5C1492419B88192002890F1 /* SlideshowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowView.m; sourceTree = "<group>"; };
+		A5C1492619B88625002890F1 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		A5C1496F19BBFD10002890F1 /* Demon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Demon.png; sourceTree = "<group>"; };
+		A5C1497019BBFD10002890F1 /* Agent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Agent.png; sourceTree = "<group>"; };
+		A5C292DB19A02A8800464E86 /* LaunchdCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchdCollector.h; sourceTree = "<group>"; };
+		A5C292DC19A02A8800464E86 /* LaunchdCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchdCollector.m; sourceTree = "<group>"; };
+		A5C292DE19A02B2700464E86 /* Collector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Collector.h; sourceTree = "<group>"; };
+		A5C292DF19A02B2700464E86 /* Collector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Collector.m; sourceTree = "<group>"; };
+		A5C292E119A039AB00464E86 /* SystemLaunchAgentsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemLaunchAgentsCollector.h; sourceTree = "<group>"; };
+		A5C292E219A039AB00464E86 /* SystemLaunchAgentsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemLaunchAgentsCollector.m; sourceTree = "<group>"; };
+		A5C292E419A039BD00464E86 /* SystemLaunchDaemonsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemLaunchDaemonsCollector.h; sourceTree = "<group>"; };
+		A5C292E519A039BD00464E86 /* SystemLaunchDaemonsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemLaunchDaemonsCollector.m; sourceTree = "<group>"; };
+		A5C292E719A039CB00464E86 /* LaunchAgentsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchAgentsCollector.h; sourceTree = "<group>"; };
+		A5C292E819A039CB00464E86 /* LaunchAgentsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchAgentsCollector.m; sourceTree = "<group>"; };
+		A5C292EA19A039D900464E86 /* LaunchDaemonsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchDaemonsCollector.h; sourceTree = "<group>"; };
+		A5C292EB19A039D900464E86 /* LaunchDaemonsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchDaemonsCollector.m; sourceTree = "<group>"; };
+		A5C292ED19A039E700464E86 /* UserLaunchAgentsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLaunchAgentsCollector.h; sourceTree = "<group>"; };
+		A5C292EE19A039E700464E86 /* UserLaunchAgentsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLaunchAgentsCollector.m; sourceTree = "<group>"; };
+		A5C292F019A13D0800464E86 /* HardwareCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HardwareCollector.h; sourceTree = "<group>"; };
+		A5C292F119A13D0800464E86 /* HardwareCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HardwareCollector.m; sourceTree = "<group>"; };
+		A5C292F319A2214E00464E86 /* VideoCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCollector.h; sourceTree = "<group>"; };
+		A5C292F419A2214E00464E86 /* VideoCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCollector.m; sourceTree = "<group>"; };
+		A5C292F619A2220400464E86 /* SystemSoftwareCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemSoftwareCollector.h; sourceTree = "<group>"; };
+		A5C292F719A2220400464E86 /* SystemSoftwareCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemSoftwareCollector.m; sourceTree = "<group>"; };
+		A5CC608C19B4BF52006D7E94 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		A5D25B2619C3CD3B006728B8 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		A5D25B2719C3CD3B006728B8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A5D25B2819C3CD3B006728B8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A5D25B2919C3CD3B006728B8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = de; path = de.lproj/Credits.rtf; sourceTree = "<group>"; };
+		A5D25B2B19C4D11F006728B8 /* TTTLocalizedPluralString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTLocalizedPluralString.h; path = EtreCheck/TTTLocalizedPluralString.h; sourceTree = "<group>"; };
+		A5D25B2C19C4D11F006728B8 /* TTTLocalizedPluralString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTLocalizedPluralString.m; path = EtreCheck/TTTLocalizedPluralString.m; sourceTree = "<group>"; };
+		A5E33C3D184CEBDF00ED59A0 /* ByteCountFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByteCountFormatter.h; sourceTree = "<group>"; };
+		A5E33C3E184CEBDF00ED59A0 /* ByteCountFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByteCountFormatter.m; sourceTree = "<group>"; };
+		A5FC11EC19A4BFDC00E81E9C /* AudioPlugInsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlugInsCollector.h; sourceTree = "<group>"; };
+		A5FC11ED19A4BFDC00E81E9C /* AudioPlugInsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlugInsCollector.m; sourceTree = "<group>"; };
+		A5FC11EF19A4BFF500E81E9C /* UserAudioPlugInsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAudioPlugInsCollector.h; sourceTree = "<group>"; };
+		A5FC11F019A4BFF500E81E9C /* UserAudioPlugInsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAudioPlugInsCollector.m; sourceTree = "<group>"; };
+		A5FC11F219A4C00F00E81E9C /* ITunesPlugInsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITunesPlugInsCollector.h; sourceTree = "<group>"; };
+		A5FC11F319A4C00F00E81E9C /* ITunesPlugInsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITunesPlugInsCollector.m; sourceTree = "<group>"; };
+		A5FC11F519A4C02300E81E9C /* UserITunesPlugInsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserITunesPlugInsCollector.h; sourceTree = "<group>"; };
+		A5FC11F619A4C02300E81E9C /* UserITunesPlugInsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserITunesPlugInsCollector.m; sourceTree = "<group>"; };
+		A5FC11F819A4C03E00E81E9C /* UserInternetPlugInsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInternetPlugInsCollector.h; sourceTree = "<group>"; };
+		A5FC11F919A4C03E00E81E9C /* UserInternetPlugInsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInternetPlugInsCollector.m; sourceTree = "<group>"; };
+		A5FC11FB19A4C30600E81E9C /* SafariExtensionsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafariExtensionsCollector.h; sourceTree = "<group>"; };
+		A5FC11FC19A4C30600E81E9C /* SafariExtensionsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafariExtensionsCollector.m; sourceTree = "<group>"; };
+		A5FC11FE19A4C4E900E81E9C /* PreferencePanesCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencePanesCollector.h; sourceTree = "<group>"; };
+		A5FC11FF19A4C4E900E81E9C /* PreferencePanesCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencePanesCollector.m; sourceTree = "<group>"; };
+		A5FC120119A5431D00E81E9C /* FontsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontsCollector.h; sourceTree = "<group>"; };
+		A5FC120219A5431D00E81E9C /* FontsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontsCollector.m; sourceTree = "<group>"; };
+		A5FC120419A5443500E81E9C /* ApplicationsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationsCollector.h; sourceTree = "<group>"; };
+		A5FC120519A5443500E81E9C /* ApplicationsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationsCollector.m; sourceTree = "<group>"; };
+		A5FC120719A5509700E81E9C /* TimeMachineCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeMachineCollector.h; sourceTree = "<group>"; };
+		A5FC120819A5509700E81E9C /* TimeMachineCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeMachineCollector.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A55BC16615BF987D00D42EF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55BC16E15BF987D00D42EF1 /* Cocoa.framework in Frameworks */,
+				A5C1492719B88625002890F1 /* Quartz.framework in Frameworks */,
+				A5CC608F19B4BF9E006D7E94 /* ServiceManagement.framework in Frameworks */,
+				A5409E9B186F271500B1727E /* SystemConfiguration.framework in Frameworks */,
+				A552A31D1818BDAE00829BA3 /* CoreServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A5257D4119AC10FB003084C8 /* Collectors */ = {
+			isa = PBXGroup;
+			children = (
+				A5C292DE19A02B2700464E86 /* Collector.h */,
+				A5C292DF19A02B2700464E86 /* Collector.m */,
+				A5C292F019A13D0800464E86 /* HardwareCollector.h */,
+				A5C292F119A13D0800464E86 /* HardwareCollector.m */,
+				A5C292F319A2214E00464E86 /* VideoCollector.h */,
+				A5C292F419A2214E00464E86 /* VideoCollector.m */,
+				A5C292F619A2220400464E86 /* SystemSoftwareCollector.h */,
+				A5C292F719A2220400464E86 /* SystemSoftwareCollector.m */,
+				A50C9DAE19A2DFDB00BA6A25 /* DiskCollector.h */,
+				A50C9DAF19A2DFDB00BA6A25 /* DiskCollector.m */,
+				A50C9DB119A2E68C00BA6A25 /* USBCollector.h */,
+				A50C9DB219A2E68C00BA6A25 /* USBCollector.m */,
+				A50C9DB419A2E69B00BA6A25 /* FirewireCollector.h */,
+				A50C9DB519A2E69B00BA6A25 /* FirewireCollector.m */,
+				A50C9DB719A2E6AB00BA6A25 /* ThunderboltCollector.h */,
+				A50C9DB819A2E6AB00BA6A25 /* ThunderboltCollector.m */,
+				A50C9DBA19A3690F00BA6A25 /* ConfigFileCollector.h */,
+				A50C9DBB19A3690F00BA6A25 /* ConfigFileCollector.m */,
+				A50C9DBD19A36CC400BA6A25 /* GatekeeperCollector.h */,
+				A50C9DBE19A36CC400BA6A25 /* GatekeeperCollector.m */,
+				A50C9DC019A36F3D00BA6A25 /* KernelExtensionCollector.h */,
+				A50C9DC119A36F3D00BA6A25 /* KernelExtensionCollector.m */,
+				A50C9DAB19A2ACB600BA6A25 /* StartupItemsCollector.h */,
+				A50C9DAC19A2ACB600BA6A25 /* StartupItemsCollector.m */,
+				A5C292DB19A02A8800464E86 /* LaunchdCollector.h */,
+				A5C292DC19A02A8800464E86 /* LaunchdCollector.m */,
+				A5C292E119A039AB00464E86 /* SystemLaunchAgentsCollector.h */,
+				A5C292E219A039AB00464E86 /* SystemLaunchAgentsCollector.m */,
+				A5C292E419A039BD00464E86 /* SystemLaunchDaemonsCollector.h */,
+				A5C292E519A039BD00464E86 /* SystemLaunchDaemonsCollector.m */,
+				A5C292E719A039CB00464E86 /* LaunchAgentsCollector.h */,
+				A5C292E819A039CB00464E86 /* LaunchAgentsCollector.m */,
+				A5C292EA19A039D900464E86 /* LaunchDaemonsCollector.h */,
+				A5C292EB19A039D900464E86 /* LaunchDaemonsCollector.m */,
+				A5C292ED19A039E700464E86 /* UserLaunchAgentsCollector.h */,
+				A5C292EE19A039E700464E86 /* UserLaunchAgentsCollector.m */,
+				A50C9DC319A4052000BA6A25 /* LoginItemsCollector.h */,
+				A50C9DC419A4052000BA6A25 /* LoginItemsCollector.m */,
+				A50C9DC619A4063E00BA6A25 /* PlugInsCollector.h */,
+				A50C9DC719A4063E00BA6A25 /* PlugInsCollector.m */,
+				A50C9DC919A4065B00BA6A25 /* InternetPlugInsCollector.h */,
+				A50C9DCA19A4065B00BA6A25 /* InternetPlugInsCollector.m */,
+				A5FC11F819A4C03E00E81E9C /* UserInternetPlugInsCollector.h */,
+				A5FC11F919A4C03E00E81E9C /* UserInternetPlugInsCollector.m */,
+				A5FC11EC19A4BFDC00E81E9C /* AudioPlugInsCollector.h */,
+				A5FC11ED19A4BFDC00E81E9C /* AudioPlugInsCollector.m */,
+				A5FC11EF19A4BFF500E81E9C /* UserAudioPlugInsCollector.h */,
+				A5FC11F019A4BFF500E81E9C /* UserAudioPlugInsCollector.m */,
+				A5FC11F219A4C00F00E81E9C /* ITunesPlugInsCollector.h */,
+				A5FC11F319A4C00F00E81E9C /* ITunesPlugInsCollector.m */,
+				A5FC11F519A4C02300E81E9C /* UserITunesPlugInsCollector.h */,
+				A5FC11F619A4C02300E81E9C /* UserITunesPlugInsCollector.m */,
+				A5FC11FB19A4C30600E81E9C /* SafariExtensionsCollector.h */,
+				A5FC11FC19A4C30600E81E9C /* SafariExtensionsCollector.m */,
+				A5FC11FE19A4C4E900E81E9C /* PreferencePanesCollector.h */,
+				A5FC11FF19A4C4E900E81E9C /* PreferencePanesCollector.m */,
+				A5FC120119A5431D00E81E9C /* FontsCollector.h */,
+				A5FC120219A5431D00E81E9C /* FontsCollector.m */,
+				A5FC120419A5443500E81E9C /* ApplicationsCollector.h */,
+				A5FC120519A5443500E81E9C /* ApplicationsCollector.m */,
+				A5FC120719A5509700E81E9C /* TimeMachineCollector.h */,
+				A5FC120819A5509700E81E9C /* TimeMachineCollector.m */,
+				A5257D2C19AB51BE003084C8 /* ProcessesCollector.h */,
+				A5257D2D19AB51BE003084C8 /* ProcessesCollector.m */,
+				A5257D2F19AB5251003084C8 /* CPUUsageCollector.h */,
+				A5257D3019AB5251003084C8 /* CPUUsageCollector.m */,
+				A5257D3219AB525D003084C8 /* MemoryUsageCollector.h */,
+				A5257D3319AB525D003084C8 /* MemoryUsageCollector.m */,
+				A5257D3819ABE02A003084C8 /* VirtualMemoryCollector.h */,
+				A5257D3919ABE02A003084C8 /* VirtualMemoryCollector.m */,
+			);
+			name = Collectors;
+			sourceTree = "<group>";
+		};
+		A55BC15E15BF987D00D42EF1 = {
+			isa = PBXGroup;
+			children = (
+				A5D25B2A19C4D109006728B8 /* 3rd party */,
+				A55BC17315BF987D00D42EF1 /* EtreCheck */,
+				A55BC16C15BF987D00D42EF1 /* Frameworks */,
+				A55BC16A15BF987D00D42EF1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A55BC16A15BF987D00D42EF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A55BC16915BF987D00D42EF1 /* EtreCheck.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A55BC16C15BF987D00D42EF1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A5C1492619B88625002890F1 /* Quartz.framework */,
+				A5CC608C19B4BF52006D7E94 /* Carbon.framework */,
+				A5409E9A186F271500B1727E /* SystemConfiguration.framework */,
+				A552A31B1818BD8300829BA3 /* CarbonCore.framework */,
+				A552A3181818BD1F00829BA3 /* Carbon.framework */,
+				A552A3161818BC7F00829BA3 /* CoreServices.framework */,
+				A55BC16D15BF987D00D42EF1 /* Cocoa.framework */,
+				A55BC16F15BF987D00D42EF1 /* Other Frameworks */,
+				A55BC1AF15C0901800D42EF1 /* ServiceManagement.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A55BC16F15BF987D00D42EF1 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A55BC17015BF987D00D42EF1 /* AppKit.framework */,
+				A55BC17115BF987D00D42EF1 /* CoreData.framework */,
+				A55BC17215BF987D00D42EF1 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		A55BC17315BF987D00D42EF1 /* EtreCheck */ = {
+			isa = PBXGroup;
+			children = (
+				A5C00A2619BFF2D500140404 /* NSAttributedString+Etresoft.h */,
+				A5C00A2719BFF2D500140404 /* NSAttributedString+Etresoft.m */,
+				A59B506B15C45EC000250772 /* NSMutableAttributedString+Etresoft.h */,
+				A59B506C15C45EC000250772 /* NSMutableAttributedString+Etresoft.m */,
+				A5E33C3D184CEBDF00ED59A0 /* ByteCountFormatter.h */,
+				A5E33C3E184CEBDF00ED59A0 /* ByteCountFormatter.m */,
+				A5257D3519AB53FF003084C8 /* SystemInformation.h */,
+				A5257D3619AB53FF003084C8 /* SystemInformation.m */,
+				A5257D3B19AC0AA3003084C8 /* Utilities.h */,
+				A5257D3C19AC0AA3003084C8 /* Utilities.m */,
+				A5257D4119AC10FB003084C8 /* Collectors */,
+				A5257D3E19AC10E3003084C8 /* Checker.h */,
+				A5257D3F19AC10E3003084C8 /* Checker.m */,
+				A5C1492319B88192002890F1 /* SlideshowView.h */,
+				A5C1492419B88192002890F1 /* SlideshowView.m */,
+				A55BC17F15BF987D00D42EF1 /* AppDelegate.h */,
+				A55BC18015BF987D00D42EF1 /* AppDelegate.m */,
+				A55BC18215BF987D00D42EF1 /* MainMenu.xib */,
+				A55BC17415BF987D00D42EF1 /* Supporting Files */,
+			);
+			path = EtreCheck;
+			sourceTree = "<group>";
+		};
+		A55BC17415BF987D00D42EF1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A54509F919BE88B600D60758 /* Magnifying Glass Shade.png */,
+				A54509FA19BE88B600D60758 /* Magnifying Glass.png */,
+				A5C1496F19BBFD10002890F1 /* Demon.png */,
+				A5C1497019BBFD10002890F1 /* Agent.png */,
+				A55BC1B815C0E0A400D42EF1 /* EtreCheck.iconset */,
+				A55BC17515BF987D00D42EF1 /* EtreCheck-Info.plist */,
+				A55BC17615BF987D00D42EF1 /* InfoPlist.strings */,
+				A540C7001873D5F800497BDE /* Localizable.strings */,
+				A55BC17915BF987D00D42EF1 /* main.m */,
+				A55BC17B15BF987D00D42EF1 /* EtreCheck-Prefix.pch */,
+				A55BC17C15BF987D00D42EF1 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A5D25B2A19C4D109006728B8 /* 3rd party */ = {
+			isa = PBXGroup;
+			children = (
+				A5D25B2B19C4D11F006728B8 /* TTTLocalizedPluralString.h */,
+				A5D25B2C19C4D11F006728B8 /* TTTLocalizedPluralString.m */,
+			);
+			name = "3rd party";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A55BC16815BF987D00D42EF1 /* EtreCheck */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A55BC18715BF987D00D42EF1 /* Build configuration list for PBXNativeTarget "EtreCheck" */;
+			buildPhases = (
+				A55BC16515BF987D00D42EF1 /* Sources */,
+				A55BC16615BF987D00D42EF1 /* Frameworks */,
+				A55BC16715BF987D00D42EF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EtreCheck;
+			productName = EtreCheck;
+			productReference = A55BC16915BF987D00D42EF1 /* EtreCheck.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A55BC16015BF987D00D42EF1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Etresoft;
+				TargetAttributes = {
+					A55BC16815BF987D00D42EF1 = {
+						DevelopmentTeam = P599JYY9LT;
+					};
+				};
+			};
+			buildConfigurationList = A55BC16315BF987D00D42EF1 /* Build configuration list for PBXProject "EtreCheck" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				fr,
+				de,
+			);
+			mainGroup = A55BC15E15BF987D00D42EF1;
+			productRefGroup = A55BC16A15BF987D00D42EF1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A55BC16815BF987D00D42EF1 /* EtreCheck */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A55BC16715BF987D00D42EF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5C1497219BBFD10002890F1 /* Agent.png in Resources */,
+				A540C6FE1873D5F800497BDE /* Localizable.strings in Resources */,
+				A54509FC19BE88B600D60758 /* Magnifying Glass.png in Resources */,
+				A55BC17815BF987D00D42EF1 /* InfoPlist.strings in Resources */,
+				A55BC17E15BF987D00D42EF1 /* Credits.rtf in Resources */,
+				A55BC18415BF987D00D42EF1 /* MainMenu.xib in Resources */,
+				A54509FB19BE88B600D60758 /* Magnifying Glass Shade.png in Resources */,
+				A55BC1B915C0E0A400D42EF1 /* EtreCheck.iconset in Resources */,
+				A5C1497119BBFD10002890F1 /* Demon.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A55BC16515BF987D00D42EF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A50C9DB319A2E68C00BA6A25 /* USBCollector.m in Sources */,
+				A5E33C3F184CEBDF00ED59A0 /* ByteCountFormatter.m in Sources */,
+				A5C292F519A2214E00464E86 /* VideoCollector.m in Sources */,
+				A5C292EF19A039E700464E86 /* UserLaunchAgentsCollector.m in Sources */,
+				A55BC17A15BF987D00D42EF1 /* main.m in Sources */,
+				A5C292F219A13D0800464E86 /* HardwareCollector.m in Sources */,
+				A5FC11FA19A4C03E00E81E9C /* UserInternetPlugInsCollector.m in Sources */,
+				A5FC11F119A4BFF500E81E9C /* UserAudioPlugInsCollector.m in Sources */,
+				A5257D3419AB525D003084C8 /* MemoryUsageCollector.m in Sources */,
+				A5FC120619A5443500E81E9C /* ApplicationsCollector.m in Sources */,
+				A55BC18115BF987D00D42EF1 /* AppDelegate.m in Sources */,
+				A5FC11F419A4C00F00E81E9C /* ITunesPlugInsCollector.m in Sources */,
+				A5C292E019A02B2700464E86 /* Collector.m in Sources */,
+				A5C292EC19A039D900464E86 /* LaunchDaemonsCollector.m in Sources */,
+				A50C9DBF19A36CC400BA6A25 /* GatekeeperCollector.m in Sources */,
+				A5FC120919A5509700E81E9C /* TimeMachineCollector.m in Sources */,
+				A50C9DC219A36F3D00BA6A25 /* KernelExtensionCollector.m in Sources */,
+				A5C292DD19A02A8800464E86 /* LaunchdCollector.m in Sources */,
+				A5C1492519B88192002890F1 /* SlideshowView.m in Sources */,
+				A5FC120319A5431D00E81E9C /* FontsCollector.m in Sources */,
+				A5FC11F719A4C02300E81E9C /* UserITunesPlugInsCollector.m in Sources */,
+				A50C9DAD19A2ACB600BA6A25 /* StartupItemsCollector.m in Sources */,
+				A5C292E919A039CB00464E86 /* LaunchAgentsCollector.m in Sources */,
+				A5FC120019A4C4E900E81E9C /* PreferencePanesCollector.m in Sources */,
+				A50C9DC819A4063E00BA6A25 /* PlugInsCollector.m in Sources */,
+				A50C9DB619A2E69B00BA6A25 /* FirewireCollector.m in Sources */,
+				A5257D4019AC10E3003084C8 /* Checker.m in Sources */,
+				A59B506D15C45EC000250772 /* NSMutableAttributedString+Etresoft.m in Sources */,
+				A5257D3119AB5251003084C8 /* CPUUsageCollector.m in Sources */,
+				A5257D2E19AB51BE003084C8 /* ProcessesCollector.m in Sources */,
+				A5257D3D19AC0AA3003084C8 /* Utilities.m in Sources */,
+				A5FC11EE19A4BFDC00E81E9C /* AudioPlugInsCollector.m in Sources */,
+				A50C9DB019A2DFDB00BA6A25 /* DiskCollector.m in Sources */,
+				A50C9DB919A2E6AB00BA6A25 /* ThunderboltCollector.m in Sources */,
+				A5C292E319A039AB00464E86 /* SystemLaunchAgentsCollector.m in Sources */,
+				A5C00A2819BFF2D500140404 /* NSAttributedString+Etresoft.m in Sources */,
+				A5D25B2D19C4D11F006728B8 /* TTTLocalizedPluralString.m in Sources */,
+				A50C9DCB19A4065B00BA6A25 /* InternetPlugInsCollector.m in Sources */,
+				A50C9DBC19A3690F00BA6A25 /* ConfigFileCollector.m in Sources */,
+				A5257D3A19ABE02A003084C8 /* VirtualMemoryCollector.m in Sources */,
+				A50C9DC519A4052000BA6A25 /* LoginItemsCollector.m in Sources */,
+				A5FC11FD19A4C30600E81E9C /* SafariExtensionsCollector.m in Sources */,
+				A5C292E619A039BD00464E86 /* SystemLaunchDaemonsCollector.m in Sources */,
+				A5257D3719AB53FF003084C8 /* SystemInformation.m in Sources */,
+				A5C292F819A2220400464E86 /* SystemSoftwareCollector.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A540C7001873D5F800497BDE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A540C6FF1873D5F800497BDE /* en */,
+				A540C7011873D5FC00497BDE /* fr */,
+				A5D25B2819C3CD3B006728B8 /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		A55BC17615BF987D00D42EF1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A55BC17715BF987D00D42EF1 /* en */,
+				A55BC1C915C0F4FA00D42EF1 /* fr */,
+				A5D25B2719C3CD3B006728B8 /* de */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A55BC17C15BF987D00D42EF1 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A55BC17D15BF987D00D42EF1 /* en */,
+				A55BC1CA15C0F4FA00D42EF1 /* fr */,
+				A5D25B2919C3CD3B006728B8 /* de */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		A55BC18215BF987D00D42EF1 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A55BC18315BF987D00D42EF1 /* en */,
+				A55BC1C815C0F4FA00D42EF1 /* fr */,
+				A5D25B2619C3CD3B006728B8 /* de */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A55BC18515BF987D00D42EF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/Frameworks/CoreServices.framework/Versions/A/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EtreCheck/EtreCheck-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = EtreCheck;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A55BC18615BF987D00D42EF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/Frameworks/CoreServices.framework/Versions/A/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EtreCheck/EtreCheck-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = EtreCheck;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A55BC18815BF987D00D42EF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "EtreCheck/EtreCheck-Info.plist";
+			};
+			name = Debug;
+		};
+		A55BC18915BF987D00D42EF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "EtreCheck/EtreCheck-Info.plist";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A55BC16315BF987D00D42EF1 /* Build configuration list for PBXProject "EtreCheck" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A55BC18515BF987D00D42EF1 /* Debug */,
+				A55BC18615BF987D00D42EF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A55BC18715BF987D00D42EF1 /* Build configuration list for PBXNativeTarget "EtreCheck" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A55BC18815BF987D00D42EF1 /* Debug */,
+				A55BC18915BF987D00D42EF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A55BC16015BF987D00D42EF1 /* Project object */;
+}
