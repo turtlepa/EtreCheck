@@ -834,7 +834,7 @@ Gw
                                     <rect key="frame" x="0.0" y="0.0" width="570" height="180"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView editable="NO" drawsBackground="NO" importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" spellingCorrection="YES" smartInsertDelete="YES" id="rRU-vM-wce">
+                                        <textView editable="NO" drawsBackground="NO" importsGraphics="NO" findStyle="panel" verticallyResizable="YES" id="rRU-vM-wce">
                                             <rect key="frame" x="0.0" y="0.0" width="570" height="180"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -844,7 +844,11 @@ Gw
                                             <size key="minSize" width="570" height="180"/>
                                             <size key="maxSize" width="1097" height="10000000"/>
                                             <connections>
-                                                <binding destination="Voe-Tx-rLC" name="attributedString" keyPath="self.log" id="RJX-pW-QgY"/>
+                                                <binding destination="Voe-Tx-rLC" name="attributedString" keyPath="self.log" id="QYo-py-yBz">
+                                                    <dictionary key="options">
+                                                        <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                    </dictionary>
+                                                </binding>
                                             </connections>
                                         </textView>
                                     </subviews>
