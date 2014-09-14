@@ -36,33 +36,116 @@
   NSArray * args =
     @[
       @"-e",
-      @"tell application \"System Events\" to get the name of every login item"
+      @"tell application \"System Events\" to get the properties of every login item"
     ];
   
   NSData * result =
     [Utilities execute: @"/usr/bin/osascript" arguments: args];
   
-  NSArray * paths = [Utilities formatLines: result];
+  NSArray * loginItems = [self formatLoginItems: result];
   
   NSUInteger count = 0;
   
-  for(NSString * path in paths)
+  for(NSDictionary * loginItem in loginItems)
     {
-    NSString * file = [path lastPathComponent];
+    NSString * name = [loginItem objectForKey: @"name"];
+    NSString * path = [loginItem objectForKey: @"path"];
+    NSString * kind = [loginItem objectForKey: @"kind"];
+    NSString * hidden = [loginItem objectForKey: @"hidden"];
     
-    if([file length])
-      {
-      [self.result
-        appendString: [NSString stringWithFormat: @"\t%@\n", file]];
+    if(![name length])
+      name = @"-";
       
-      ++count;
-      }
+    if(![path length])
+      path = NSLocalizedString(@"Unknown", NULL);
+      
+    if(![kind length])
+      kind = NSLocalizedString(@"Unknown", NULL);
+
+    BOOL isHidden = [hidden isEqualToString: @"true"];
+    
+    [self.result
+      appendString:
+        [NSString
+          stringWithFormat:
+            @"\t%@: %@%@ (%@)\n",
+            name,
+            kind,
+            isHidden ? NSLocalizedString(@"Hidden", NULL) : @"",
+            path]];
+    
+    ++count;
     }
     
   if(!count)
     [self.result appendString: NSLocalizedString(@"\tNone\n", NULL)];
   
   [self.result appendCR];
+  }
+
+// Format the comma-delimited list of login items.
+- (NSArray *) formatLoginItems: (NSData *) data
+  {
+  if(!data)
+    return nil;
+  
+  NSString * string =
+    [[NSString alloc]
+      initWithBytes: [data bytes]
+      length: [data length]
+      encoding: NSUTF8StringEncoding];
+  
+  if(!string)
+    return nil;
+    
+  NSMutableArray * loginItems = [NSMutableArray array];
+  
+  NSArray * parts = [string componentsSeparatedByString: @","];
+  
+  [string release];
+  
+  for(NSString * part in parts)
+    {
+    NSArray * keyValue = [self parseKeyValue: part];
+    
+    if(!keyValue)
+      continue;
+      
+    NSString * key = [keyValue objectAtIndex: 0];
+    NSString * value = [keyValue objectAtIndex: 1];
+    
+    if([key isEqualToString: @"name"])
+      [loginItems addObject: [NSMutableDictionary dictionary]];
+    else if([key isEqualToString: @"path"])
+      value = [Utilities cleanPath: value];
+    
+    NSMutableDictionary * loginItem = [loginItems lastObject];
+    
+    [loginItem setObject: value forKey: key];
+    }
+    
+  return loginItems;
+  }
+
+// Parse a key/value from a login item result.
+- (NSArray *) parseKeyValue: (NSString *) part
+  {
+  NSArray * keyValue = [part componentsSeparatedByString: @":"];
+  
+  if(!keyValue)
+    return nil;
+    
+  NSString * key =
+    [[keyValue objectAtIndex: 0]
+      stringByTrimmingCharactersInSet:
+        [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+  NSString * value = 
+    [[keyValue objectAtIndex: 1]
+      stringByTrimmingCharactersInSet:
+        [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+  return @[key, value];
   }
 
 @end

@@ -116,6 +116,7 @@
 "[Unknown]" = "[Inconnu]";
 "[System]" = "[Système]";
 "%@ (hidden)" = "%@ (caché)";
+"Hidden" = "Caché";
 "\tThere was a problem retrieving launchd job status.\n" = "\tImpossible de trouver le status des taches launchd\n";
 "Support" = "Aide";
 "Version: %@" = "Version : %@";

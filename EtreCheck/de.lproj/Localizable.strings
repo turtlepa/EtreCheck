@@ -116,6 +116,7 @@
 "[Unknown]" = "[Unbekannt]";
 "[System]" = "[System]";
 "%@ (hidden)" = "%@ (Verdeckt)";
+"Hidden" = "Verdeckt";
 "\tThere was a problem retrieving launchd job status.\n" = "Es gab ein Problem Abrufen launchd Auftragsstatus.\n";
 "Support" = "Unterstützung";
 "Version: %@" = "Version: %@";
