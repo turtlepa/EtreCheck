@@ -273,9 +273,16 @@
     lastBackup = [destination objectForKey: @"BACKUP_COMPLETED_DATE"];
     }
     
+  if(!snapshotCount)
+    snapshotCount = @0;
+    
   [destination setObject: snapshotCount forKey: kSnapshotcount];
-  [destination setObject: oldestBackup forKey: kOldestBackup];
-  [destination setObject: lastBackup forKey: kLastbackup];
+  
+  if(oldestBackup)
+    [destination setObject: oldestBackup forKey: kOldestBackup];
+    
+  if(lastBackup)
+    [destination setObject: lastBackup forKey: kLastbackup];
   }
 
 // Consolidate a single destination.
@@ -596,20 +603,23 @@
             @"\t\tTotal number of backups: %@ \n", NULL),
           [destination objectForKey: kSnapshotcount]]];
   
+  NSDate * oldestBackup = [destination objectForKey: kOldestBackup];
+  NSDate * lastBackup = [destination objectForKey: kLastbackup];
+
   [self.result
     appendString:
       [NSString
         stringWithFormat:
           NSLocalizedString(
             @"\t\tOldest backup: %@ \n", NULL),
-          [destination objectForKey: kOldestBackup]]];
+          oldestBackup ? oldestBackup : @"-"]];
 
   [self.result
     appendString:
       [NSString
         stringWithFormat:
           NSLocalizedString(@"\t\tLast backup: %@ \n", NULL),
-          [destination objectForKey: kLastbackup]]];
+          lastBackup ? lastBackup : @"-"]];
   }
 
 // Print an overall analysis of the Time Machine size differential.

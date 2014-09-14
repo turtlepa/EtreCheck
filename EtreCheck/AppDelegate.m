@@ -391,7 +391,10 @@
   dispatch_async(
     dispatch_get_main_queue(),
     ^{
-      self.displayStatus = [newStatus copy];
+      NSMutableAttributedString * status = [newStatus copy];
+      self.displayStatus = status;
+
+      [status release];
       
       [[self.statusView animator]
         scrollRangeToVisible:
