@@ -178,57 +178,13 @@
     NSURLBookmarkResolutionWithoutMounting |
     NSURLBookmarkResolutionWithoutUI;
   
-  NSURL * url =
+  return
     [NSURL
       URLByResolvingBookmarkData: data
       options: options
       relativeToURL: nil
       bookmarkDataIsStale: & isStale
       error: NULL];
-  
-  // Maybe the OS thinks it isn't a bookmark, but maybe it is.
-  if(!url)
-    url = [self dredgeBookmark: data];
-    
-  return url;
-  }
-
-// Try to dredge a bookmark out of invalid data.
-- (NSURL *) dredgeBookmark: (NSData *) data
-  {
-  NSURL * url = nil;
-  
-  const char * buffer = data.bytes;
-  
-  const char * start = buffer;
-  const char * end = start + data.length;
-  
-  for(const char * ptr = start; ptr < (end - 9); ++ptr)
-    {
-    if(!strncmp(ptr, "/Volumes/", 9) && ((ptr - start) >= 2))
-      {
-      uint16_t length;
-      
-      memcpy(& length, ptr - 2, sizeof(length));
-      
-      length = CFSwapInt16BigToHost(length);
-      
-      if(length < (end - ptr))
-        {
-        NSString * path =
-          [[NSFileManager defaultManager]
-            stringWithFileSystemRepresentation: ptr length: length];
-          
-        @try
-          {
-          url = [NSURL fileURLWithPath: path];
-          }
-        @catch(NSException * exception)
-          {
-          }
-        }
-      }
-    }
   }
 
 // Collect excluded paths.
