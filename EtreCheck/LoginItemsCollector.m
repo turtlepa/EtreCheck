@@ -48,31 +48,7 @@
   
   for(NSDictionary * loginItem in loginItems)
     {
-    NSString * name = [loginItem objectForKey: @"name"];
-    NSString * path = [loginItem objectForKey: @"path"];
-    NSString * kind = [loginItem objectForKey: @"kind"];
-    NSString * hidden = [loginItem objectForKey: @"hidden"];
-    
-    if(![name length])
-      name = @"-";
-      
-    if(![path length])
-      path = NSLocalizedString(@"Unknown", NULL);
-      
-    if(![kind length])
-      kind = NSLocalizedString(@"Unknown", NULL);
-
-    BOOL isHidden = [hidden isEqualToString: @"true"];
-    
-    [self.result
-      appendString:
-        [NSString
-          stringWithFormat:
-            @"\t%@: %@%@ (%@)\n",
-            name,
-            kind,
-            isHidden ? NSLocalizedString(@"Hidden", NULL) : @"",
-            path]];
+    [self printLoginItem: loginItem];
     
     ++count;
     }
@@ -80,6 +56,9 @@
   if(!count)
     [self.result appendString: NSLocalizedString(@"\tNone\n", NULL)];
   
+  [self
+    setTabs: @[@28, @112] forRange: NSMakeRange(0, [self.result length])];
+
   [self.result appendCR];
   }
 
@@ -125,6 +104,36 @@
     }
     
   return loginItems;
+  }
+
+// Print a login item.
+- (void) printLoginItem: (NSDictionary *) loginItem
+  {
+  NSString * name = [loginItem objectForKey: @"name"];
+  NSString * path = [loginItem objectForKey: @"path"];
+  NSString * kind = [loginItem objectForKey: @"kind"];
+  NSString * hidden = [loginItem objectForKey: @"hidden"];
+  
+  if(![name length])
+    name = @"-";
+    
+  if(![path length])
+    path = NSLocalizedString(@"Unknown", NULL);
+    
+  if(![kind length])
+    kind = NSLocalizedString(@"Unknown", NULL);
+
+  BOOL isHidden = [hidden isEqualToString: @"true"];
+  
+  [self.result
+    appendString:
+      [NSString
+        stringWithFormat:
+          @"\t%@\t%@%@ (%@)\n",
+          name,
+          kind,
+          isHidden ? NSLocalizedString(@"Hidden", NULL) : @"",
+          path]];
   }
 
 // Parse a key/value from a login item result.
