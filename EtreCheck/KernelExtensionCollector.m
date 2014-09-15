@@ -467,7 +467,9 @@
     [extensions addObject: [[string copy] autorelease]];
     
     [string
-      appendString: [NSString stringWithFormat: @"\t\t%@", directory]
+      appendString:
+        [NSString
+          stringWithFormat: @"\t\t%@", [Utilities cleanPath: directory]]
       attributes:
         @{
           NSFontAttributeName : [[Utilities shared] boldFont],
