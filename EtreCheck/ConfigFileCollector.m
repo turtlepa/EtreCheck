@@ -83,6 +83,9 @@
     if(corrupt && !hostname)
       *corrupt = YES;
       
+    if([hostname length] < 1)
+      continue;
+      
     if([hostname isEqualToString: @"localhost"])
       continue;
 
