@@ -916,7 +916,7 @@ Gw
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Agent" id="ah4-O9-s19"/>
                             </imageView>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="YNi-t0-nyG" userLabel="Finder">
-                                <rect key="frame" x="443" y="119" width="84" height="91"/>
+                                <rect key="frame" x="441" y="117" width="88" height="95"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="I43-rE-5l3"/>
                             </imageView>
