@@ -514,12 +514,12 @@
   NSRect demonStartFrame = [self.demonImage frame];
   NSRect demonEndFrame = demonStartFrame;
   
-  demonEndFrame.origin.x -= 40;
+  demonEndFrame.origin.x -= 45;
 
   NSRect agentStartFrame = [self.agentImage frame];
   NSRect agentEndFrame = agentStartFrame;
   
-  agentEndFrame.origin.x += 40;
+  agentEndFrame.origin.x += 45;
 
   [self animateDemon: demonEndFrame];
   [self animateDemon: demonStartFrame agent: agentEndFrame];
