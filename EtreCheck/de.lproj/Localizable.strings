@@ -190,4 +190,5 @@
 "%d day (plural rule: zero)" = "";
 "%d day (plural rule: one)" = "einen Tag ";
 "%d day (plural rule: other)" = "%d Tage ";
-
+"Upgradeable" = "Nachrüstbar";
+"Not upgradeable" = "Nicht erweiterbar";

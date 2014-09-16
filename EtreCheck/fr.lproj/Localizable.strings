@@ -190,4 +190,6 @@
 "%d day (plural rule: zero)" = "";
 "%d day (plural rule: one)" = "un jour ";
 "%d day (plural rule: other)" = "%d jours ";
+"Upgradeable" = "Extensible";
+"Not upgradeable" = "Pas extensible";
 

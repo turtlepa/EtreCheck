@@ -360,6 +360,75 @@
     [self.result
       appendString:
         [NSString stringWithFormat: @"\t%@ RAM\n", memory]];
+    
+  NSDictionary * details = [self collectMemoryDetails];
+  
+  if(details)
+    [self printMemoryDetails: details];
+  }
+
+- (NSDictionary *) collectMemoryDetails
+  {
+  NSArray * args =
+    @[
+      @"-xml",
+      @"SPMemoryDataType"
+    ];
+  
+  NSData * result =
+    [Utilities execute: @"/usr/sbin/system_profiler" arguments: args];
+  
+  if(result)
+    {
+    NSArray * plist = [Utilities readPropertyListData: result];
+  
+    if(plist && [plist count])
+      {
+      NSArray * infos =
+        [[plist objectAtIndex: 0] objectForKey: @"_items"];
+        
+      if([infos count])
+        return [infos objectAtIndex: 0];
+      }
+    }
+    
+  return nil;
+  }
+
+- (void) printMemoryDetails: (NSDictionary *) details
+  {
+  NSNumber * upgradeable =
+    [details objectForKey: @"is_memory_upgradeable"];
+  
+  [self.result
+    appendString:
+      [NSString
+        stringWithFormat:
+          @"\t\t%@\n",
+          [upgradeable boolValue]
+            ? NSLocalizedString(@"Upgradeable", NULL)
+            : NSLocalizedString(@"Not upgradeable", NULL)]];
+
+  NSArray * banks = [details objectForKey: @"_items"];
+  
+  for(NSDictionary * bank in banks)
+    {
+    NSString * name = [bank objectForKey: @"_name"];
+    NSString * size = [bank objectForKey: @"dimm_size"];
+    NSString * type = [bank objectForKey: @"dimm_type"];
+    NSString * speed = [bank objectForKey: @"dimm_speed"];
+    NSString * status = [bank objectForKey: @"dimm_status"];
+    
+    [self.result
+      appendString:
+        [NSString stringWithFormat: @"\t\t%@\n", name]];
+
+    [self.result
+      appendString:
+        [NSString
+          stringWithFormat:
+            @"\t\t\t%@ %@ %@ %@\n", size, type, speed, status]];
+    }
   }
 
 @end
