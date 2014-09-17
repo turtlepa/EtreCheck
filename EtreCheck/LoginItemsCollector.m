@@ -141,7 +141,7 @@
   {
   NSArray * keyValue = [part componentsSeparatedByString: @":"];
   
-  if(!keyValue)
+  if([keyValue count] < 2)
     return nil;
     
   NSString * key =
