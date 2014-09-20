@@ -51,6 +51,8 @@
         [self printVideoInformation: infos];
       }
     }
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Print video information.

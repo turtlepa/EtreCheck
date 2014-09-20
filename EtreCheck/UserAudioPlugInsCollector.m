@@ -29,6 +29,8 @@
   [self
     parseUserPlugins: NSLocalizedString(@"User Audio Plug-ins:", NULL)
     path: @"/Library/Audio/Plug-ins"];
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 @end

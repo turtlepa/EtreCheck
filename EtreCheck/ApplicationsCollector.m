@@ -50,6 +50,8 @@
   [self.result appendCR];
   [self.result
     deleteCharactersInRange: NSMakeRange(0, [self.result length])];
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Collect applications.
@@ -219,6 +221,11 @@
 
   if(bundleID)
     {
+    NSString * obtained_from = [application objectForKey: @"obtained_from"];
+    
+    if([obtained_from isEqualToString: @"apple"])
+      return nil;
+      
     if([bundleID hasPrefix: @"com.apple."])
       return nil;
 

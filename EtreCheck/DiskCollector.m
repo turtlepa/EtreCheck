@@ -72,6 +72,8 @@
     }
   else
     [self.result appendCR];
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Print disks attached to a single controller.

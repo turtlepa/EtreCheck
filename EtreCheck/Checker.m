@@ -120,18 +120,29 @@
   dispatch_async(
     queue,
     ^{
-      for(NSImage * icon in machineIcons)
+      BOOL once = NO;
+      
+      while(!once)
         {
-        [[NSNotificationCenter defaultCenter]
-          postNotificationName: kShowMachineIcon
-          object: icon];
+        for(NSImage * icon in machineIcons)
+          {
+          [[NSNotificationCenter defaultCenter]
+            postNotificationName: kShowMachineIcon
+            object: icon];
+            
+          struct timespec tm;
           
-        struct timespec tm;
-        
-        tm.tv_sec = 0;
-        tm.tv_nsec = NSEC_PER_SEC * .5;
-        
-        nanosleep(& tm, NULL);
+          tm.tv_sec = 0;
+          tm.tv_nsec = NSEC_PER_SEC * .5;
+          
+          nanosleep(& tm, NULL);
+          
+          if(once)
+            if(hardwareCollector.done)
+              break;
+          }
+          
+        once = YES;
         }
       
       // Make sure there is some image, even if a generic question mark.
@@ -197,12 +208,15 @@
   
   // Start the application animation.
   
+  KernelExtensionCollector * kernelExtensionCollector =
+    [[KernelExtensionCollector new] autorelease];
+    
   // This searches through applications, and takes some time, so it is
   // somewhat related to applications.
-  [collectors addObject: [[KernelExtensionCollector new] autorelease]];
+  [collectors addObject: kernelExtensionCollector];
   
   // Start the machine animation.
-  [self runApplicationsAnimation];
+  [self runApplicationsAnimation: kernelExtensionCollector];
   
   progress = [self performCollections: collectors progress: progress];
 
@@ -210,21 +224,23 @@
   }
 
 // Run the applications animation.
-- (void) runApplicationsAnimation
+- (void) runApplicationsAnimation:
+  (KernelExtensionCollector *) kernelExtensionCollector
   {
-  NSDictionary * applications =
-    [[SystemInformation sharedInformation] applications];
-  
   dispatch_async(
     queue,
     ^{
-      [self performMachineAnimation: applications];
+      [self performMachineAnimation: kernelExtensionCollector];
     });
   }
 
 // Perform machine animation.
-- (void) performMachineAnimation: (NSDictionary *) applications
+- (void) performMachineAnimation:
+  (KernelExtensionCollector *) kernelExtensionCollector
   {
+  NSDictionary * applications =
+    [[SystemInformation sharedInformation] applications];
+  
   int count = 0;
   
   for(NSString * name in applications)
@@ -253,7 +269,8 @@
     // Wait to see if the collection finishes. If it does, exit
     // early.
     if(count++ > 10)
-      break;
+      if(kernelExtensionCollector.done)
+        break;
     }
 
   [[NSNotificationCenter defaultCenter]
@@ -269,6 +286,12 @@
   if(!iconPath)
     return nil;
     
+  // Only report 3rd party applications.
+  NSString * obtained_from = [application objectForKey: @"obtained_from"];
+  
+  if([obtained_from isEqualToString: @"apple"])
+    return nil;
+      
   return [[NSImage alloc] initWithContentsOfFile: iconPath];
   }
 

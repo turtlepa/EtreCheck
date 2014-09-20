@@ -32,6 +32,8 @@
   [self
     parsePlugins: NSLocalizedString(@"Internet Plug-ins:", NULL)
     path:  @"/Library/Internet Plug-Ins"];
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 @end

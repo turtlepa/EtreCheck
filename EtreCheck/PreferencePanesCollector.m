@@ -65,6 +65,8 @@
         }
       }
     }
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Print information for a preference pane.

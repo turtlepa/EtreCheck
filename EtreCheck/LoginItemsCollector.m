@@ -60,6 +60,8 @@
     setTabs: @[@28, @112] forRange: NSMakeRange(0, [self.result length])];
 
   [self.result appendCR];
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Format the comma-delimited list of login items.

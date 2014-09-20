@@ -67,6 +67,8 @@ GatekeeperSetting;
   [self printGatekeeperSetting: setting];
 
   [self.result appendCR];
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Collect the Gatekeeper setting.

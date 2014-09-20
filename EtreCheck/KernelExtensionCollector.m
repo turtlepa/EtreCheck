@@ -77,11 +77,23 @@
   [self
     setTabs: @[@28, @112]
     forRange: NSMakeRange(0, [self.result length])];
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Collect all extensions on the system.
 - (void) collectAllExtensions
   {
+  dispatch_semaphore_t signal = dispatch_semaphore_create(0);
+  dispatch_semaphore_t done = dispatch_semaphore_create(0);
+  
+  dispatch_async(
+    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+    ^{
+      [self collectKnownExtensions: signal];
+      dispatch_semaphore_signal(done);
+    });
+  
   NSMutableDictionary * allExtensions = [NSMutableDictionary dictionary];
   
   [allExtensions addEntriesFromDictionary: [self collectExtensions]];
@@ -97,6 +109,124 @@
     addEntriesFromDictionary: [self collectApplicationExtensions]];
   
   self.extensions = allExtensions;
+  
+  dispatch_semaphore_signal(signal);
+  dispatch_semaphore_wait(done, DISPATCH_TIME_FOREVER);
+  
+  dispatch_release(signal);
+  dispatch_release(done);
+  }
+
+// Collect known extensions.
+- (void) collectKnownExtensions: (dispatch_semaphore_t) signal
+  {
+  NSArray * args =
+    @[
+      @"-xml",
+      @"SPExtensionsDataType"
+    ];
+  
+  NSData * result =
+    [Utilities execute: @"/usr/sbin/system_profiler" arguments: args];
+  
+  if(result)
+    {
+    dispatch_semaphore_wait(signal, DISPATCH_TIME_FOREVER);
+    
+    NSArray * plist = [Utilities readPropertyListData: result];
+  
+    if([plist count])
+      {
+      NSArray * foundExtensions =
+        [[plist objectAtIndex: 0] objectForKey: @"_items"];
+        
+      NSMutableDictionary * knownExtensions =
+        [NSMutableDictionary dictionary];
+      
+      for(NSDictionary * foundExtension in foundExtensions)
+        {
+        NSString * path = [foundExtension objectForKey: @"spext_path"];
+        
+        if(path)
+          [knownExtensions setObject: foundExtension forKey: path];
+        }
+      
+      [self checkForAppleExtensions: knownExtensions];
+      [self checkForUnknownExtensions: knownExtensions];
+      }
+    }
+  }
+
+// Check for Apple extensions.
+- (void) checkForAppleExtensions: (NSDictionary *) knownExtensions
+  {
+  // Add the Apple tag from any known extensions.
+  for(NSString * label in self.extensions)
+    {
+    NSDictionary * extension = [self.extensions objectForKey: label];
+    
+    NSString * path = [extension objectForKey: @"path"];
+    
+    NSDictionary * knownExtension = [knownExtensions objectForKey: path];
+      
+    if(knownExtension)
+      {
+      NSString * obtained_from =
+        [knownExtension objectForKey: @"spext_obtained_from"];
+      
+      if([obtained_from isEqualToString: @"spext_apple"])
+        {
+        NSMutableDictionary * extension =
+          [self.extensions objectForKey: label];
+        
+        [extension setObject: @"apple" forKey: @"obtained_from"];
+        }
+      }
+    }
+  }
+  
+// Look for any heretofore unknown extensions.
+- (void) checkForUnknownExtensions: (NSDictionary *) knownExtensions
+  {
+  // Collect the paths of all current extensions.
+  NSMutableSet * extensionPaths = [NSMutableSet set];
+  
+  for(NSString * label in self.extensions)
+    {
+    NSDictionary * extension = [self.extensions objectForKey: label];
+    
+    NSString * path = [extension objectForKey: @"path"];
+    
+    if(path)
+      [extensionPaths addObject: path];
+    }
+    
+  for(NSString * name in knownExtensions)
+    {
+    NSDictionary * knownExtension = [knownExtensions objectForKey: name];
+    
+    NSString * path = [knownExtension objectForKey: @"spext_path"];
+    
+    // Do I already know about this extension?
+    if([extensionPaths containsObject: path])
+      continue;
+      
+    // Add it to the list.
+    NSMutableDictionary * bundle = [self parseExtensionBundle: path];
+        
+    if(bundle)
+      {
+      NSString * identifier = [bundle objectForKey: @"CFBundleIdentifier"];
+
+      NSString * obtained_from =
+        [knownExtension objectForKey: @"spext_obtained_from"];
+        
+      if([obtained_from isEqualToString: @"spext_apple"])
+        [bundle setObject: @"apple" forKey: @"obtained_from"];
+        
+      [self.extensions setObject: bundle forKey: identifier];
+      }
+    }
   }
 
 // Collect 3rd party extensions.
@@ -195,6 +325,12 @@
 
   if(bundleID)
     {
+    NSString * obtained_from = [application objectForKey: @"obtained_from"];
+    
+    if([obtained_from isEqualToString: @"apple"])
+      return @{};
+     
+    // The obtained_from indicator isn't quite good enough.
     if([bundleID hasPrefix: @"com.apple."])
       return @{};
         
@@ -221,29 +357,48 @@
 
   for(NSString * line in lines)
     {
-    NSString * versionPlist =
-      [line stringByAppendingPathComponent: @"Contents/Info.plist"];
-
-    NSDictionary * plist = [Utilities readPropertyList: versionPlist];
-
-    if(plist)
-      {
-      NSString * identifier = [plist objectForKey: @"CFBundleIdentifier"];
+    NSMutableDictionary * bundle = [self parseExtensionBundle: line];
       
-      if(identifier)
-        {
-        NSDictionary * bundle =
-          [NSMutableDictionary dictionaryWithDictionary: plist];
-        
-        // Save the path too.
-        [bundle setValue: [self extensionDirectory: line] forKey: @"path"];
-        
-        [bundles setObject: bundle forKey: identifier];
-        }
-      }
+    NSString * identifier = [bundle objectForKey: @"CFBundleIdentifier"];
+
+    if(identifier && bundle)
+      [bundles setObject: bundle forKey: identifier];
     }
     
   return bundles;
+  }
+
+// Parse a single extension bundle.
+- (NSMutableDictionary *) parseExtensionBundle: (NSString *) path
+  {
+  NSString * versionPlist =
+    [path stringByAppendingPathComponent: @"Contents/Info.plist"];
+
+  NSDictionary * plist = [Utilities readPropertyList: versionPlist];
+
+  // Check for inconsistent path from Apple extensions.
+  if(!plist)
+    versionPlist = [path stringByAppendingPathComponent: @"Info.plist"];
+
+  plist = [Utilities readPropertyList: versionPlist];
+
+  if(plist)
+    {
+    NSString * identifier = [plist objectForKey: @"CFBundleIdentifier"];
+    
+    if(identifier)
+      {
+      NSMutableDictionary * bundle =
+        [NSMutableDictionary dictionaryWithDictionary: plist];
+      
+      // Save the path too.
+      [bundle setValue: [self extensionDirectory: path] forKey: @"path"];
+      
+      return bundle;
+      }
+    }
+    
+  return nil;
   }
 
 // Get the path from a bundle and type.
@@ -411,6 +566,8 @@
     return YES;
   else if([label hasPrefix: @"com.CalDigit.driver.HDPro"])
     return YES;
+  else if([label hasPrefix: @"com.silabs.driver.CP210xVCPDriver"])
+    return YES;
 
   // Snow Leopard.
   else if([label hasPrefix: @"com.Immersion.driver.ImmersionForceFeedback"])
@@ -486,6 +643,14 @@
 // Format an extension for output.
 - (NSAttributedString *) formatExtension: (NSString *) label
   {
+  NSDictionary * extension = [self.extensions objectForKey: label];
+  
+  NSString * obtained_from = [extension objectForKey: @"obtained_from"];
+  
+  if([obtained_from isEqualToString: @"apple"])
+    return nil;
+
+  // The obtained_from indicator isn't quite good enough.
   if([label hasPrefix: @"com.apple."])
     return nil;
 

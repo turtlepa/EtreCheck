@@ -68,6 +68,8 @@
   [self.result appendCR];
 
   [formatter release];
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Collect virtual memory information.

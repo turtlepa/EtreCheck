@@ -60,6 +60,8 @@
     }
   else
     [self.result appendCR];
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Print a single USB device.

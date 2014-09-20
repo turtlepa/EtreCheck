@@ -132,6 +132,8 @@
         }
       }
     }
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Print informaiton for the machine.

@@ -75,6 +75,8 @@
     
     [self.result appendCR];
     }
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Collect extension updates.

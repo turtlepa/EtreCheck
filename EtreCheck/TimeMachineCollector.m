@@ -82,6 +82,8 @@
   
   // Now I can continue.
   [self collectInformation];
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Collect Time Machine information now that I know I should be able to

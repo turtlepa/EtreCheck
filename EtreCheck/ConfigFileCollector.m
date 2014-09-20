@@ -62,6 +62,8 @@
       
     [self.result appendCR];
     }
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Collect the number of changes to /etc/hosts and its status.

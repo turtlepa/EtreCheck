@@ -50,8 +50,7 @@
   
     if(plist && [plist count])
       {
-      NSArray * items =
-        [[plist objectAtIndex: 0] objectForKey: @"_items"];
+      NSArray * items = [[plist objectAtIndex: 0] objectForKey: @"_items"];
         
       if([items count])
         {
@@ -72,6 +71,8 @@
         }
       }
     }
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Get startup item bundles.

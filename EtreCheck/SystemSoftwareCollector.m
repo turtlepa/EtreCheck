@@ -62,6 +62,8 @@
         }
       }
     }
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Print a system software item.

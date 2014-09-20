@@ -14,6 +14,14 @@
 @synthesize name = myName;
 @synthesize result = myResult;
 @synthesize progressEstimate = myProgressEstimate;
+@synthesize complete = myComplete;
+@dynamic done;
+
+// Is this collector complete?
+- (BOOL) done
+  {
+  return !dispatch_semaphore_wait(self.complete, DISPATCH_TIME_NOW);
+  }
 
 // Constructor.
 - (id) init
@@ -25,6 +33,7 @@
     myResult = [NSMutableAttributedString new];
     myProgressEstimate = 0.1;
     myFormatter = [NSNumberFormatter new];
+    myComplete = dispatch_semaphore_create(0);
     }
     
   return self;
@@ -33,6 +42,7 @@
 // Destructor.
 - (void) dealloc
   {
+  dispatch_release(myComplete);
   [myFormatter release];
   [myResult release];
   

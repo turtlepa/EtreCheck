@@ -9,7 +9,7 @@
 // Collect kernel extensions.
 @interface KernelExtensionCollector : Collector
   {
-  NSDictionary * myExtensions;
+  NSMutableDictionary * myExtensions;
   NSMutableDictionary * myLoadedExtensions;
   NSMutableDictionary * myUnloadedExtensions;
   NSMutableDictionary * myUnexpectedExtensions;
@@ -17,7 +17,7 @@
   }
 
 // All extensions.
-@property (retain) NSDictionary * extensions;
+@property (retain) NSMutableDictionary * extensions;
 
 // Loaded extensions.
 @property (retain) NSMutableDictionary * loadedExtensions;

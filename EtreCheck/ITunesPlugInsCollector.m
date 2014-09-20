@@ -29,6 +29,8 @@
   [self
     parsePlugins: NSLocalizedString(@"iTunes Plug-ins:", NULL)
     path:  @"/Library/iTunes/iTunes Plug-ins"];
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 @end

@@ -35,6 +35,8 @@
   
   // Print the top processes.
   [self printTopProcesses: processesMemory];
+    
+  dispatch_semaphore_signal(self.complete);
   }
 
 // Collect the average CPU usage of all processes.

@@ -46,6 +46,8 @@
   [self
     formatPropertyListFiles: files
     title: NSLocalizedString(@"Problem System Launch Agents:", NULL)];
+    
+  dispatch_semaphore_signal(self.complete);
   }
   
 @end
