@@ -19,7 +19,7 @@
   
   if(self)
     {
-    self.progressEstimate = 35.0;
+    self.progressEstimate = 34.0;
     self.name = @"applications";
     genericApplication =
       [[NSWorkspace sharedWorkspace] iconForFileType: @".app"];

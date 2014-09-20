@@ -411,7 +411,15 @@
             ? NSLocalizedString(@"Upgradeable", NULL)
             : NSLocalizedString(@"Not upgradeable", NULL)]];
 
-  NSArray * banks = [details objectForKey: @"_items"];
+  [self printMemoryBanks: [details objectForKey: @"_items"]];
+  }
+
+// Print memory banks.
+- (void) printMemoryBanks: (NSArray *) banks
+  {
+  NSString * lastBankID = nil;
+  NSString * lastBankInfo = nil;
+  int bankCount = 0;
   
   for(NSDictionary * bank in banks)
     {
@@ -421,15 +429,35 @@
     NSString * speed = [bank objectForKey: @"dimm_speed"];
     NSString * status = [bank objectForKey: @"dimm_status"];
     
-    [self.result
-      appendString:
-        [NSString stringWithFormat: @"\t\t%@\n", name]];
-
-    [self.result
-      appendString:
-        [NSString
-          stringWithFormat:
-            @"\t\t\t%@ %@ %@ %@\n", size, type, speed, status]];
+    NSString * currentBankID =
+      [NSString stringWithFormat: @"\t\t%@", name];
+      
+    NSString * currentBankInfo =
+      [NSString
+        stringWithFormat:
+          @"\t\t\t%@ %@ %@ %@\n", size, type, speed, status];
+      
+    BOOL sameID = [lastBankID isEqualToString: currentBankID];
+    BOOL sameInfo = [lastBankInfo isEqualToString: currentBankInfo];
+    
+    if(sameID && sameInfo && (bank != [banks lastObject]))
+      ++bankCount;
+    else
+      {
+      [self.result appendString: currentBankID];
+      [self.result
+        appendString:
+          [NSString
+            stringWithFormat:
+              @"%@\n",
+              bankCount > 0
+                ? [NSString stringWithFormat: @" (%d)", bankCount]
+                : @""]];
+      [self.result appendString: currentBankInfo];
+      
+      lastBankID = currentBankID;
+      lastBankInfo = currentBankInfo;
+      }
     }
   }
 
