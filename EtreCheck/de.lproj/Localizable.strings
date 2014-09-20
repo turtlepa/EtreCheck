@@ -192,3 +192,11 @@
 "%d day (plural rule: other)" = "%d Tage ";
 "Upgradeable" = "Nachrüstbar";
 "Not upgradeable" = "Nicht erweiterbar";
+"Good - Handoff supported" = "Gut - Handoff unterstützt";
+"Old - Handoff not supported" = "Altes - Handoff nicht unterstützt";
+"%d interface (plural rule: zero)" = "Ohne Netzwerkanschlüsse\n";
+"%d interface (plural rule: one)" = "";
+"%d interface (plural rule: other)" = "%d Netzwerkanschlüsse\n";
+"\t\t%@: %@\n" = "\t\t%@: %@\n";
+
+

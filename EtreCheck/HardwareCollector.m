@@ -125,6 +125,9 @@
         for(NSDictionary * info in infos)
           [self printMachineInformation: info];
           
+        [self printBluetoothInformation];
+        [self printWirelessInformation];
+        
         [self.result appendCR];
         }
       }
@@ -168,7 +171,6 @@
           cpu_count,
           speed,
           cpu_type ? cpu_type : @"",
-          cpu_count,
           core_count]];
     
   [self printMemory: memory];
@@ -429,6 +431,126 @@
           stringWithFormat:
             @"\t\t\t%@ %@ %@ %@\n", size, type, speed, status]];
     }
+  }
+
+// Print information about bluetooth.
+- (void) printBluetoothInformation
+  {
+  [self.result
+    appendString:
+      [NSString
+        stringWithFormat:
+          @"\tBluetooth: %@\n", [self collectBluetoothInformation]]];
+  }
+
+// Collect bluetooth information.
+- (NSString *) collectBluetoothInformation
+  {
+  NSArray * args =
+    @[
+      @"-xml",
+      @"SPBluetoothDataType"
+    ];
+  
+  NSData * result =
+    [Utilities execute: @"/usr/sbin/system_profiler" arguments: args];
+  
+  NSString * bluetooth = NSLocalizedString(@"Unknown", NULL);
+  
+  if(result)
+    {
+    NSArray * plist = [Utilities readPropertyListData: result];
+  
+    if(plist && [plist count])
+      {
+      NSArray * infos =
+        [[plist objectAtIndex: 0] objectForKey: @"_items"];
+        
+      if([infos count])
+        {
+        for(NSDictionary * info in infos)
+          {
+          NSDictionary * localDevice =
+            [info objectForKey: @"local_device_title"];
+            
+          if(localDevice)
+            {
+            NSString * version =
+              [localDevice objectForKey: @"general_lmp_version"];
+            
+            if([version isGreaterThanOrEqualTo: @"0x6"])
+              return NSLocalizedString(@"Good - Handoff supported", NULL);
+              
+            bluetooth =
+              NSLocalizedString(@"Old - Handoff not supported", NULL);
+            }
+          }
+        }
+      }
+    }
+    
+  return bluetooth;
+  }
+
+// Print wireless information.
+- (void) printWirelessInformation
+  {
+  NSArray * args =
+    @[
+      @"-xml",
+      @"SPAirPortDataType"
+    ];
+  
+  NSData * result =
+    [Utilities execute: @"/usr/sbin/system_profiler" arguments: args];
+  
+  if(result)
+    {
+    NSArray * plist = [Utilities readPropertyListData: result];
+  
+    if(plist && [plist count])
+      {
+      NSArray * infos =
+        [[plist objectAtIndex: 0] objectForKey: @"_items"];
+        
+      if([infos count])
+        {
+        for(NSDictionary * info in infos)
+          {
+          NSArray * interfaces =
+            [info objectForKey: @"spairport_airport_interfaces"];
+            
+          NSUInteger count = [interfaces count];
+          
+          if(interfaces)
+            [self.result
+              appendString:
+                [NSString
+                  stringWithFormat:
+                    @"\tWireless: %@",
+                    TTTLocalizedPluralString(count, @"interface", nil)]];
+          
+          for(NSDictionary * interface in interfaces)
+            [self
+              printWirelessInterface: interface
+              indent: count > 1 ? @"\t\t" : @" "];
+          }
+        }
+      }
+    }
+  }
+
+// Print a single wireless interface.
+- (void) printWirelessInterface: (NSDictionary *) interface
+  indent: (NSString *) indent
+  {
+  NSString * name = [interface objectForKey: @"_name"];
+  NSString * modes =
+    [interface objectForKey: @"spairport_supported_phymodes"];
+
+  [self.result
+    appendString:
+      [NSString stringWithFormat: @"%@%@: %@\n", indent, name, modes]];
   }
 
 @end

@@ -19,3 +19,6 @@
 "%d day (plural rule: zero)" = "";
 "%d day (plural rule: one)" = "one day ";
 "%d day (plural rule: other)" = "%d days ";
+"%d interface (plural rule: zero)" = "no interfaces\n";
+"%d interface (plural rule: one)" = "";
+"%d interface (plural rule: other)" = "%d interfaces\n";
