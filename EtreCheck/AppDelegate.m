@@ -39,6 +39,7 @@
 @synthesize displayStatus = myDisplayStatus;
 @synthesize log;
 @synthesize currentProgressIncrement = myCurrentProgressIncrement;
+@synthesize progressTimer = myProgressTimer;
 @synthesize machineIcon = myMachineIcon;
 @synthesize applicationIcon = myApplicationIcon;
 @synthesize magnifyingGlass = myMagnifyingGlass;
@@ -245,6 +246,8 @@
   {
   [[NSApplication sharedApplication] endSheet: self.userMessgePanel];
   
+  [self startProgressTimer];
+  
   dispatch_async(
     dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
     ^{
@@ -252,6 +255,34 @@
     });
   }
 
+// Start the progress timer.
+- (void) startProgressTimer
+  {
+  self.progressTimer =
+    [NSTimer
+      scheduledTimerWithTimeInterval: .2
+      target: self
+      selector: @selector(fireProgressTimer:)
+      userInfo: nil
+      repeats: YES];
+  }
+
+// Progress timer.
+- (void) fireProgressTimer: (NSTimer *) timer
+  {
+  double current = [self.progress doubleValue];
+  
+  current = current + 1;
+  
+  if(current > self.currentProgressIncrement)
+    return;
+    
+  [self updateProgress: current];
+  
+  if(current >= 100)
+    [timer invalidate];
+  }
+  
 // Cancel the report.
 - (IBAction) cancel: (id) sender
   {
@@ -272,46 +303,8 @@
   {
   NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
   
-  NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-  [dateFormatter setDateStyle: NSDateFormatterLongStyle];
-  [dateFormatter setTimeStyle: NSDateFormatterLongStyle];
-  [dateFormatter setLocale: [NSLocale currentLocale]];
-  NSString * dateString = [dateFormatter stringFromDate: [NSDate date]];
-  [dateFormatter release];
-
-  NSBundle * bundle = [NSBundle mainBundle];
+  [self printEtreCheckHeader];
   
-  if([self.userMessage length])
-    {
-    [self.log
-      appendString: NSLocalizedString(@"Problem description:\n", NULL)
-      attributes:
-        @{
-          NSFontAttributeName : [[Utilities shared] boldFont]
-        }];
-      
-    [self.log
-      appendAttributedString:
-        [self.userMessage attributedStringByTrimmingWhitespace]];
-    
-    [self.log appendString: @"\n\n"];
-    }
-    
-  [self.log
-    appendString:
-      [NSString
-        stringWithFormat:
-          NSLocalizedString(
-            @"EtreCheck version: %@ (%@)\nReport generated %@\n\n", NULL),
-            [bundle
-              objectForInfoDictionaryKey: @"CFBundleShortVersionString"],
-            [bundle objectForInfoDictionaryKey: @"CFBundleVersion"],
-            dateString]
-    attributes:
-      [NSDictionary
-       dictionaryWithObjectsAndKeys:
-         [[Utilities shared] boldFont], NSFontAttributeName, nil]];
-
   [self setupNotificationHandlers];
   
   [self.progress startAnimation: self];
@@ -331,6 +324,62 @@
   [LaunchdCollector cleanup];
   
   [pool drain];
+  }
+
+// Print the EtreCheck header.
+- (void) printEtreCheckHeader
+  {
+  [self printProblemDescription];
+  
+  NSBundle * bundle = [NSBundle mainBundle];
+  
+  [self.log
+    appendString:
+      [NSString
+        stringWithFormat:
+          NSLocalizedString(
+            @"EtreCheck version: %@ (%@)\nReport generated %@\n\n", NULL),
+            [bundle
+              objectForInfoDictionaryKey: @"CFBundleShortVersionString"],
+            [bundle objectForInfoDictionaryKey: @"CFBundleVersion"],
+            [self currentDate]]
+    attributes:
+      [NSDictionary
+       dictionaryWithObjectsAndKeys:
+         [[Utilities shared] boldFont], NSFontAttributeName, nil]];
+  }
+
+// Print the problem description.
+- (void) printProblemDescription
+  {
+  if([self.userMessage length])
+    {
+    [self.log
+      appendString: NSLocalizedString(@"Problem description:\n", NULL)
+      attributes:
+        @{
+          NSFontAttributeName : [[Utilities shared] boldFont]
+        }];
+      
+    [self.log
+      appendAttributedString:
+        [self.userMessage attributedStringByTrimmingWhitespace]];
+    
+    [self.log appendString: @"\n\n"];
+    }
+  }
+
+// Get the current date as a string.
+- (NSString *) currentDate
+  {
+  NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+  [dateFormatter setDateStyle: NSDateFormatterLongStyle];
+  [dateFormatter setTimeStyle: NSDateFormatterLongStyle];
+  [dateFormatter setLocale: [NSLocale currentLocale]];
+  NSString * dateString = [dateFormatter stringFromDate: [NSDate date]];
+  [dateFormatter release];
+
+  return dateString;
   }
 
 // Setup notification handlers.
@@ -407,25 +456,30 @@
 // Handle a progress update.
 - (void) progressUpdated: (NSNotification *) notification
   {
-  if([self.progress isIndeterminate])
-    [self.progress setIndeterminate: NO];
-    
-  self.currentProgressIncrement = [[notification object] doubleValue];
-  
   dispatch_async(
     dispatch_get_main_queue(),
     ^{
-      // Try to make Snow Leopard update.
-      if((self.currentProgressIncrement - [self.progress doubleValue]) > 1)
-        [self.progress setNeedsDisplay: YES];
-
-      // Snow Leopard doesn't like animations with CA layers.
-      // Beat it with a rubber hose.
-      [self.progress setHidden: YES];
-      [self.progress setDoubleValue: self.currentProgressIncrement];
-      [self.progress setHidden: NO];
-      [self.progress startAnimation: self];
+      [self updateProgress: self.currentProgressIncrement];
+      
+      self.currentProgressIncrement = [[notification object] doubleValue];
     });
+  }
+
+- (void) updateProgress: (double) amount
+  {
+  // Try to make Snow Leopard update.
+  if((self.currentProgressIncrement - [self.progress doubleValue]) > 1)
+    [self.progress setNeedsDisplay: YES];
+
+  if([self.progress isIndeterminate])
+    [self.progress setIndeterminate: NO];
+    
+  // Snow Leopard doesn't like animations with CA layers.
+  // Beat it with a rubber hose.
+  [self.progress setHidden: YES];
+  [self.progress setDoubleValue: amount];
+  [self.progress setHidden: NO];
+  [self.progress startAnimation: self];
   }
 
 // Handle an application found.
@@ -581,6 +635,8 @@
 // Show the output pane.
 - (void) displayOutput
   {
+  [self.progressTimer invalidate];
+  
   NSData * rtfData =
     [self.log
       RTFFromRange: NSMakeRange(0, [self.log length])
