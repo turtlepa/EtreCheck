@@ -96,6 +96,10 @@
   
   [self.logView setHidden: YES];
   
+  // Set delegate for notification center.
+  [[NSUserNotificationCenter defaultUserNotificationCenter]
+    setDelegate: self];
+
   dispatch_after(
     dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)),
     dispatch_get_main_queue(),
@@ -717,7 +721,41 @@
       [self.window setShowsResizeIndicator: YES];
       [self.window
         setStyleMask: [self.window styleMask] | NSResizableWindowMask];
+      
+      [self notify];
     });
+  }
+
+// Notify the user that the report is done.
+- (void) notify
+  {
+  if(![NSUserNotificationCenter class])
+    return;
+    
+  // Notify the user.
+  NSUserNotification * notification = [[NSUserNotification alloc] init];
+    
+  notification.title = @"Etrecheck";
+  notification.informativeText =
+    NSLocalizedString(@"Report complete", NULL);
+  
+  // TODO: Do something clever with sound and notifications.
+  notification.soundName = NSUserNotificationDefaultSoundName;
+  
+  [[NSUserNotificationCenter defaultUserNotificationCenter]
+    deliverNotification: notification];
+    
+  [notification release];
+  }
+
+// Display web site when the user clicks on a notification.
+- (void) userNotificationCenter: (NSUserNotificationCenter *) center
+  didActivateNotification: (NSUserNotification *) notification
+  {
+  if([self.window isMiniaturized])
+    [self.window deminiaturize: self];
+    
+  [self.window makeKeyAndOrderFront: self];
   }
 
 // Copy the report to the clipboard.

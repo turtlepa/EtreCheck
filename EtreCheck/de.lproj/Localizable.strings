@@ -198,5 +198,6 @@
 "%d interface (plural rule: one)" = "";
 "%d interface (plural rule: other)" = "%d Netzwerkanschlüsse\n";
 "\t\t%@: %@\n" = "\t\t%@: %@\n";
+"Report complete" = "Bericht abgeschlossen";
 
 

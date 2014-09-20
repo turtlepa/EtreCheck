@@ -8,7 +8,8 @@
 
 @class SlideshowView;
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject
+  <NSApplicationDelegate, NSUserNotificationCenterDelegate>
   {
   NSWindow * window;
   NSWindow * myLogWindow;

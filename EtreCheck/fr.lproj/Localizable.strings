@@ -198,4 +198,4 @@
 "%d interface (plural rule: one)" = "";
 "%d interface (plural rule: other)" = "%d interfaces\n";
 "\t\t%@: %@\n" = "\t\t%@ : %@\n";
-
+"Report complete" = "Rapport complet";
