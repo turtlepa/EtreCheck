@@ -695,6 +695,9 @@
 // Show the report view.
 - (void) showReportView
   {
+  [[self.logView enclosingScrollView] setDrawsBackground: YES];
+  [[self.logView enclosingScrollView] setBorderType: NSBezelBorder];
+  
   dispatch_after(
     dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
     dispatch_get_main_queue(),
@@ -723,6 +726,15 @@
         setStyleMask: [self.window styleMask] | NSResizableWindowMask];
       
       [self notify];
+    });
+
+  dispatch_after(
+    dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)),
+    dispatch_get_main_queue(),
+    ^{
+      [self.reportView setWantsLayer: NO];
+      
+      [self.logView scrollRangeToVisible: NSMakeRange(0, 1)];
     });
   }
 
