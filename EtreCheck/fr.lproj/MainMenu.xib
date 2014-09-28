@@ -876,12 +876,12 @@ Gw
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" alphaValue="0.70000000000000007" id="PHl-IL-fhi" userLabel="Mask">
                                 <rect key="frame" x="203" y="80" width="230" height="147"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Magnifying Glass Shade" id="h2p-bx-vsM"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="MagnifyingGlassShade" id="h2p-bx-vsM"/>
                             </imageView>
                             <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="unu-XY-TZC" userLabel="Magnifying Glass">
                                 <rect key="frame" x="203" y="80" width="230" height="147"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Magnifying Glass" id="U0y-89-Dyg"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="MagnifyingGlass" id="U0y-89-Dyg"/>
                             </imageView>
                             <progressIndicator maxValue="100" displayedWhenStopped="NO" indeterminate="YES" style="bar" id="tDb-Al-O2y">
                                 <rect key="frame" x="20" y="19" width="491" height="20"/>
@@ -944,9 +944,9 @@ Gw
         <userDefaultsController representsSharedInstance="YES" id="HgC-29-4Qk"/>
     </objects>
     <resources>
-        <image name="Agent" width="117.5" height="125"/>
+        <image name="Agent" width="118" height="125"/>
         <image name="Demon" width="110" height="125"/>
-        <image name="Magnifying Glass" width="400" height="200"/>
-        <image name="Magnifying Glass Shade" width="800" height="400"/>
+        <image name="MagnifyingGlass" width="800" height="400"/>
+        <image name="MagnifyingGlassShade" width="800" height="400"/>
     </resources>
 </document>
