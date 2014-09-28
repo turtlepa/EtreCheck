@@ -136,11 +136,7 @@
         [resourceDirectory
           stringByAppendingPathComponent: @"GenericApplicationIcon.icns"]];
   
-  myEtreCheckIcon =
-    [[NSImage alloc]
-      initWithContentsOfFile:
-        [[[NSBundle mainBundle]
-          resourcePath] stringByAppendingPathComponent: @"EtreCheck.icns"]];
+  myEtreCheckIcon = [NSImage imageNamed: @"AppIcon"];
   
   myFinderIcon =
     [[NSImage alloc]

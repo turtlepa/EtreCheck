@@ -230,12 +230,12 @@
   dispatch_async(
     queue,
     ^{
-      [self performMachineAnimation: kernelExtensionCollector];
+      [self performApplicationsAnimation: kernelExtensionCollector];
     });
   }
 
-// Perform machine animation.
-- (void) performMachineAnimation:
+// Perform applications animation.
+- (void) performApplicationsAnimation:
   (KernelExtensionCollector *) kernelExtensionCollector
   {
   NSDictionary * applications =

@@ -27,8 +27,6 @@
 		A5257D4019AC10E3003084C8 /* Checker.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3F19AC10E3003084C8 /* Checker.m */; };
 		A5409E9B186F271500B1727E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5409E9A186F271500B1727E /* SystemConfiguration.framework */; };
 		A540C6FE1873D5F800497BDE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A540C7001873D5F800497BDE /* Localizable.strings */; };
-		A54509FB19BE88B600D60758 /* Magnifying Glass Shade.png in Resources */ = {isa = PBXBuildFile; fileRef = A54509F919BE88B600D60758 /* Magnifying Glass Shade.png */; };
-		A54509FC19BE88B600D60758 /* Magnifying Glass.png in Resources */ = {isa = PBXBuildFile; fileRef = A54509FA19BE88B600D60758 /* Magnifying Glass.png */; };
 		A552A31D1818BDAE00829BA3 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A552A3161818BC7F00829BA3 /* CoreServices.framework */; };
 		A55BC16E15BF987D00D42EF1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55BC16D15BF987D00D42EF1 /* Cocoa.framework */; };
 		A55BC17815BF987D00D42EF1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A55BC17615BF987D00D42EF1 /* InfoPlist.strings */; };
@@ -36,13 +34,11 @@
 		A55BC17E15BF987D00D42EF1 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A55BC17C15BF987D00D42EF1 /* Credits.rtf */; };
 		A55BC18115BF987D00D42EF1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BC18015BF987D00D42EF1 /* AppDelegate.m */; };
 		A55BC18415BF987D00D42EF1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55BC18215BF987D00D42EF1 /* MainMenu.xib */; };
-		A55BC1B915C0E0A400D42EF1 /* EtreCheck.iconset in Resources */ = {isa = PBXBuildFile; fileRef = A55BC1B815C0E0A400D42EF1 /* EtreCheck.iconset */; };
 		A59B506D15C45EC000250772 /* NSMutableAttributedString+Etresoft.m in Sources */ = {isa = PBXBuildFile; fileRef = A59B506C15C45EC000250772 /* NSMutableAttributedString+Etresoft.m */; };
+		A5B6BD5B19D7AAF900C48C37 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5B6BD5A19D7AAF900C48C37 /* Media.xcassets */; };
 		A5C00A2819BFF2D500140404 /* NSAttributedString+Etresoft.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C00A2719BFF2D500140404 /* NSAttributedString+Etresoft.m */; };
 		A5C1492519B88192002890F1 /* SlideshowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C1492419B88192002890F1 /* SlideshowView.m */; };
 		A5C1492719B88625002890F1 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C1492619B88625002890F1 /* Quartz.framework */; };
-		A5C1497119BBFD10002890F1 /* Demon.png in Resources */ = {isa = PBXBuildFile; fileRef = A5C1496F19BBFD10002890F1 /* Demon.png */; };
-		A5C1497219BBFD10002890F1 /* Agent.png in Resources */ = {isa = PBXBuildFile; fileRef = A5C1497019BBFD10002890F1 /* Agent.png */; };
 		A5C292DD19A02A8800464E86 /* LaunchdCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292DC19A02A8800464E86 /* LaunchdCollector.m */; };
 		A5C292E019A02B2700464E86 /* Collector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292DF19A02B2700464E86 /* Collector.m */; };
 		A5C292E319A039AB00464E86 /* SystemLaunchAgentsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292E219A039AB00464E86 /* SystemLaunchAgentsCollector.m */; };
@@ -108,8 +104,6 @@
 		A5409E9A186F271500B1727E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		A540C6FF1873D5F800497BDE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A540C7011873D5FC00497BDE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		A54509F919BE88B600D60758 /* Magnifying Glass Shade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Magnifying Glass Shade.png"; sourceTree = "<group>"; };
-		A54509FA19BE88B600D60758 /* Magnifying Glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Magnifying Glass.png"; sourceTree = "<group>"; };
 		A552A3161818BC7F00829BA3 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/CoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		A552A3181818BD1F00829BA3 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Carbon.framework; sourceTree = DEVELOPER_DIR; };
 		A552A31B1818BD8300829BA3 /* CarbonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CarbonCore.framework; path = ../../../../System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework; sourceTree = "<group>"; };
@@ -127,19 +121,17 @@
 		A55BC18015BF987D00D42EF1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A55BC18315BF987D00D42EF1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A55BC1AF15C0901800D42EF1 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
-		A55BC1B815C0E0A400D42EF1 /* EtreCheck.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = EtreCheck.iconset; sourceTree = SOURCE_ROOT; };
 		A55BC1C815C0F4FA00D42EF1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A55BC1C915C0F4FA00D42EF1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A55BC1CA15C0F4FA00D42EF1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = fr; path = fr.lproj/Credits.rtf; sourceTree = "<group>"; };
 		A59B506B15C45EC000250772 /* NSMutableAttributedString+Etresoft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+Etresoft.h"; sourceTree = "<group>"; };
 		A59B506C15C45EC000250772 /* NSMutableAttributedString+Etresoft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+Etresoft.m"; sourceTree = "<group>"; };
+		A5B6BD5A19D7AAF900C48C37 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		A5C00A2619BFF2D500140404 /* NSAttributedString+Etresoft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Etresoft.h"; sourceTree = "<group>"; };
 		A5C00A2719BFF2D500140404 /* NSAttributedString+Etresoft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Etresoft.m"; sourceTree = "<group>"; };
 		A5C1492319B88192002890F1 /* SlideshowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowView.h; sourceTree = "<group>"; };
 		A5C1492419B88192002890F1 /* SlideshowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowView.m; sourceTree = "<group>"; };
 		A5C1492619B88625002890F1 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
-		A5C1496F19BBFD10002890F1 /* Demon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Demon.png; sourceTree = "<group>"; };
-		A5C1497019BBFD10002890F1 /* Agent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Agent.png; sourceTree = "<group>"; };
 		A5C292DB19A02A8800464E86 /* LaunchdCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchdCollector.h; sourceTree = "<group>"; };
 		A5C292DC19A02A8800464E86 /* LaunchdCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchdCollector.m; sourceTree = "<group>"; };
 		A5C292DE19A02B2700464E86 /* Collector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Collector.h; sourceTree = "<group>"; };
@@ -357,11 +349,7 @@
 		A55BC17415BF987D00D42EF1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A54509F919BE88B600D60758 /* Magnifying Glass Shade.png */,
-				A54509FA19BE88B600D60758 /* Magnifying Glass.png */,
-				A5C1496F19BBFD10002890F1 /* Demon.png */,
-				A5C1497019BBFD10002890F1 /* Agent.png */,
-				A55BC1B815C0E0A400D42EF1 /* EtreCheck.iconset */,
+				A5B6BD5A19D7AAF900C48C37 /* Media.xcassets */,
 				A55BC17515BF987D00D42EF1 /* EtreCheck-Info.plist */,
 				A55BC17615BF987D00D42EF1 /* InfoPlist.strings */,
 				A540C7001873D5F800497BDE /* Localizable.strings */,
@@ -439,15 +427,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5C1497219BBFD10002890F1 /* Agent.png in Resources */,
+				A5B6BD5B19D7AAF900C48C37 /* Media.xcassets in Resources */,
 				A540C6FE1873D5F800497BDE /* Localizable.strings in Resources */,
-				A54509FC19BE88B600D60758 /* Magnifying Glass.png in Resources */,
 				A55BC17815BF987D00D42EF1 /* InfoPlist.strings in Resources */,
 				A55BC17E15BF987D00D42EF1 /* Credits.rtf in Resources */,
 				A55BC18415BF987D00D42EF1 /* MainMenu.xib in Resources */,
-				A54509FB19BE88B600D60758 /* Magnifying Glass Shade.png in Resources */,
-				A55BC1B915C0E0A400D42EF1 /* EtreCheck.iconset in Resources */,
-				A5C1497119BBFD10002890F1 /* Demon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,6 +601,7 @@
 		A55BC18815BF987D00D42EF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "EtreCheck/EtreCheck-Info.plist";
@@ -626,6 +611,7 @@
 		A55BC18915BF987D00D42EF1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "EtreCheck/EtreCheck-Info.plist";
