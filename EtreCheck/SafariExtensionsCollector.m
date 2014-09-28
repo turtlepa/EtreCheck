@@ -121,6 +121,11 @@
   
   name = [name stringByDeletingPathExtension];
   
+  NSString * humanReadableName = [self humanReadableExtensionName: name];
+  
+  if(humanReadableName)
+    name = humanReadableName;
+    
   NSString * updateURL = [self.updates objectForKey: archiveName];
   
   [self.result
@@ -140,6 +145,129 @@
         }];
     
   [self.result appendString: @"\n"];
+  }
+
+- (NSString *) humanReadableExtensionName: (NSString *) extensionName
+  {
+  NSString * userSafariExtensionsDir =
+    [NSHomeDirectory()
+      stringByAppendingPathComponent: @"Library/Safari/Extensions"];
+
+  NSString * extensionPath =
+    [userSafariExtensionsDir stringByAppendingPathComponent: extensionName];
+  
+  NSDictionary * plist =
+    [self
+      readSafariExtensionPropertyList:
+        [extensionPath stringByAppendingPathExtension: @"safariextz"]];
+
+  NSString * name = [plist objectForKey: @"CFBundleDisplayName"];
+    
+  if(name)
+    return name;
+  
+  return extensionName;
+  }
+
+// Read a property list from a Safari extension.
+- (id) readSafariExtensionPropertyList: (NSString *) path
+  {
+  NSString * tempDirectory =
+    [self extractExtensionArchive: [path stringByResolvingSymlinksInPath]];
+
+  NSDictionary * plist = [self findExtensionPlist: tempDirectory];
+    
+  [[NSFileManager defaultManager]
+    removeItemAtPath: tempDirectory error: NULL];
+    
+  return plist;
+  }
+
+- (NSString *) extractExtensionArchive: (NSString *) path
+  {
+  NSString * resolvedPath = [path stringByResolvingSymlinksInPath];
+  
+  NSString * tempDirectory = [self createTemporaryDirectory];
+  
+  [[NSFileManager defaultManager]
+    createDirectoryAtPath: tempDirectory
+    withIntermediateDirectories: YES
+    attributes: nil
+    error: NULL];
+  
+  NSArray * args =
+    @[
+      @"-zxf",
+      resolvedPath,
+      @"-C",
+      tempDirectory
+    ];
+  
+  [Utilities execute: @"/usr/bin/xar" arguments: args];
+  
+  return tempDirectory;
+  }
+
+- (NSString *) createTemporaryDirectory
+  {
+  NSString * template =
+    [NSTemporaryDirectory()
+      stringByAppendingPathComponent: @"XXXXXXXXXXXX"];
+  
+  char * buffer = strdup([template fileSystemRepresentation]);
+  
+  mkdtemp(buffer);
+  
+  NSString * temporaryDirectory =
+    [[NSFileManager defaultManager]
+      stringWithFileSystemRepresentation: buffer length: strlen(buffer)];
+  
+  free(buffer);
+  
+  return temporaryDirectory;
+  }
+
+- (NSDictionary *) findExtensionPlist: (NSString *) directory
+  {
+  NSArray * args =
+    @[
+      directory,
+      @"-name",
+      @"Info.plist"
+    ];
+    
+  NSData * infoPlistPathData =
+    [Utilities execute: @"/usr/bin/find" arguments: args];
+
+  NSString * infoPlistPathString =
+    [[NSString alloc]
+      initWithData: infoPlistPathData encoding: NSUTF8StringEncoding];
+  
+  NSString * infoPlistPath =
+    [infoPlistPathString stringByTrimmingCharactersInSet:
+        [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+  
+  [infoPlistPathString release];
+  
+  NSData * plistData =
+    [Utilities execute: @"/bin/cat" arguments: @[infoPlistPath]];
+
+  NSDictionary * plist = nil;
+  
+  if(plistData)
+    {
+    NSError * error;
+    NSPropertyListFormat format;
+    
+    plist =
+      [NSPropertyListSerialization
+        propertyListWithData: plistData
+        options: NSPropertyListImmutable
+        format: & format
+        error: & error];
+    }
+    
+  return plist;
   }
 
 @end
