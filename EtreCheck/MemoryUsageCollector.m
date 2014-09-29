@@ -95,7 +95,7 @@
       }
 
   [self
-    setTabs: @[@28, @112]
+    setTabs: @[@28, @112, @196]
     forRange: NSMakeRange(0, [self.result length])];
   
   [self.result appendCR];

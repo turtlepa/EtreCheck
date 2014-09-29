@@ -8,6 +8,7 @@
 #import "NSMutableAttributedString+Etresoft.h"
 #import "SystemInformation.h"
 #import "Utilities.h"
+#import "ByteCountFormatter.h"
 
 // Some keys for an internal dictionary.
 #define kVolumeType @"volumetype"
@@ -18,6 +19,7 @@
 @implementation DiskCollector
 
 @dynamic volumes;
+@synthesize coreStorageVolumes = myCoreStorageVolumes;
 
 // Provide easy access to volumes.
 - (NSMutableDictionary *) volumes
@@ -34,9 +36,18 @@
     {
     self.progressEstimate = 0.4;
     self.name = @"diskinformation";
+    myCoreStorageVolumes = [NSMutableDictionary new];
     }
     
   return self;
+  }
+
+// Destructor.
+- (void) dealloc
+  {
+  [myCoreStorageVolumes release];
+  
+  [super dealloc];
   }
 
 // Perform the collection.
@@ -60,6 +71,8 @@
   
     if(plist && [plist count])
       {
+      [self collectCoreStorage];
+      
       [self.result
         appendAttributedString: [self buildTitle: @"Disk Information:"]];
       
@@ -73,7 +86,51 @@
   else
     [self.result appendCR];
     
+  [self
+    setTabs: @[@28, @56, @84]
+    forRange: NSMakeRange(0, [self.result length])];
+
   dispatch_semaphore_signal(self.complete);
+  }
+
+// Collect Core Storage information.
+- (void) collectCoreStorage
+  {
+  NSArray * args =
+    @[
+      @"-xml",
+      @"SPStorageDataType"
+    ];
+  
+  NSData * result =
+    [Utilities execute: @"/usr/sbin/system_profiler" arguments: args];
+  
+  if(result)
+    {
+    NSArray * plist = [Utilities readPropertyListData: result];
+  
+    if(plist && [plist count])
+      {
+      NSArray * volumes =
+        [[plist objectAtIndex: 0] objectForKey: @"_items"];
+        
+      for(NSDictionary * volume in volumes)
+        [self collectCoreStorageVolume: volume];
+      }
+    }
+  }
+
+// Collect a Core Storage volume.
+- (void) collectCoreStorageVolume: (NSDictionary *) volume
+  {
+  NSArray * pvs = [volume objectForKey: @"com.apple.corestorage.pv"];
+  
+  for(NSDictionary * pv in pvs)
+    {
+    NSString * name = [pv objectForKey: @"_name"];
+    
+    [self.coreStorageVolumes setObject: volume forKey: name];
+    }
   }
 
 // Print disks attached to a single controller.
@@ -108,17 +165,47 @@
     
     [self collectSMARTStatus: disk indent: @"\t"];
     
-    NSArray * volumes = [disk objectForKey: @"volumes"];
-
-    if(volumes && [volumes count])
-      for(NSDictionary * volume in volumes)
-        [self printVolume: volume indent: @"\t\t"];
-    else
-      [self.result appendCR];
-
-    if([volumes count])
-      [self.result appendCR];
+    [self printDiskVolumes: disk];
     }
+  }
+
+// Print the volumes on a disk.
+- (void) printDiskVolumes: (NSDictionary *) disk
+  {
+  NSArray * volumes = [disk objectForKey: @"volumes"];
+  NSMutableSet * coreStorageVolumeNames = [NSMutableSet set];
+
+  if(volumes && [volumes count])
+    {
+    for(NSDictionary * volume in volumes)
+      {
+      NSString * iocontent = [volume objectForKey: @"iocontent"];
+      
+      if([iocontent isEqualToString: @"Apple_CoreStorage"])
+        {
+        NSString * name = [volume objectForKey: @"_name"];
+        
+        [coreStorageVolumeNames addObject: name];
+        }
+        
+      else
+        [self printVolume: volume indent: @"\t\t"];
+      }
+      
+    for(NSDictionary * name in coreStorageVolumeNames)
+      {
+      NSDictionary * coreStorageVolume =
+        [self.coreStorageVolumes objectForKey: name];
+        
+      if(coreStorageVolume)
+        [self printCoreStorageVolume: coreStorageVolume indent: @"\t\t"];
+      }
+    }
+  else
+    [self.result appendCR];
+
+  if([volumes count] || [coreStorageVolumeNames count])
+    [self.result appendCR];
   }
 
 // Get the SMART status for this disk.
@@ -156,29 +243,117 @@
             indent]];
   }
 
+// Print information about a Core Storage volume.
+- (void) printCoreStorageVolume: (NSDictionary *) volume
+  indent: (NSString *) indent
+  {
+  [self printVolume: volume indent: indent];
+  
+  indent = [indent stringByAppendingString: @"\t"];
+  
+  NSDictionary * lv = [volume objectForKey: @"com.apple.corestorage.lv"];
+  
+  if(lv)
+    [self printCoreStorageLvInformation: lv indent: indent];
+    
+  NSArray * pvs = [volume objectForKey: @"com.apple.corestorage.pv"];
+  
+  if(pvs)
+    [self printCoreStoragePvInformation: pvs indent: indent];
+  }
+
+// Print Core Storage "lv" information about a volume.
+- (void) printCoreStorageLvInformation: (NSDictionary *) lv
+  indent: (NSString *) indent
+  {
+  NSString * state =
+    [lv objectForKey: @"com.apple.corestorage.lv.conversionState"];
+  NSString * encrypted =
+    [lv objectForKey: @"com.apple.corestorage.lv.encrypted"];
+  NSString * encryptionType =
+    [lv objectForKey: @"com.apple.corestorage.lv.encryptionType"];
+  NSString * locked =
+    [lv objectForKey: @"com.apple.corestorage.lv.locked"];
+    
+  if(!encryptionType)
+    encryptionType = @"";
+    
+  if(!state)
+    state = @"";
+    
+  if([encrypted isEqualToString: @"yes"])
+    {
+    [self.result
+      appendString:
+        [NSString
+          stringWithFormat:
+            @"%@%@ %@ %@",
+            indent,
+            NSLocalizedString(@"Encrypted", NULL),
+            encryptionType,
+            [locked isEqualToString: @"yes"]
+              ? NSLocalizedString(@"Locked", NULL)
+              : NSLocalizedString(@"Unlocked", NULL)]];
+
+    if(![state isEqualToString: @"Complete"])
+      [self.result
+        appendString: state
+        attributes:
+          @{
+            NSForegroundColorAttributeName : [[Utilities shared] blue],
+            NSFontAttributeName : [[Utilities shared] boldFont]
+          }];
+      
+    [self.result appendCR];
+    }
+  }
+
+// Print Core Storage "pv" information about a volume.
+- (void) printCoreStoragePvInformation: (NSArray *) pvs
+  indent: (NSString *) indent
+  {
+  for(NSDictionary * pv in pvs)
+    {
+    NSString * name = [pv objectForKey: @"_name"];
+    NSString * status =
+      [pv objectForKey: @"com.apple.corestorage.pv.status"];
+
+    NSNumber * pvSize =
+      [pv objectForKey: @"com.apple.corestorage.pv.size"];
+    
+    NSString * size = @"";
+    
+    if(pvSize)
+      {
+      ByteCountFormatter * formatter = [ByteCountFormatter new];
+      
+      size = [formatter stringFromByteCount: [pvSize unsignedIntegerValue]];
+        
+      [formatter release];
+      }
+
+    [self.result
+      appendString:
+        [NSString
+          stringWithFormat:
+            @"%@Core Storage: %@ %@ %@", indent, name, size, status]];
+    [self.result appendCR];
+    }
+  }
+
 // Print information about a volume.
-// TODO: Shorten this.
 - (void) printVolume: (NSDictionary *) volume indent: (NSString *) indent
   {
   NSString * volumeName = [volume objectForKey: @"_name"];
   NSString * volumeMountPoint = [volume objectForKey: @"mount_point"];
   NSString * volumeDevice = [volume objectForKey: @"bsd_name"];
-  NSString * volumeSize = [volume objectForKey: @"size"];
-  NSString * volumeFree = [volume objectForKey: @"free_space"];
-  NSNumber * free = [volume objectForKey: @"free_space_in_bytes"];
+  NSString * volumeSize = [self volumeSize: volume];
+  NSString * volumeFree = [self volumeFreeSpace: volume];
   NSString * UUID = [volume objectForKey: @"volume_uuid"];
 
   if(!volumeMountPoint)
     volumeMountPoint = NSLocalizedString(@"<not mounted>", NULL);
     
-  if(!volumeFree)
-    volumeFree = @"";
-  else
-    volumeFree =
-      [NSString
-        stringWithFormat:
-          NSLocalizedString(@"(%@ free)", NULL), volumeFree];
-
   if(UUID)
     [self.volumes setObject: volume forKey: UUID];
 
@@ -186,7 +361,9 @@
     [self
       volumeStatsFor: volumeName
       at: volumeMountPoint
-      available: [free unsignedIntegerValue]];
+      available:
+        [[volume objectForKey: @"free_space_in_bytes"]
+          unsignedIntegerValue]];
 
   NSString * volumeInfo =
     [NSString
@@ -209,8 +386,68 @@
     [self.result appendString: volumeInfo];
   }
 
+// Get the size of a volume.
+- (NSString *) volumeSize: (NSDictionary *) volume
+  {
+  NSString * size = nil;
+  
+  NSNumber * sizeInBytes =
+    [volume objectForKey: @"size_in_bytes"];
+  
+  if(sizeInBytes)
+    {
+    ByteCountFormatter * formatter = [ByteCountFormatter new];
+    
+    size =
+      [formatter
+        stringFromByteCount: [sizeInBytes unsignedIntegerValue]];
+      
+    [formatter release];
+    }
+
+  if(!size)
+    size = [volume objectForKey: @"size"];
+
+  if(!size)
+    size = NSLocalizedString(@"Size unknown", NULL);
+    
+  return size;
+  }
+
+// Get the free space on the volume.
+- (NSString *) volumeFreeSpace: (NSDictionary *) volume
+  {
+  NSString * volumeFree = nil;
+  
+  NSNumber * freeSpaceInBytes =
+    [volume objectForKey: @"free_space_in_bytes"];
+  
+  if(freeSpaceInBytes)
+    {
+    ByteCountFormatter * formatter = [ByteCountFormatter new];
+    
+    volumeFree =
+      [formatter
+        stringFromByteCount: [freeSpaceInBytes unsignedIntegerValue]];
+      
+    [formatter release];
+    }
+
+  if(!volumeFree)
+    volumeFree = [volume objectForKey: @"free_space"];
+
+  if(!volumeFree)
+    volumeFree = @"";
+  else
+    volumeFree =
+      [NSString
+        stringWithFormat:
+          NSLocalizedString(@"(%@ free)", NULL), volumeFree];
+    
+  return volumeFree;
+  }
+
 // Get more information about a volume.
-// TODO: Shorten this.
 - (NSDictionary *) volumeStatsFor: (NSString *) name
   at: (NSString *) mountPoint available: (NSUInteger) free
   {

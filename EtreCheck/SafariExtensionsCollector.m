@@ -96,12 +96,21 @@
     {
     for(NSDictionary * update in updatesList)
       {
+      NSString * compositeIdentifier = [update objectForKey: @"Identifier"];
+      
+      NSMutableArray * identifierParts =
+        [NSMutableArray
+          arrayWithArray:
+            [compositeIdentifier componentsSeparatedByString: @"-"]];
+      
+      [identifierParts removeLastObject];
+      
+      NSString * identifier =
+        [identifierParts componentsJoinedByString: @"-"];
+      
       NSString * urlString = [update objectForKey: @"Update URL"];
-      NSURL * url = [NSURL URLWithString: urlString];
-      
-      NSString * name = [url lastPathComponent];
-      
-      [self.updates setObject: urlString forKey: name];
+
+      [self.updates setObject: urlString forKey: identifier];
       }
     }
   }
@@ -121,12 +130,16 @@
   
   name = [name stringByDeletingPathExtension];
   
-  NSString * humanReadableName = [self humanReadableExtensionName: name];
+  NSDictionary * plist = [self extensionInfoPList: name];
+  
+  NSString * humanReadableName = [self humanReadableExtensionName: plist];
   
   if(humanReadableName)
     name = humanReadableName;
     
-  NSString * updateURL = [self.updates objectForKey: archiveName];
+  NSString * identifier = [plist objectForKey: @"CFBundleIdentifier"];
+  
+  NSString * updateURL = [self.updates objectForKey: identifier];
   
   [self.result
     appendString: [NSString stringWithFormat: @"\t%@ ", name]];
@@ -147,7 +160,8 @@
   [self.result appendString: @"\n"];
   }
 
-- (NSString *) humanReadableExtensionName: (NSString *) extensionName
+// Read the extension plist dictionary.
+- (NSDictionary *) extensionInfoPList: (NSString *) extensionName
   {
   NSString * userSafariExtensionsDir =
     [NSHomeDirectory()
@@ -156,17 +170,21 @@
   NSString * extensionPath =
     [userSafariExtensionsDir stringByAppendingPathComponent: extensionName];
   
-  NSDictionary * plist =
+  return
     [self
       readSafariExtensionPropertyList:
         [extensionPath stringByAppendingPathExtension: @"safariextz"]];
+  }
 
+// Get the human readable extension name from the plist dictionary.
+- (NSString *) humanReadableExtensionName: (NSDictionary *) plist
+  {
   NSString * name = [plist objectForKey: @"CFBundleDisplayName"];
     
   if(name)
     return name;
   
-  return extensionName;
+  return nil;
   }
 
 // Read a property list from a Safari extension.

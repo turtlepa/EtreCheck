@@ -181,7 +181,7 @@
     [self.result appendAttributedString: formattedOutput];
 
     [self
-      setTabs: @[@28, @112]
+      setTabs: @[@28, @112, @196]
       forRange: NSMakeRange(start, [self.result length] - start)];
 
     if(!self.launchdStatus)

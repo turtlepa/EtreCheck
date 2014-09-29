@@ -57,7 +57,8 @@
     [self.result appendString: NSLocalizedString(@"\tNone\n", NULL)];
   
   [self
-    setTabs: @[@28, @112] forRange: NSMakeRange(0, [self.result length])];
+    setTabs: @[@28, @112, @196]
+    forRange: NSMakeRange(0, [self.result length])];
 
   [self.result appendCR];
     
