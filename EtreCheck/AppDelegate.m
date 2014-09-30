@@ -86,6 +86,7 @@
   // Snow Leopard doesn't order views in a predictable fashion. New subviews
   // get added on top of all siblings, regardless of the relative order of
   // those siblings.
+  // Or not.
   self.applicationIcon.maskView = self.magnifyingGlass;
     
   [self.magnifyingGlass setHidden: NO];
