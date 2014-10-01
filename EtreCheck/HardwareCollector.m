@@ -350,25 +350,43 @@
 // Print memory, flagging insufficient amounts.
 - (void) printMemory: (NSString *) memory
   {
+  NSDictionary * details = [self collectMemoryDetails];
+  
+  NSString * upgradeable = @"";
+  
+  if(details)
+    {
+    NSString * isUpgradeable =
+      [details objectForKey: @"is_memory_upgradeable"];
+    
+    upgradeable =
+      [isUpgradeable boolValue]
+        ? NSLocalizedString(@"Upgradeable", NULL)
+        : NSLocalizedString(@"Not upgradeable", NULL);
+    }
+    
   if([[SystemInformation sharedInformation] physicalRAM] < 4)
     {
     [self.result
       appendString:
-        [NSString stringWithFormat: @"\t%@ RAM\n", memory]
-    attributes:
-      [NSDictionary
-        dictionaryWithObjectsAndKeys:
-          [NSColor redColor], NSForegroundColorAttributeName, nil]];
+        [NSString stringWithFormat: @"\t%@ RAM %@\n", memory, upgradeable]
+      attributes:
+        [NSDictionary
+          dictionaryWithObjectsAndKeys:
+            [NSColor redColor], NSForegroundColorAttributeName, nil]];
     }
   else
     [self.result
       appendString:
-        [NSString stringWithFormat: @"\t%@ RAM\n", memory]];
-    
-  NSDictionary * details = [self collectMemoryDetails];
-  
+        [NSString stringWithFormat: @"\t%@ RAM %@\n", memory, upgradeable]];
+
   if(details)
-    [self printMemoryDetails: details];
+    {
+    NSArray * banks = [details objectForKey: @"_items"];
+    
+    if(banks)
+      [self printMemoryBanks: banks];
+    }
   }
 
 - (NSDictionary *) collectMemoryDetails
@@ -397,23 +415,6 @@
     }
     
   return nil;
-  }
-
-- (void) printMemoryDetails: (NSDictionary *) details
-  {
-  NSNumber * upgradeable =
-    [details objectForKey: @"is_memory_upgradeable"];
-  
-  [self.result
-    appendString:
-      [NSString
-        stringWithFormat:
-          @"\t\t%@\n",
-          [upgradeable boolValue]
-            ? NSLocalizedString(@"Upgradeable", NULL)
-            : NSLocalizedString(@"Not upgradeable", NULL)]];
-
-  [self printMemoryBanks: [details objectForKey: @"_items"]];
   }
 
 // Print memory banks.
