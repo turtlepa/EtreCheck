@@ -80,6 +80,12 @@
   
   for(NSString * line in lines)
     {
+    if(![line length])
+      continue;
+      
+    if(![line hasPrefix: @"#"])
+      continue;
+      
     NSString * hostname = [self readHostname: line];
       
     if(corrupt && !hostname)

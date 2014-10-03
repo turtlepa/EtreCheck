@@ -6,6 +6,8 @@
 
 #import "ByteCountFormatter.h"
 
+#define k1000 1000.0 // 1024
+
 @implementation ByteCountFormatter
 
 - (NSString *) stringFromByteCount: (long long) byteCount
@@ -22,7 +24,7 @@
   
   while(YES)
     {
-    if(value < 1024)
+    if(value < k1000)
       {
       int precision = 0;
       NSString * units = @"";
@@ -41,7 +43,7 @@
       
     ++unitsIndex;
     
-    value /= 1024.0;
+    value /= k1000;
     }
     
   return displayMem;

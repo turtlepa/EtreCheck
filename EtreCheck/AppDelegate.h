@@ -34,6 +34,7 @@
   NSString * myCollectionStatus;
   NSAttributedString * myUserMessage;
   NSWindow * myUserMessagePanel;
+  NSView * myApplicationAnimationView;
 
   NSMutableDictionary * launchdStatus;
   NSMutableSet * appleLaunchd;
@@ -65,6 +66,7 @@
 @property (retain) NSString * collectionStatus;
 @property (retain) NSAttributedString * userMessage;
 @property (retain) IBOutlet NSWindow * userMessgePanel;
+@property (retain) IBOutlet NSView * applicationAnimationView;
 
 // Start the report.
 - (IBAction) start: (id) sender;

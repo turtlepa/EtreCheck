@@ -18,6 +18,7 @@
 #define kSupportURL @"supporturl"
 #define kPlist @"plist"
 
+#define kStatusUnknown @"unknown"
 #define kStatusNotLoaded @"notloaded"
 #define kStatusLoaded @"loaded"
 #define kStatusRunning @"running"
@@ -290,7 +291,7 @@
 // Get the job status.
 - (NSString *) collectJobStatus: (NSDictionary *) plist
   {
-  NSString * jobStatus = kStatusInvalid;
+  NSString * jobStatus = kStatusUnknown;
 
   if(plist)
     {
@@ -510,24 +511,31 @@
   NSString * statusString = NSLocalizedString(@"[not loaded]", NULL);
   NSColor * color = [[Utilities shared] gray];;
   
-  if([[status objectForKey: kStatus] isEqualToString: kStatusLoaded])
+  NSString * statusCode = [status objectForKey: kStatus];
+  
+  if([statusCode isEqualToString: kStatusLoaded])
     {
     statusString = NSLocalizedString(@"[loaded]", NULL);
     color = [[Utilities shared] blue];
     }
-  else if([[status objectForKey: kStatus] isEqualToString: kStatusRunning])
+  else if([statusCode isEqualToString: kStatusRunning])
     {
     statusString = NSLocalizedString(@"[running]", NULL);
     color = [[Utilities shared] green];
     }
-  else if([[status objectForKey: kStatus] isEqualToString: kStatusFailed])
+  else if([statusCode isEqualToString: kStatusFailed])
     {
     statusString = NSLocalizedString(@"[failed]", NULL);
     color = [[Utilities shared] red];
     }
-  else if([[status objectForKey: kStatus] isEqualToString: kStatusInvalid])
+  else if([statusCode isEqualToString: kStatusUnknown])
     {
-    statusString = NSLocalizedString(@"[invalid]", NULL);
+    statusString = NSLocalizedString(@"[unknown]", NULL);
+    color = [[Utilities shared] red];
+    }
+  else if([statusCode isEqualToString: kStatusInvalid])
+    {
+    statusString = NSLocalizedString(@"[invalid?]", NULL);
     color = [[Utilities shared] red];
     }
   

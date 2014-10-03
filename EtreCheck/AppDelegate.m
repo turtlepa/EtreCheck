@@ -20,6 +20,8 @@
 #import "SystemInformation.h"
 #import "NSAttributedString+Etresoft.h"
 
+NSComparisonResult compareViews(id view1, id view2, void * context);
+
 @interface AppDelegate ()
 
 - (void) collectInfo;
@@ -51,6 +53,7 @@
 @synthesize animationView = myAnimationView;
 @synthesize userMessage = myUserMessage;
 @synthesize userMessgePanel = myUserMessagePanel;
+@synthesize applicationAnimationView = myApplicationAnimationView;
 
 // Destructor.
 - (void) dealloc
@@ -82,13 +85,7 @@
   [self.applicationIcon updateSubviewsWithTransition: kCATransitionPush];
   [self.applicationIcon
     transitionToImage: [[Utilities shared] genericApplicationIcon]];
-    
-  // Snow Leopard doesn't order views in a predictable fashion. New subviews
-  // get added on top of all siblings, regardless of the relative order of
-  // those siblings.
-  // Or not.
-  self.applicationIcon.maskView = self.magnifyingGlass;
-    
+        
   [self.magnifyingGlass setHidden: NO];
     
   [self.finderIcon setImage: [[Utilities shared] FinderIcon]];
@@ -96,6 +93,9 @@
   [self.agentImage setHidden: NO];
   
   [self.logView setHidden: YES];
+  
+  [self.applicationAnimationView
+    sortSubviewsUsingFunction: compareViews context: self];
   
   // Set delegate for notification center.
   [[NSUserNotificationCenter defaultUserNotificationCenter]
@@ -883,6 +883,22 @@
     if(rtfData)
       [rtfData writeToURL: [savePanel URL] atomically: YES];
     }
+  }
+
+NSComparisonResult compareViews(id view1, id view2, void * context)
+  {
+  AppDelegate * self = (AppDelegate *)context;
+  
+  if(view1 == self.applicationIcon)
+    return NSOrderedAscending;
+    
+  if(view1 == self.magnifyingGlass && view2 == self.applicationIcon)
+    return NSOrderedDescending;
+    
+  if(view1 == self.magnifyingGlass)
+    return NSOrderedAscending;
+    
+  return NSOrderedSame;
   }
 
 @end

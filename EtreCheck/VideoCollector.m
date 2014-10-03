@@ -64,13 +64,21 @@
   for(NSDictionary * info in infos)
     {
     NSString * name = [info objectForKey: @"sppci_model"];
-    NSString * vram = [info objectForKey: @"spdisplays_vram"];
+    NSString * vramAmount = [info objectForKey: @"spdisplays_vram"];
 
+    NSString * vram = @"";
+    
+    if(vramAmount)
+      vram =
+        [NSString
+          stringWithFormat:
+            NSLocalizedString(@"VRAM: %@", NULL), vramAmount];
+      
     [self.result
       appendString:
         [NSString
           stringWithFormat:
-            @"\t%@%@VRAM: %@\n",
+            @"\t%@%@%@\n",
             name ? name : @"",
             name ? @" - " : @"",
             vram]];

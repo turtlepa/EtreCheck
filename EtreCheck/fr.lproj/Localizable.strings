@@ -111,7 +111,7 @@
 "[loaded]" = "[engagé]";
 "[not loaded]" = "[désengagé]";
 "[failed]" = "[échec]";
-"[invalid]" = "[invalide]";
+"[invalid]" = "[invalide ?]";
 "[running]" = "[en marche]";
 "[Unknown]" = "[Inconnu]";
 "[System]" = "[Système]";
@@ -162,6 +162,7 @@
 "Mac App Store" = "Mac App Store";
 "Unknown!" = "Inconnu !";
 "Unknown" = "Inconnu";
+"[unknown]" = "[inconnu]";
 "gatekeeperneedslion" = "\tInformations Gatekeeper nécessitent OS X 10.7.5 \"Lion\" ou plus tard.\n\n";
 "EtreCheck version: %@ (%@)\nReport generated %@\n\n" = "EtreCheck version : %@ (%@)\nRapport créé %@\n\n";
 "en_US" = "fr_FR";
@@ -202,4 +203,4 @@
 "Encrypted" = "Crypté";
 "Locked" = "Fermé";
 "Unlocked" = "Overt";
-
+"VRAM: %@" = "VRAM : %@";

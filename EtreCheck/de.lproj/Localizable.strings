@@ -111,7 +111,7 @@
 "[loaded]" = "[geladen]";
 "[not loaded]" = "[nicht geladen]";
 "[failed]" = "[gescheitert]";
-"[invalid]" = "[ungültig]";
+"[invalid?]" = "[ungültig?]";
 "[running]" = "[Motor]";
 "[Unknown]" = "[Unbekannt]";
 "[System]" = "[System]";
@@ -161,9 +161,10 @@
 "Mac App Store and identified developers" = "Mac App Store und identifizierte Entwickler ";
 "Mac App Store" = "Mac App Store";
 "Unknown!" = "Unbekannt! ";
-"Unknown" = "unbekannt";
+"Unknown" = "Unbekannt";
+"[unknown]" = "[unbekannt]";
 "gatekeeperneedslion" = "\tGatekeeper Informationen erfordert OS X 10.7.5 \"Lion\" oder höher.\n\n";
-"EtreCheck version: %@ (%@)\nReport generated %@\n\n" = "EtreCheck version : %@ (%@)\nBericht erzeugt auf %@\n\n";
+"EtreCheck version: %@ (%@)\nReport generated %@\n\n" = "EtreCheck version: %@ (%@)\nBericht erzeugt auf %@\n\n";
 "en_US" = "de_DE";
 "machineattributes" = "/System/Library/PrivateFrameworks/ServerInformation.framework/Versions/A/Resources/French.lproj/SIMachineAttributes.plist";
 "oldmachineattributes" = "/System/Library/PrivateFrameworks/ServerKit.framework/Versions/A/Resources/French.lproj/XSMachineAttributes.plist";
