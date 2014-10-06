@@ -83,7 +83,7 @@
     if(![line length])
       continue;
       
-    if(![line hasPrefix: @"#"])
+    if([line hasPrefix: @"#"])
       continue;
       
     NSString * hostname = [self readHostname: line];
