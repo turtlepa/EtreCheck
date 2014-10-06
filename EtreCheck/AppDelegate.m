@@ -734,7 +734,9 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
     dispatch_get_main_queue(),
     ^{
       [self.reportView setWantsLayer: NO];
-      
+
+      [self.logView
+        scrollRangeToVisible: NSMakeRange([self.log length] - 2, 1)];
       [self.logView scrollRangeToVisible: NSMakeRange(0, 1)];
     });
   }
