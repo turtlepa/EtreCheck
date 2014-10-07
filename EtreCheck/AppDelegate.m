@@ -45,6 +45,7 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
 @synthesize machineIcon = myMachineIcon;
 @synthesize applicationIcon = myApplicationIcon;
 @synthesize magnifyingGlass = myMagnifyingGlass;
+@synthesize magnifyingGlassShade = myMagnifyingGlassShade;
 @synthesize finderIcon = myFinderIcon;
 @synthesize demonImage = myDemonImage;
 @synthesize agentImage = myAgentImage;
@@ -53,7 +54,6 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
 @synthesize animationView = myAnimationView;
 @synthesize userMessage = myUserMessage;
 @synthesize userMessgePanel = myUserMessagePanel;
-@synthesize applicationAnimationView = myApplicationAnimationView;
 
 // Destructor.
 - (void) dealloc
@@ -94,7 +94,7 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   
   [self.logView setHidden: YES];
   
-  [self.applicationAnimationView
+  [self.animationView
     sortSubviewsUsingFunction: compareViews context: self];
   
   // Set delegate for notification center.
@@ -900,6 +900,9 @@ NSComparisonResult compareViews(id view1, id view2, void * context)
   if(view1 == self.magnifyingGlass)
     return NSOrderedAscending;
     
+  if(view1 == self.magnifyingGlassShade)
+    return NSOrderedAscending;
+
   return NSOrderedSame;
   }
 

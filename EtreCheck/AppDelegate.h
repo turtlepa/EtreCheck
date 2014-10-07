@@ -28,13 +28,13 @@
   SlideshowView * myMachineIcon;
   SlideshowView * myApplicationIcon;
   NSImageView * myMagnifyingGlass;
+  NSImageView * myMagnifyingGlassShade;
   NSImageView * myFinderIcon;
   NSImageView * myDemonImage;
   NSImageView * myAgentImage;
   NSString * myCollectionStatus;
   NSAttributedString * myUserMessage;
   NSWindow * myUserMessagePanel;
-  NSView * myApplicationAnimationView;
 
   NSMutableDictionary * launchdStatus;
   NSMutableSet * appleLaunchd;
@@ -60,13 +60,13 @@
 @property (retain) IBOutlet SlideshowView * machineIcon;
 @property (retain) IBOutlet SlideshowView * applicationIcon;
 @property (retain) IBOutlet NSImageView * magnifyingGlass;
+@property (retain) IBOutlet NSImageView * magnifyingGlassShade;
 @property (retain) IBOutlet NSImageView * finderIcon;
 @property (retain) IBOutlet NSImageView * demonImage;
 @property (retain) IBOutlet NSImageView * agentImage;
 @property (retain) NSString * collectionStatus;
 @property (retain) NSAttributedString * userMessage;
 @property (retain) IBOutlet NSWindow * userMessgePanel;
-@property (retain) IBOutlet NSView * applicationAnimationView;
 
 // Start the report.
 - (IBAction) start: (id) sender;

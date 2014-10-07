@@ -9,13 +9,18 @@
 #import "SystemInformation.h"
 #import "Utilities.h"
 
-// TODO: Get display name from plist file.
+#define kIdentifier @"identifier"
+#define kHumanReadableName @"humanreadablename"
+#define kArchive @"archived"
+#define kCache @"cached"
+#define kDefaults @"defaults"
+#define kEnabled @"enabled"
 
 // Collect Safari extensions.
 @implementation SafariExtensionsCollector
 
 @synthesize updates = myUpdates;
-@synthesize settings = mySettings;
+@synthesize extensions = myExtensions;
 
 // Constructor.
 - (id) init
@@ -23,7 +28,10 @@
   self = [super init];
   
   if(self)
+    {
     self.name = @"safariextensions";
+    myExtensions = [NSMutableDictionary new];
+    }
     
   return self;
   }
@@ -31,7 +39,7 @@
 // Destructor.
 - (void) dealloc
   {
-  self.settings = nil;
+  self.extensions = nil;
   self.updates = nil;
   
   [super dealloc];
@@ -41,16 +49,130 @@
 - (void) collect
   {
   [self
-    updateStatus:
-      NSLocalizedString(@"Checking Safari extensions", NULL)];
+    updateStatus: NSLocalizedString(@"Checking Safari extensions", NULL)];
 
+  [self collectArchives];
+
+  [self collectCaches];
+
+  [self collectDefaults];
+    
+  // Print the extensions.
+  if([self.extensions count])
+    {
+    [self.result
+      appendAttributedString: [self buildTitle: @"Safari Extensions:"]];
+
+    for(NSString * name in self.extensions)
+      [self printExtension: [self.extensions objectForKey: name]];
+    
+    [self.result appendCR];
+    }
+
+  dispatch_semaphore_signal(self.complete);
+  }
+
+// Collect extension archives.
+- (void) collectArchives
+  {
+  NSString * userSafariExtensionsDir =
+    [NSHomeDirectory()
+      stringByAppendingPathComponent: @"Library/Safari/Extensions"];
+
+  NSArray * args =
+    @[
+      userSafariExtensionsDir,
+      @"-iname",
+      @"*.safariextz"];
+
+  NSData * data = [Utilities execute: @"/usr/bin/find" arguments: args];
+  
+  NSArray * paths = [Utilities formatLines: data];
+  
+  for(NSString * path in paths)
+    {
+    NSString * name = [self extensionName: path];
+      
+    NSDictionary * plist = [self readSafariExtensionPropertyList: path];
+
+    NSMutableDictionary * extension =
+      [self createExtensionsFromPlist: plist name: name];
+
+    [extension setObject: @YES forKey: kArchive];
+    }
+  }
+
+// Create an extension dictionary from a plist.
+- (NSMutableDictionary *) createExtensionsFromPlist: (NSDictionary *) plist
+  name: (NSString *) name
+  {
+  NSString * humanReadableName =
+    [plist objectForKey: @"CFBundleDisplayName"];
+  
+  if(!humanReadableName)
+    humanReadableName = name;
+    
+  NSString * identifier = [plist objectForKey: @"CFBundleIdentifier"];
+  
+  if(!identifier)
+    identifier = name;
+    
+  NSMutableDictionary * extension = [self.extensions objectForKey: name];
+  
+  if(!extension)
+    {
+    extension = [NSMutableDictionary dictionary];
+    
+    [self.extensions setObject: extension forKey: name];
+    }
+    
+  [extension setObject: humanReadableName forKey: kHumanReadableName];
+  [extension setObject: identifier forKey: kIdentifier];
+  
+  return extension;
+  }
+
+// Collect extension caches.
+- (void) collectCaches
+  {
+  NSString * userSafariExtensionsDir =
+    [NSHomeDirectory()
+      stringByAppendingPathComponent:
+        @"Library/Caches/com.apple.Safari/Extensions"];
+
+  NSArray * args =
+    @[
+      userSafariExtensionsDir,
+      @"-iname",
+      @"*.safariextension"];
+
+  NSData * data = [Utilities execute: @"/usr/bin/find" arguments: args];
+  
+  NSArray * paths = [Utilities formatLines: data];
+
+  for(NSString * path in paths)
+    {
+    NSString * name = [self extensionName: path];
+      
+    NSDictionary * plist = [self readSafariExtensionPropertyList: path];
+
+    NSMutableDictionary * extension =
+      [self createExtensionsFromPlist: plist name: name];
+
+    [extension setObject: @YES forKey: kCache];
+    }
+  }
+
+// Collect extension defaults.
+- (void) collectDefaults
+  {
   NSString * userSafariExtensionsDir =
     [NSHomeDirectory()
       stringByAppendingPathComponent: @"Library/Safari/Extensions"];
 
   NSUserDefaults * defaults = [[NSUserDefaults alloc] init];
   
-  self.settings =
+  NSDictionary * settings =
     [defaults
       persistentDomainForName:
         [userSafariExtensionsDir
@@ -59,31 +181,52 @@
   [defaults release];
   
   // Get extension updates.
-  [self collectUpdates];
+  [self collectUpdates: settings];
   
   NSArray * currentExtensions =
-    [self.settings objectForKey: @"Installed Extensions"];
+    [settings objectForKey: @"Installed Extensions"];
   
-  // Print the extensions.
-  if([currentExtensions count])
+  for(NSDictionary * plist in currentExtensions)
     {
-    [self.result
-      appendAttributedString: [self buildTitle: @"Safari Extensions:"]];
-
-    for(NSDictionary * extension in currentExtensions)
-      [self printExtension: extension];
-    
-    [self.result appendCR];
+    NSString * name =
+      [self extensionName: [plist objectForKey: @"Bundle Directory Name"]];
+      
+    if(!name)
+      continue;
+      
+    NSMutableDictionary * extension =
+      [self createExtensionsFromDefaults: plist name: name];
+      
+    [extension setObject: @YES forKey: kDefaults];
     }
+  }
+
+// Create an extension dictionary from a plist.
+- (NSMutableDictionary *)
+  createExtensionsFromDefaults: (NSDictionary *) plist
+  name: (NSString *) name
+  {
+  NSMutableDictionary * extension = [self.extensions objectForKey: name];
+  
+  if(!extension)
+    return nil;
     
-  dispatch_semaphore_signal(self.complete);
+  if(![extension objectForKey: kHumanReadableName])
+    [extension setObject: name forKey: kHumanReadableName];
+    
+  NSNumber * enabled = [plist objectForKey: @"Enabled"];
+
+  if(enabled)
+    [extension setObject: enabled forKey: kEnabled];
+    
+  return extension;
   }
 
 // Collect extension updates.
-- (void) collectUpdates
+- (void) collectUpdates: (NSDictionary *) settings
   {
   NSDictionary * availableUpdates =
-    [self.settings objectForKey: @"Available Updates"];
+    [settings objectForKey: @"Available Updates"];
   
   NSArray * updatesList = nil;
   
@@ -118,31 +261,17 @@
 // Print a Safari extension.
 - (void) printExtension: (NSDictionary *) extension
   {
-  NSNumber * enabled = [extension objectForKey: @"Enabled"];
+  NSNumber * enabled = [extension objectForKey: kEnabled];
   
-  NSString * archiveName =
-    [extension objectForKey: @"Archive File Name"];
+  NSString * humanReadableName =
+    [extension objectForKey: kHumanReadableName];
   
-  NSString * name = [extension objectForKey: @"Bundle Directory Name"];
-  
-  if(!name)
-    name = archiveName;
-  
-  name = [name stringByDeletingPathExtension];
-  
-  NSDictionary * plist = [self extensionInfoPList: name];
-  
-  NSString * humanReadableName = [self humanReadableExtensionName: plist];
-  
-  if(humanReadableName)
-    name = humanReadableName;
-    
-  NSString * identifier = [plist objectForKey: @"CFBundleIdentifier"];
+  NSString * identifier = [extension objectForKey: kIdentifier];
   
   NSString * updateURL = [self.updates objectForKey: identifier];
   
   [self.result
-    appendString: [NSString stringWithFormat: @"\t%@ ", name]];
+    appendString: [NSString stringWithFormat: @"\t%@ ", humanReadableName]];
     
   if(![enabled intValue])
     [self.result appendString: NSLocalizedString(@"(Disabled) ", NULL)];
@@ -174,6 +303,26 @@
     [self
       readSafariExtensionPropertyList:
         [extensionPath stringByAppendingPathExtension: @"safariextz"]];
+  }
+
+// Get the extension name, less the uniquifier.
+- (NSString *) extensionName: (NSString *) path
+  {
+  if(!path)
+    return nil;
+    
+  NSString * name =
+    [[path lastPathComponent] stringByDeletingPathExtension];
+    
+  NSMutableArray * parts =
+    [NSMutableArray
+      arrayWithArray: [name componentsSeparatedByString: @"-"]];
+    
+  if([parts count] > 1)
+    if([[parts lastObject] integerValue] > 1)
+      [parts removeLastObject];
+    
+  return [parts componentsJoinedByString: @"-"];
   }
 
 // Get the human readable extension name from the plist dictionary.

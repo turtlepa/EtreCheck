@@ -9,12 +9,12 @@
 // Collect Safari extensions.
 @interface SafariExtensionsCollector : Collector
   {
-  NSDictionary * mySettings;
+  NSMutableDictionary * myExtensions;
   NSMutableDictionary * myUpdates;
   }
 
-// Results from defaults read ~/Library/Safari/Extensions/extensions.
-@property (retain) NSDictionary * settings;
+// Key is extension name.
+@property (retain) NSMutableDictionary * extensions;
 
 // Available updates.
 @property (retain) NSMutableDictionary * updates;
