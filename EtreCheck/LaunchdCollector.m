@@ -283,8 +283,7 @@
       kHidden : [NSNumber numberWithBool: hidden],
       kStatus : jobStatus,
       kExecutable : executable,
-      kSupportURL : [self getSupportURL: nil bundleID: path],
-      kPlist : plist
+      kSupportURL : [self getSupportURL: nil bundleID: path]
     };
   }
 
