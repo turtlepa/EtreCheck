@@ -193,8 +193,8 @@
 "%d day (plural rule: other)" = "%d jours ";
 "Upgradeable" = "Extensible";
 "Not upgradeable" = "Pas extensible";
-"Good - Handoff supported" = "Bon - Handoff disponible";
-"Old - Handoff not supported" = "Vieux - Handoff pas disponible";
+"Good - Handoff/Airdrop2 supported" = "Bon - Handoff/Airdrop2 disponible";
+"Old - Handoff/Airdrop2 not supported" = "Vieux - Handoff/Airdrop2 pas disponible";
 "%d interface (plural rule: zero)" = "aucune interface\n";
 "%d interface (plural rule: one)" = "";
 "%d interface (plural rule: other)" = "%d interfaces\n";

@@ -10,16 +10,12 @@
 @interface HardwareCollector : Collector
   {
   NSDictionary * myProperties;
-  NSString * myMachineCode;
   NSImage * myMachineIcon;
   NSDictionary * myMachineImageLookup;
   }
 
 // Machine properties.
 @property (retain) NSDictionary * properties;
-
-// The machine code.
-@property (retain) NSString * machineCode;
 
 // The machine icon.
 @property (retain) NSImage * machineIcon;

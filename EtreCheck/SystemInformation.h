@@ -22,6 +22,7 @@
   int myPhysicalRAM;
   NSImage * myMachineIcon;
   NSDictionary * myProcesses;
+  NSString * myModel;
   }
 
 // Keep track of the OS version.
@@ -41,6 +42,9 @@
 
 // All processes.
 @property (retain) NSDictionary * processes;
+
+// The model code.
+@property (retain) NSString * model;
 
 // Return the singeton of shared values.
 + (SystemInformation *) sharedInformation;

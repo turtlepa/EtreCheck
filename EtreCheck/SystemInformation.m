@@ -14,6 +14,7 @@
 @synthesize physicalRAM = myPhysicalRAM;
 @synthesize machineIcon = myMachineIcon;
 @synthesize processes = myProcesses;
+@synthesize model = myModel;
 
 // Return the singeton of shared values.
 + (SystemInformation *) sharedInformation

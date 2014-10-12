@@ -18,7 +18,6 @@
 @implementation HardwareCollector
 
 @synthesize properties = myProperties;
-@synthesize machineCode = myMachineCode;
 @synthesize machineIcon = myMachineIcon;
 
 // Constructor.
@@ -43,7 +42,6 @@
 - (void) dealloc
   {
   self.machineIcon = nil;
-  self.machineCode = nil;
   self.properties = nil;
   
   [super dealloc];
@@ -140,7 +138,7 @@
 - (void) printMachineInformation: (NSDictionary *) info
   {
   NSString * name = [info objectForKey: @"machine_name"];
-  self.machineCode = [info objectForKey: @"machine_model"];
+  NSString * model = [info objectForKey: @"machine_model"];
   NSString * cpu_type = [info objectForKey: @"cpu_type"];
   NSNumber * core_count =
     [info objectForKey: @"number_processors"];
@@ -150,19 +148,21 @@
   NSString * memory = [info objectForKey: @"physical_memory"];
   NSString * serial = [info objectForKey: @"serial_number"];
 
+  [[SystemInformation sharedInformation] setModel: model];
+  
   // Extract the memory.
   [[SystemInformation sharedInformation]
     setPhysicalRAM: [self parseMemory: memory]];
 
   // Print the human readable machine name, if I can find one.
-  [self printHumanReadableMacName: serial code: self.machineCode];
+  [self printHumanReadableMacName: serial code: model];
     
   [self.result
     appendString:
       [NSString
         stringWithFormat:
           NSLocalizedString(@"\t%@ - %@: %@\n", NULL),
-          name, NSLocalizedString(@"model", NULL), self.machineCode]];
+          name, NSLocalizedString(@"model", NULL), model]];
     
   [self.result
     appendString:
@@ -477,50 +477,33 @@
 // Collect bluetooth information.
 - (NSString *) collectBluetoothInformation
   {
-  NSArray * args =
-    @[
-      @"-xml",
-      @"SPBluetoothDataType"
-    ];
-  
-  NSData * result =
-    [Utilities execute: @"/usr/sbin/system_profiler" arguments: args];
-  
-  NSString * bluetooth = NSLocalizedString(@"Unknown", NULL);
-  
-  if(result)
-    {
-    NSArray * plist = [Utilities readPropertyListData: result];
-  
-    if(plist && [plist count])
-      {
-      NSArray * infos =
-        [[plist objectAtIndex: 0] objectForKey: @"_items"];
-        
-      if([infos count])
-        {
-        for(NSDictionary * info in infos)
-          {
-          NSDictionary * localDevice =
-            [info objectForKey: @"local_device_title"];
-            
-          if(localDevice)
-            {
-            NSString * version =
-              [localDevice objectForKey: @"general_lmp_version"];
-            
-            if([version isGreaterThanOrEqualTo: @"0x6"])
-              return NSLocalizedString(@"Good - Handoff supported", NULL);
+  if([self supportsContinuity])
+    return NSLocalizedString(@"Good - Handoff/Airdrop2 supported", NULL);
               
-            bluetooth =
-              NSLocalizedString(@"Old - Handoff not supported", NULL);
-            }
-          }
-        }
-      }
-    }
+  return NSLocalizedString(@"Old - Handoff/Airdrop2 not supported", NULL);
+  }
+
+// Is continuity supported?
+- (BOOL) supportsContinuity
+  {
+  NSString * model = [[SystemInformation sharedInformation] model];
+  
+  if([model hasPrefix: @"MacBookPro"])
+    return [model isGreaterThanOrEqualTo: @"MacBookPro9"];
+
+  else if([model hasPrefix: @"iMac"])
+    return [model isGreaterThanOrEqualTo: @"iMac13"];
+
+  else if([model hasPrefix: @"MacPro"])
+    return [model isGreaterThanOrEqualTo: @"MacPro6"];
+
+  else if([model hasPrefix: @"MacBookAir"])
+    return [model isGreaterThanOrEqualTo: @"MacBookAir5"];
+
+  else if([model hasPrefix: @"Macmini"])
+    return [model isGreaterThanOrEqualTo: @"Macmini6"];
     
-  return bluetooth;
+  return NO;
   }
 
 // Print wireless information.
