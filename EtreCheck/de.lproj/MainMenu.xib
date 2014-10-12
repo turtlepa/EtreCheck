@@ -660,9 +660,8 @@
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="CYc-qI-gT3">
                         <rect key="frame" x="18" y="213" width="508" height="44"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="8c5-qk-jzN">
+                        <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Bitte beschreiben Sie hier Ihr Problem; denn es könnte anderen Personen dabei helfen, eine Lösung zu finden. (optional)" id="8c5-qk-jzN">
                             <font key="font" metaFont="system"/>
-                            <string key="title">Bitte beschreiben Sie Ihr Problem. Dies wird helfen, anderen Menschen eine Lösung zu finden, wenn sie den Bericht gelesen. (optional)</string>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -686,7 +685,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="yAn-LB-NTZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="502" height="123"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="502" height="146"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <size key="minSize" width="502" height="146"/>

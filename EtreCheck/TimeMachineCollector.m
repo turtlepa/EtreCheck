@@ -425,13 +425,16 @@
     {
     BOOL skip = [skipSystemFiles boolValue];
 
-    [self.result appendString: @"\tSkip System Files: "];
+    [self.result
+      appendString: NSLocalizedString(@"\tSkip System Files: ", NULL)];
 
     if(!skip)
-      [self.result appendString: @"NO\n"];
+      [self.result appendString: NSLocalizedString(@"NO\n", NULL)];
     else
       [self.result
-        appendString: @"YES - System files not being backed up\n"
+        appendString:
+          NSLocalizedString(
+            @"YES - System files not being backed up\n", NULL)
         attributes:
           [NSDictionary
             dictionaryWithObjectsAndKeys:

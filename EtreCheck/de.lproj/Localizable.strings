@@ -9,7 +9,7 @@
 "Starting up..." = "Inbetriebnahme...";
 "Checking launchd information" = "Durchsuchen Sie Launchd-Informationen";
 "Checking hardware information" = "Durchsuchen Sie Hardware-Informationen";
-"Checking hardware" = "Durchsuchen Sie Hardware";
+"Checking hardware" = "Hardware wird durchsucht";
 "Checking video information" = "Überprüfen Videoinformationen";
 "Checking obsolete startup items" = "Prüfung veraltet Autostart-Objekte";
 "Checking system software" = "Überprüfung der Systemsoftware";
@@ -51,7 +51,7 @@
 "FireWire Information:" = "FireWire Informationen:";
 "Thunderbolt Information:" = "Thunderbolt Informationen:";
 "%@S.M.A.R.T. Status: %@\n" = "%@S.M.A.R.T. Status: %@\n";
-"%@S.M.A.R.T. Status: Verified\n" = "%@S.M.A.R.T. Status: Verifizierte\n";
+"%@S.M.A.R.T. Status: Verified\n" = "%@S.M.A.R.T. Status: Verifiziert\n";
 "<not mounted>" = "<nicht sichtbar>";
 "Low!" = "Niedrig!";
 "3rd Party Preference Panes:" = "Einstellungskarten von Drittanbietern:";
@@ -61,13 +61,13 @@
 "Top Processes by CPU:" = "Top Prozesse von der CPU:";
 "Top Processes by Memory:" = "Top Prozesse vom Speicher:";
 "Kernel Extensions:" = "Kernel-Erweiterungen:";
-"Problem System Launch Daemons:" = "Problem System zu starten Daemons:";
-"Problem System Launch Agents:" = "Problem System zu starten Bevollmächtigte:";
-"Launch Daemons:" = "Starten Daemons:";
-"Launch Agents:" = "Launch Agents:";
-"User Launch Agents:" = "Benutzer starten Bevollmächtigte:";
-"User Login Items:" = "Benutzer-Login Artikel:";
-"User Internet Plug-ins:" = "Benutzer Internet Plug-Ins:";
+"Problem System Launch Daemons:" = "Problematische Start-Daemons des Systems:";
+"Problem System Launch Agents:" = "Problematische Start-Agents des Systems:";
+"Launch Daemons:" = "Start-Daemons:";
+"Launch Agents:" = "Start-Agents:";
+"User Launch Agents:" = "Benutzer Start-Agents:";
+"User Login Items:" = "Anmeldeobjekte:";
+"User Internet Plug-ins:" = "Internet Plug-Ins des Benutzers:";
 "Virtual Memory Information:" = "Informationen zum virtuellen Speicher:";
 "Free RAM" = "Freier RAM";
 "(%@ free)" = "(%@ frei)";
@@ -136,8 +136,7 @@
 "\t%@: Version: %@%@" = "\t%@: Version: %@%@";
 "linkstyle" = "<head><style>a { font-family: sans-serif; } a:active { color: blue; } a:hover { color: blue; } </style></head>";
 "Update Available" = "Update verfügbar";
-"updateavailable" = "Es gibt eine neue Version von EtreCheck verfügbar. Wollen Sie jetzt beenden und laden Sie die neue Version?";
-"Go to update" = "Zum aktualisieren";
+"updateavailable" = "Es gibt eine neue Version von EtreCheck. Wollen Sie dieses Programm jetzt beenden und die neue Version laden?";
 "Skip" = "Überspringen";
 "Invalid" = "ungültig";
 "EtreCheck Report" = "EtreCheck Bericht";
@@ -174,7 +173,7 @@
 " [Recovery]" = " [Erholung]";
 "info" = " ℹ️";
 "startupitemsdeprecated" = "\tAutostart-Objekte sind veraltet und werden nicht in zukünftigen Versionen von OS X arbeiten\n";
-"Quit and go to update" = "Beenden Sie und gehen Sie zu aktualisieren";
+"Quit and go to update" = "Programm beenden und aktualisieren";
 "EtreCheck Report" = "EtreCheck Bericht";
 "Problem description:\n" = "Problembeschreibung:\n";
 "Confirm cancellation" = "Stornierung bestätigt";
@@ -187,7 +186,7 @@
 "Mismatch!" = "Mismatch!";
 "(Disabled) " = "(Abgeschaltet)";
 "\tDestinations:\n" = "\tSicherungsziele:\n";
-"\t%@ - Uptime: %@\n" = "\t%@ - Laufzeit: %@\n";
+"\t%@ - Uptime: %@%@\n" = "\t%@ - Laufzeit: %@\n";
 "%d day (plural rule: zero)" = "";
 "%d day (plural rule: one)" = "einen Tag ";
 "%d day (plural rule: other)" = "%d Tage ";
@@ -203,6 +202,7 @@
 "Encrypted" = "Verschlüsselten";
 "Locked" = "Verschlossen";
 "Unlocked" = "Rntriegelt";
-
-
+"\tSkip System Files: " = "Überspringen Systemdateien: ";
+"NO\n" = "NEIN\n";
+"YES - System files not being backed up\n" = "JA - Systemdateien nicht gesichert\n";
 
