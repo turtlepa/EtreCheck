@@ -649,16 +649,16 @@
         </menu>
         <window title="Fenêtre" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="hni-3i-hk1" userLabel="Window - User Message">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="109" y="132" width="562" height="346"/>
+            <rect key="contentRect" x="109" y="132" width="562" height="278"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <view key="contentView" id="ztf-cY-AUf">
-                <rect key="frame" x="0.0" y="0.0" width="562" height="346"/>
+                <rect key="frame" x="0.0" y="5" width="562" height="278"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" id="lrR-aP-PG2">
-                        <rect key="frame" x="386" y="13" width="162" height="32"/>
+                        <rect key="frame" x="381" y="13" width="167" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="Construire le rapport" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qTb-gt-ctA">
+                        <buttonCell key="cell" type="push" title="Démarrer EtreCheck" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qTb-gt-ctA">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
@@ -669,33 +669,8 @@ DQ
                             <action selector="start:" target="Voe-Tx-rLC" id="2ik-2d-dt0"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" id="3TY-9F-OAG">
-                        <rect key="frame" x="304" y="13" width="82" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="Annuler" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5fz-wh-HYm">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                        </buttonCell>
-                        <connections>
-                            <action selector="cancel:" target="Voe-Tx-rLC" id="1Nm-mq-EEq"/>
-                        </connections>
-                    </button>
-                    <button id="pUo-Nx-msa">
-                        <rect key="frame" x="18" y="22" width="275" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="check" title="Ne plus afficher cette boîte de dialogue" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="PkC-2F-H9b">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <binding destination="HgC-29-4Qk" name="value" keyPath="values.dontshowusermessage" id="VSt-Sg-kSQ"/>
-                        </connections>
-                    </button>
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="ge8-79-855">
-                        <rect key="frame" x="20" y="61" width="522" height="144"/>
+                        <rect key="frame" x="20" y="60" width="522" height="148"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" id="7OZ-1o-9En">
                             <rect key="frame" x="1" y="1" width="502" height="117"/>
@@ -705,10 +680,10 @@ Gw
                                     <rect key="frame" x="0.0" y="0.0" width="502" height="142"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="520" height="142"/>
+                                    <size key="minSize" width="520" height="146"/>
                                     <size key="maxSize" width="522" height="10000000"/>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="520" height="142"/>
+                                    <size key="minSize" width="520" height="146"/>
                                     <size key="maxSize" width="522" height="10000000"/>
                                     <connections>
                                         <binding destination="Voe-Tx-rLC" name="attributedString" keyPath="self.userMessage" id="3xh-8o-4KW">
@@ -731,18 +706,29 @@ Gw
                         </scroller>
                     </scrollView>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="Wus-O6-YnG">
-                        <rect key="frame" x="18" y="213" width="526" height="113"/>
+                        <rect key="frame" x="18" y="216" width="526" height="42"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="trd-Nq-EeU">
                             <font key="font" metaFont="system"/>
-                            <string key="title">Le rapport EtreCheck est plus utile comme une image complète de l'état général de votre système. Si vous rencontrez des problèmes, le meilleur plan d'action est d'aller aux forums de support Apple, écrire une description détaillée de votre problème, expliquer ce qui se passe, expliquer ce que vous aimeriez voir se produire, et inclure ce rapport. Vous pouvez fournir toutes les informations ci-dessous et EtreCheck les ajoutera automatiquement à votre rapport.</string>
+                            <string key="title">S'il vous plaît décrire votre problème. Cela aidera d'autres personnes à trouver une solution quand ils lisent votre rapport. (en option)</string>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <button id="pUo-Nx-msa">
+                        <rect key="frame" x="18" y="22" width="275" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <buttonCell key="cell" type="check" title="Ne plus afficher cette boîte de dialogue" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="PkC-2F-H9b">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="HgC-29-4Qk" name="value" keyPath="values.dontshowusermessage" id="VSt-Sg-kSQ"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="206" y="354"/>
+            <point key="canvasLocation" x="174" y="512"/>
         </window>
         <window title="Journal" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="LC3-aK-O61" userLabel="Window - Log">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>

@@ -651,50 +651,22 @@
         <window title="Fenster" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="hni-3i-hk1" userLabel="Window - User Message">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="109" y="132" width="544" height="341"/>
+            <rect key="contentRect" x="109" y="132" width="544" height="277"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <view key="contentView" id="ztf-cY-AUf">
-                <rect key="frame" x="0.0" y="0.0" width="544" height="341"/>
+                <rect key="frame" x="0.0" y="5" width="544" height="277"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="CYc-qI-gT3">
-                        <rect key="frame" x="18" y="194" width="508" height="127"/>
+                        <rect key="frame" x="18" y="213" width="508" height="44"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="8c5-qk-jzN">
                             <font key="font" metaFont="system"/>
-                            <string key="title">Die EtreCheck Bericht ist besonders nützlich, als Momentaufnahme über den Gesamtstatus des Systems. Wenn Sie Probleme haben, ist die beste Maßnahme, um die Apple-Support-Foren zu gehen, schreiben Sie eine detaillierte Beschreibung des Problems, zu erklären, was passiert ist, zu erklären, was Sie möchten, um zu sehen, geschehen, um diesen Bericht. Sie können all diese Informationen liefern und unter EtreCheck wird es automatisch zu Ihrem Bericht hinzu:</string>
+                            <string key="title">Bitte beschreiben Sie Ihr Problem. Dies wird helfen, anderen Menschen eine Lösung zu finden, wenn sie den Bericht gelesen. (optional)</string>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" id="lrR-aP-PG2">
-                        <rect key="frame" x="397" y="13" width="133" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="Bericht erstellen" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qTb-gt-ctA">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
-                        </buttonCell>
-                        <connections>
-                            <action selector="start:" target="Voe-Tx-rLC" id="2ik-2d-dt0"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" id="3TY-9F-OAG">
-                        <rect key="frame" x="295" y="13" width="102" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="Abbrechen" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5fz-wh-HYm">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                        </buttonCell>
-                        <connections>
-                            <action selector="cancel:" target="Voe-Tx-rLC" id="1Nm-mq-EEq"/>
-                        </connections>
-                    </button>
                     <button id="pUo-Nx-msa">
                         <rect key="frame" x="18" y="22" width="251" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -707,7 +679,7 @@ Gw
                         </connections>
                     </button>
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="ge8-79-855">
-                        <rect key="frame" x="20" y="61" width="504" height="125"/>
+                        <rect key="frame" x="20" y="57" width="504" height="148"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" id="7OZ-1o-9En">
                             <rect key="frame" x="1" y="1" width="502" height="123"/>
@@ -717,10 +689,10 @@ Gw
                                     <rect key="frame" x="0.0" y="0.0" width="502" height="123"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="502" height="123"/>
+                                    <size key="minSize" width="502" height="146"/>
                                     <size key="maxSize" width="504" height="10000000"/>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="502" height="123"/>
+                                    <size key="minSize" width="502" height="146"/>
                                     <size key="maxSize" width="504" height="10000000"/>
                                     <connections>
                                         <binding destination="Voe-Tx-rLC" name="attributedString" keyPath="self.userMessage" id="3xh-8o-4KW">
@@ -742,8 +714,23 @@ Gw
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <button verticalHuggingPriority="750" id="lrR-aP-PG2">
+                        <rect key="frame" x="386" y="13" width="144" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <buttonCell key="cell" type="push" title="Starte EtreCheck" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qTb-gt-ctA">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="start:" target="Voe-Tx-rLC" id="2ik-2d-dt0"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
+            <point key="canvasLocation" x="136" y="527.5"/>
         </window>
         <window title="Protokolldatei" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="LC3-aK-O61" userLabel="Window - Log">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
