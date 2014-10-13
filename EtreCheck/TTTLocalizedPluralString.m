@@ -117,6 +117,8 @@ static NSString * TTTCzechPluralRuleForCount(NSUInteger count) {
 
 static NSString * TTTEnglishPluralRuleForCount(NSUInteger count) {
     switch (count) {
+        case 0:
+            return kTTTZeroPluralRule;
         case 1:
             return kTTTOnePluralRule;
         default:
@@ -126,7 +128,9 @@ static NSString * TTTEnglishPluralRuleForCount(NSUInteger count) {
 
 static NSString * TTTFrenchPluralRuleForCount(NSUInteger count) {
     switch (count) {
+        // jdaniel: Originally the french zero would use the one rule. Why?
         case 0:
+            return kTTTZeroPluralRule;
         case 1:
             return kTTTOnePluralRule;
         default:
@@ -136,6 +140,8 @@ static NSString * TTTFrenchPluralRuleForCount(NSUInteger count) {
 
 static NSString * TTTGermanPluralRuleForCount(NSUInteger count) {
     switch (count) {
+        case 0:
+            return kTTTZeroPluralRule;
         case 1:
             return kTTTOnePluralRule;
         default:
@@ -445,18 +451,47 @@ NSString * TTTLocalizedPluralStringKeyForCountAndSingularNoun(NSUInteger count, 
     return TTTLocalizedPluralStringKeyForCountAndSingularNounForLanguage(count, singular, languageCode);
 }
 
+// Format a string using a plural rule.
+static NSString * formatPluralString(NSString * string, NSString * singular)
+  {
+  NSString * localized = NSLocalizedString(string, NULL);
+  
+  // Localization is the same, fallback.
+  if([string isEqualToString: localized])
+    return
+      [NSString
+        stringWithFormat:
+          @"%%d %@ (plural rule: %@)", singular, kTTTOtherPluralRule];
+  
+  return string;
+  }
+
 NSString * TTTLocalizedPluralStringKeyForCountAndSingularNounForLanguage(NSUInteger count, NSString *singular, NSString *languageCode) {
     NSString *pluralRule = nil;
 
     // Because -hasPrefix is being used here, any three-letter ISO 639-2/3 codes must come before two-letter ISO 639-1 codes in order to prevent, for instance, Konkani (kok) from having Korean (ko) pluralization applied
-    if ([languageCode hasPrefix:@"ar"]) {
-        pluralRule = TTTArabicPluralRuleForCount(count);
-    } else if ([languageCode hasPrefix:@"ca"]) {
-        pluralRule = TTTCatalanPluralRuleForCount(count);
+    // jdaniel: It is not my intent to disrespect any language, but for
+    // performance, it is best to check the most popular languages first.
+    if ([languageCode hasPrefix:@"en"]) {
+        pluralRule = TTTEnglishPluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"zh-Hans"]) {
         pluralRule = TTTSimplifiedChinesePluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"zh-Hant"]) {
         pluralRule = TTTTraditionalChinesePluralRuleForCount(count);
+    } else if ([languageCode hasPrefix:@"fr"]) {
+        pluralRule = TTTFrenchPluralRuleForCount(count);
+    } else if ([languageCode hasPrefix:@"de"]) {
+        pluralRule = TTTGermanPluralRuleForCount(count);
+    } else if ([languageCode hasPrefix:@"es"]) {
+        pluralRule = TTTSpanishPluralRuleForCount(count);
+    } else if ([languageCode hasPrefix:@"ja"]) {
+        pluralRule = TTTJapanesePluralRuleForCount(count);
+    } else if ([languageCode hasPrefix:@"pt"]) {
+        pluralRule = TTTPortuguesePluralRuleForCount(count);
+    } else if ([languageCode hasPrefix:@"ar"]) {
+        pluralRule = TTTArabicPluralRuleForCount(count);
+    } else if ([languageCode hasPrefix:@"ca"]) {
+        pluralRule = TTTCatalanPluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"cr"]) {
         pluralRule = TTTCroatianPluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"cs"]) {
@@ -465,12 +500,6 @@ NSString * TTTLocalizedPluralStringKeyForCountAndSingularNounForLanguage(NSUInte
         pluralRule = TTTDanishPluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"nl"]) {
         pluralRule = TTTDutchPluralRuleForCount(count);
-    } else if ([languageCode hasPrefix:@"en"]) {
-        pluralRule = TTTEnglishPluralRuleForCount(count);
-    } else if ([languageCode hasPrefix:@"fr"]) {
-        pluralRule = TTTFrenchPluralRuleForCount(count);
-    } else if ([languageCode hasPrefix:@"de"]) {
-        pluralRule = TTTGermanPluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"fi"]) {
         pluralRule = TTTFinnishPluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"el"]) {
@@ -483,8 +512,6 @@ NSString * TTTLocalizedPluralStringKeyForCountAndSingularNounForLanguage(NSUInte
         pluralRule = TTTIndonesianPluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"it"]) {
         pluralRule = TTTItalianPluralRuleForCount(count);
-    } else if ([languageCode hasPrefix:@"ja"]) {
-        pluralRule = TTTJapanesePluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"ko"]) {
         pluralRule = TTTKoreanPluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"lv"]) {
@@ -497,14 +524,10 @@ NSString * TTTLocalizedPluralStringKeyForCountAndSingularNounForLanguage(NSUInte
         pluralRule = TTTNorwegianNynorskPluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"pl"]) {
         pluralRule = TTTPolishPluralRuleForCount(count);
-    } else if ([languageCode hasPrefix:@"pt"]) {
-        pluralRule = TTTPortuguesePluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"ro"]) {
         pluralRule = TTTRomanianPluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"ru"]) {
         pluralRule = TTTRussianPluralRuleForCount(count);
-    } else if ([languageCode hasPrefix:@"es"]) {
-        pluralRule = TTTSpanishPluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"sk"]) {
         pluralRule = TTTSlovakPluralRuleForCount(count);
     } else if ([languageCode hasPrefix:@"sv"]) {
@@ -522,5 +545,24 @@ NSString * TTTLocalizedPluralStringKeyForCountAndSingularNounForLanguage(NSUInte
         return nil;
     }
 
-    return [NSString stringWithFormat:@"%%d %@ (plural rule: %@)", singular, pluralRule];
+    // jdaniel: This code seems to only accept one and other for most
+    // languages. I am going to fix that for languages I support but provide
+    // a fallback for legacy localizations.
+  
+    NSString * result =
+      [NSString
+        stringWithFormat:
+          @"%%d %@ (plural rule: %@)", singular, pluralRule];
+  
+    if(pluralRule == kTTTZeroPluralRule)
+      result = formatPluralString(result, singular);
+
+    if(pluralRule == kTTTFewPluralRule)
+      result = formatPluralString(result, singular);
+
+    if(pluralRule == kTTTManyPluralRule)
+      result = formatPluralString(result, singular);
+  
+    return result;
 }
+
