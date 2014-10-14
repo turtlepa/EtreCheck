@@ -237,7 +237,9 @@
         format: & format
         error: & error];
       
-    return plist;
+    // Make sure the property list is a dictionary.
+    if([plist respondsToSelector: @selector(objectForKey:)])
+      return plist;
     }
     
   return nil;
