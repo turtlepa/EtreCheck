@@ -9,6 +9,7 @@
 #import "NSMutableAttributedString+Etresoft.h"
 #import "SystemInformation.h"
 #import "Utilities.h"
+#import "NSDictionary+Etresoft.h"
 
 #define kStatus @"status"
 #define kHidden @"hidden"
@@ -264,7 +265,7 @@
   BOOL hidden = [file hasPrefix: @"."];
   
   // Get the properties.
-  NSDictionary * plist = [Utilities readPropertyList: path];
+  NSDictionary * plist = [NSDictionary readPropertyList: path];
 
   // Get the status.
   NSString * jobStatus = [self collectJobStatus: plist];

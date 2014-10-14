@@ -7,6 +7,7 @@
 #import "VideoCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
 #import "Utilities.h"
+#import "NSArray+Etresoft.h"
 
 @implementation VideoCollector
 
@@ -41,7 +42,7 @@
   
   if(result)
     {
-    NSArray * plist = [Utilities readPropertyListData: result];
+    NSArray * plist = [NSArray readPropertyListData: result];
   
     if(plist && [plist count])
       {

@@ -230,16 +230,12 @@
     NSError * error;
     NSPropertyListFormat format;
     
-    NSDictionary * plist =
+    return
       [NSPropertyListSerialization
         propertyListWithData: data
         options: NSPropertyListImmutable
         format: & format
         error: & error];
-      
-    // Make sure the property list is a dictionary.
-    if([plist respondsToSelector: @selector(objectForKey:)])
-      return plist;
     }
     
   return nil;

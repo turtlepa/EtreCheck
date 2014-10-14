@@ -7,6 +7,8 @@
 #import "StartupItemsCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
 #import "Utilities.h"
+#import "NSArray+Etresoft.h"
+#import "NSDictionary+Etresoft.h"
 
 // Collect old startup items.
 @implementation StartupItemsCollector
@@ -46,7 +48,7 @@
   
   if(result)
     {
-    NSArray * plist = [Utilities readPropertyListData: result];
+    NSArray * plist = [NSArray readPropertyListData: result];
   
     if(plist && [plist count])
       {
@@ -92,7 +94,7 @@
 
   for(NSString * file in files)
     {
-    NSDictionary * plist = [Utilities readPropertyList: file];
+    NSDictionary * plist = [NSDictionary readPropertyList: file];
 
     if(plist)
       [bundles setObject: plist forKey: file];

@@ -7,6 +7,7 @@
 #import "FontsCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
 #import "Utilities.h"
+#import "NSArray+Etresoft.h"
 
 // Collect font information.
 @implementation FontsCollector
@@ -76,7 +77,7 @@
   
   if(result)
     {
-    NSArray * plist = [Utilities readPropertyListData: result];
+    NSArray * plist = [NSArray readPropertyListData: result];
   
     if(plist && [plist count])
       {

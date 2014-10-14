@@ -8,6 +8,7 @@
 #import "NSMutableAttributedString+Etresoft.h"
 #import "SystemInformation.h"
 #import "Utilities.h"
+#import "NSDictionary+Etresoft.h"
 
 // Base class that knows how to handle plug-ins of various types.
 @implementation PlugInsCollector
@@ -78,7 +79,7 @@
     NSString * versionPlist =
       [path stringByAppendingPathComponent: @"Contents/Info.plist"];
 
-    NSDictionary * plist = [Utilities readPropertyList: versionPlist];
+    NSDictionary * plist = [NSDictionary readPropertyList: versionPlist];
 
     if(!plist)
       plist =

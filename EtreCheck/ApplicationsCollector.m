@@ -8,6 +8,8 @@
 #import "NSMutableAttributedString+Etresoft.h"
 #import "Utilities.h"
 #import "SystemInformation.h"
+#import "NSArray+Etresoft.h"
+#import "NSDictionary+Etresoft.h"
 
 // Collect installed applications.
 @implementation ApplicationsCollector
@@ -70,7 +72,7 @@
   
   if(result)
     {
-    NSArray * plist = [Utilities readPropertyListData: result];
+    NSArray * plist = [NSArray readPropertyListData: result];
   
     if([plist count])
       {
@@ -108,7 +110,7 @@
   NSString * versionPlist =
     [path stringByAppendingPathComponent: @"Contents/Info.plist"];
 
-  NSDictionary * plist = [Utilities readPropertyList: versionPlist];
+  NSDictionary * plist = [NSDictionary readPropertyList: versionPlist];
 
   NSMutableDictionary * info =
     [NSMutableDictionary dictionaryWithDictionary: application];

@@ -50,6 +50,8 @@
 		A5C292F519A2214E00464E86 /* VideoCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292F419A2214E00464E86 /* VideoCollector.m */; };
 		A5C292F819A2220400464E86 /* SystemSoftwareCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292F719A2220400464E86 /* SystemSoftwareCollector.m */; };
 		A5CC608F19B4BF9E006D7E94 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55BC1AF15C0901800D42EF1 /* ServiceManagement.framework */; };
+		A5D0877919ECACF6004F52C2 /* NSArray+Etresoft.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D0877819ECACF6004F52C2 /* NSArray+Etresoft.m */; };
+		A5D0877C19ECAD4E004F52C2 /* NSDictionary+Etresoft.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D0877B19ECAD4E004F52C2 /* NSDictionary+Etresoft.m */; };
 		A5D25B2D19C4D11F006728B8 /* TTTLocalizedPluralString.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D25B2C19C4D11F006728B8 /* TTTLocalizedPluralString.m */; };
 		A5E33C3F184CEBDF00ED59A0 /* ByteCountFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E33C3E184CEBDF00ED59A0 /* ByteCountFormatter.m */; };
 		A5FC11EE19A4BFDC00E81E9C /* AudioPlugInsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FC11ED19A4BFDC00E81E9C /* AudioPlugInsCollector.m */; };
@@ -153,6 +155,10 @@
 		A5C292F619A2220400464E86 /* SystemSoftwareCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemSoftwareCollector.h; sourceTree = "<group>"; };
 		A5C292F719A2220400464E86 /* SystemSoftwareCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemSoftwareCollector.m; sourceTree = "<group>"; };
 		A5CC608C19B4BF52006D7E94 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		A5D0877719ECACF6004F52C2 /* NSArray+Etresoft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Etresoft.h"; sourceTree = "<group>"; };
+		A5D0877819ECACF6004F52C2 /* NSArray+Etresoft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Etresoft.m"; sourceTree = "<group>"; };
+		A5D0877A19ECAD4E004F52C2 /* NSDictionary+Etresoft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Etresoft.h"; sourceTree = "<group>"; };
+		A5D0877B19ECAD4E004F52C2 /* NSDictionary+Etresoft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Etresoft.m"; sourceTree = "<group>"; };
 		A5D25B2619C3CD3B006728B8 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A5D25B2719C3CD3B006728B8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A5D25B2819C3CD3B006728B8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -327,6 +333,10 @@
 				A5C00A2719BFF2D500140404 /* NSAttributedString+Etresoft.m */,
 				A59B506B15C45EC000250772 /* NSMutableAttributedString+Etresoft.h */,
 				A59B506C15C45EC000250772 /* NSMutableAttributedString+Etresoft.m */,
+				A5D0877719ECACF6004F52C2 /* NSArray+Etresoft.h */,
+				A5D0877819ECACF6004F52C2 /* NSArray+Etresoft.m */,
+				A5D0877A19ECAD4E004F52C2 /* NSDictionary+Etresoft.h */,
+				A5D0877B19ECAD4E004F52C2 /* NSDictionary+Etresoft.m */,
 				A5E33C3D184CEBDF00ED59A0 /* ByteCountFormatter.h */,
 				A5E33C3E184CEBDF00ED59A0 /* ByteCountFormatter.m */,
 				A5257D3519AB53FF003084C8 /* SystemInformation.h */,
@@ -477,6 +487,7 @@
 				A50C9DB019A2DFDB00BA6A25 /* DiskCollector.m in Sources */,
 				A50C9DB919A2E6AB00BA6A25 /* ThunderboltCollector.m in Sources */,
 				A5C292E319A039AB00464E86 /* SystemLaunchAgentsCollector.m in Sources */,
+				A5D0877C19ECAD4E004F52C2 /* NSDictionary+Etresoft.m in Sources */,
 				A5C00A2819BFF2D500140404 /* NSAttributedString+Etresoft.m in Sources */,
 				A5D25B2D19C4D11F006728B8 /* TTTLocalizedPluralString.m in Sources */,
 				A50C9DCB19A4065B00BA6A25 /* InternetPlugInsCollector.m in Sources */,
@@ -484,6 +495,7 @@
 				A5257D3A19ABE02A003084C8 /* VirtualMemoryCollector.m in Sources */,
 				A50C9DC519A4052000BA6A25 /* LoginItemsCollector.m in Sources */,
 				A5FC11FD19A4C30600E81E9C /* SafariExtensionsCollector.m in Sources */,
+				A5D0877919ECACF6004F52C2 /* NSArray+Etresoft.m in Sources */,
 				A5C292E619A039BD00464E86 /* SystemLaunchDaemonsCollector.m in Sources */,
 				A5257D3719AB53FF003084C8 /* SystemInformation.m in Sources */,
 				A5C292F819A2220400464E86 /* SystemSoftwareCollector.m in Sources */,

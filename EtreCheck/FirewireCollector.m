@@ -7,6 +7,7 @@
 #import "FirewireCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
 #import "Utilities.h"
+#import "NSArray+Etresoft.h"
 
 // Collect information about Firewire devices.
 @implementation FirewireCollector
@@ -43,7 +44,7 @@
   
   if(result)
     {
-    NSArray * plist = [Utilities readPropertyListData: result];
+    NSArray * plist = [NSArray readPropertyListData: result];
   
     if(plist && [plist count])
       {

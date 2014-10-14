@@ -7,6 +7,7 @@
 #import "PreferencePanesCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
 #import "Utilities.h"
+#import "NSArray+Etresoft.h"
 
 // Collect 3rd party preference panes.
 @implementation PreferencePanesCollector
@@ -39,7 +40,7 @@
   
   if(result)
     {
-    NSArray * plist = [Utilities readPropertyListData: result];
+    NSArray * plist = [NSArray readPropertyListData: result];
   
     if(plist && [plist count])
       {

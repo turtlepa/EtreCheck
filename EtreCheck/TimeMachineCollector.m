@@ -9,6 +9,7 @@
 #import "ByteCountFormatter.h"
 #import "SystemInformation.h"
 #import "Utilities.h"
+#import "NSDictionary+Etresoft.h"
 
 #define kSnapshotcount @"snapshotcount"
 #define kLastbackup @"lastbackup"
@@ -239,7 +240,7 @@
   if(result)
     {
     NSDictionary * destinationinfo  =
-      [Utilities readPropertyListData: result];
+      [NSDictionary readPropertyListData: result];
     
     NSArray * destinationList =
       [destinationinfo objectForKey: @"Destinations"];

@@ -19,6 +19,7 @@
 #import "LaunchdCollector.h"
 #import "SystemInformation.h"
 #import "NSAttributedString+Etresoft.h"
+#import "NSDictionary+Etresoft.h"
 
 NSComparisonResult compareViews(id view1, id view2, void * context);
 
@@ -133,7 +134,7 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
           [[[NSBundle mainBundle] infoDictionary]
             objectForKey: @"CFBundleVersion"]];
 
-    NSDictionary * info = [Utilities readPropertyListData: data];
+    NSDictionary * info = [NSDictionary readPropertyListData: data];
     
     for(NSString * key in info)
       if([key isEqualToString: @"Application Updates"])

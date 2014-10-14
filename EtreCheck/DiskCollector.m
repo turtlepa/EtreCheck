@@ -9,6 +9,7 @@
 #import "SystemInformation.h"
 #import "Utilities.h"
 #import "ByteCountFormatter.h"
+#import "NSArray+Etresoft.h"
 
 // Some keys for an internal dictionary.
 #define kVolumeType @"volumetype"
@@ -67,7 +68,7 @@
   
   if(result)
     {
-    NSArray * plist = [Utilities readPropertyListData: result];
+    NSArray * plist = [NSArray readPropertyListData: result];
   
     if(plist && [plist count])
       {
@@ -107,7 +108,7 @@
   
   if(result)
     {
-    NSArray * plist = [Utilities readPropertyListData: result];
+    NSArray * plist = [NSArray readPropertyListData: result];
   
     if(plist && [plist count])
       {

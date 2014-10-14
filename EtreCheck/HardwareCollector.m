@@ -9,6 +9,8 @@
 #import "SystemInformation.h"
 #import "Utilities.h"
 #import "TTTLocalizedPluralString.h"
+#import "NSArray+Etresoft.h"
+#import "NSDictionary+Etresoft.h"
 
 // Some keys to be returned from machine lookuup.
 #define kMachineIcon @"machineicon"
@@ -52,13 +54,13 @@
   {
   // First look for a machine attributes file.
   self.properties =
-    [Utilities
+    [NSDictionary
       readPropertyList: NSLocalizedString(@"machineattributes", NULL)];
     
   // Don't give up yet. Try the old one too.
   if(!self.properties)
     self.properties =
-      [Utilities
+      [NSDictionary
         readPropertyList:
           NSLocalizedString(@"oldmachineattributes", NULL)];
     
@@ -107,7 +109,7 @@
   
   if(result)
     {
-    NSArray * plist = [Utilities readPropertyListData: result];
+    NSArray * plist = [NSArray readPropertyListData: result];
   
     if(plist && [plist count])
       {
@@ -402,7 +404,7 @@
   
   if(result)
     {
-    NSArray * plist = [Utilities readPropertyListData: result];
+    NSArray * plist = [NSArray readPropertyListData: result];
   
     if(plist && [plist count])
       {
@@ -520,7 +522,7 @@
   
   if(result)
     {
-    NSArray * plist = [Utilities readPropertyListData: result];
+    NSArray * plist = [NSArray readPropertyListData: result];
   
     if(plist && [plist count])
       {

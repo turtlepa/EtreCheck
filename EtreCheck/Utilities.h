@@ -56,7 +56,7 @@
 // Format text into an array of trimmed lines separated by newlines.
 + (NSArray *) formatLines: (NSData *) data;
 
-// Read a property list.
+// Read a property list to an array.
 + (id) readPropertyList: (NSString *) path;
 + (id) readPropertyListData: (NSData *) data;
 

@@ -9,6 +9,7 @@
 #import "SystemInformation.h"
 #import "Utilities.h"
 #import "TTTLocalizedPluralString.h"
+#import "NSArray+Etresoft.h"
 
 // Collect system software information.
 @implementation SystemSoftwareCollector
@@ -43,7 +44,7 @@
   
   if(result)
     {
-    NSArray * plist = [Utilities readPropertyListData: result];
+    NSArray * plist = [NSArray readPropertyListData: result];
   
     if(plist && [plist count])
       {

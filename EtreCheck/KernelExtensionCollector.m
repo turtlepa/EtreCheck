@@ -9,6 +9,8 @@
 #import "NSMutableAttributedString+Etresoft.h"
 #import "Utilities.h"
 #import "SystemInformation.h"
+#import "NSArray+Etresoft.h"
+#import "NSDictionary+Etresoft.h"
 
 @implementation KernelExtensionCollector
 
@@ -133,7 +135,7 @@
     {
     dispatch_semaphore_wait(signal, DISPATCH_TIME_FOREVER);
     
-    NSArray * plist = [Utilities readPropertyListData: result];
+    NSArray * plist = [NSArray readPropertyListData: result];
   
     if([plist count])
       {
@@ -374,13 +376,13 @@
   NSString * versionPlist =
     [path stringByAppendingPathComponent: @"Contents/Info.plist"];
 
-  NSDictionary * plist = [Utilities readPropertyList: versionPlist];
+  NSDictionary * plist = [NSDictionary readPropertyList: versionPlist];
 
   // Check for inconsistent path from Apple extensions.
   if(!plist)
     versionPlist = [path stringByAppendingPathComponent: @"Info.plist"];
 
-  plist = [Utilities readPropertyList: versionPlist];
+  plist = [NSDictionary readPropertyList: versionPlist];
 
   if(plist)
     {
