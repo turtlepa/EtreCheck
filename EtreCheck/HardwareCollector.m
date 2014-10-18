@@ -490,20 +490,44 @@
   {
   NSString * model = [[SystemInformation sharedInformation] model];
   
+  NSString * specificModel = nil;
+  int target = 0;
+  int number = 0;
+  
   if([model hasPrefix: @"MacBookPro"])
-    return [model isGreaterThanOrEqualTo: @"MacBookPro9"];
-
+    {
+    specificModel = @"MacBookPro";
+    target = 9;
+    }
   else if([model hasPrefix: @"iMac"])
-    return [model isGreaterThanOrEqualTo: @"iMac13"];
-
+    {
+    specificModel = @"iMac";
+    target = 13;
+    }
   else if([model hasPrefix: @"MacPro"])
-    return [model isGreaterThanOrEqualTo: @"MacPro6"];
-
+    {
+    specificModel = @"MacPro";
+    target = 6;
+    }
   else if([model hasPrefix: @"MacBookAir"])
-    return [model isGreaterThanOrEqualTo: @"MacBookAir5"];
-
+    {
+    specificModel = @"MacBookAir";
+    target = 5;
+    }
   else if([model hasPrefix: @"Macmini"])
-    return [model isGreaterThanOrEqualTo: @"Macmini6"];
+    {
+    specificModel = @"Macmini";
+    target = 9;
+    }
+    
+  if(specificModel)
+    {
+    NSScanner * scanner = [NSScanner scannerWithString: model];
+    
+    if([scanner scanString: specificModel intoString: NULL])
+      if([scanner scanInt: & number])
+        return number >= target;
+    }
     
   return NO;
   }
