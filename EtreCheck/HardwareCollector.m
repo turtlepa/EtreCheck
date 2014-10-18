@@ -361,10 +361,12 @@
     NSString * isUpgradeable =
       [details objectForKey: @"is_memory_upgradeable"];
     
-    upgradeable =
-      [isUpgradeable boolValue]
-        ? NSLocalizedString(@"Upgradeable", NULL)
-        : NSLocalizedString(@"Not upgradeable", NULL);
+    // Snow Leopoard doesn't seem to report this.
+    if(isUpgradeable)
+      upgradeable =
+        [isUpgradeable boolValue]
+          ? NSLocalizedString(@"Upgradeable", NULL)
+          : NSLocalizedString(@"Not upgradeable", NULL);
     }
     
   if([[SystemInformation sharedInformation] physicalRAM] < 4)
