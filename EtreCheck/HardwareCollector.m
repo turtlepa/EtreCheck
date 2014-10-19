@@ -519,7 +519,7 @@
   else if([model hasPrefix: @"Macmini"])
     {
     specificModel = @"Macmini";
-    target = 9;
+    target = 6;
     }
     
   if(specificModel)
