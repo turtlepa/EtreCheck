@@ -217,8 +217,8 @@
   // This key is only significant if present and false.
   NSNumber * enabled = [plist objectForKey: @"Enabled"];
 
-  // Read those operators carefully.
-  if(!enabled)
+  // If I don't have a plist file, assume the extension is enabled.
+  if(!enabled && !plist)
     enabled = @YES;
     
   if(enabled)
