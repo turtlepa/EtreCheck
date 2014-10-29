@@ -498,12 +498,17 @@
   {
   NSMutableSet * backedupVolumeUUIDs = [NSMutableSet set];
   
-  // Root always gets backed up.
-  NSString * root = [settings objectForKey: @"RootVolumeUUID"];
+  for(NSString * destinationID in destinations)
+    {
+    NSDictionary * destination = [destinations objectForKey: destinationID];
+    
+    // Root always gets backed up.
+    NSString * root = [destination objectForKey: @"RootVolumeUUID"];
   
-  if(root)
-    [backedupVolumeUUIDs addObject: root];
-  
+    if(root)
+      [backedupVolumeUUIDs addObject: root];
+    }
+    
   // Included volumes get backed up.
   NSArray * includedVolumeUUIDs =
     [settings objectForKey: @"IncludedVolumeUUIDs"];

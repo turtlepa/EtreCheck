@@ -214,8 +214,13 @@
   if(![extension objectForKey: kHumanReadableName])
     [extension setObject: name forKey: kHumanReadableName];
     
+  // This key is only significant if present and false.
   NSNumber * enabled = [plist objectForKey: @"Enabled"];
 
+  // Read those operators carefully.
+  if(!enabled)
+    enabled = @YES;
+    
   if(enabled)
     [extension setObject: enabled forKey: kEnabled];
     
