@@ -164,14 +164,10 @@
 // Print a Safari extension.
 - (void) printExtension: (NSDictionary *) extension
   {
-  NSNumber * enabled = [extension objectForKey: kEnabled];
-  
   NSString * humanReadableName =
     [extension objectForKey: kHumanReadableName];
   
   NSString * identifier = [extension objectForKey: kIdentifier];
-  
-  NSString * updateURL = [self.updates objectForKey: identifier];
   
   [self.result
     appendString: [NSString stringWithFormat: @"\t%@ ", humanReadableName]];

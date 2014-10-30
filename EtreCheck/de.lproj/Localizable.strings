@@ -81,9 +81,9 @@
 "\tMobile backups: " = "\tMobil Sicherungskopie: ";
 "ON\n" = "AUF\n";
 "OFF\n" = "AUS\n";
-"\tAuto backup: " = "\tAautomatisches-Sicherungskopie: ";
+"\tAuto backup: " = "\tAutomatische Sicherungskopie: ";
 "YES\n" = "JA\n ";
-"NO - Auto backup turned off\n" = "NEIN - Aautomatisches-Sicherungskopie abgeschaltet\n";
+"NO - Auto backup turned off\n" = "NEIN - Automatische Sicherungskopie ausgeschaltet\n";
 "\tVolumes being backed up:\n" = "\tGesicherte Platten:\n";
 "\t\t%@: Disk size: %@ Disk used: %@\n" = "\t\t%@: Festplattengröße: %@ Disk verwendet: %@\n";
 "\t\tTotal size: %@ \n" = "\t\tGesamt Größe: %@\n";
