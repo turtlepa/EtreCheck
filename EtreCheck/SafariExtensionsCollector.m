@@ -55,8 +55,6 @@
 
   [self collectCaches];
 
-  [self collectDefaults];
-    
   // Print the extensions.
   if([self.extensions count])
     {
@@ -163,106 +161,6 @@
     }
   }
 
-// Collect extension defaults.
-- (void) collectDefaults
-  {
-  NSString * userSafariExtensionsDir =
-    [NSHomeDirectory()
-      stringByAppendingPathComponent: @"Library/Safari/Extensions"];
-
-  NSUserDefaults * defaults = [[NSUserDefaults alloc] init];
-  
-  NSDictionary * settings =
-    [defaults
-      persistentDomainForName:
-        [userSafariExtensionsDir
-          stringByAppendingPathComponent: @"extensions"]];
-
-  [defaults release];
-  
-  // Get extension updates.
-  [self collectUpdates: settings];
-  
-  NSArray * currentExtensions =
-    [settings objectForKey: @"Installed Extensions"];
-  
-  for(NSDictionary * plist in currentExtensions)
-    {
-    NSString * name =
-      [self extensionName: [plist objectForKey: @"Bundle Directory Name"]];
-      
-    if(!name)
-      continue;
-      
-    NSMutableDictionary * extension =
-      [self createExtensionsFromDefaults: plist name: name];
-      
-    [extension setObject: @YES forKey: kDefaults];
-    }
-  }
-
-// Create an extension dictionary from a plist.
-- (NSMutableDictionary *)
-  createExtensionsFromDefaults: (NSDictionary *) plist
-  name: (NSString *) name
-  {
-  NSMutableDictionary * extension = [self.extensions objectForKey: name];
-  
-  if(!extension)
-    return nil;
-    
-  if(![extension objectForKey: kHumanReadableName])
-    [extension setObject: name forKey: kHumanReadableName];
-    
-  // This key is only significant if present and false.
-  NSNumber * enabled = [plist objectForKey: @"Enabled"];
-
-  // If I don't have a plist file, assume the extension is enabled.
-  if(!enabled && !plist)
-    enabled = @YES;
-    
-  if(enabled)
-    [extension setObject: enabled forKey: kEnabled];
-    
-  return extension;
-  }
-
-// Collect extension updates.
-- (void) collectUpdates: (NSDictionary *) settings
-  {
-  NSDictionary * availableUpdates =
-    [settings objectForKey: @"Available Updates"];
-  
-  NSArray * updatesList = nil;
-  
-  if([availableUpdates respondsToSelector: @selector(objectForKey:)])
-    updatesList = [availableUpdates objectForKey: @"Updates List"];
-    
-  self.updates = [NSMutableDictionary dictionary];
-  
-  if([updatesList count])
-    {
-    for(NSDictionary * update in updatesList)
-      {
-      NSString * compositeIdentifier = [update objectForKey: @"Identifier"];
-      
-      NSMutableArray * identifierParts =
-        [NSMutableArray
-          arrayWithArray:
-            [compositeIdentifier componentsSeparatedByString: @"-"]];
-      
-      [identifierParts removeLastObject];
-      
-      NSString * identifier =
-        [identifierParts componentsJoinedByString: @"-"];
-      
-      NSString * urlString = [update objectForKey: @"Update URL"];
-
-      [self.updates setObject: urlString forKey: identifier];
-      }
-    }
-  }
-
 // Print a Safari extension.
 - (void) printExtension: (NSDictionary *) extension
   {
@@ -277,19 +175,6 @@
   
   [self.result
     appendString: [NSString stringWithFormat: @"\t%@ ", humanReadableName]];
-    
-  if(![enabled intValue])
-    [self.result appendString: NSLocalizedString(@"(Disabled) ", NULL)];
-
-  if(updateURL)
-    [self.result
-      appendString: NSLocalizedString(@"(Update available)", NULL)
-      attributes:
-        @{
-          NSFontAttributeName : [[Utilities shared] boldFont],
-          NSForegroundColorAttributeName : [[Utilities shared] blue],
-          NSLinkAttributeName : updateURL
-        }];
     
   [self.result appendString: @"\n"];
   }

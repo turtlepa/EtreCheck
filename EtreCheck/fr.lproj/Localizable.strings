@@ -169,7 +169,6 @@
 "oldmachineattributes" = "/System/Library/PrivateFrameworks/ServerKit.framework/Versions/A/Resources/French.lproj/XSMachineAttributes.plist";
 "(Verified)" = "(Verifié)";
 "Gatekeeper:" = "Gatekeeper :";
-"(Update available)" = "(Mise à jour disponible)";
 " [Recovery]" = " [Restauration]";
 "info" = " ℹ️";
 "startupitemsdeprecated" = "\tLes éléments de démarrage sont obsolètes et ne fonctionnent plus dans les futures versions d’OS X\n";
@@ -184,7 +183,6 @@
 " (Low!)" = " (Fabile !)";
 "\tLaunchd job status not available.\n" = "État du travail de ​​Launchd pas disponible.\n";
 "Mismatch!" = "Incompatibilité !";
-"(Disabled) " = "(Désactivé)";
 "\tDestinations:\n" = "\tDestinations :\n";
 "\t%@ - Uptime: %@%@\n" = "\t%@ - Disponibilité : %@%@\n";
 "%d day (plural rule: zero)" = "";

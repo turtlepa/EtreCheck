@@ -169,7 +169,6 @@
 "oldmachineattributes" = "/System/Library/PrivateFrameworks/ServerKit.framework/Versions/A/Resources/French.lproj/XSMachineAttributes.plist";
 "(Verified)" = "(Verifiziert)";
 "Gatekeeper:" = "Gatekeeper:";
-"(Update available)" = "(Update verfügbar)";
 " [Recovery]" = " [Erholung]";
 "info" = " ℹ️";
 "startupitemsdeprecated" = "\tAutostart-Objekte sind veraltet und werden nicht in zukünftigen Versionen von OS X arbeiten\n";
@@ -184,7 +183,6 @@
 " (Low!)" = "(Niedrig!) ";
 "\tLaunchd job status not available.\n" = "\tLaunchd Auftragsstatus nicht verfügbar.\n";
 "Mismatch!" = "Mismatch!";
-"(Disabled) " = "(Abgeschaltet)";
 "\tDestinations:\n" = "\tSicherungsziele:\n";
 "\t%@ - Uptime: %@%@\n" = "\t%@ - Laufzeit: %@%@\n";
 "%d day (plural rule: zero)" = "";
