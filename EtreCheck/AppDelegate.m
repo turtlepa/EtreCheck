@@ -309,12 +309,16 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   {
   NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
   
+  dispatch_async(
+    dispatch_get_main_queue(),
+    ^{
+      [self.progress startAnimation: self];
+      [self.spinner startAnimation: self];
+    });
+
   [self printEtreCheckHeader];
   
   [self setupNotificationHandlers];
-  
-  [self.progress startAnimation: self];
-  [self.spinner startAnimation: self];
   
   Checker * checker = [Checker new];
   
@@ -475,7 +479,7 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   {
   // Try to make Snow Leopard update.
   if((self.currentProgressIncrement - [self.progress doubleValue]) > 1)
-    [self.progress setNeedsDisplay: YES];
+  [self.progress setNeedsDisplay: YES];
 
   if([self.progress isIndeterminate])
     [self.progress setIndeterminate: NO];
@@ -662,18 +666,11 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
 // Hide the animation view.
 - (void) hideAnimationView
   {
-  // Hide the progress bar in Snow Leopard.
-  NSUInteger majorOSVersion =
-    [[SystemInformation sharedInformation] majorOSVersion];
-    
   dispatch_async(
     dispatch_get_main_queue(),
     ^{
-      if(majorOSVersion < kLion)
-        {
-        [self.progress stopAnimation: self];
-        [self.spinner stopAnimation: self];
-        }
+      [self.progress stopAnimation: self];
+      [self.spinner stopAnimation: self];
       
       [self.logView setHidden: NO];
     });
@@ -704,9 +701,9 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
     dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
     dispatch_get_main_queue(),
     ^{
-      [NSAnimationContext beginGrouping];
+      //[NSAnimationContext beginGrouping];
       
-      [[NSAnimationContext currentContext] setDuration: 1.0];
+      //[[NSAnimationContext currentContext] setDuration: 1.0];
       
       [self.window makeFirstResponder: self.logView];
       
@@ -720,7 +717,7 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
         
       [window setFrame: frame display: YES animate: YES];
       
-      [NSAnimationContext endGrouping];
+      //[NSAnimationContext endGrouping];
       
       [[self.logView enclosingScrollView] setHasVerticalScroller: YES];
       [self.window setShowsResizeIndicator: YES];
@@ -734,8 +731,6 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
     dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)),
     dispatch_get_main_queue(),
     ^{
-      [self.reportView setWantsLayer: NO];
-
       [self.logView
         scrollRangeToVisible: NSMakeRange([self.log length] - 2, 1)];
       [self.logView scrollRangeToVisible: NSMakeRange(0, 1)];
