@@ -131,11 +131,8 @@
     for(NSDictionary * device in devices)
       [self printFirewireDevice: device indent: indent found: found];
 
-  NSArray * volumes = [device objectForKey: @"volumes"];
-  
-  if(volumes)
-    for(NSDictionary * volume in volumes)
-      [self printVolume: volume indent: indent];
+  // Print all volumes on the device.
+  [self printDiskVolumes: device];
   }
 
 @end

@@ -9,6 +9,7 @@
 #import "AudioPlugInsCollector.h"
 #import "CPUUsageCollector.h"
 #import "ConfigFileCollector.h"
+#import "CoreStorageCollector.h"
 #import "DiskCollector.h"
 #import "FirewireCollector.h"
 #import "FontsCollector.h"
@@ -101,6 +102,7 @@
   // Collect items that will be needed by other collectors.
   [collectors addObject: hardwareCollector];
   [collectors addObject: [[SystemSoftwareCollector new] autorelease]];
+  [collectors addObject: [[CoreStorageCollector new] autorelease]];
   [collectors addObject: [[DiskCollector new] autorelease]];
   [collectors addObject: [[ApplicationsCollector new] autorelease]];
   

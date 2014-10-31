@@ -20,12 +20,18 @@
 @implementation DiskCollector
 
 @dynamic volumes;
-@synthesize coreStorageVolumes = myCoreStorageVolumes;
+@dynamic coreStorageVolumes;
 
 // Provide easy access to volumes.
 - (NSMutableDictionary *) volumes
   {
   return [[SystemInformation sharedInformation] volumes];
+  }
+
+// Provide easy access to coreStorageVolumes.
+- (NSMutableDictionary *) coreStorageVolumes
+  {
+  return [[SystemInformation sharedInformation] coreStorageVolumes];
   }
 
 // Constructor.
@@ -37,18 +43,9 @@
     {
     self.progressEstimate = 0.4;
     self.name = @"diskinformation";
-    myCoreStorageVolumes = [NSMutableDictionary new];
     }
     
   return self;
-  }
-
-// Destructor.
-- (void) dealloc
-  {
-  [myCoreStorageVolumes release];
-  
-  [super dealloc];
   }
 
 // Perform the collection.
@@ -72,8 +69,6 @@
   
     if(plist && [plist count])
       {
-      [self collectCoreStorage];
-      
       [self.result
         appendAttributedString: [self buildTitle: @"Disk Information:"]];
       
@@ -92,46 +87,6 @@
     forRange: NSMakeRange(0, [self.result length])];
 
   dispatch_semaphore_signal(self.complete);
-  }
-
-// Collect Core Storage information.
-- (void) collectCoreStorage
-  {
-  NSArray * args =
-    @[
-      @"-xml",
-      @"SPStorageDataType"
-    ];
-  
-  NSData * result =
-    [Utilities execute: @"/usr/sbin/system_profiler" arguments: args];
-  
-  if(result)
-    {
-    NSArray * plist = [NSArray readPropertyListData: result];
-  
-    if(plist && [plist count])
-      {
-      NSArray * volumes =
-        [[plist objectAtIndex: 0] objectForKey: @"_items"];
-        
-      for(NSDictionary * volume in volumes)
-        [self collectCoreStorageVolume: volume];
-      }
-    }
-  }
-
-// Collect a Core Storage volume.
-- (void) collectCoreStorageVolume: (NSDictionary *) volume
-  {
-  NSArray * pvs = [volume objectForKey: @"com.apple.corestorage.pv"];
-  
-  for(NSDictionary * pv in pvs)
-    {
-    NSString * name = [pv objectForKey: @"_name"];
-    
-    [self.coreStorageVolumes setObject: volume forKey: name];
-    }
   }
 
 // Print disks attached to a single controller.
@@ -167,6 +122,8 @@
     [self collectSMARTStatus: disk indent: @"\t"];
     
     [self printDiskVolumes: disk];
+    
+    [self.result appendCR];
     }
   }
 
@@ -202,11 +159,6 @@
         [self printCoreStorageVolume: coreStorageVolume indent: @"\t\t"];
       }
     }
-  else
-    [self.result appendCR];
-
-  if([volumes count] || [coreStorageVolumeNames count])
-    [self.result appendCR];
   }
 
 // Get the SMART status for this disk.

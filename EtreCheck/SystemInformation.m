@@ -10,6 +10,7 @@
 
 @synthesize majorOSVersion = myMajorOSVersion;
 @synthesize volumes = myVolumes;
+@synthesize coreStorageVolumes = myCoreStorageVolumes;
 @synthesize applications = myApplications;
 @synthesize physicalRAM = myPhysicalRAM;
 @synthesize machineIcon = myMachineIcon;
@@ -38,7 +39,10 @@
   self = [super init];
   
   if(self)
-    myVolumes = [[NSMutableDictionary alloc] init];
+    {
+    myVolumes = [NSMutableDictionary new];
+    myCoreStorageVolumes = [NSMutableDictionary new];
+    }
     
   return self;
   }

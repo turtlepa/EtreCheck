@@ -8,21 +8,18 @@
 
 // Collect information about disks.
 @interface DiskCollector : Collector
-  {
-  NSMutableDictionary * myCoreStorageVolumes;
-  }
 
 // Provide easy access to volumes.
 @property (readonly) NSMutableDictionary * volumes;
 
-// Provide easy access to CoreStorage volumes.
+// Provide easy access to Core Storage volumes.
 @property (readonly) NSMutableDictionary * coreStorageVolumes;
 
 // Get the SMART status for this disk.
 - (void) collectSMARTStatus: (NSDictionary *) disk
   indent: (NSString *) indent;
 
-// Print information about a volume.
-- (void) printVolume: (NSDictionary *) volume indent: (NSString *) indent;
+// Print the volumes on a disk.
+- (void) printDiskVolumes: (NSDictionary *) disk;
 
 @end

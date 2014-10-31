@@ -54,6 +54,7 @@
 		A5D0877C19ECAD4E004F52C2 /* NSDictionary+Etresoft.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D0877B19ECAD4E004F52C2 /* NSDictionary+Etresoft.m */; };
 		A5D25B2D19C4D11F006728B8 /* TTTLocalizedPluralString.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D25B2C19C4D11F006728B8 /* TTTLocalizedPluralString.m */; };
 		A5E33C3F184CEBDF00ED59A0 /* ByteCountFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E33C3E184CEBDF00ED59A0 /* ByteCountFormatter.m */; };
+		A5E765E91A03A9BD00BC994C /* CoreStorageCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E765E81A03A9BD00BC994C /* CoreStorageCollector.m */; };
 		A5FC11EE19A4BFDC00E81E9C /* AudioPlugInsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FC11ED19A4BFDC00E81E9C /* AudioPlugInsCollector.m */; };
 		A5FC11F119A4BFF500E81E9C /* UserAudioPlugInsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FC11F019A4BFF500E81E9C /* UserAudioPlugInsCollector.m */; };
 		A5FC11F419A4C00F00E81E9C /* ITunesPlugInsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FC11F319A4C00F00E81E9C /* ITunesPlugInsCollector.m */; };
@@ -167,6 +168,8 @@
 		A5D25B2C19C4D11F006728B8 /* TTTLocalizedPluralString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTLocalizedPluralString.m; path = EtreCheck/TTTLocalizedPluralString.m; sourceTree = "<group>"; };
 		A5E33C3D184CEBDF00ED59A0 /* ByteCountFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByteCountFormatter.h; sourceTree = "<group>"; };
 		A5E33C3E184CEBDF00ED59A0 /* ByteCountFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByteCountFormatter.m; sourceTree = "<group>"; };
+		A5E765E71A03A9BD00BC994C /* CoreStorageCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreStorageCollector.h; sourceTree = "<group>"; };
+		A5E765E81A03A9BD00BC994C /* CoreStorageCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreStorageCollector.m; sourceTree = "<group>"; };
 		A5FC11EC19A4BFDC00E81E9C /* AudioPlugInsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlugInsCollector.h; sourceTree = "<group>"; };
 		A5FC11ED19A4BFDC00E81E9C /* AudioPlugInsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlugInsCollector.m; sourceTree = "<group>"; };
 		A5FC11EF19A4BFF500E81E9C /* UserAudioPlugInsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAudioPlugInsCollector.h; sourceTree = "<group>"; };
@@ -216,6 +219,8 @@
 				A5C292F419A2214E00464E86 /* VideoCollector.m */,
 				A5C292F619A2220400464E86 /* SystemSoftwareCollector.h */,
 				A5C292F719A2220400464E86 /* SystemSoftwareCollector.m */,
+				A5E765E71A03A9BD00BC994C /* CoreStorageCollector.h */,
+				A5E765E81A03A9BD00BC994C /* CoreStorageCollector.m */,
 				A50C9DAE19A2DFDB00BA6A25 /* DiskCollector.h */,
 				A50C9DAF19A2DFDB00BA6A25 /* DiskCollector.m */,
 				A50C9DB119A2E68C00BA6A25 /* USBCollector.h */,
@@ -405,7 +410,7 @@
 		A55BC16015BF987D00D42EF1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Etresoft;
 				TargetAttributes = {
 					A55BC16815BF987D00D42EF1 = {
@@ -490,6 +495,7 @@
 				A5D0877C19ECAD4E004F52C2 /* NSDictionary+Etresoft.m in Sources */,
 				A5C00A2819BFF2D500140404 /* NSAttributedString+Etresoft.m in Sources */,
 				A5D25B2D19C4D11F006728B8 /* TTTLocalizedPluralString.m in Sources */,
+				A5E765E91A03A9BD00BC994C /* CoreStorageCollector.m in Sources */,
 				A50C9DCB19A4065B00BA6A25 /* InternetPlugInsCollector.m in Sources */,
 				A50C9DBC19A3690F00BA6A25 /* ConfigFileCollector.m in Sources */,
 				A5257D3A19ABE02A003084C8 /* VirtualMemoryCollector.m in Sources */,
@@ -552,6 +558,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -586,6 +593,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
@@ -611,7 +619,6 @@
 		A55BC18815BF987D00D42EF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -622,7 +629,6 @@
 		A55BC18915BF987D00D42EF1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
