@@ -167,8 +167,6 @@
   NSString * humanReadableName =
     [extension objectForKey: kHumanReadableName];
   
-  NSString * identifier = [extension objectForKey: kIdentifier];
-  
   [self.result
     appendString: [NSString stringWithFormat: @"\t%@ ", humanReadableName]];
     
