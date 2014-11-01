@@ -359,12 +359,14 @@
   NSNumber * size = [volume objectForKey: @"size_in_bytes"];
   NSNumber * freespace = [volume objectForKey: @"free_space_in_bytes"];
 
-  NSUInteger used =
-    [size unsignedIntegerValue] - [freespace unsignedIntegerValue];
+  unsigned long long used =
+    [size unsignedLongLongValue] - [freespace unsignedLongLongValue];
   
   if(size)
     {
-    diskSize = [formatter stringFromByteCount: [size unsignedIntegerValue]];
+    diskSize =
+      [formatter stringFromByteCount: [size unsignedLongLongValue]];
+    
     spaceRequired = [formatter stringFromByteCount: used];
     }
 
@@ -379,7 +381,7 @@
   if(size)
     {
     minimumBackupSize += used;
-    maximumBackupSize += [size unsignedIntegerValue];
+    maximumBackupSize += [size unsignedLongLongValue];
     }
   }
 
@@ -558,9 +560,9 @@
   NSNumber * bytesAvailable = [destination objectForKey: @"BytesAvailable"];
   NSNumber * bytesUsed = [destination objectForKey: @"BytesUsed"];
 
-  NSUInteger totalSizeValue =
-    [bytesAvailable unsignedIntegerValue] +
-    [bytesUsed unsignedIntegerValue];
+  unsigned long long totalSizeValue =
+    [bytesAvailable unsignedLongLongValue] +
+    [bytesUsed unsignedLongLongValue];
 
   // Print the total size.
   [self printTotalSize: totalSizeValue];
@@ -591,7 +593,7 @@
   }
 
 // Print the total size of the backup.
-- (void) printTotalSize: (NSUInteger) totalSizeValue
+- (void) printTotalSize: (unsigned long long) totalSizeValue
   {
   NSString * totalSize =
     [formatter stringFromByteCount: totalSizeValue];
@@ -634,7 +636,7 @@
   }
 
 // Print an overall analysis of the Time Machine size differential.
-- (void) printDestinationSizeAnalysis: (NSUInteger) totalSizeValue
+- (void) printDestinationSizeAnalysis: (unsigned long long) totalSizeValue
   {
   [self.result
     appendString:
@@ -675,7 +677,7 @@
 
 // Print the size analysis result.
 - (void) printSizeAnalysis: (NSString *) analysis
-  forSize: (NSUInteger) totalSizeValue
+  forSize: (unsigned long long) totalSizeValue
   {
   if(totalSizeValue >= (maximumBackupSize * 3))
     [self.result

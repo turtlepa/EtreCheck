@@ -15,8 +15,8 @@
   ByteCountFormatter * formatter;
 
   // Keep track of the minimum and maximum required sizes.
-  NSUInteger minimumBackupSize;
-  NSUInteger maximumBackupSize;
+  unsigned long long minimumBackupSize;
+  unsigned long long maximumBackupSize;
 
   // Time Machine destinations indexed by UUID.
   NSMutableDictionary * destinations;

@@ -9,6 +9,6 @@
 // NSByteCountFormatter only exists on 10.8 and later.
 @interface ByteCountFormatter : NSObject
 
-- (NSString *) stringFromByteCount: (long long) byteCount;
+- (NSString *) stringFromByteCount: (unsigned long long) byteCount;
 
 @end

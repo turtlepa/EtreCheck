@@ -10,7 +10,7 @@
 
 @implementation ByteCountFormatter
 
-- (NSString *) stringFromByteCount: (long long) byteCount
+- (NSString *) stringFromByteCount: (unsigned long long) byteCount
   {
   NSArray * unitValues =
     [NSLocalizedString(@"B KB MB GB TB", NULL)

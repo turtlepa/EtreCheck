@@ -280,7 +280,8 @@
       {
       ByteCountFormatter * formatter = [ByteCountFormatter new];
       
-      size = [formatter stringFromByteCount: [pvSize unsignedIntegerValue]];
+      size =
+        [formatter stringFromByteCount: [pvSize unsignedLongLongValue]];
         
       [formatter release];
       }
@@ -316,7 +317,7 @@
       at: volumeMountPoint
       available:
         [[volume objectForKey: @"free_space_in_bytes"]
-          unsignedIntegerValue]];
+          unsignedLongLongValue]];
 
   NSString * volumeInfo =
     [NSString
@@ -353,7 +354,7 @@
     
     size =
       [formatter
-        stringFromByteCount: [sizeInBytes unsignedIntegerValue]];
+        stringFromByteCount: [sizeInBytes unsignedLongLongValue]];
       
     [formatter release];
     }
@@ -381,7 +382,7 @@
     
     volumeFree =
       [formatter
-        stringFromByteCount: [freeSpaceInBytes unsignedIntegerValue]];
+        stringFromByteCount: [freeSpaceInBytes unsignedLongLongValue]];
       
     [formatter release];
     }
@@ -402,11 +403,11 @@
 
 // Get more information about a volume.
 - (NSDictionary *) volumeStatsFor: (NSString *) name
-  at: (NSString *) mountPoint available: (NSUInteger) free
+  at: (NSString *) mountPoint available: (unsigned long long) free
   {
   if([mountPoint isEqualToString: @"/"])
     {
-    NSUInteger GB = 1024 * 1024 * 1024;
+    unsigned long long GB = 1024 * 1024 * 1024;
 
     if(free < (GB * 15))
       return
