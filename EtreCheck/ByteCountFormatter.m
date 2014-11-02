@@ -15,7 +15,7 @@
   NSArray * unitValues =
     [NSLocalizedString(@"B KB MB GB TB", NULL)
       componentsSeparatedByString: @" "];
-  int precisionValues[] = { 0, 0, 0, 2, 0};
+  int precisionValues[] = { 0, 0, 0, 2, 2};
   NSUInteger unitsIndex = 0;
   
   NSString * displayMem = @"?";
