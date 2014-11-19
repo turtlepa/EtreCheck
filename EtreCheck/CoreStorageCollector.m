@@ -12,8 +12,8 @@
 #import "NSArray+Etresoft.h"
 
 // Some keys for an internal dictionary.
-#define kVolumeType @"volumetype"
-#define kVolumeStatus @"volumestatus"
+#define kDiskType @"volumetype"
+#define kDiskStatus @"volumestatus"
 #define kAttributes @"attributes"
 
 // Collect information about disks.

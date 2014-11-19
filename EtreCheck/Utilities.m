@@ -171,10 +171,16 @@
   NSData * result =
     [[[task standardOutput] fileHandleForReading] readDataToEndOfFile];
   
+  NSData * error =
+    [[[task standardError] fileHandleForReading] readDataToEndOfFile];
+
   [task release];
   [errorPipe release];
   [outputPipe release];
   
+  if(![result length] && [error length])
+    return error;
+    
   return result;
   }
 

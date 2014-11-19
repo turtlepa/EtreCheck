@@ -34,7 +34,9 @@
 		A55BC17E15BF987D00D42EF1 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A55BC17C15BF987D00D42EF1 /* Credits.rtf */; };
 		A55BC18115BF987D00D42EF1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BC18015BF987D00D42EF1 /* AppDelegate.m */; };
 		A55BC18415BF987D00D42EF1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55BC18215BF987D00D42EF1 /* MainMenu.xib */; };
+		A57516AF1A14D9E700F374FB /* DiagnosticsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A57516AE1A14D9E700F374FB /* DiagnosticsCollector.m */; };
 		A59B506D15C45EC000250772 /* NSMutableAttributedString+Etresoft.m in Sources */ = {isa = PBXBuildFile; fileRef = A59B506C15C45EC000250772 /* NSMutableAttributedString+Etresoft.m */; };
+		A5B659231A16D57800476A76 /* DiagnosticEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B659221A16D57800476A76 /* DiagnosticEvent.m */; };
 		A5B6BD5B19D7AAF900C48C37 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5B6BD5A19D7AAF900C48C37 /* Media.xcassets */; };
 		A5C00A2819BFF2D500140404 /* NSAttributedString+Etresoft.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C00A2719BFF2D500140404 /* NSAttributedString+Etresoft.m */; };
 		A5C1492519B88192002890F1 /* SlideshowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C1492419B88192002890F1 /* SlideshowView.m */; };
@@ -49,6 +51,7 @@
 		A5C292F219A13D0800464E86 /* HardwareCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292F119A13D0800464E86 /* HardwareCollector.m */; };
 		A5C292F519A2214E00464E86 /* VideoCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292F419A2214E00464E86 /* VideoCollector.m */; };
 		A5C292F819A2220400464E86 /* SystemSoftwareCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292F719A2220400464E86 /* SystemSoftwareCollector.m */; };
+		A5C9FC041A1AADA200C1EAA5 /* LogCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C9FC031A1AADA200C1EAA5 /* LogCollector.m */; };
 		A5CC608F19B4BF9E006D7E94 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55BC1AF15C0901800D42EF1 /* ServiceManagement.framework */; };
 		A5D0877919ECACF6004F52C2 /* NSArray+Etresoft.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D0877819ECACF6004F52C2 /* NSArray+Etresoft.m */; };
 		A5D0877C19ECAD4E004F52C2 /* NSDictionary+Etresoft.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D0877B19ECAD4E004F52C2 /* NSDictionary+Etresoft.m */; };
@@ -127,8 +130,12 @@
 		A55BC1C815C0F4FA00D42EF1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A55BC1C915C0F4FA00D42EF1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A55BC1CA15C0F4FA00D42EF1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = fr; path = fr.lproj/Credits.rtf; sourceTree = "<group>"; };
+		A57516AD1A14D9E700F374FB /* DiagnosticsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiagnosticsCollector.h; sourceTree = "<group>"; };
+		A57516AE1A14D9E700F374FB /* DiagnosticsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiagnosticsCollector.m; sourceTree = "<group>"; };
 		A59B506B15C45EC000250772 /* NSMutableAttributedString+Etresoft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+Etresoft.h"; sourceTree = "<group>"; };
 		A59B506C15C45EC000250772 /* NSMutableAttributedString+Etresoft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+Etresoft.m"; sourceTree = "<group>"; };
+		A5B659211A16D57800476A76 /* DiagnosticEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiagnosticEvent.h; sourceTree = "<group>"; };
+		A5B659221A16D57800476A76 /* DiagnosticEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiagnosticEvent.m; sourceTree = "<group>"; };
 		A5B6BD5A19D7AAF900C48C37 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		A5C00A2619BFF2D500140404 /* NSAttributedString+Etresoft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Etresoft.h"; sourceTree = "<group>"; };
 		A5C00A2719BFF2D500140404 /* NSAttributedString+Etresoft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Etresoft.m"; sourceTree = "<group>"; };
@@ -155,6 +162,8 @@
 		A5C292F419A2214E00464E86 /* VideoCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCollector.m; sourceTree = "<group>"; };
 		A5C292F619A2220400464E86 /* SystemSoftwareCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemSoftwareCollector.h; sourceTree = "<group>"; };
 		A5C292F719A2220400464E86 /* SystemSoftwareCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemSoftwareCollector.m; sourceTree = "<group>"; };
+		A5C9FC021A1AADA200C1EAA5 /* LogCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogCollector.h; sourceTree = "<group>"; };
+		A5C9FC031A1AADA200C1EAA5 /* LogCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogCollector.m; sourceTree = "<group>"; };
 		A5CC608C19B4BF52006D7E94 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		A5D0877719ECACF6004F52C2 /* NSArray+Etresoft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Etresoft.h"; sourceTree = "<group>"; };
 		A5D0877819ECACF6004F52C2 /* NSArray+Etresoft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Etresoft.m"; sourceTree = "<group>"; };
@@ -283,6 +292,12 @@
 				A5257D3319AB525D003084C8 /* MemoryUsageCollector.m */,
 				A5257D3819ABE02A003084C8 /* VirtualMemoryCollector.h */,
 				A5257D3919ABE02A003084C8 /* VirtualMemoryCollector.m */,
+				A5B659211A16D57800476A76 /* DiagnosticEvent.h */,
+				A5B659221A16D57800476A76 /* DiagnosticEvent.m */,
+				A57516AD1A14D9E700F374FB /* DiagnosticsCollector.h */,
+				A57516AE1A14D9E700F374FB /* DiagnosticsCollector.m */,
+				A5C9FC021A1AADA200C1EAA5 /* LogCollector.h */,
+				A5C9FC031A1AADA200C1EAA5 /* LogCollector.m */,
 			);
 			name = Collectors;
 			sourceTree = "<group>";
@@ -458,6 +473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A50C9DB319A2E68C00BA6A25 /* USBCollector.m in Sources */,
+				A5B659231A16D57800476A76 /* DiagnosticEvent.m in Sources */,
 				A5E33C3F184CEBDF00ED59A0 /* ByteCountFormatter.m in Sources */,
 				A5C292F519A2214E00464E86 /* VideoCollector.m in Sources */,
 				A5C292EF19A039E700464E86 /* UserLaunchAgentsCollector.m in Sources */,
@@ -476,12 +492,14 @@
 				A50C9DC219A36F3D00BA6A25 /* KernelExtensionCollector.m in Sources */,
 				A5C292DD19A02A8800464E86 /* LaunchdCollector.m in Sources */,
 				A5C1492519B88192002890F1 /* SlideshowView.m in Sources */,
+				A57516AF1A14D9E700F374FB /* DiagnosticsCollector.m in Sources */,
 				A5FC120319A5431D00E81E9C /* FontsCollector.m in Sources */,
 				A5FC11F719A4C02300E81E9C /* UserITunesPlugInsCollector.m in Sources */,
 				A50C9DAD19A2ACB600BA6A25 /* StartupItemsCollector.m in Sources */,
 				A5C292E919A039CB00464E86 /* LaunchAgentsCollector.m in Sources */,
 				A5FC120019A4C4E900E81E9C /* PreferencePanesCollector.m in Sources */,
 				A50C9DC819A4063E00BA6A25 /* PlugInsCollector.m in Sources */,
+				A5C9FC041A1AADA200C1EAA5 /* LogCollector.m in Sources */,
 				A50C9DB619A2E69B00BA6A25 /* FirewireCollector.m in Sources */,
 				A5257D4019AC10E3003084C8 /* Checker.m in Sources */,
 				A59B506D15C45EC000250772 /* NSMutableAttributedString+Etresoft.m in Sources */,
@@ -620,7 +638,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "EtreCheck/EtreCheck-Info.plist";
 			};
@@ -630,7 +647,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "EtreCheck/EtreCheck-Info.plist";
 			};

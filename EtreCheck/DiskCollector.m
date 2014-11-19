@@ -10,10 +10,11 @@
 #import "Utilities.h"
 #import "ByteCountFormatter.h"
 #import "NSArray+Etresoft.h"
+#import "TTTLocalizedPluralString.h"
 
 // Some keys for an internal dictionary.
-#define kVolumeType @"volumetype"
-#define kVolumeStatus @"volumestatus"
+#define kDiskType @"volumetype"
+#define kDiskStatus @"volumestatus"
 #define kAttributes @"attributes"
 
 // Collect information about disks.
@@ -286,11 +287,28 @@
       [formatter release];
       }
 
-    [self.result
-      appendString:
-        [NSString
-          stringWithFormat:
-            @"%@Core Storage: %@ %@ %@", indent, name, size, status]];
+    NSString * errors = [self errorsFor: name];
+    
+    status = [status stringByAppendingString: errors];
+    
+    if([errors length])
+      [self.result
+        appendString:
+          [NSString
+            stringWithFormat:
+              @"%@Core Storage: %@ %@ %@", indent, name, size, status]
+        attributes:
+          @{
+            NSForegroundColorAttributeName : [[Utilities shared] red],
+            NSFontAttributeName : [[Utilities shared] boldFont]
+          }];
+    else
+      [self.result
+        appendString:
+          [NSString
+            stringWithFormat:
+              @"%@Core Storage: %@ %@ %@", indent, name, size, status]];
+
     [self.result appendCR];
     }
   }
@@ -319,6 +337,20 @@
         [[volume objectForKey: @"free_space_in_bytes"]
           unsignedLongLongValue]];
 
+  NSDictionary * attributes = [stats objectForKey: kAttributes];
+  
+  NSString * errors = [self errorsFor: volumeDevice];
+  
+  if([errors length])
+    attributes =
+      @{
+        NSForegroundColorAttributeName : [[Utilities shared] red],
+        NSFontAttributeName : [[Utilities shared] boldFont]
+      };
+
+  NSString * status =
+    [[stats objectForKey: kDiskStatus] stringByAppendingString: errors];
+
   NSString * volumeInfo =
     [NSString
       stringWithFormat:
@@ -327,15 +359,13 @@
         volumeName ? volumeName : @"-",
         volumeDevice,
         volumeMountPoint,
-        [stats objectForKey: kVolumeType],
+        [stats objectForKey: kDiskType],
         volumeSize,
         volumeFree,
-        [stats objectForKey: kVolumeStatus]];
+        status];
     
-  if([stats objectForKey: kAttributes])
-    [self.result
-      appendString: volumeInfo
-      attributes: [stats objectForKey: kAttributes]];
+  if(attributes)
+    [self.result appendString: volumeInfo attributes: attributes];
   else
     [self.result appendString: volumeInfo];
   }
@@ -405,50 +435,62 @@
 - (NSDictionary *) volumeStatsFor: (NSString *) name
   at: (NSString *) mountPoint available: (unsigned long long) free
   {
+  NSString * type = NSLocalizedString(@"", NULL);
+  NSString * status = NSLocalizedString(@"", NULL);
+  NSDictionary * attributes = @{};
+  
   if([mountPoint isEqualToString: @"/"])
     {
     unsigned long long GB = 1024 * 1024 * 1024;
 
     if(free < (GB * 15))
-      return
-        @{
-          kVolumeType : NSLocalizedString(@" [Startup]", NULL),
-          kVolumeStatus : NSLocalizedString(@" (Low!)", NULL),
-          kAttributes :
-            @{
-              NSForegroundColorAttributeName : [[Utilities shared] red],
-              NSFontAttributeName : [[Utilities shared] boldFont]
-            }
-        };
-      
-    return
-      @{
-        kVolumeType : NSLocalizedString(@" [Startup]", NULL),
-        kVolumeStatus : NSLocalizedString(@"", NULL),
-        kAttributes :
-          @{
-            NSFontAttributeName : [[Utilities shared] boldFont]
-          }
-      };
+      {
+      type = NSLocalizedString(@" [Startup]", NULL);
+      status = NSLocalizedString(@" (Low!)", NULL);
+      }
     }
     
   else if([name isEqualToString: @"Recovery HD"])
-    return
+    {
+    type = NSLocalizedString(@" [Recovery]", NULL);
+    attributes =
       @{
-        kVolumeType : NSLocalizedString(@" [Recovery]", NULL),
-        kVolumeStatus : NSLocalizedString(@"", NULL),
-        kAttributes :
-          @{
-            NSForegroundColorAttributeName : [[Utilities shared] gray]
-          }
+        NSForegroundColorAttributeName : [[Utilities shared] gray]
       };
+    }
     
+  if([status length] && ![attributes count])
+    attributes =
+      @{
+        NSForegroundColorAttributeName : [[Utilities shared] red],
+        NSFontAttributeName : [[Utilities shared] boldFont]
+      };
+
   return
     @{
-      kVolumeType : NSLocalizedString(@"", NULL),
-      kVolumeStatus : NSLocalizedString(@"", NULL),
-      kAttributes : @{}
+      kDiskType : type,
+      kDiskStatus : status,
+      kAttributes : attributes
     };
+  }
+
+// Get more information about a device.
+- (NSString *) errorsFor: (NSString *) name
+  {
+  NSNumber * errors =
+    [[[SystemInformation sharedInformation] diskErrors] objectForKey: name];
+    
+  int errorCount = [errors intValue];
+  
+  // TODO: Finish localization for this.
+  if(errorCount)
+    return
+      [NSString
+        stringWithFormat:
+          NSLocalizedString(@" - %@", NULL),
+          TTTLocalizedPluralString(errorCount, @"error", NULL)];
+
+  return NSLocalizedString(@"", NULL);
   }
 
 @end

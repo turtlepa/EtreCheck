@@ -11,6 +11,7 @@
 @synthesize majorOSVersion = myMajorOSVersion;
 @synthesize volumes = myVolumes;
 @synthesize coreStorageVolumes = myCoreStorageVolumes;
+@synthesize diskErrors = myDiskErrors;
 @synthesize applications = myApplications;
 @synthesize physicalRAM = myPhysicalRAM;
 @synthesize machineIcon = myMachineIcon;
@@ -42,6 +43,7 @@
     {
     myVolumes = [NSMutableDictionary new];
     myCoreStorageVolumes = [NSMutableDictionary new];
+    myDiskErrors = [NSMutableDictionary new];
     }
     
   return self;
@@ -50,6 +52,7 @@
 // Destructor.
 - (void) dealloc
   {
+  self.diskErrors = nil;
   self.volumes = nil;
   self.applications = nil;
   self.machineIcon = nil;

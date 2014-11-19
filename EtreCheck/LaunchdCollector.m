@@ -603,13 +603,13 @@
     // site.
     NSString * nameParameter =
       [name length]
-        ? [NSString stringWithFormat: @"%@+", name]
+        ? name
         : bundleID;
 
     return
       [NSString
         stringWithFormat:
-          @"http://www.google.com/search?q=%@support+site:%@",
+          @"http://www.google.com/search?q=%@+support+site:%@",
           nameParameter, host];
     }
   

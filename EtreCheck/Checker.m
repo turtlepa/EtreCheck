@@ -37,8 +37,10 @@
 #import "UserLaunchAgentsCollector.h"
 #import "VideoCollector.h"
 #import "VirtualMemoryCollector.h"
+#import "DiagnosticsCollector.h"
 #import "Utilities.h"
 #import "SystemInformation.h"
+#import "LogCollector.h"
 
 // Perform the check.
 @implementation Checker
@@ -103,6 +105,7 @@
   [collectors addObject: hardwareCollector];
   [collectors addObject: [[SystemSoftwareCollector new] autorelease]];
   [collectors addObject: [[CoreStorageCollector new] autorelease]];
+  [collectors addObject: [[LogCollector new] autorelease]];
   [collectors addObject: [[DiskCollector new] autorelease]];
   [collectors addObject: [[ApplicationsCollector new] autorelease]];
   
@@ -329,6 +332,7 @@
   [collectors addObject: [[CPUUsageCollector new] autorelease]];
   [collectors addObject: [[MemoryUsageCollector new] autorelease]];
   [collectors addObject: [[VirtualMemoryCollector new] autorelease]];
+  [collectors addObject: [[DiagnosticsCollector new] autorelease]];
   
   // Start the agents and daemons animation.
   dispatch_semaphore_t semaphore = [self runAgentsAndDaemonsAnimation];
@@ -424,6 +428,7 @@
   [result appendAttributedString: [self getResult: @"cpu"]];
   [result appendAttributedString: [self getResult: @"memory"]];
   [result appendAttributedString: [self getResult: @"vm"]];
+  [result appendAttributedString: [self getResult: @"diagnostics"]];
   
   return [result autorelease];
   }

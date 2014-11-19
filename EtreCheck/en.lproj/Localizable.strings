@@ -22,3 +22,13 @@
 "%d interface (plural rule: zero)" = "no interfaces\n";
 "%d interface (plural rule: one)" = "";
 "%d interface (plural rule: other)" = "%d interfaces\n";
+"%d crash (plural rule: zero)" = "no crashes";
+"%d crash (plural rule: one)" = "one crash";
+"%d crash (plural rule: other)" = "%d crashes";
+"%d overload (plural rule: zero)" = "no CPU overloads";
+"%d overload (plural rule: one)" = "one CPU overload";
+"%d overload (plural rule: other)" = "%d CPU overloads";
+"/Library/Logs/DiagnosticReports permissions" = "\tStandard users cannot read /Library/Logs/DiagnosticReports.\n\tRun as an administrator account to see more information.";
+"%d error (plural rule: zero)" = "no errors";
+"%d error (plural rule: one)" = "one error";
+"%d error (plural rule: other)" = "%d errors";

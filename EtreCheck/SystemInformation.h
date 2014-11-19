@@ -19,6 +19,7 @@
   int myMajorOSVersion;
   NSMutableDictionary * myVolumes;
   NSMutableDictionary * myCoreStorageVolumes;
+  NSMutableDictionary * myDiskErrors;
   NSDictionary * myApplications;
   int myPhysicalRAM;
   NSImage * myMachineIcon;
@@ -34,6 +35,9 @@
 
 // Keep track of CoreStorage volumes.
 @property (retain) NSMutableDictionary * coreStorageVolumes;
+
+// Keep track of disk errors.
+@property (retain) NSMutableDictionary * diskErrors;
 
 // Keep track of applications.
 @property (retain) NSDictionary * applications;
