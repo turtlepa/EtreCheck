@@ -422,6 +422,7 @@
   }
 
 // Print memory banks.
+// TODO: Shorten this.
 - (void) printMemoryBanks: (NSArray *) banks
   {
   NSString * lastBankID = nil;
@@ -439,7 +440,13 @@
     NSString * currentBankID =
       [NSString stringWithFormat: @"\t\t%@", name];
       
-    // TODO: Check for all of these being "empty".
+    if([size isEqualToString: @"emtpy"])
+      {
+      type = @"";
+      speed = @"";
+      status = @"";
+      }
+      
     NSString * currentBankInfo =
       [NSString
         stringWithFormat:
@@ -591,10 +598,10 @@
   NSString * modes =
     [interface objectForKey: @"spairport_supported_phymodes"];
 
-  // TODO: Check for (null) on modes.
-  [self.result
-    appendString:
-      [NSString stringWithFormat: @"%@%@: %@\n", indent, name, modes]];
+  if(modes)
+    [self.result
+      appendString:
+        [NSString stringWithFormat: @"%@%@: %@\n", indent, name, modes]];
   }
 
 @end
