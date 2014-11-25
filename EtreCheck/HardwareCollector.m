@@ -6,7 +6,7 @@
 
 #import "HardwareCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "Utilities.h"
 #import "TTTLocalizedPluralString.h"
 #import "NSArray+Etresoft.h"
@@ -150,10 +150,10 @@
   NSString * memory = [info objectForKey: @"physical_memory"];
   NSString * serial = [info objectForKey: @"serial_number"];
 
-  [[SystemInformation sharedInformation] setModel: model];
+  [[Model model] setModel: model];
   
   // Extract the memory.
-  [[SystemInformation sharedInformation]
+  [[Model model]
     setPhysicalRAM: [self parseMemory: memory]];
 
   // Print the human readable machine name, if I can find one.
@@ -213,7 +213,7 @@
     if(![marketingName length])
       marketingName = [machineProperties objectForKey: kMachineName];
 
-    [[SystemInformation sharedInformation]
+    [[Model model]
       setMachineIcon: [machineProperties objectForKey: kMachineIcon]];
     }
 
@@ -369,7 +369,7 @@
           : NSLocalizedString(@"Not upgradeable", NULL);
     }
     
-  if([[SystemInformation sharedInformation] physicalRAM] < 4)
+  if([[Model model] physicalRAM] < 4)
     {
     [self.result
       appendString:
@@ -439,6 +439,7 @@
     NSString * currentBankID =
       [NSString stringWithFormat: @"\t\t%@", name];
       
+    // TODO: Check for all of these being "empty".
     NSString * currentBankInfo =
       [NSString
         stringWithFormat:
@@ -490,7 +491,7 @@
 // Is continuity supported?
 - (BOOL) supportsContinuity
   {
-  NSString * model = [[SystemInformation sharedInformation] model];
+  NSString * model = [[Model model] model];
   
   NSString * specificModel = nil;
   int target = 0;
@@ -590,6 +591,7 @@
   NSString * modes =
     [interface objectForKey: @"spairport_supported_phymodes"];
 
+  // TODO: Check for (null) on modes.
   [self.result
     appendString:
       [NSString stringWithFormat: @"%@%@: %@\n", indent, name, modes]];

@@ -5,7 +5,7 @@
  **********************************************************************/
 
 #import "LogCollector.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "Utilities.h"
 #import "NSArray+Etresoft.h"
 
@@ -51,8 +51,6 @@
   NSData * result =
     [Utilities execute: @"/usr/sbin/system_profiler" arguments: args];
   
-  //result = [NSData dataWithContentsOfFile: @"/tmp/logfile.xml"];
-  
   if(!result)
     return;
     
@@ -79,50 +77,64 @@
   // 17 Nov 2014 15:39:31 kernel[0]: disk0s2: I/O error.
   NSString * name = [result objectForKey: @"_name"];
   
+  NSString * content = [result objectForKey: @"contents"];
+  
   if([name isEqualToString: @"kernel_log_description"])
+    [self collectKernelLogContent: content];
+  else if([name isEqualToString: @"asl_messages_description"])
+    [self collectASLLogContent: content];
+  }
+
+// Collect results from the kernel log entry.
+- (void) collectKernelLogContent: (NSString *) content
+  {
+  NSArray * lines = [content componentsSeparatedByString: @"\n"];
+  
+  for(NSString * line in lines)
     {
-    NSString * contents = [result objectForKey: @"contents"];
-    
-    NSArray * lines = [contents componentsSeparatedByString: @"\n"];
-    
-    for(NSString * line in lines)
+    if([line hasSuffix: @": I/O error."])
       {
-      if([line hasSuffix: @": I/O error."])
+      NSRange diskRange = [line rangeOfString: @": disk"];
+      
+      if(diskRange.location != NSNotFound)
         {
-        NSRange diskRange = [line rangeOfString: @": disk"];
+        diskRange.length = ([line length] - 12) - diskRange.location - 2;
+        diskRange.location += 2;
         
-        if(diskRange.location != NSNotFound)
-          {
-          diskRange.length = ([line length] - 12) - diskRange.location - 2;
-          diskRange.location += 2;
-          
-          if(diskRange.location < [line length])
-            if((diskRange.location + diskRange.length) < [line length])
+        if(diskRange.location < [line length])
+          if((diskRange.location + diskRange.length) < [line length])
+            {
+            NSString * disk = [line substringWithRange: diskRange];
+            
+            if(disk)
               {
-              NSString * disk = [line substringWithRange: diskRange];
-              
-              if(disk)
-                {
-                NSNumber * errorCount =
-                  [[[SystemInformation sharedInformation] diskErrors]
-                    objectForKey: disk];
-                  
-                if(!errorCount)
-                  errorCount = [NSNumber numberWithUnsignedInteger: 0];
-                  
-                errorCount =
-                  [NSNumber
-                    numberWithUnsignedInteger:
-                      [errorCount unsignedIntegerValue] + 1];
-                  
-                [[[SystemInformation sharedInformation] diskErrors]
-                  setObject: errorCount forKey: disk];
-                }
+              NSNumber * errorCount =
+                [[[Model model] diskErrors]
+                  objectForKey: disk];
+                
+              if(!errorCount)
+                errorCount = [NSNumber numberWithUnsignedInteger: 0];
+                
+              errorCount =
+                [NSNumber
+                  numberWithUnsignedInteger:
+                    [errorCount unsignedIntegerValue] + 1];
+                
+              [[[Model model] diskErrors]
+                setObject: errorCount forKey: disk];
               }
-          }
+            }
         }
       }
     }
+  }
+
+// Collect results from the asl log entry.
+- (void) collectASLLogContent: (NSString *) content
+  {
+  NSArray * lines = [content componentsSeparatedByString: @"\n"];
+  
+  [[Model model] setLogEntries: lines];
   }
 
 @end

@@ -6,7 +6,7 @@
 
 #import "CoreStorageCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "Utilities.h"
 #import "ByteCountFormatter.h"
 #import "NSArray+Etresoft.h"
@@ -24,7 +24,7 @@
 // Provide easy access to coreStorageVolumes.
 - (NSMutableDictionary *) coreStorageVolumes
   {
-  return [[SystemInformation sharedInformation] coreStorageVolumes];
+  return [[Model model] coreStorageVolumes];
   }
 
 // Constructor.

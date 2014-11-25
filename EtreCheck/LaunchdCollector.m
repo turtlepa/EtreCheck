@@ -7,7 +7,7 @@
 #import "LaunchdCollector.h"
 #import <ServiceManagement/ServiceManagement.h>
 #import "NSMutableAttributedString+Etresoft.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "Utilities.h"
 #import "NSDictionary+Etresoft.h"
 
@@ -17,6 +17,7 @@
 #define kFilename @"filename"
 #define kExecutable @"executable"
 #define kSupportURL @"supporturl"
+#define kDetailsURL @"detailsurl"
 #define kPlist @"plist"
 
 #define kStatusUnknown @"unknown"
@@ -261,9 +262,6 @@
   // I need this.
   NSString * file = [path lastPathComponent];
   
-  // Is the file hidden?
-  BOOL hidden = [file hasPrefix: @"."];
-  
   // Get the properties.
   NSDictionary * plist = [NSDictionary readPropertyList: path];
 
@@ -277,11 +275,31 @@
   if(![self isValidExecutable: executable])
     jobStatus = kStatusInvalid;
     
+  NSString * name = [[executable firstObject] lastPathComponent];
+  
+  NSAttributedString * detailsURL = nil;
+  
+  if([jobStatus isEqualToString: kStatusFailed])
+    if([[Model model] hasLogEntries: name])
+      detailsURL = [[Model model] getDetailsURLFor: name];
+  
+  if(detailsURL)
+    return
+      @{
+        kApple : [NSNumber numberWithBool: [self isAppleFile: file]],
+        kFilename : [self sanitizeFilename: file],
+        kHidden : [NSNumber numberWithBool: [file hasPrefix: @"."]],
+        kStatus : jobStatus,
+        kExecutable : executable,
+        kSupportURL : [self getSupportURL: nil bundleID: path],
+        kDetailsURL : detailsURL
+      };
+
   return
     @{
       kApple : [NSNumber numberWithBool: [self isAppleFile: file]],
       kFilename : [self sanitizeFilename: file],
-      kHidden : [NSNumber numberWithBool: hidden],
+      kHidden : [NSNumber numberWithBool: [file hasPrefix: @"."]],
       kStatus : jobStatus,
       kExecutable : executable,
       kSupportURL : [self getSupportURL: nil bundleID: path]
@@ -568,11 +586,21 @@
       attributes:
         @{
           NSFontAttributeName : [[Utilities shared] boldFont],
-          NSForegroundColorAttributeName : [[Utilities shared] gray],
+          NSForegroundColorAttributeName : [[Utilities shared] blue],
           NSLinkAttributeName : [status objectForKey: kSupportURL]
         }];
     }
     
+  // Get the details link.
+  NSAttributedString * detailsURL = [status objectForKey: kDetailsURL];
+  
+  if([detailsURL length])
+    {
+    [extra appendString: @" "];
+
+    [extra appendAttributedString: detailsURL];
+    }
+
   // Show what is being hidden.
   if([[status objectForKey: kHidden] boolValue] || self.showExecutable)
     [extra appendString:

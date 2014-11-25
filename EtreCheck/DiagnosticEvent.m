@@ -8,12 +8,10 @@
 
 @implementation DiagnosticEvent
 
-@synthesize crashCount = myCrashCount;
-@synthesize cpuCount = myCPUCount;
-@synthesize passingCount = myPassingCount;
-@synthesize failureCount = myFailureCount;
-@synthesize testResult = myTestResult;
+@synthesize type = myType;
 @synthesize date = myDate;
 @synthesize name = myName;
+@synthesize details = myDetails;
+@synthesize file = myFile;
 
 @end

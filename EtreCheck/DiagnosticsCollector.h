@@ -10,7 +10,12 @@
 @interface DiagnosticsCollector : Collector
   {
   BOOL insufficientPermissions;
-  NSMutableDictionary * events;
+  
+  NSDateFormatter * myDateFormatter;
+  NSDateFormatter * myLogDateFormatter;
   }
+
+@property (retain) NSDateFormatter * dateFormatter;
+@property (retain) NSDateFormatter * logDateFormatter;
 
 @end

@@ -6,23 +6,32 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum EventType
+  {
+  kUnknown,
+  kCrash,
+  kCPU,
+  kHang,
+  kSelfTestPass,
+  kSelfTestFail,
+  kPanic,
+  kLog
+  }
+EventType;
+
 @interface DiagnosticEvent : NSObject
   {
-  NSUInteger myCrashCount;
-  NSUInteger myCPUCount;
-  NSUInteger myPassingCount;
-  NSUInteger myFailureCount;
-  NSString * myTestResult;
-  NSString * myDate;
+  EventType myType;
   NSString * myName;
+  NSDate * myDate;
+  NSString * myFile;
+  NSString * myDetails;
   }
 
-@property (assign) NSUInteger crashCount;
-@property (assign) NSUInteger cpuCount;
-@property (assign) NSUInteger passingCount;
-@property (assign) NSUInteger failureCount;
-@property (strong) NSString * testResult;
-@property (strong) NSString * date;
+@property (assign) EventType type;
 @property (strong) NSString * name;
+@property (strong) NSDate * date;
+@property (strong) NSString * file;
+@property (strong) NSString * details;
 
 @end

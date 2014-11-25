@@ -7,7 +7,7 @@
 #import "ApplicationsCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
 #import "Utilities.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "NSArray+Etresoft.h"
 #import "NSDictionary+Etresoft.h"
 
@@ -41,7 +41,7 @@
   NSDictionary * applications = [self collectApplications];
   
   // Save the applications.
-  [[SystemInformation sharedInformation] setApplications: applications];
+  [[Model model] setApplications: applications];
   
   // Organize the applications by their parent directories.
   NSDictionary * parents = [self collectParentDirectories: applications];
@@ -219,6 +219,9 @@
   NSAttributedString * supportLink =
     [[[NSAttributedString alloc] initWithString: @""] autorelease];
 
+  NSAttributedString * detailsLink =
+    [[[NSAttributedString alloc] initWithString: @""] autorelease];
+
   NSString * bundleID = [application objectForKey: @"CFBundleIdentifier"];
 
   if(bundleID)
@@ -245,8 +248,17 @@
           name, [self formatVersionString: application]]];
     
   [output appendAttributedString: supportLink];
-  [output appendString: @"\n"];
+  [output appendString: @" "];
   
+  detailsLink = [[Model model] getDetailsURLFor: name];
+  
+  if(detailsLink)
+    {
+    [output appendString: @" "];
+    [output appendAttributedString: detailsLink];
+    [output appendString: @"\n"];
+    }
+    
   return [output autorelease];
   }
 

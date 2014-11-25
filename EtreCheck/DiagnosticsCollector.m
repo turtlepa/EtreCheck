@@ -10,9 +10,13 @@
 #import "TTTLocalizedPluralString.h"
 #import "DiagnosticEvent.h"
 #import "NSArray+Etresoft.h"
+#import "Model.h"
 
 // Collect diagnostics information.
 @implementation DiagnosticsCollector
+
+@synthesize dateFormatter = myDateFormatter;
+@synthesize logDateFormatter = myLogDateFormatter;
 
 // Constructor.
 - (id) init
@@ -24,7 +28,17 @@
     self.name = @"diagnostics";
     self.progressEstimate = 1;
     
-    events = [NSMutableDictionary new];
+    myDateFormatter = [[NSDateFormatter alloc] init];
+   
+    [myDateFormatter setDateFormat: @"yyyy-MM-dd_HHmmss"];
+    [myDateFormatter setLocale: [NSLocale systemLocale]];
+
+    myLogDateFormatter = [[NSDateFormatter alloc] init];
+   
+    [myLogDateFormatter setDateFormat: @"MMM d, yyyy, hh:mm:ss a"];
+    [myLogDateFormatter setTimeZone: [NSTimeZone localTimeZone]];
+    [myLogDateFormatter
+      setLocale: [NSLocale localeWithLocaleIdentifier: @"en_US"]];
     }
     
   return self;
@@ -33,7 +47,7 @@
 // Destructor.
 - (void) dealloc
   {
-  [events release];
+  self.dateFormatter = nil;
   
   [super dealloc];
   }
@@ -48,11 +62,14 @@
 
   [self collectDiagnostics];
   [self collectCrashReporter];
-  [self collectDiagnosticReports];
-  [self collectUserDiagnosticReports];
+  [self collectDiagnosticReportCrashes];
+  [self collectUserDiagnosticReportCrashes];
+  [self collectDiagnosticReportHangs];
+  [self collectUserDiagnosticReportHangs];
+  [self collectPanics];
   [self collectCPU];
   
-  if([events count] || insufficientPermissions)
+  if([[[Model model] diagnosticEvents] count] || insufficientPermissions)
     {
     // TODO: Localize this.
     [self.result
@@ -63,14 +80,21 @@
     
     // TODO: Localize this.
     if(insufficientPermissions)
+      {
+      [self.result appendString: @"\n"];
       [self.result
         appendString:
           NSLocalizedString(
             @"/Library/Logs/DiagnosticReports permissions", NULL)];
+      }
     
     [self.result appendCR];
     }
   
+  [self
+    setTabs: @[@28, @112, @196]
+    forRange: NSMakeRange(0, [self.result length])];
+
   dispatch_semaphore_signal(self.complete);
   }
 
@@ -107,11 +131,6 @@
 // Collect a single diagnostic result.
 - (void) collectDiagnosticResult: (NSDictionary *) result
   {
-  NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-   
-  [dateFormatter setDateFormat: @"yyyy-MM-dd"];
-  [dateFormatter setLocale: [NSLocale currentLocale]];
-
   NSString * name = [result objectForKey: @"_name"];
   
   if([name isEqualToString: @"spdiags_post_value"])
@@ -119,23 +138,26 @@
     NSDate * lastRun =
       [result objectForKey: @"spdiags_last_run_key"];
     
-    NSString * testResult =
-      [result objectForKey: @"spdiags_result_key"];
+    DiagnosticEvent * event = [DiagnosticEvent new];
+
+    event.date = lastRun;
     
-    // TODO: Localize this.
-    DiagnosticEvent * event =
-      [self
-        findEvent: NSLocalizedString(@"Self test", NULL)
-        on: [dateFormatter stringFromDate: lastRun]];
-    
-    if(![event.testResult isEqualToString: testResult])
-      event.testResult =
-        [event.testResult stringByAppendingFormat: @", %@", testResult];
+    NSString * details = [result objectForKey: @"spdiags_result_key"];
       
-    if([testResult isEqualToString: @"spdiags_passed_value"])
-      event.passingCount = event.passingCount + 1;
+    // TODO: Localize this.
+    if([details isEqualToString: @"spdiags_passed_value"])
+      {
+      event.type = kSelfTestPass;
+      event.name = NSLocalizedString(@"Self test - passed", NULL);
+      }
     else
-      event.failureCount = event.failureCount + 1;
+      {
+      event.type = kSelfTestFail;
+      event.name = NSLocalizedString(@"Self test - failed", NULL);
+      event.details = details;
+      }
+      
+    [[[Model model] diagnosticEvents] setObject: event forKey: @"selftest"];
     }
   }
 
@@ -146,44 +168,24 @@
     @[
       @"/Library/Logs/CrashReporter",
       @"-iname",
-      @"*.gz"];
+      @"*.crash"
+    ];
   
   NSData * data = [Utilities execute: @"/usr/bin/find" arguments: args];
   
   NSArray * files = [Utilities formatLines: data];
   
-  for(NSString * file in files)
-    {
-    NSArray * parts =
-      [[file lastPathComponent] componentsSeparatedByString: @".log."];
-    
-    if([parts count] > 1)
-      {
-      NSString * name = [parts firstObject];
-      NSString * date = nil;
-      NSString * fullDate = [parts objectAtIndex: 1];
-      
-      if([fullDate length] > 7)
-        date =
-          [NSString
-            stringWithFormat:
-              @"%@-%@-%@",
-              [fullDate substringWithRange: NSMakeRange(0, 4)],
-              [fullDate substringWithRange: NSMakeRange(4, 2)],
-              [fullDate substringWithRange: NSMakeRange(6, 2)]];
-      
-      if(name && date)
-        {
-        DiagnosticEvent * event = [self findEvent: name on: date];
-        
-        event.crashCount = event.crashCount + 1;
-        }
-      }
-    }
+  NSString * permissionsError =
+    @"find: /Library/Logs/DiagnosticReports: Permission denied";
+
+  if([[files firstObject] isEqualToString: permissionsError])
+    insufficientPermissions = YES;
+  else
+    [self parseDiagnosticReports: files];
   }
 
 // Collect files in /Library/Logs/DiagnosticReports.
-- (void) collectDiagnosticReports
+- (void) collectDiagnosticReportCrashes
   {
   NSArray * args =
     @[
@@ -206,7 +208,7 @@
   }
 
 // Collect files in ~/Library/Logs/DiagnosticReports.
-- (void) collectUserDiagnosticReports
+- (void) collectUserDiagnosticReportCrashes
   {
   NSString * diagnosticReportsDir =
     [NSHomeDirectory()
@@ -224,31 +226,69 @@
   [self parseDiagnosticReports: [Utilities formatLines: data]];
   }
 
-// Parse diagnostic reports.
-- (void) parseDiagnosticReports: (NSArray *) files
+// Collect hang files in /Library/Logs/DiagnosticReports.
+- (void) collectDiagnosticReportHangs
   {
-  for(NSString * file in files)
-    {
-    NSArray * parts =
-      [[file lastPathComponent] componentsSeparatedByString: @"_"];
-    
-    if([parts count] > 1)
-      {
-      NSString * name = [parts firstObject];
-      NSString * date = nil;
-      NSString * fullDate = [parts objectAtIndex: 1];
+  NSArray * args =
+    @[
+      @"/Library/Logs/DiagnosticReports",
+      @"-iname",
+      @"*.hang"
+    ];
+  
+  NSData * data = [Utilities execute: @"/usr/bin/find" arguments: args];
+  
+  NSArray * files = [Utilities formatLines: data];
+  
+  NSString * permissionsError =
+    @"find: /Library/Logs/DiagnosticReports: Permission denied";
 
-      if([fullDate length] > 7)
-        date = [fullDate substringToIndex: 10];
-      
-      if(name && date)
-        {
-        DiagnosticEvent * event = [self findEvent: name on: date];
-        
-        event.crashCount = event.crashCount + 1;
-        }
-      }
-    }
+  if([[files firstObject] isEqualToString: permissionsError])
+    insufficientPermissions = YES;
+  else
+    [self parseDiagnosticReports: files];
+  }
+
+// Collect hang files in ~/Library/Logs/DiagnosticReports.
+- (void) collectUserDiagnosticReportHangs
+  {
+  NSString * diagnosticReportsDir =
+    [NSHomeDirectory()
+      stringByAppendingPathComponent: @"Library/Logs/DiagnosticReports"];
+
+  NSArray * args =
+    @[
+      diagnosticReportsDir,
+      @"-iname",
+      @"*.hang"
+    ];
+  
+  NSData * data = [Utilities execute: @"/usr/bin/find" arguments: args];
+  
+  [self parseDiagnosticReports: [Utilities formatLines: data]];
+  }
+
+// Collect panic files in ~/Library/Logs/DiagnosticReports.
+- (void) collectPanics
+  {
+  NSArray * args =
+    @[
+      @"/Library/Logs/DiagnosticReports",
+      @"-iname",
+      @"*.panic"
+    ];
+  
+  NSData * data = [Utilities execute: @"/usr/bin/find" arguments: args];
+  
+  NSArray * files = [Utilities formatLines: data];
+  
+  NSString * permissionsError =
+    @"find: /Library/Logs/DiagnosticReports: Permission denied";
+
+  if([[files firstObject] isEqualToString: permissionsError])
+    insufficientPermissions = YES;
+  else
+    [self parseDiagnosticReports: [Utilities formatLines: data]];
   }
 
 // Collect CPU usage reports.
@@ -264,179 +304,243 @@
   
   NSArray * files = [Utilities formatLines: data];
   
-  for(NSString * file in files)
-    {
-    NSArray * parts =
-      [[file lastPathComponent] componentsSeparatedByString: @"_"];
-    
-    if([parts count] > 1)
-      {
-      NSString * name = [self cpuHogName: file];
-      NSString * date = nil;
-      NSString * fullDate = [parts objectAtIndex: 1];
+  NSString * permissionsError =
+    @"find: /Library/Logs/DiagnosticReports: Permission denied";
 
-      if([fullDate length] > 7)
-        date = [fullDate substringToIndex: 10];
+  if([[files firstObject] isEqualToString: permissionsError])
+    insufficientPermissions = YES;
+  else
+    [self parseDiagnosticReports: [Utilities formatLines: data]];
+  }
+
+// Parse diagnostic reports.
+- (void) parseDiagnosticReports: (NSArray *) files
+  {
+  for(NSString * file in files)
+    [self createEventFromFile: file];
+  }
+
+// Create a new diagnostic event for a file.
+- (void) createEventFromFile: (NSString *) file
+  {
+  NSString * typeString = [file pathExtension];
+  
+  EventType type = kUnknown;
+  
+  if([typeString isEqualToString: @"crash"])
+    type = kCrash;
+  else if([typeString isEqualToString: @"hang"])
+    type = kHang;
+  else if([typeString isEqualToString: @"panic"])
+    type = kPanic;
+  else if([typeString isEqualToString: @"diag"])
+    type = kCPU;
+
+  NSDate * date = [self parseFileDate: file];
+  
+  if((type != kUnknown) && date)
+    {
+    DiagnosticEvent * event = [DiagnosticEvent new];
+    
+    event.name = [file lastPathComponent];
+    event.date = date;
+    event.type = type;
+    event.file = file;
+    
+    // Include the entire log file for a panic.
+    if(type == kPanic)
+      event.details =
+        [NSString
+          stringWithContentsOfFile: file
+          encoding: NSUTF8StringEncoding
+          error: NULL];
+    
+    // Include just the first section for a CPU report.
+    else if(type == kCPU)
+      event.details = [self CPUReportHeader: file];
       
-      if(name && date)
-        {
-        DiagnosticEvent * event = [self findEvent: name on: date];
-        
-        event.cpuCount = event.cpuCount + 1;
-        }
-      }
+    // For everything else, just look for matching events in the log file.
+    else
+      event.details = [self logEntriesAround: date];
+    
+    [[[Model model] diagnosticEvents] setObject: event forKey: event.name];
     }
   }
 
-// Get the name of a CPU hog.
-- (NSString *) cpuHogName: (NSString *) path
+// Parse a log file date.
+- (NSDate *) parseFileDate: (NSString *) path
   {
-  NSString * name = nil;
+  NSArray * parts =
+    [[path lastPathComponent] componentsSeparatedByString: @"_"];
   
-  NSData * data = [NSData dataWithContentsOfFile: path];
-  
-  NSArray * lines = [Utilities formatLines: data];
-  
-  for(NSString * line in lines)
-    if([line hasPrefix: @"Path:            "])
-      name = [[line substringFromIndex: 17] lastPathComponent];
+  if([parts count] > 1)
+    return [self.dateFormatter dateFromString: [parts objectAtIndex: 1]];
+    
+  return nil;
+  }
 
-  if([name isEqualToString: @"???"])
-    for(NSUInteger i = 0; i < [lines count]; ++i)
-      {
-      NSString * line = [lines objectAtIndex: i];
-      
-      if([line hasPrefix: @"  Binary Images:"])
-        if((i + 2) < [lines count])
+// Collect log entires matching a date.
+- (NSString *) logEntriesAround: (NSDate *) date
+  {
+  NSDate * startDate = [date dateByAddingTimeInterval: -60*5];
+  NSDate * endDate = [date dateByAddingTimeInterval: 60*5];
+  
+  NSArray * lines = [[Model model] logEntries];
+  
+  __block BOOL matching = NO;
+  __block NSMutableString * result = [NSMutableString string];
+  
+  [lines
+    enumerateObjectsUsingBlock:
+      ^(id obj, NSUInteger idx, BOOL * stop)
+        {
+        NSString * line = (NSString *)obj;
+        
+        if([line length] >= 24)
           {
-          NSArray * parts =
-            [[lines objectAtIndex: i + 2] componentsSeparatedByString:@"/"];
-            
-          name = [parts lastObject];
-          }
-      }
+          NSString * dateString = [line substringToIndex: 24];
+        
+          NSDate * logDate =
+            [self.logDateFormatter dateFromString: dateString];
+        
+          if([endDate compare: logDate] == NSOrderedAscending)
+            *stop = YES;
+          
+          else if([startDate compare: logDate] == NSOrderedAscending)
+            matching = YES;
 
-  return name;
+          else
+            {
+            NSRange found =
+              [line
+                rangeOfCharacterFromSet:
+                  [NSCharacterSet whitespaceCharacterSet]];
+              
+            if(matching && (found.location == 0))
+              matching = YES;
+            else
+              matching = NO;
+            }
+          }
+          
+        if(matching)
+          {
+          [result appendString: line];
+          [result appendString: @"\n"];
+          }
+        }];
+    
+  return result;
+  }
+
+// Collect just the first section for a CPU report header.
+- (NSString *) CPUReportHeader: (NSString *) file
+  {
+  NSString * contents =
+    [NSString
+      stringWithContentsOfFile: file
+      encoding: NSUTF8StringEncoding
+      error: NULL];
+  
+  NSArray * lines = [contents componentsSeparatedByString: @"\n"];
+
+  __block NSMutableString * result = [NSMutableString string];
+  
+  __block NSUInteger lineCount = 0;
+  
+  [lines
+    enumerateObjectsUsingBlock:
+      ^(id obj, NSUInteger idx, BOOL * stop)
+        {
+        NSString * line = (NSString *)obj;
+        
+        [result appendString: line];
+        [result appendString: @"\n"];
+        
+        if(lineCount++ > 20)
+          *stop = YES;
+        }];
+    
+  return result;
   }
 
 // Print crash logs.
 - (void) printDiagnostics
   {
-  NSArray * dates =
-    [[events allKeys]
-      sortedArrayUsingComparator:
-        ^NSComparisonResult(id obj1, id obj2)
-          {
-          return -1 * [obj1 compare: obj2];
-          }];
+  NSMutableDictionary * events = [[Model model] diagnosticEvents];
     
-  NSUInteger i = 0;
+  NSArray * sortedKeys =
+    [events
+      keysSortedByValueUsingComparator:
+        ^NSComparisonResult(id obj1, id obj2)
+        {
+        DiagnosticEvent * event1 = (DiagnosticEvent *)obj1;
+        DiagnosticEvent * event2 = (DiagnosticEvent *)obj2;
+        
+        return [event2.date compare: event1.date];
+        }];
+    
+  NSDate * then =
+    [[NSDate date] dateByAddingTimeInterval: -60 * 60 * 24 * 3];
   
-  for(NSString * date in dates)
+  for(NSString * name in sortedKeys)
     {
+    DiagnosticEvent * event = [events objectForKey: name];
+    
+    switch(event.type)
+      {
+      case kPanic:
+      case kSelfTestFail:
+        [self printDiagnosticEvent: event name: name];
+        break;
+        
+      default:
+        if([then compare: event.date] == NSOrderedAscending)
+          [self printDiagnosticEvent: event name: name];
+      }
+    }
+  }
+
+// Print a single diagnostic event.
+- (void) printDiagnosticEvent: (DiagnosticEvent *) event
+  name: (NSString *) name
+  {
+  if(event.type == kSelfTestFail)
     [self.result
       appendString:
-        [NSString stringWithFormat: @"\t%@:\n", date]];
-      
-    NSDictionary * dayEvents = [events objectForKey: date];
+        [NSString
+          stringWithFormat:
+            @"\t%@ \t- %@",
+            [self.logDateFormatter stringFromDate: event.date],
+            event.name]
+      attributes:
+        @{
+          NSForegroundColorAttributeName : [[Utilities shared] red],
+          NSFontAttributeName : [[Utilities shared] boldFont]
+        }];
     
-    for(NSString * name in dayEvents)
+  else
+    [self.result
+      appendString:
+        [NSString
+          stringWithFormat:
+            @"\t%@\t%@",
+            [self.logDateFormatter stringFromDate: event.date],
+            event.name]];
+  
+  if([event.details length])
+    {
+    NSAttributedString * detailsURL =
+      [[Model model] getDetailsURLFor: name];
+
+    if(detailsURL)
       {
-      BOOL problem = NO;
-      
-      NSString * status =
-        [self
-          collectDiagnosticStatusFor: name
-          inEvents: dayEvents
-          problem: & problem];
-      
-      // TODO: Make red on failure.
-      [self.result
-        appendString:
-          [NSString stringWithFormat: @"\t\t%@ (%@)\n", name, status]];
+      [self.result appendString: @" "];
+      [self.result appendAttributedString: detailsURL];
       }
-      
-    ++i;
-    
-    if(i >= 3)
-      break;
-    }
-  }
-
-// Collect diagnostic status for a single day event.
-- (NSString *) collectDiagnosticStatusFor: (NSString *) name
-  inEvents: (NSDictionary *) dayEvents
-  problem: (BOOL *) problem
-  {
-  DiagnosticEvent * event = [dayEvents objectForKey: name];
-  
-  NSMutableArray * items = [NSMutableArray array];
-  
-  // TODO: Localize this.
-  if(event.crashCount)
-    [items
-      addObject:
-        TTTLocalizedPluralString(event.crashCount, @"crash", NULL)];
-    
-  // TODO: Localize this.
-  if(event.cpuCount)
-    [items
-      addObject:
-        TTTLocalizedPluralString(event.cpuCount, @"overload", NULL)];
-    
-  // TODO: Localize this.
-  if(event.passingCount)
-    [items
-      addObject:
-        [NSString
-          stringWithFormat:
-            NSLocalizedString(@"Passing: %d", NULL), event.passingCount]];
-
-  // TODO: Localize this.
-  if(event.failureCount)
-    {
-    if(problem)
-      *problem = YES;
-      
-    [items
-      addObject:
-        [NSString
-          stringWithFormat:
-            NSLocalizedString(@"Failing: %d", NULL), event.failureCount]];
     }
 
-  return [items componentsJoinedByString: @" - "];
-  }
-  
-// Get an existing event or create a new one.
-- (DiagnosticEvent *) findEvent: (NSString *) name on: (NSString *) date
-  {
-  NSMutableDictionary * dayEvents = [events objectForKey: date];
-  
-  if(!dayEvents)
-    {
-    dayEvents = [NSMutableDictionary new];
-    
-    [events setObject: dayEvents forKey: date];
-    
-    [dayEvents release];
-    }
-    
-  DiagnosticEvent * event = [dayEvents objectForKey: name];
-  
-  if(!event)
-    {
-    event = [DiagnosticEvent new];
-    
-    [dayEvents setObject: event forKey: name];
-    
-    [event release];
-    
-    event.date = date;
-    event.name = name;
-    }
-    
-  return event;
+  [self.result appendString: @"\n"];
   }
 
 @end

@@ -18,6 +18,19 @@
 	<string>2.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.etresoft.etrecheck</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>etrecheck</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>100</string>
 	<key>LSApplicationCategoryType</key>

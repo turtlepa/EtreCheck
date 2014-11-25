@@ -6,7 +6,7 @@
 
 #import "PlugInsCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "Utilities.h"
 #import "NSDictionary+Etresoft.h"
 
@@ -101,7 +101,7 @@
     NSLocalizedString(
       @"http://www.java.com/en/download/installed.jsp", NULL);
   
-  if([[SystemInformation sharedInformation] majorOSVersion] < 11)
+  if([[Model model] majorOSVersion] < 11)
     url = NSLocalizedString(@"http://support.apple.com/kb/dl1572", NULL);
 
   [string appendString: @" "];

@@ -7,7 +7,7 @@
 #import "VirtualMemoryCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
 #import "ByteCountFormatter.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "Utilities.h"
 
 // Collect virtual memory information.

@@ -6,7 +6,7 @@
 
 #import "DiskCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "Utilities.h"
 #import "ByteCountFormatter.h"
 #import "NSArray+Etresoft.h"
@@ -26,13 +26,13 @@
 // Provide easy access to volumes.
 - (NSMutableDictionary *) volumes
   {
-  return [[SystemInformation sharedInformation] volumes];
+  return [[Model model] volumes];
   }
 
 // Provide easy access to coreStorageVolumes.
 - (NSMutableDictionary *) coreStorageVolumes
   {
-  return [[SystemInformation sharedInformation] coreStorageVolumes];
+  return [[Model model] coreStorageVolumes];
   }
 
 // Constructor.
@@ -478,7 +478,7 @@
 - (NSString *) errorsFor: (NSString *) name
   {
   NSNumber * errors =
-    [[[SystemInformation sharedInformation] diskErrors] objectForKey: name];
+    [[[Model model] diskErrors] objectForKey: name];
     
   int errorCount = [errors intValue];
   

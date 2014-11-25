@@ -7,7 +7,7 @@
 #import "TimeMachineCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
 #import "ByteCountFormatter.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "Utilities.h"
 #import "NSDictionary+Etresoft.h"
 
@@ -60,7 +60,7 @@
     updateStatus:
       NSLocalizedString(@"Checking Time Machine information", NULL)];
 
-  if([[SystemInformation sharedInformation] majorOSVersion] < 9)
+  if([[Model model] majorOSVersion] < 9)
     return;
     
   [self.result appendAttributedString: [self buildTitle: @"Time Machine:"]];
@@ -146,7 +146,7 @@
     
     // Get the path for this volume too.
     NSDictionary * volume =
-      [[[SystemInformation sharedInformation] volumes] objectForKey: UUID];
+      [[[Model model] volumes] objectForKey: UUID];
     
     NSString * mountPoint = [volume objectForKey: @"mount_point"];
     
@@ -327,7 +327,7 @@
 - (void) printBackedupVolume: (NSString *) UUID
   {
   NSDictionary * volume =
-    [[[SystemInformation sharedInformation] volumes] objectForKey: UUID];
+    [[[Model model] volumes] objectForKey: UUID];
   
   if(!volume)
     return;

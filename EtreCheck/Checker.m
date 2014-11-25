@@ -39,7 +39,7 @@
 #import "VirtualMemoryCollector.h"
 #import "DiagnosticsCollector.h"
 #import "Utilities.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "LogCollector.h"
 
 // Perform the check.
@@ -244,7 +244,7 @@
   (KernelExtensionCollector *) kernelExtensionCollector
   {
   NSDictionary * applications =
-    [[SystemInformation sharedInformation] applications];
+    [[Model model] applications];
   
   int count = 0;
   

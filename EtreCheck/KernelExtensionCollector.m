@@ -8,7 +8,7 @@
 #import "KernelExtensionCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
 #import "Utilities.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "NSArray+Etresoft.h"
 #import "NSDictionary+Etresoft.h"
 
@@ -307,7 +307,7 @@
   NSMutableDictionary * extensions = [NSMutableDictionary dictionary];
   
   NSDictionary * applications =
-    [[SystemInformation sharedInformation] applications];
+    [[Model model] applications];
   
   for(NSString * name in applications)
     {

@@ -6,7 +6,7 @@
 
 #import "Collector.h"
 #import "NSMutableAttributedString+Etresoft.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "Utilities.h"
 
 @implementation Collector
@@ -159,7 +159,7 @@
       attributes:
         @{
           NSFontAttributeName : [[Utilities shared] boldFont],
-          NSForegroundColorAttributeName : [[Utilities shared] gray],
+          NSForegroundColorAttributeName : [[Utilities shared] blue],
           NSLinkAttributeName : query
         }];
     }
@@ -243,7 +243,7 @@
       {
       if(age)
         *age =
-          ([[SystemInformation sharedInformation] majorOSVersion] -
+          ([[Model model] majorOSVersion] -
             majorVersion);
         
       NSString * minorVersion = nil;
@@ -282,7 +282,7 @@
       {
       if(age)
         *age =
-          ([[SystemInformation sharedInformation] majorOSVersion] -
+          ([[Model model] majorOSVersion] -
             majorVersion);
         
       NSString * minorVersion = nil;
@@ -323,7 +323,7 @@
       {
       if(age)
         *age =
-          ([[SystemInformation sharedInformation] majorOSVersion] -
+          ([[Model model] majorOSVersion] -
             majorVersion);
       
       return [NSString stringWithFormat: @" - SDK 10.%d", majorVersion - 4];

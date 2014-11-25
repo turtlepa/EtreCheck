@@ -5,7 +5,7 @@
  **********************************************************************/
 
 #import "ProcessesCollector.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "Utilities.h"
 
 // Collect information about processes.
@@ -47,7 +47,7 @@
     if([command isEqualToString: @"EtreCheck"])
       continue;
       
-    double RAM = [[SystemInformation sharedInformation] physicalRAM];
+    double RAM = [[Model model] physicalRAM];
     
     RAM = RAM * 1024 * 1024 * 1024;
     

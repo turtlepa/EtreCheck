@@ -17,9 +17,10 @@
 #import <QuartzCore/CAAnimation.h>
 #import <QuartzCore/CoreImage.h>
 #import "LaunchdCollector.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "NSAttributedString+Etresoft.h"
 #import "NSDictionary+Etresoft.h"
+#import "DetailManager.h"
 
 NSComparisonResult compareViews(id view1, id view2, void * context);
 
@@ -55,6 +56,7 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
 @synthesize animationView = myAnimationView;
 @synthesize userMessage = myUserMessage;
 @synthesize userMessgePanel = myUserMessagePanel;
+@synthesize detailManager = myDetailManager;
 
 // Destructor.
 - (void) dealloc
@@ -102,12 +104,40 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   [[NSUserNotificationCenter defaultUserNotificationCenter]
     setDelegate: self];
 
+  // Handle my own "etrecheck:" URLs.
+  NSAppleEventManager * appleEventManager =
+    [NSAppleEventManager sharedAppleEventManager];
+  
+  [appleEventManager
+    setEventHandler: self
+    andSelector: @selector(handleGetURLEvent:withReplyEvent:)
+    forEventClass:kInternetEventClass
+    andEventID: kAEGetURL];
+  
   dispatch_after(
     dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)),
     dispatch_get_main_queue(),
     ^{
       [self collectUserMessage];
     });
+  }
+
+// Handle an "etrecheck:" URL.
+- (void) handleGetURLEvent: (NSAppleEventDescriptor *) event
+  withReplyEvent: (NSAppleEventDescriptor *) reply
+  {
+  NSString * urlString =
+    [[event paramDescriptorForKeyword: keyDirectObject] stringValue];
+  
+  NSURL * url = [NSURL URLWithString: urlString];
+    
+  if([[url scheme] isEqualToString: @"etrecheck"])
+    {
+    NSString * manager = [url host];
+    
+    if([manager isEqualToString: @"detail"])
+      [self.detailManager showDetail: [[url path] lastPathComponent]];
+    }
   }
 
 // Check for a new version.
@@ -883,6 +913,8 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
     }
   }
 
+@end
+
 NSComparisonResult compareViews(id view1, id view2, void * context)
   {
   AppDelegate * self = (AppDelegate *)context;
@@ -902,4 +934,3 @@ NSComparisonResult compareViews(id view1, id view2, void * context)
   return NSOrderedSame;
   }
 
-@end

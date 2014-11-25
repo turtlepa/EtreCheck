@@ -7,6 +7,7 @@
 #import <Cocoa/Cocoa.h>
 
 @class SlideshowView;
+@class DetailManager;
 
 @interface AppDelegate : NSObject
   <NSApplicationDelegate, NSUserNotificationCenterDelegate>
@@ -41,6 +42,8 @@
   
   BOOL launchDFail;
   BOOL launchDAvailable;
+  
+  DetailManager * myDetailManager;
   }
   
 @property (retain) IBOutlet NSWindow * window;
@@ -67,6 +70,7 @@
 @property (retain) NSString * collectionStatus;
 @property (retain) NSAttributedString * userMessage;
 @property (retain) IBOutlet NSWindow * userMessgePanel;
+@property (retain) IBOutlet DetailManager * detailManager;
 
 // Start the report.
 - (IBAction) start: (id) sender;

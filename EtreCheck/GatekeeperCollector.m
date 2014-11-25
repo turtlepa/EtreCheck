@@ -6,7 +6,7 @@
 
 #import "GatekeeperCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "Utilities.h"
 
 // Gatekeeper settings.
@@ -41,7 +41,7 @@ GatekeeperSetting;
       NSLocalizedString(@"Checking Gatekeeper information", NULL)];
 
   // Only check gatekeeper on Maountain Lion or later.
-  if([[SystemInformation sharedInformation] majorOSVersion] < kMountainLion)
+  if([[Model model] majorOSVersion] < kMountainLion)
     return;
     
   [self.result appendAttributedString: [self buildTitle: @"Gatekeeper:"]];

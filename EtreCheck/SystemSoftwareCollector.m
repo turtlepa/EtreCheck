@@ -6,7 +6,7 @@
 
 #import "SystemSoftwareCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "Utilities.h"
 #import "TTTLocalizedPluralString.h"
 #import "NSArray+Etresoft.h"
@@ -113,7 +113,7 @@
     BOOL found = [scanner scanInt: & majorVersion];
     
     if(found)
-      [[SystemInformation sharedInformation]
+      [[Model model]
         setMajorOSVersion: majorVersion];
     }
   }

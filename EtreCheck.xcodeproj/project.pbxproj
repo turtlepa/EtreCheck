@@ -21,12 +21,14 @@
 		A5257D2E19AB51BE003084C8 /* ProcessesCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D2D19AB51BE003084C8 /* ProcessesCollector.m */; };
 		A5257D3119AB5251003084C8 /* CPUUsageCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3019AB5251003084C8 /* CPUUsageCollector.m */; };
 		A5257D3419AB525D003084C8 /* MemoryUsageCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3319AB525D003084C8 /* MemoryUsageCollector.m */; };
-		A5257D3719AB53FF003084C8 /* SystemInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3619AB53FF003084C8 /* SystemInformation.m */; };
+		A5257D3719AB53FF003084C8 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3619AB53FF003084C8 /* Model.m */; };
 		A5257D3A19ABE02A003084C8 /* VirtualMemoryCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3919ABE02A003084C8 /* VirtualMemoryCollector.m */; };
 		A5257D3D19AC0AA3003084C8 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3C19AC0AA3003084C8 /* Utilities.m */; };
 		A5257D4019AC10E3003084C8 /* Checker.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3F19AC10E3003084C8 /* Checker.m */; };
 		A5409E9B186F271500B1727E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5409E9A186F271500B1727E /* SystemConfiguration.framework */; };
 		A540C6FE1873D5F800497BDE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A540C7001873D5F800497BDE /* Localizable.strings */; };
+		A54B87351A1D4F1900F25213 /* HelpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A54B87341A1D4F1900F25213 /* HelpManager.m */; };
+		A54B87381A1D4FED00F25213 /* DetailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A54B87371A1D4FED00F25213 /* DetailManager.m */; };
 		A552A31D1818BDAE00829BA3 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A552A3161818BC7F00829BA3 /* CoreServices.framework */; };
 		A55BC16E15BF987D00D42EF1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55BC16D15BF987D00D42EF1 /* Cocoa.framework */; };
 		A55BC17815BF987D00D42EF1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A55BC17615BF987D00D42EF1 /* InfoPlist.strings */; };
@@ -99,8 +101,8 @@
 		A5257D3019AB5251003084C8 /* CPUUsageCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPUUsageCollector.m; sourceTree = "<group>"; };
 		A5257D3219AB525D003084C8 /* MemoryUsageCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryUsageCollector.h; sourceTree = "<group>"; };
 		A5257D3319AB525D003084C8 /* MemoryUsageCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryUsageCollector.m; sourceTree = "<group>"; };
-		A5257D3519AB53FF003084C8 /* SystemInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemInformation.h; sourceTree = "<group>"; };
-		A5257D3619AB53FF003084C8 /* SystemInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemInformation.m; sourceTree = "<group>"; };
+		A5257D3519AB53FF003084C8 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		A5257D3619AB53FF003084C8 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		A5257D3819ABE02A003084C8 /* VirtualMemoryCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualMemoryCollector.h; sourceTree = "<group>"; };
 		A5257D3919ABE02A003084C8 /* VirtualMemoryCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualMemoryCollector.m; sourceTree = "<group>"; };
 		A5257D3B19AC0AA3003084C8 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
@@ -110,6 +112,10 @@
 		A5409E9A186F271500B1727E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		A540C6FF1873D5F800497BDE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A540C7011873D5FC00497BDE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A54B87331A1D4F1900F25213 /* HelpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpManager.h; sourceTree = "<group>"; };
+		A54B87341A1D4F1900F25213 /* HelpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpManager.m; sourceTree = "<group>"; };
+		A54B87361A1D4FED00F25213 /* DetailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailManager.h; sourceTree = "<group>"; };
+		A54B87371A1D4FED00F25213 /* DetailManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailManager.m; sourceTree = "<group>"; };
 		A552A3161818BC7F00829BA3 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/CoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		A552A3181818BD1F00829BA3 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Carbon.framework; sourceTree = DEVELOPER_DIR; };
 		A552A31B1818BD8300829BA3 /* CarbonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CarbonCore.framework; path = ../../../../System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework; sourceTree = "<group>"; };
@@ -292,8 +298,6 @@
 				A5257D3319AB525D003084C8 /* MemoryUsageCollector.m */,
 				A5257D3819ABE02A003084C8 /* VirtualMemoryCollector.h */,
 				A5257D3919ABE02A003084C8 /* VirtualMemoryCollector.m */,
-				A5B659211A16D57800476A76 /* DiagnosticEvent.h */,
-				A5B659221A16D57800476A76 /* DiagnosticEvent.m */,
 				A57516AD1A14D9E700F374FB /* DiagnosticsCollector.h */,
 				A57516AE1A14D9E700F374FB /* DiagnosticsCollector.m */,
 				A5C9FC021A1AADA200C1EAA5 /* LogCollector.h */,
@@ -359,8 +363,10 @@
 				A5D0877B19ECAD4E004F52C2 /* NSDictionary+Etresoft.m */,
 				A5E33C3D184CEBDF00ED59A0 /* ByteCountFormatter.h */,
 				A5E33C3E184CEBDF00ED59A0 /* ByteCountFormatter.m */,
-				A5257D3519AB53FF003084C8 /* SystemInformation.h */,
-				A5257D3619AB53FF003084C8 /* SystemInformation.m */,
+				A5B659211A16D57800476A76 /* DiagnosticEvent.h */,
+				A5B659221A16D57800476A76 /* DiagnosticEvent.m */,
+				A5257D3519AB53FF003084C8 /* Model.h */,
+				A5257D3619AB53FF003084C8 /* Model.m */,
 				A5257D3B19AC0AA3003084C8 /* Utilities.h */,
 				A5257D3C19AC0AA3003084C8 /* Utilities.m */,
 				A5257D4119AC10FB003084C8 /* Collectors */,
@@ -368,6 +374,10 @@
 				A5257D3F19AC10E3003084C8 /* Checker.m */,
 				A5C1492319B88192002890F1 /* SlideshowView.h */,
 				A5C1492419B88192002890F1 /* SlideshowView.m */,
+				A54B87331A1D4F1900F25213 /* HelpManager.h */,
+				A54B87341A1D4F1900F25213 /* HelpManager.m */,
+				A54B87361A1D4FED00F25213 /* DetailManager.h */,
+				A54B87371A1D4FED00F25213 /* DetailManager.m */,
 				A55BC17F15BF987D00D42EF1 /* AppDelegate.h */,
 				A55BC18015BF987D00D42EF1 /* AppDelegate.m */,
 				A55BC18215BF987D00D42EF1 /* MainMenu.xib */,
@@ -488,6 +498,7 @@
 				A5C292E019A02B2700464E86 /* Collector.m in Sources */,
 				A5C292EC19A039D900464E86 /* LaunchDaemonsCollector.m in Sources */,
 				A50C9DBF19A36CC400BA6A25 /* GatekeeperCollector.m in Sources */,
+				A54B87351A1D4F1900F25213 /* HelpManager.m in Sources */,
 				A5FC120919A5509700E81E9C /* TimeMachineCollector.m in Sources */,
 				A50C9DC219A36F3D00BA6A25 /* KernelExtensionCollector.m in Sources */,
 				A5C292DD19A02A8800464E86 /* LaunchdCollector.m in Sources */,
@@ -502,6 +513,7 @@
 				A5C9FC041A1AADA200C1EAA5 /* LogCollector.m in Sources */,
 				A50C9DB619A2E69B00BA6A25 /* FirewireCollector.m in Sources */,
 				A5257D4019AC10E3003084C8 /* Checker.m in Sources */,
+				A54B87381A1D4FED00F25213 /* DetailManager.m in Sources */,
 				A59B506D15C45EC000250772 /* NSMutableAttributedString+Etresoft.m in Sources */,
 				A5257D3119AB5251003084C8 /* CPUUsageCollector.m in Sources */,
 				A5257D2E19AB51BE003084C8 /* ProcessesCollector.m in Sources */,
@@ -521,7 +533,7 @@
 				A5FC11FD19A4C30600E81E9C /* SafariExtensionsCollector.m in Sources */,
 				A5D0877919ECACF6004F52C2 /* NSArray+Etresoft.m in Sources */,
 				A5C292E619A039BD00464E86 /* SystemLaunchDaemonsCollector.m in Sources */,
-				A5257D3719AB53FF003084C8 /* SystemInformation.m in Sources */,
+				A5257D3719AB53FF003084C8 /* Model.m in Sources */,
 				A5C292F819A2220400464E86 /* SystemSoftwareCollector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -638,6 +650,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "EtreCheck/EtreCheck-Info.plist";
 			};
@@ -647,6 +660,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "EtreCheck/EtreCheck-Info.plist";
 			};

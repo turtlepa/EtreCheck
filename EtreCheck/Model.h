@@ -13,18 +13,22 @@
 #define kMavericks    13
 #define kYosemite     14
 
+@class DiagnosticEvent;
+
 // A singleton to keep track of system information.
-@interface SystemInformation : NSObject
+@interface Model : NSObject
   {
   int myMajorOSVersion;
   NSMutableDictionary * myVolumes;
   NSMutableDictionary * myCoreStorageVolumes;
   NSMutableDictionary * myDiskErrors;
+  NSArray * myLogEntries;
   NSDictionary * myApplications;
   int myPhysicalRAM;
   NSImage * myMachineIcon;
   NSDictionary * myProcesses;
   NSString * myModel;
+  NSMutableDictionary * myDiagnosticEvents;
   }
 
 // Keep track of the OS version.
@@ -38,6 +42,9 @@
 
 // Keep track of disk errors.
 @property (retain) NSMutableDictionary * diskErrors;
+
+// Keep track of log content.
+@property (retain) NSArray * logEntries;
 
 // Keep track of applications.
 @property (retain) NSDictionary * applications;
@@ -54,7 +61,16 @@
 // The model code.
 @property (retain) NSString * model;
 
+// Diagnostic events.
+@property (retain) NSMutableDictionary * diagnosticEvents;
+
 // Return the singeton of shared values.
-+ (SystemInformation *) sharedInformation;
++ (Model *) model;
+
+// Return true if there are log entries for a process.
+- (BOOL) hasLogEntries: (NSString *) name;
+
+// Create a details URL for a query string.
+- (NSAttributedString *) getDetailsURLFor: (NSString *) query;
 
 @end

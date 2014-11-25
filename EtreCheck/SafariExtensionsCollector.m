@@ -6,7 +6,7 @@
 
 #import "SafariExtensionsCollector.h"
 #import "NSMutableAttributedString+Etresoft.h"
-#import "SystemInformation.h"
+#import "Model.h"
 #import "Utilities.h"
 
 #define kIdentifier @"identifier"
