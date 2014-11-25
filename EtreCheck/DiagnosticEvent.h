@@ -15,6 +15,8 @@ typedef enum EventType
   kSelfTestPass,
   kSelfTestFail,
   kPanic,
+  kASLLog,
+  kSystemLog,
   kLog
   }
 EventType;

@@ -8,6 +8,7 @@
 #import "Model.h"
 #import "Utilities.h"
 #import "NSArray+Etresoft.h"
+#import "DiagnosticEvent.h"
 
 // Collect information from log files.
 @implementation LogCollector
@@ -21,9 +22,32 @@
     {
     self.name = @"log";
     self.progressEstimate = 1;
+
+    aslLogDateFormatter = [[NSDateFormatter alloc] init];
+   
+    [aslLogDateFormatter setDateFormat: @"MMM d, yyyy, hh:mm:ss a"];
+    [aslLogDateFormatter setTimeZone: [NSTimeZone localTimeZone]];
+    [aslLogDateFormatter
+      setLocale: [NSLocale localeWithLocaleIdentifier: @"en_US"]];
+
+    systemLogDateFormatter = [[NSDateFormatter alloc] init];
+   
+    [systemLogDateFormatter setDateFormat: @"MMM d HH:mm:ss"];
+    [systemLogDateFormatter setTimeZone: [NSTimeZone localTimeZone]];
+    [systemLogDateFormatter
+      setLocale: [NSLocale localeWithLocaleIdentifier: @"en_US"]];
     }
     
   return self;
+  }
+
+// Destructor.
+- (void) dealloc
+  {
+  [systemLogDateFormatter release];
+  [aslLogDateFormatter release];
+  
+  [super dealloc];
   }
 
 // Perform the collection.
@@ -34,6 +58,8 @@
       NSLocalizedString(@"Checking information from log files", NULL)];
 
   [self collectLogInformation];
+  
+  [self collectSystemLog];
   
   dispatch_semaphore_signal(self.complete);
   }
@@ -133,7 +159,100 @@
   {
   NSArray * lines = [content componentsSeparatedByString: @"\n"];
   
-  [[Model model] setLogEntries: lines];
+  NSMutableArray * events = [NSMutableArray array];
+  
+  __block DiagnosticEvent * event = nil;
+  
+  [lines
+    enumerateObjectsUsingBlock:
+      ^(id obj, NSUInteger idx, BOOL * stop)
+        {
+        NSString * line = (NSString *)obj;
+        
+        if([line length] >= 24)
+          {
+          NSDate * logDate =
+            [aslLogDateFormatter
+              dateFromString: [line substringToIndex: 24]];
+        
+          if(logDate)
+            {
+            event = [DiagnosticEvent new];
+            
+            event.type = kASLLog;
+            event.date = logDate;
+            event.details = line;
+            
+            [events addObject: event];
+            
+            return;
+            }
+          }
+          
+        if(event.details)
+          event.details =
+            [NSString stringWithFormat: @"%@\n", event.details];
+        }];
+    
+    
+  [[Model model] setLogEntries: events];
+  }
+
+// Collect the system log, if accessible.
+- (void) collectSystemLog
+  {
+  NSString * content =
+    [NSString
+      stringWithContentsOfFile: @"/var/log/system.log"
+      encoding: NSUTF8StringEncoding
+      error: NULL];
+    
+  if(content)
+    [self collectSystemLogContent: content];
+  }
+
+// Collect results from the system log content.
+- (void) collectSystemLogContent: (NSString *) content
+  {
+  NSArray * lines = [content componentsSeparatedByString: @"\n"];
+  
+  NSMutableArray * events = [NSMutableArray array];
+  
+  __block DiagnosticEvent * event = nil;
+  
+  [lines
+    enumerateObjectsUsingBlock:
+      ^(id obj, NSUInteger idx, BOOL * stop)
+        {
+        NSString * line = (NSString *)obj;
+        
+        if([line length] >= 15)
+          {
+          NSDate * logDate =
+            [systemLogDateFormatter
+              dateFromString: [line substringToIndex: 15]];
+        
+          if(logDate)
+            {
+            event = [DiagnosticEvent new];
+            
+            event.type = kSystemLog;
+            event.date = logDate;
+            event.details = line;
+            
+            [events addObject: event];
+            
+            return;
+            }
+          }
+          
+        if(event.details)
+          event.details =
+            [NSString stringWithFormat: @"%@\n", event.details];
+        }];
+    
+    
+  [[Model model] setLogEntries: events];
   }
 
 @end

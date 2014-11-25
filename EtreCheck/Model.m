@@ -78,15 +78,15 @@
     enumerateObjectsUsingBlock:
       ^(id obj, NSUInteger idx, BOOL * stop)
         {
-        NSString * line = (NSString *)obj;
+        DiagnosticEvent * event = (DiagnosticEvent *)obj;
         
-        if([line containsString: name])
+        if([event.details containsString: name])
           matching = YES;
 
         else
           {
           NSRange found =
-            [line
+            [event.details
               rangeOfCharacterFromSet:
                 [NSCharacterSet whitespaceCharacterSet]];
             
@@ -98,7 +98,7 @@
         
         if(matching)
           {
-          [result appendString: line];
+          [result appendString: event.details];
           [result appendString: @"\n"];
           }
         }];
@@ -117,6 +117,35 @@
     }
 
   return NO;
+  }
+
+// Collect log entires matching a date.
+- (NSString *) logEntriesAround: (NSDate *) date
+  {
+  NSDate * startDate = [date dateByAddingTimeInterval: -60*5];
+  NSDate * endDate = [date dateByAddingTimeInterval: 60*5];
+  
+  NSArray * lines = [[Model model] logEntries];
+  
+  __block NSMutableString * result = [NSMutableString string];
+  
+  [lines
+    enumerateObjectsUsingBlock:
+      ^(id obj, NSUInteger idx, BOOL * stop)
+        {
+        DiagnosticEvent * event = (DiagnosticEvent *)obj;
+        
+        if([endDate compare: event.date] == NSOrderedAscending)
+          *stop = YES;
+        
+        else if([startDate compare: event.date] == NSOrderedAscending)
+          {
+          [result appendString: event.details];
+          [result appendString: @"\n"];
+          }
+        }];
+    
+  return result;
   }
 
 // Create a details URL for a query string.

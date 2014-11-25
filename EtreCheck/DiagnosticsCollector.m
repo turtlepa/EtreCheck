@@ -357,7 +357,7 @@
       
     // For everything else, just look for matching events in the log file.
     else
-      event.details = [self logEntriesAround: date];
+      event.details = [[Model model] logEntriesAround: date];
     
     [[[Model model] diagnosticEvents] setObject: event forKey: event.name];
     }
@@ -373,60 +373,6 @@
     return [self.dateFormatter dateFromString: [parts objectAtIndex: 1]];
     
   return nil;
-  }
-
-// Collect log entires matching a date.
-- (NSString *) logEntriesAround: (NSDate *) date
-  {
-  NSDate * startDate = [date dateByAddingTimeInterval: -60*5];
-  NSDate * endDate = [date dateByAddingTimeInterval: 60*5];
-  
-  NSArray * lines = [[Model model] logEntries];
-  
-  __block BOOL matching = NO;
-  __block NSMutableString * result = [NSMutableString string];
-  
-  [lines
-    enumerateObjectsUsingBlock:
-      ^(id obj, NSUInteger idx, BOOL * stop)
-        {
-        NSString * line = (NSString *)obj;
-        
-        if([line length] >= 24)
-          {
-          NSString * dateString = [line substringToIndex: 24];
-        
-          NSDate * logDate =
-            [self.logDateFormatter dateFromString: dateString];
-        
-          if([endDate compare: logDate] == NSOrderedAscending)
-            *stop = YES;
-          
-          else if([startDate compare: logDate] == NSOrderedAscending)
-            matching = YES;
-
-          else
-            {
-            NSRange found =
-              [line
-                rangeOfCharacterFromSet:
-                  [NSCharacterSet whitespaceCharacterSet]];
-              
-            if(matching && (found.location == 0))
-              matching = YES;
-            else
-              matching = NO;
-            }
-          }
-          
-        if(matching)
-          {
-          [result appendString: line];
-          [result appendString: @"\n"];
-          }
-        }];
-    
-  return result;
   }
 
 // Collect just the first section for a CPU report header.

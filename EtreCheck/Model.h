@@ -70,6 +70,9 @@
 // Return true if there are log entries for a process.
 - (BOOL) hasLogEntries: (NSString *) name;
 
+// Collect log entires matching a date.
+- (NSString *) logEntriesAround: (NSDate *) date;
+
 // Create a details URL for a query string.
 - (NSAttributedString *) getDetailsURLFor: (NSString *) query;
 
