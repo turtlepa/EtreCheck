@@ -175,10 +175,6 @@
 		A5D0877819ECACF6004F52C2 /* NSArray+Etresoft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Etresoft.m"; sourceTree = "<group>"; };
 		A5D0877A19ECAD4E004F52C2 /* NSDictionary+Etresoft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Etresoft.h"; sourceTree = "<group>"; };
 		A5D0877B19ECAD4E004F52C2 /* NSDictionary+Etresoft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Etresoft.m"; sourceTree = "<group>"; };
-		A5D25B2619C3CD3B006728B8 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		A5D25B2719C3CD3B006728B8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A5D25B2819C3CD3B006728B8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		A5D25B2919C3CD3B006728B8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = de; path = de.lproj/Credits.rtf; sourceTree = "<group>"; };
 		A5D25B2B19C4D11F006728B8 /* TTTLocalizedPluralString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTLocalizedPluralString.h; path = EtreCheck/TTTLocalizedPluralString.h; sourceTree = "<group>"; };
 		A5D25B2C19C4D11F006728B8 /* TTTLocalizedPluralString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTLocalizedPluralString.m; path = EtreCheck/TTTLocalizedPluralString.m; sourceTree = "<group>"; };
 		A5E33C3D184CEBDF00ED59A0 /* ByteCountFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByteCountFormatter.h; sourceTree = "<group>"; };
@@ -450,7 +446,6 @@
 			knownRegions = (
 				en,
 				fr,
-				de,
 			);
 			mainGroup = A55BC15E15BF987D00D42EF1;
 			productRefGroup = A55BC16A15BF987D00D42EF1 /* Products */;
@@ -546,7 +541,6 @@
 			children = (
 				A540C6FF1873D5F800497BDE /* en */,
 				A540C7011873D5FC00497BDE /* fr */,
-				A5D25B2819C3CD3B006728B8 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -556,7 +550,6 @@
 			children = (
 				A55BC17715BF987D00D42EF1 /* en */,
 				A55BC1C915C0F4FA00D42EF1 /* fr */,
-				A5D25B2719C3CD3B006728B8 /* de */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -566,7 +559,6 @@
 			children = (
 				A55BC17D15BF987D00D42EF1 /* en */,
 				A55BC1CA15C0F4FA00D42EF1 /* fr */,
-				A5D25B2919C3CD3B006728B8 /* de */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -576,7 +568,6 @@
 			children = (
 				A55BC18315BF987D00D42EF1 /* en */,
 				A55BC1C815C0F4FA00D42EF1 /* fr */,
-				A5D25B2619C3CD3B006728B8 /* de */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
