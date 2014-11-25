@@ -482,7 +482,6 @@
     
   int errorCount = [errors intValue];
   
-  // TODO: Finish localization for this.
   if(errorCount)
     return
       [NSString

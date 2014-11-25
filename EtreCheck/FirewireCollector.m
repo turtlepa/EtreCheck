@@ -65,7 +65,6 @@
   }
 
 // Print a single Firewire device.
-// TODO: Shorten this.
 - (void) printFirewireDevice: (NSDictionary *) device
   indent: (NSString *) indent found: (BOOL *) found
   {

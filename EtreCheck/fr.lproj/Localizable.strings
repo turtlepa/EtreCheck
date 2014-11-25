@@ -214,3 +214,6 @@
 "Checking diagnostics information" = "Vérification des informations du diagnostic";
 "No details available" = "Aucun détail disponible";
 "Details for %@" = "Détails pour %@";
+"%d error (plural rule: zero)" = "aucune erreur\n";
+"%d error (plural rule: one)" = "une erreur";
+"%d error (plural rule: other)" = "%d erreurs\n";

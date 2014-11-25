@@ -422,7 +422,6 @@
   }
 
 // Print memory banks.
-// TODO: Shorten this.
 - (void) printMemoryBanks: (NSArray *) banks
   {
   NSString * lastBankID = nil;
