@@ -205,3 +205,12 @@
 "NO\n" = "NON\n";
 "YES - System files not being backed up\n" = "OUI - Les fichiers du système ne sont pas sauvegardés\n";
 "/Library/Logs/DiagnosticReports permissions" = "\tStandard users cannot read /Library/Logs/DiagnosticReports.\n\tRun as an administrator account to see more information.";
+"Details" = "Détails";
+"Checking information from log files" = "Vérification des informations des fichiers journaux";
+"Self test - passed" = "Examen de soi - succès";
+"Self test - failed" = "Examen de soi - échec";
+"/Library/Logs/DiagnosticReports permissions" = "Autorisations du dossier /Library/Logs/DiagnosticReports";
+"Diagnostics Information:" = "Informations du diagnostic :";
+"Checking diagnostics information" = "Vérification des informations du diagnostic";
+"No details available" = "Aucun détail disponible";
+"Details for %@" = "Détails pour %@";

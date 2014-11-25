@@ -74,19 +74,17 @@
   {
   [self showDetailPane];
     
-  // TODO: Localize this.
   [self.title
     setStringValue:
       [NSString
         stringWithFormat:
-          NSLocalizedString(@"Detail for %@", NULL), name]];
+          NSLocalizedString(@"Details for %@", NULL), name]];
   
   DiagnosticEvent * event =
     [[[Model model] diagnosticEvents] objectForKey: name];
   
   NSString * details = event.details;
   
-  // TODO: Localize this.
   if(![details length])
     details = NSLocalizedString(@"No details available", NULL);
     

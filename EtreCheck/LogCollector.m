@@ -29,7 +29,6 @@
 // Perform the collection.
 - (void) collect
   {
-  // TODO: Localize this.
   [self
     updateStatus:
       NSLocalizedString(@"Checking information from log files", NULL)];

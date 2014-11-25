@@ -128,7 +128,6 @@
   NSString * url =
     [NSString stringWithFormat: @"etrecheck://detail/%@", query];
   
-  // TODO: Localize this.
   [urlString
     appendString: NSLocalizedString(@"Details", NULL)
     attributes:

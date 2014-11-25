@@ -55,7 +55,6 @@
 // Perform the collection.
 - (void) collect
   {
-  // TODO: Localize this.
   [self
     updateStatus:
       NSLocalizedString(@"Checking diagnostics information", NULL)];
@@ -71,14 +70,12 @@
   
   if([[[Model model] diagnosticEvents] count] || insufficientPermissions)
     {
-    // TODO: Localize this.
     [self.result
       appendAttributedString:
         [self buildTitle: @"Diagnostics Information:"]];
       
     [self printDiagnostics];
     
-    // TODO: Localize this.
     if(insufficientPermissions)
       {
       [self.result appendString: @"\n"];
@@ -144,7 +141,6 @@
     
     NSString * details = [result objectForKey: @"spdiags_result_key"];
       
-    // TODO: Localize this.
     if([details isEqualToString: @"spdiags_passed_value"])
       {
       event.type = kSelfTestPass;
