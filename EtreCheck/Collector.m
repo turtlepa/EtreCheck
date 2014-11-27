@@ -12,6 +12,7 @@
 @implementation Collector
 
 @synthesize name = myName;
+@synthesize title = myTitle;
 @synthesize result = myResult;
 @synthesize progressEstimate = myProgressEstimate;
 @synthesize complete = myComplete;
@@ -64,12 +65,12 @@
 
 // Construct a title with a bold, blue font using a given anchor into
 // the online help.
-- (NSAttributedString *) buildTitle: (NSString *) title
+- (NSAttributedString *) buildTitle
   {
   NSMutableAttributedString * string = [NSMutableAttributedString new];
     
   [string
-    appendString: NSLocalizedString(title, NULL)
+    appendString: NSLocalizedString(self.title, NULL)
     attributes:
       @{
         NSFontAttributeName : [[Utilities shared] boldFont]
@@ -80,6 +81,8 @@
       stringWithFormat:
         @"http://www.etresoft.com/etrecheck_story#%@", self.name];
   
+  url = [NSString stringWithFormat: @"etrecheck://help/%@", self.name];
+
   [string
     appendString: NSLocalizedString(@"info", NULL)
     attributes:

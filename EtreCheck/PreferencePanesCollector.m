@@ -18,7 +18,10 @@
   self = [super init];
   
   if(self)
+    {
     self.name = @"preferencepanes";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+    }
     
   return self;
   }
@@ -49,9 +52,7 @@
         
       if([items count])
         {
-        [self.result
-          appendAttributedString:
-            [self buildTitle: @"3rd Party Preference Panes:"]];
+        [self.result appendAttributedString: [self buildTitle]];
         
         NSUInteger count = 0;
         

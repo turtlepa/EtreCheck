@@ -21,6 +21,7 @@
 #import "NSAttributedString+Etresoft.h"
 #import "NSDictionary+Etresoft.h"
 #import "DetailManager.h"
+#import "HelpManager.h"
 
 NSComparisonResult compareViews(id view1, id view2, void * context);
 
@@ -57,6 +58,7 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
 @synthesize userMessage = myUserMessage;
 @synthesize userMessgePanel = myUserMessagePanel;
 @synthesize detailManager = myDetailManager;
+@synthesize helpManager = myHelpManager;
 
 // Destructor.
 - (void) dealloc
@@ -137,6 +139,8 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
     
     if([manager isEqualToString: @"detail"])
       [self.detailManager showDetail: [[url path] lastPathComponent]];
+    else if([manager isEqualToString: @"help"])
+      [self.helpManager showDetail: [[url path] lastPathComponent]];
     }
   }
 
@@ -727,6 +731,15 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   [[self.logView enclosingScrollView] setDrawsBackground: YES];
   [[self.logView enclosingScrollView] setBorderType: NSBezelBorder];
   
+  [[NSNotificationCenter defaultCenter]
+    addObserver: self
+    selector: @selector(didScroll:)
+    name: NSViewBoundsDidChangeNotification
+    object: [[self.logView enclosingScrollView] contentView]];
+  
+  [[[self.logView enclosingScrollView] contentView]
+    setPostsBoundsChangedNotifications: YES];
+  
   dispatch_after(
     dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
     dispatch_get_main_queue(),
@@ -765,6 +778,13 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
         scrollRangeToVisible: NSMakeRange([self.log length] - 2, 1)];
       [self.logView scrollRangeToVisible: NSMakeRange(0, 1)];
     });
+  }
+
+// Handle a scroll change in the report view.
+- (void) didScroll: (NSNotification *) notification
+  {
+  [self.detailManager closeDetail: self];
+  [self.helpManager closeDetail: self];
   }
 
 // Notify the user that the report is done.

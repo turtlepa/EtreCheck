@@ -16,8 +16,10 @@
   
   if(self)
     {
-    self.progressEstimate = 0.3;
     self.name = @"launchagents";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
+    self.progressEstimate = 0.3;
     }
     
   return self;
@@ -43,9 +45,7 @@
   
   NSArray * files = [Utilities formatLines: result];
   
-  [self
-    formatPropertyListFiles: files
-    title: NSLocalizedString(@"Launch Agents:", NULL)];
+  [self printPropertyListFiles: files];
     
   dispatch_semaphore_signal(self.complete);
   }

@@ -21,6 +21,8 @@
   if(self)
     {
     self.name = @"vm";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
     self.progressEstimate = 10;
     }
     
@@ -36,9 +38,7 @@
 
   NSDictionary * vminfo = [self collectVirtualMemoryInformation];
     
-  [self.result
-    appendAttributedString:
-      [self buildTitle: @"Virtual Memory Information:"]];
+  [self.result appendAttributedString: [self buildTitle]];
 
   formatter = [[ByteCountFormatter alloc] init];
 

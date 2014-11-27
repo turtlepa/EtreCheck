@@ -16,8 +16,10 @@
   
   if(self)
     {
-    self.progressEstimate = 1.0;
     self.name = @"internetplugins";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
+    self.progressEstimate = 1.0;
     }
     
   return self;
@@ -29,9 +31,7 @@
   [self
     updateStatus: NSLocalizedString(@"Checking internet plug-ins", NULL)];
 
-  [self
-    parsePlugins: NSLocalizedString(@"Internet Plug-ins:", NULL)
-    path:  @"/Library/Internet Plug-Ins"];
+  [self parsePlugins: @"/Library/Internet Plug-Ins"];
     
   dispatch_semaphore_signal(self.complete);
   }

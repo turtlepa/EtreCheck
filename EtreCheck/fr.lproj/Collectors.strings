@@ -1,0 +1,36 @@
+/* 
+  Collectors.strings
+  EtreCheck
+
+  Created by John Daniel on 2014-11-26.
+  Copyright (c) 2014 Etresoft. All rights reserved.
+*/
+"applications" = "Applications :";
+"configurationfiles" = "Fichiers de configuration :";
+"cpu" = "L’utilisation du CPU par processus :";
+"diagnostics" = "Informations du diagnostic :";
+"disk" = "Informations des disques :";
+"firewire" = "Informations Firewire :";
+"fonts" = "Polices mauvaises :";
+"gatekeeper" = "Gatekeeper :";
+"hardware" = "Informations matérielles :";
+"kernelextensions" = "Extensions du noyau :";
+"loginitems" = "Éléments Ouverture :";
+"memory" = "L’utilisation de la mémoire par processus :";
+"preferencepanes" = "Panneaux de préférences tiers :";
+"safariextensions" = "Extensions de Safari :";
+"startupitems" = "Éléments de démarrage :";
+"systemsoftware" = "Logiciel du système :";
+"thunderbolt" = "Informations Thunderbolt :";
+"timemachine" = "Time Machine :";
+"usb" = "Informations USB :";
+"video" = "Informations vidéo :";
+"vm" = "Informations de la mémoire virtuelle :";
+"audioplugins" = "Plug-ins audios :";
+"internetplugins" = "Plug-ins internets :";
+"itunesplugins" = "Plug-ins iTunes :";
+"launchagents" = "Agents de lancement :";
+"launchdaemons" = "Daemons de lancements :";
+"systemlaunchagents" = "Agents de lancement systèmes avec un problème :";
+"systemlaunchdaemons" = "Daemons de lancement systèmes avec un problème :";
+"userlaunchagents" = "Agents de lancement pour l’utilisateur :";

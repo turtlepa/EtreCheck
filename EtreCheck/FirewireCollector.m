@@ -19,8 +19,10 @@
   
   if(self)
     {
+    self.name = @"firewire";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
     self.progressEstimate = 0.4;
-    self.name = @"firewireinformation";
     }
     
   return self;
@@ -95,9 +97,7 @@
     {
     if(!*found)
       {
-      [self.result
-        appendAttributedString:
-          [self buildTitle: @"Firewire Information:"]];
+      [self.result appendAttributedString: [self buildTitle]];
       
       *found = YES;
       }

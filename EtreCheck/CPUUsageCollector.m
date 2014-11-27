@@ -16,7 +16,10 @@
   self = [super init];
   
   if(self)
+    {
     self.name = @"cpu";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+    }
     
   return self;
   }
@@ -80,7 +83,7 @@
 - (void) printTopProcesses: (NSArray *) processes
   {
   [self.result
-    appendAttributedString: [self buildTitle: @"Top Processes by CPU:"]];
+    appendAttributedString: [self buildTitle]];
   
   NSUInteger count = 0;
   

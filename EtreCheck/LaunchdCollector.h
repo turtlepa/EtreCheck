@@ -17,9 +17,8 @@
 @property (retain) NSMutableSet * appleLaunchd;
 @property (assign) BOOL showExecutable;
 
-// Format a list of files.
-- (void) formatPropertyListFiles: (NSArray *) paths
-  title: (NSString *) title;
+// Print a list of files.
+- (void) printPropertyListFiles: (NSArray *) paths;
 
 // Release memory.
 + (void) cleanup;

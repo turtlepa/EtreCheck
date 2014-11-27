@@ -15,7 +15,10 @@
   self = [super init];
   
   if(self)
+    {
     self.name = @"userlaunchagents";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+    }
     
   return self;
   }
@@ -45,9 +48,7 @@
   
   NSArray * files = [Utilities formatLines: result];
   
-  [self
-    formatPropertyListFiles: files
-    title: NSLocalizedString(@"User Launch Agents:", NULL)];
+  [self printPropertyListFiles: files];
     
   dispatch_semaphore_signal(self.complete);
   }

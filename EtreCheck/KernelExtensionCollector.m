@@ -29,8 +29,10 @@
     {
     myExtensionsByLocation = [NSMutableDictionary new];
     
-    self.progressEstimate = 28.0;
     self.name = @"kernelextensions";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
+    self.progressEstimate = 28.0;
     }
     
   return self;
@@ -66,8 +68,7 @@
   // Now print the output.
   if([formattedOutput count])
     {
-    [self.result
-      appendAttributedString: [self buildTitle: @"Kernel Extensions:"]];
+    [self.result appendAttributedString: [self buildTitle]];
     
     for(NSAttributedString * output in formattedOutput)
       {

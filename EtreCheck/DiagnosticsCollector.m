@@ -26,6 +26,8 @@
   if(self)
     {
     self.name = @"diagnostics";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
     self.progressEstimate = 1;
     
     myDateFormatter = [[NSDateFormatter alloc] init];
@@ -70,9 +72,7 @@
   
   if([[[Model model] diagnosticEvents] count] || insufficientPermissions)
     {
-    [self.result
-      appendAttributedString:
-        [self buildTitle: @"Diagnostics Information:"]];
+    [self.result appendAttributedString: [self buildTitle]];
       
     [self printDiagnostics];
     

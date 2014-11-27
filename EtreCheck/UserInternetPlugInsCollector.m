@@ -15,7 +15,10 @@
   self = [super init];
   
   if(self)
+    {
     self.name = @"userinternetplugins";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+    }
     
   return self;
   }

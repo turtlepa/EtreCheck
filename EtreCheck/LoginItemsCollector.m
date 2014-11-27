@@ -18,8 +18,10 @@
   
   if(self)
     {
-    self.progressEstimate = 1.6;
     self.name = @"loginitems";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
+    self.progressEstimate = 1.6;
     }
     
   return self;
@@ -30,8 +32,7 @@
   {
   [self updateStatus: NSLocalizedString(@"Checking login items", NULL)];
 
-  [self.result
-    appendAttributedString: [self buildTitle: @"User Login Items:"]];
+  [self.result appendAttributedString: [self buildTitle]];
     
   NSArray * args =
     @[

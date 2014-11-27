@@ -10,7 +10,7 @@
 @interface PlugInsCollector : Collector
 
 // Parse plugins
-- (void) parsePlugins: (NSString *) type path: (NSString *) path;
+- (void) parsePlugins: (NSString *) path;
 
 // Parse user plugins
 - (void) parseUserPlugins: (NSString *) type path: (NSString *) path;

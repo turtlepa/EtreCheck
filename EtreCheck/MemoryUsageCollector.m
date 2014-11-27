@@ -17,7 +17,10 @@
   self = [super init];
   
   if(self)
+    {
     self.name = @"memory";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+    }
     
   return self;
   }
@@ -78,8 +81,7 @@
 // Print top processes by memory.
 - (void) printTopProcesses: (NSArray *) processes
   {
-  [self.result
-    appendAttributedString: [self buildTitle: @"Top Processes by Memory:"]];
+  [self.result appendAttributedString: [self buildTitle]];
   
   NSUInteger count = 0;
   

@@ -30,6 +30,8 @@
   if(self)
     {
     self.name = @"safariextensions";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
     myExtensions = [NSMutableDictionary new];
     }
     
@@ -58,8 +60,7 @@
   // Print the extensions.
   if([self.extensions count])
     {
-    [self.result
-      appendAttributedString: [self buildTitle: @"Safari Extensions:"]];
+    [self.result appendAttributedString: [self buildTitle]];
 
     for(NSString * name in self.extensions)
       [self printExtension: [self.extensions objectForKey: name]];

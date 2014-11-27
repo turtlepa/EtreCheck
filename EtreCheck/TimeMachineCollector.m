@@ -37,6 +37,7 @@
     excludedVolumeUUIDs = [[NSMutableSet alloc] init];
     
     self.name = @"timemachine";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
     }
     
   return self;
@@ -63,7 +64,7 @@
   if([[Model model] majorOSVersion] < 9)
     return;
     
-  [self.result appendAttributedString: [self buildTitle: @"Time Machine:"]];
+  [self.result appendAttributedString: [self buildTitle]];
 
   BOOL tmutilExists =
     [[NSFileManager defaultManager] fileExistsAtPath: @"/usr/bin/tmutil"];

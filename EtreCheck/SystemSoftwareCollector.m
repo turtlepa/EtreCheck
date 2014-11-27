@@ -21,8 +21,10 @@
   
   if(self)
     {
-    self.progressEstimate = 0.5;
     self.name = @"systemsoftware";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
+    self.progressEstimate = 0.5;
     }
     
   return self;
@@ -53,8 +55,7 @@
         
       if([items count])
         {
-        [self.result
-          appendAttributedString: [self buildTitle: @"System Software:"]];
+        [self.result appendAttributedString: [self buildTitle]];
         
         for(NSDictionary * item in items)
           [self printSystemSoftware: item];

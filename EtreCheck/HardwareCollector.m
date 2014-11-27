@@ -30,6 +30,8 @@
   if(self)
     {
     self.name = @"hardware";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
     self.progressEstimate = 8;
     
     // Do this in the constructor so the data is available before
@@ -118,9 +120,7 @@
         
       if([infos count])
         {
-        [self.result
-          appendAttributedString:
-            [self buildTitle: @"Hardware Information:"]];
+        [self.result appendAttributedString: [self buildTitle]];
 
         for(NSDictionary * info in infos)
           [self printMachineInformation: info];

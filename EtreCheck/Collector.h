@@ -11,6 +11,7 @@
 @interface Collector : NSObject
   {
   NSString * myName;
+  NSString * myTitle;
   double myProgressEstimate;
   NSMutableAttributedString * myResult;
   NSNumberFormatter * myFormatter;
@@ -19,6 +20,9 @@
 
 // The name of this collector.
 @property (retain) NSString * name;
+
+// The title for this collector.
+@property (retain) NSString * title;
 
 // An estimate of how long this collection will take.
 @property (assign) double progressEstimate;
@@ -38,7 +42,7 @@
 
 // Construct a title with a bold, blue font using a given anchor into
 // the online help.
-- (NSAttributedString *) buildTitle: (NSString *) title;
+- (NSAttributedString *) buildTitle;
   
 // Set tabs in the result.
 - (void) setTabs: (NSArray *) stops forRange: (NSRange) range;

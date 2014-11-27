@@ -21,8 +21,11 @@
   
   if(self)
     {
-    self.progressEstimate = 37.0;
     self.name = @"applications";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
+    self.progressEstimate = 37.0;
+
     genericApplication =
       [[NSWorkspace sharedWorkspace] iconForFileType: @".app"];
     }
@@ -35,7 +38,7 @@
   {
   [self updateStatus: NSLocalizedString(@"Checking applications", NULL)];
 
-  [self.result appendAttributedString: [self buildTitle: @"Applications:"]];
+  [self.result appendAttributedString: [self buildTitle]];
   
   // Get the applications.
   NSDictionary * applications = [self collectApplications];

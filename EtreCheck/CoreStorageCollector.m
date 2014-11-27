@@ -34,8 +34,10 @@
   
   if(self)
     {
-    self.progressEstimate = 1.0;
     self.name = @"corestorageinformation";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
+    self.progressEstimate = 1.0;
     }
     
   return self;

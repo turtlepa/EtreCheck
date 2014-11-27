@@ -169,8 +169,7 @@
   }
 
 // Format a list of files.
-- (void) formatPropertyListFiles: (NSArray *) paths
-  title: (NSString *) title
+- (void) printPropertyListFiles: (NSArray *) paths
   {
   NSUInteger start = [self.result length];
   
@@ -179,7 +178,7 @@
 
   if(formattedOutput)
     {
-    [self.result appendAttributedString: [self buildTitle: title]];
+    [self.result appendAttributedString: [self buildTitle]];
 
     [self.result appendAttributedString: formattedOutput];
 

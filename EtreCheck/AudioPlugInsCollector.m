@@ -15,7 +15,10 @@
   self = [super init];
   
   if(self)
+    {
     self.name = @"audioplugins";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+    }
     
   return self;
   }
@@ -26,9 +29,7 @@
   [self
     updateStatus: NSLocalizedString(@"Checking audio plug-ins", NULL)];
 
-  [self
-    parsePlugins: NSLocalizedString(@"Audio Plug-ins:", NULL)
-    path:  @"/Library/Audio/Plug-ins"];
+  [self parsePlugins: @"/Library/Audio/Plug-ins"];
     
   dispatch_semaphore_signal(self.complete);
   }

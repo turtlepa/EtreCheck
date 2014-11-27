@@ -18,8 +18,10 @@
   
   if(self)
     {
-    self.progressEstimate = 1.5;
     self.name = @"video";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
+    self.progressEstimate = 1.5;
     }
     
   return self;
@@ -59,8 +61,7 @@
 // Print video information.
 - (void) printVideoInformation: (NSArray *) infos
   {
-  [self.result
-    appendAttributedString: [self buildTitle: @"Video Information:"]];
+  [self.result appendAttributedString: [self buildTitle]];
   
   for(NSDictionary * info in infos)
     {

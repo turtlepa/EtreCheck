@@ -20,8 +20,10 @@
   
   if(self)
     {
-    self.progressEstimate = 0.4;
     self.name = @"startupitems";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
+    self.progressEstimate = 0.4;
     }
     
   return self;
@@ -56,8 +58,8 @@
         
       if([items count])
         {
-        [self.result
-          appendAttributedString: [self buildTitle: @"Startup Items:"]];
+        // TODO: Update startup items.
+        [self.result appendAttributedString: [self buildTitle]];
         
         for(NSDictionary * item in items)
           [self printStartupItem: item];

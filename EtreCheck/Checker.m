@@ -398,12 +398,12 @@
   [result appendAttributedString: [self getResult: @"hardware"]];
   [result appendAttributedString: [self getResult: @"video"]];
   [result appendAttributedString: [self getResult: @"systemsoftware"]];
-  [result appendAttributedString: [self getResult: @"diskinformation"]];
-  [result appendAttributedString: [self getResult: @"usbinformation"]];
+  [result appendAttributedString: [self getResult: @"disk"]];
+  [result appendAttributedString: [self getResult: @"usb"]];
   [result
-    appendAttributedString: [self getResult: @"firewireinformation"]];
+    appendAttributedString: [self getResult: @"firewire"]];
   [result
-    appendAttributedString: [self getResult: @"thunderboltinformation"]];
+    appendAttributedString: [self getResult: @"thunderbolt"]];
   [result appendAttributedString: [self getResult: @"configurationfiles"]];
   [result appendAttributedString: [self getResult: @"gatekeeper"]];
   [result appendAttributedString: [self getResult: @"applications"]];

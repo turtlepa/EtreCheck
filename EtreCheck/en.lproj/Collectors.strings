@@ -1,0 +1,36 @@
+/* 
+  Collectors.strings
+  EtreCheck
+
+  Created by John Daniel on 2014-11-26.
+  Copyright (c) 2014 Etresoft. All rights reserved.
+*/
+"applications" = "Applications:";
+"configurationfiles" = "Configuration files:";
+"cpu" = "Top Processes by CPU:";
+"diagnostics" = "Diagnostics Information:";
+"disk" = "Disk Information:";
+"firewire" = "Firewire Information:";
+"fonts" = "Bad Fonts:";
+"gatekeeper" = "Gatekeeper:";
+"hardware" = "Hardware Information:";
+"kernelextensions" = "Kernel Extensions:";
+"loginitems" = "User Login Items:";
+"memory" = "Top Processes by Memory:";
+"preferencepanes" = "3rd Party Preference Panes:";
+"safariextensions" = "Safari Extensions:";
+"startupitems" = "Startup Items:";
+"systemsoftware" = "System Software:";
+"thunderbolt" = "Thunderbolt Information:";
+"timemachine" = "Time Machine:";
+"usb" = "USB Information:";
+"video" = "Video Information:";
+"vm" = "Virtual Memory Information:";
+"audioplugins" = "Audio Plug-ins:";
+"internetplugins" = "Internet Plug-ins:";
+"itunesplugins" = "iTunes Plug-ins:";
+"launchagents" = "Launch Agents:";
+"launchdaemons" = "Launch Daemons:";
+"systemlaunchagents" = "Problem System Launch Agents:";
+"systemlaunchdaemons" = "Problem System Launch Daemons:";
+"userlaunchagents" = "User Launch Agents:";

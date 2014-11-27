@@ -17,8 +17,10 @@
   
   if(self)
     {
-    self.progressEstimate = 0.5;
     self.name = @"configurationfiles";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
+    self.progressEstimate = 0.5;
     }
     
   return self;
@@ -49,7 +51,7 @@
   if(haveChanges)
     {
     [self.result
-      appendAttributedString: [self buildTitle: @"Configuration files:"]];
+      appendAttributedString: [self buildTitle]];
     
     // Print changes to /etc/sysctl.conf.
     if(haveSysctl)

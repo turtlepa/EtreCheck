@@ -42,8 +42,10 @@
   
   if(self)
     {
+    self.name = @"disk";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
     self.progressEstimate = 0.4;
-    self.name = @"diskinformation";
     }
     
   return self;
@@ -70,8 +72,7 @@
   
     if(plist && [plist count])
       {
-      [self.result
-        appendAttributedString: [self buildTitle: @"Disk Information:"]];
+      [self.result appendAttributedString: [self buildTitle]];
       
       NSDictionary * controllers =
         [[plist objectAtIndex: 0] objectForKey: @"_items"];

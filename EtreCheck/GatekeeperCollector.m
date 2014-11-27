@@ -28,7 +28,10 @@ GatekeeperSetting;
   self = [super init];
   
   if(self)
+    {
     self.name = @"gatekeeper";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+    }
     
   return self;
   }
@@ -44,7 +47,7 @@ GatekeeperSetting;
   if([[Model model] majorOSVersion] < kMountainLion)
     return;
     
-  [self.result appendAttributedString: [self buildTitle: @"Gatekeeper:"]];
+  [self.result appendAttributedString: [self buildTitle]];
 
   BOOL gatekeeperExists =
     [[NSFileManager defaultManager] fileExistsAtPath: @"/usr/sbin/spctl"];

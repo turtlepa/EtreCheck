@@ -14,14 +14,14 @@
 @implementation PlugInsCollector
 
 // Parse plugins
-- (void) parsePlugins: (NSString *) type path: (NSString *) path
+- (void) parsePlugins: (NSString *) path
   {
   // Find all the plug-in bundles in the given path.
   NSDictionary * bundles = [self parseFiles: path];
   
   if([bundles count])
     {
-    [self.result appendAttributedString: [self buildTitle: type]];
+    [self.result appendAttributedString: [self buildTitle]];
 
     for(NSString * filename in bundles)
       {
@@ -257,8 +257,7 @@
 - (void) parseUserPlugins: (NSString *) type path: (NSString *) path
   {
   [self
-    parsePlugins: type
-    path: [NSHomeDirectory() stringByAppendingPathComponent: path]];
+    parsePlugins: [NSHomeDirectory() stringByAppendingPathComponent: path]];
   }
 
 @end

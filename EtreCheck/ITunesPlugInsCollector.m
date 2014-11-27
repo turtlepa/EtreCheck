@@ -15,7 +15,10 @@
   self = [super init];
   
   if(self)
+    {
     self.name = @"itunesplugins";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+    }
     
   return self;
   }
@@ -26,9 +29,7 @@
   [self
     updateStatus: NSLocalizedString(@"Checking iTunes plug-ins", NULL)];
 
-  [self
-    parsePlugins: NSLocalizedString(@"iTunes Plug-ins:", NULL)
-    path:  @"/Library/iTunes/iTunes Plug-ins"];
+  [self parsePlugins: @"/Library/iTunes/iTunes Plug-ins"];
     
   dispatch_semaphore_signal(self.complete);
   }

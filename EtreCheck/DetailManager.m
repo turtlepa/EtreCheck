@@ -163,7 +163,7 @@
     {
     NSSize size = [self.detail contentSize];
     
-    size.height = (height * (numberOfLines + 1)) + 106;
+    size.height = (height * (numberOfLines + 1)) + 80;
     
     if(size.height > kMaxHeight)
       size.height = kMaxHeight;

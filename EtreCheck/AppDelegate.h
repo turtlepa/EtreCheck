@@ -8,6 +8,7 @@
 
 @class SlideshowView;
 @class DetailManager;
+@class HelpManager;
 
 @interface AppDelegate : NSObject
   <NSApplicationDelegate, NSUserNotificationCenterDelegate>
@@ -44,6 +45,7 @@
   BOOL launchDAvailable;
   
   DetailManager * myDetailManager;
+  HelpManager * myHelpManager;
   }
   
 @property (retain) IBOutlet NSWindow * window;
@@ -71,6 +73,7 @@
 @property (retain) NSAttributedString * userMessage;
 @property (retain) IBOutlet NSWindow * userMessgePanel;
 @property (retain) IBOutlet DetailManager * detailManager;
+@property (retain) IBOutlet HelpManager * helpManager;
 
 // Start the report.
 - (IBAction) start: (id) sender;

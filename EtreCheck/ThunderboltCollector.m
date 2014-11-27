@@ -19,8 +19,10 @@
   
   if(self)
     {
+    self.name = @"thunderbolt";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
     self.progressEstimate = 0.4;
-    self.name = @"thunderboltinformation";
     }
     
   return self;
@@ -75,9 +77,7 @@
     {
     if(!*found)
       {
-      [self.result
-        appendAttributedString:
-          [self buildTitle: @"Thunderbolt Information:"]];
+      [self.result appendAttributedString: [self buildTitle]];
       
       *found = YES;
       }

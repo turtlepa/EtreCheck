@@ -20,6 +20,7 @@
                 <outlet property="demonImage" destination="PBo-4n-aK2" id="x01-Zs-ecw"/>
                 <outlet property="detailManager" destination="91K-cv-wWe" id="9WT-yE-oIo"/>
                 <outlet property="finderIcon" destination="YNi-t0-nyG" id="VwO-Jj-e1b"/>
+                <outlet property="helpManager" destination="OAP-T5-MR2" id="xX9-71-M4r"/>
                 <outlet property="logView" destination="rRU-vM-wce" id="5SF-dE-SRO"/>
                 <outlet property="logWindow" destination="LC3-aK-O61" id="D9A-nq-J3f"/>
                 <outlet property="machineIcon" destination="kxf-sE-hK4" id="g5f-Le-vgx"/>
@@ -38,14 +39,14 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="91K-cv-wWe" userLabel="Detail Manager" customClass="DetailManager">
             <connections>
-                <outlet property="contentView" destination="LrJ-81-PLR" id="fgg-SN-pcl"/>
+                <outlet property="contentView" destination="LrJ-81-PLR" id="9Rs-fz-70U"/>
                 <outlet property="drawer" destination="e8z-wh-oG8" id="xgY-ts-6nD"/>
                 <outlet property="popoverViewController" destination="CD6-Ts-2gu" id="rh0-bf-m56"/>
                 <outlet property="textView" destination="9wF-Yp-vPY" id="pCh-ol-yRF"/>
                 <outlet property="title" destination="7aS-2D-TCp" id="fnK-Eu-gel"/>
             </connections>
         </customObject>
-        <drawer trailingOffset="15" id="e8z-wh-oG8">
+        <drawer trailingOffset="15" id="e8z-wh-oG8" userLabel="Detail Drawer">
             <size key="contentSize" width="100" height="100"/>
             <size key="maxContentSize" width="10000" height="10000"/>
             <connections>
@@ -56,6 +57,27 @@
         <viewController id="CD6-Ts-2gu" userLabel="Detail Popover View Controller">
             <connections>
                 <outlet property="view" destination="TdQ-Ra-PPP" id="78X-xz-HJb"/>
+            </connections>
+        </viewController>
+        <customObject id="OAP-T5-MR2" userLabel="Help Manager" customClass="HelpManager">
+            <connections>
+                <outlet property="contentView" destination="LrJ-81-PLR" id="WeX-ob-JLZ"/>
+                <outlet property="drawer" destination="cgp-eo-bq3" id="0tF-sk-xAS"/>
+                <outlet property="popoverViewController" destination="YSL-a6-4F4" id="icG-sM-o4U"/>
+                <outlet property="title" destination="B64-4Y-HGo" id="My9-Dg-i1j"/>
+            </connections>
+        </customObject>
+        <drawer preferredEdge="minX" trailingOffset="15" id="cgp-eo-bq3" userLabel="Help Drawer">
+            <size key="contentSize" width="100" height="100"/>
+            <size key="maxContentSize" width="10000" height="10000"/>
+            <connections>
+                <outlet property="contentView" destination="nCU-Ry-DLu" id="5nR-by-gfk"/>
+                <outlet property="parentWindow" destination="HCb-1A-LX1" id="7ES-TQ-VAp"/>
+            </connections>
+        </drawer>
+        <viewController id="YSL-a6-4F4" userLabel="Help Popover View Controller">
+            <connections>
+                <outlet property="view" destination="nCU-Ry-DLu" id="atU-qN-wlc"/>
             </connections>
         </viewController>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
@@ -955,20 +977,20 @@ Gw
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="TSS-HM-CJH">
-                    <rect key="frame" x="1" y="61" width="240" height="155"/>
+                    <rect key="frame" x="1" y="45" width="240" height="181"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="8lt-UL-p23">
                         <rect key="frame" x="1" y="1" width="223" height="133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="panel" verticallyResizable="YES" id="9wF-Yp-vPY">
-                                <rect key="frame" x="0.0" y="0.0" width="223" height="153"/>
+                                <rect key="frame" x="0.0" y="0.0" width="223" height="179"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="238" height="153"/>
+                                <size key="minSize" width="238" height="179"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="238" height="153"/>
+                                <size key="minSize" width="238" height="179"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                             </textView>
                         </subviews>
@@ -984,7 +1006,7 @@ Gw
                     </scroller>
                 </scrollView>
                 <button verticalHuggingPriority="750" id="PKc-FO-wiI">
-                    <rect key="frame" x="82" y="13" width="76" height="32"/>
+                    <rect key="frame" x="82" y="5" width="76" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Hx1-1F-S0i">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -995,16 +1017,55 @@ Gw
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="7aS-2D-TCp">
-                    <rect key="frame" x="18" y="224" width="205" height="17"/>
+                    <rect key="frame" x="18" y="234" width="205" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="ejO-pC-dA9">
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>
-            <point key="canvasLocation" x="-168.5" y="101.5"/>
+            <point key="canvasLocation" x="-200.5" y="-23.5"/>
+        </customView>
+        <customView id="nCU-Ry-DLu" userLabel="Help View">
+            <rect key="frame" x="0.0" y="0.0" width="241" height="261"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button verticalHuggingPriority="750" id="5iF-mu-oJy">
+                    <rect key="frame" x="82" y="5" width="76" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kNI-Zd-Phb">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="closeDetail:" target="OAP-T5-MR2" id="mZn-Vf-SWb"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="B64-4Y-HGo">
+                    <rect key="frame" x="18" y="234" width="205" height="17"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="z6N-iJ-6fw">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="2ht-Co-VnW">
+                    <rect key="frame" x="18" y="41" width="205" height="185"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Multiline Label" id="Qgc-jY-jcQ">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="OAP-T5-MR2" name="value" keyPath="self.details" id="jhA-Fe-gjo"/>
+                    </connections>
+                </textField>
+            </subviews>
+            <point key="canvasLocation" x="-244.5" y="234.5"/>
         </customView>
     </objects>
     <resources>

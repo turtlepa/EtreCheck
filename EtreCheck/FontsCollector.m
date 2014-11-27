@@ -19,8 +19,10 @@
   
   if(self)
     {
-    self.progressEstimate = 3.0;
     self.name = @"fonts";
+    self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
+    self.progressEstimate = 3.0;
     }
     
   return self;
@@ -35,7 +37,7 @@
   
   if([badFonts count])
     {
-    [self.result appendAttributedString: [self buildTitle: @"Bad Fonts:"]];
+    [self.result appendAttributedString: [self buildTitle]];
     
     for(NSDictionary * font in badFonts)
       {
