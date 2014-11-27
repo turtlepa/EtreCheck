@@ -74,7 +74,6 @@
   {
   [self showDetailPane];
     
-  // TODO: Localize this.
   [self.title
     setStringValue:
       [NSString
@@ -84,7 +83,6 @@
   
   NSString * details = NSLocalizedStringFromTable(name, @"Help", NULL);
   
-  // TODO: Localize this.
   if(![details length])
     details = NSLocalizedString(@"No help available", NULL);
     

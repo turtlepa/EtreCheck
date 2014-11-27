@@ -142,7 +142,7 @@
 "Gatekeeper:" = "Gatekeeper :";
 " [Recovery]" = " [Restauration]";
 "info" = " ℹ️";
-"startupitemsdeprecated" = "\tLes éléments de démarrage sont obsolètes et ne fonctionnent plus dans les futures versions d’OS X\n";
+"startupitemsdeprecated" = "\tLes éléments de démarrage sont obsolètes avec OS X Yosemite\n";
 "Quit and go to update" = "Qutter et mettre à jour";
 "EtreCheck Report" = "Rapport EtreCheck";
 "Problem description:\n" = "Description du problème :\n";
@@ -187,3 +187,4 @@
 "%d error (plural rule: one)" = "une erreur";
 "%d error (plural rule: other)" = "%d erreurs\n";
 "Help for %@" = "Aide pour %@";
+"No help available" = "Aucune aide disponible";

@@ -58,7 +58,6 @@
         
       if([items count])
         {
-        // TODO: Update startup items.
         [self.result appendAttributedString: [self buildTitle]];
         
         for(NSDictionary * item in items)
