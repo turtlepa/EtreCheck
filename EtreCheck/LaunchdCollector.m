@@ -248,8 +248,12 @@
     }
 
   [output appendAttributedString: [self formatPropertyListStatus: status]];
+  
   [output appendString: [status objectForKey: kFilename]];
-  [output appendAttributedString: [self formatExtraContent: status]];
+  
+  [output
+    appendAttributedString: [self formatExtraContent: status for: path]];
+  
   [output appendString: @"\n"];
   
   return YES;
@@ -286,7 +290,7 @@
     return
       @{
         kApple : [NSNumber numberWithBool: [self isAppleFile: file]],
-        kFilename : [self sanitizeFilename: file],
+        kFilename : [Utilities sanitizeFilename: file],
         kHidden : [NSNumber numberWithBool: [file hasPrefix: @"."]],
         kStatus : jobStatus,
         kExecutable : executable,
@@ -297,7 +301,7 @@
   return
     @{
       kApple : [NSNumber numberWithBool: [self isAppleFile: file]],
-      kFilename : [self sanitizeFilename: file],
+      kFilename : [Utilities sanitizeFilename: file],
       kHidden : [NSNumber numberWithBool: [file hasPrefix: @"."]],
       kStatus : jobStatus,
       kExecutable : executable,
@@ -373,103 +377,6 @@
   return NO;
   }
 
-// Make a file name more presentable.
-- (NSString *) sanitizeFilename: (NSString *) file
-  {
-  NSString * prettyFile = file;
-  
-  // What are you trying to hide?
-  if([file hasPrefix: @"."])
-    prettyFile =
-      [NSString
-        stringWithFormat: NSLocalizedString(@"%@ (hidden)", NULL), file];
-
-  // Silly Apple.
-  else if([file hasPrefix: @"com.apple.CSConfigDotMacCert-"])
-    prettyFile = [self sanitizeMobileMe: file];
-
-  // What are you trying to expose?
-  else if([file hasPrefix: @"com.facebook.videochat."])
-    prettyFile = [self sanitizeFacebook: file];
-
-  // What are you trying to expose?
-  else if([file hasPrefix: @"com.adobe.ARM."])
-    prettyFile = @"com.adobe.ARM.[...].plist";
-
-  // I don't want to see it.
-  else if([file length] > 76)
-    {
-    NSString * extension = [file pathExtension];
-    
-    prettyFile =
-      [NSString
-        stringWithFormat:
-          @"%@...%@", [file substringToIndex: 40], extension];
-    }
-    
-  return prettyFile;
-  }
-
-// Apple used to put the user's name into a file name.
-- (NSString *) sanitizeMobileMe: (NSString *) file
-  {
-  NSScanner * scanner = [NSScanner scannerWithString: file];
-
-  BOOL found =
-    [scanner
-      scanString: @"com.apple.CSConfigDotMacCert-" intoString: NULL];
-
-  if(!found)
-    return file;
-    
-  found = [scanner scanUpToString: @"@" intoString: NULL];
-
-  if(!found)
-    return file;
-    
-  NSString * domain = nil;
-  
-  found = [scanner scanUpToString: @".com-" intoString: & domain];
-
-  if(!found)
-    return file;
-
-  found = [scanner scanString: @".com-" intoString: NULL];
-
-  if(!found)
-    return file;
-    
-  NSString * suffix = nil;
-
-  found = [scanner scanUpToString: @"\n" intoString: & suffix];
-
-  if(!found)
-    return file;
-    
-  return
-    [NSString
-      stringWithFormat:
-        @"com.apple.CSConfigDotMacCert-[...]%@.com-%@", domain, suffix];
-  }
-
-/* Facebook puts the users name in a filename too. */
-- (NSString *) sanitizeFacebook: (NSString *) file
-  {
-  NSScanner * scanner = [NSScanner scannerWithString: file];
-
-  BOOL found =
-    [scanner
-      scanString: @"com.facebook.videochat." intoString: NULL];
-
-  if(!found)
-    return file;
-    
-  [scanner scanUpToString: @".plist" intoString: NULL];
-
-  return
-    NSLocalizedString(@"com.facebook.videochat.[redacted].plist", NULL);
-  }
-
 // Collect the executable of the launchd item.
 - (NSArray *) collectLaunchdItemExecutable: (NSDictionary *) plist
   {
@@ -526,7 +433,7 @@
 - (NSAttributedString *) formatPropertyListStatus: (NSDictionary *) status
   {
   NSString * statusString = NSLocalizedString(@"[not loaded]", NULL);
-  NSColor * color = [[Utilities shared] gray];;
+  NSColor * color = [[Utilities shared] gray];
   
   NSString * statusCode = [status objectForKey: kStatus];
   
@@ -571,10 +478,34 @@
 
 // Include any extra content that may be useful.
 - (NSAttributedString *) formatExtraContent: (NSDictionary *) status
+  for: (NSString *) path
+  {
+  if([[Model model] isAdware: path])
+    {
+    NSString * adware = [[[Model model] adwareFiles] objectForKey: path];
+    
+    NSAttributedString * removeLink =
+      [self generateRemoveAdwareLink: adware];
+
+    if(removeLink)
+      {
+      NSMutableAttributedString * extra =
+        [[NSMutableAttributedString alloc] init];
+  
+      [extra appendAttributedString: removeLink];
+      
+      return [extra autorelease];
+      }
+    }
+
+  return [self formatSupportLink: status];
+  }
+
+- (NSAttributedString *) formatSupportLink: (NSDictionary *) status
   {
   NSMutableAttributedString * extra =
     [[NSMutableAttributedString alloc] init];
-  
+
   // Get the support link.
   if([[status objectForKey: kSupportURL] length])
     {

@@ -8,6 +8,7 @@
 #import "DiagnosticEvent.h"
 #import "NSMutableAttributedString+Etresoft.h"
 #import "Utilities.h"
+#import "AdwareCollector.h"
 
 @implementation Model
 
@@ -22,6 +23,7 @@
 @synthesize processes = myProcesses;
 @synthesize model = myModel;
 @synthesize diagnosticEvents = myDiagnosticEvents;
+@synthesize adwareFiles = myAdwareFiles;
 
 // Return the singeton of shared values.
 + (Model *) model
@@ -50,6 +52,7 @@
     myCoreStorageVolumes = [NSMutableDictionary new];
     myDiskErrors = [NSMutableDictionary new];
     myDiagnosticEvents = [NSMutableDictionary new];
+    myAdwareFiles = [NSMutableDictionary new];
     }
     
   return self;
@@ -58,6 +61,7 @@
 // Destructor.
 - (void) dealloc
   {
+  self.adwareFiles = nil;
   self.diagnosticEvents = nil;
   self.diskErrors = nil;
   self.volumes = nil;
@@ -167,6 +171,18 @@
       }];
   
   return [urlString autorelease];
+  }
+
+// Is this file an adware file?
+- (BOOL) isAdware: (NSString *) path
+  {
+  return [self.adwareFiles objectForKey: path];
+  }
+
+// What kind of adware is this?
+- (NSString *) adwareType: (NSString *) path
+  {
+  return [self.adwareFiles objectForKey: path];
   }
 
 @end

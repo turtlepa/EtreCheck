@@ -67,4 +67,7 @@
 // the path.
 + (NSString *) formatExecutable: (NSArray *) parts;
 
+// Make a file name more presentable.
++ (NSString *) sanitizeFilename: (NSString *) file;
+
 @end

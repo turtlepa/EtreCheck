@@ -59,6 +59,7 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
 @synthesize userMessgePanel = myUserMessagePanel;
 @synthesize detailManager = myDetailManager;
 @synthesize helpManager = myHelpManager;
+@synthesize adwareManager = myAdwareManager;
 
 // Destructor.
 - (void) dealloc
@@ -141,6 +142,8 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
       [self.detailManager showDetail: [[url path] lastPathComponent]];
     else if([manager isEqualToString: @"help"])
       [self.helpManager showDetail: [[url path] lastPathComponent]];
+    else if([manager isEqualToString: @"adware"])
+      [self.adwareManager showDetail: [[url path] lastPathComponent]];
     }
   }
 
@@ -785,6 +788,7 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   {
   [self.detailManager closeDetail: self];
   [self.helpManager closeDetail: self];
+  [self.adwareManager closeDetail: self];
   }
 
 // Notify the user that the report is done.

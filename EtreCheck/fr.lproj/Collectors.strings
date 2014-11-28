@@ -16,7 +16,7 @@
 "hardware" = "Informations matérielles :";
 "kernelextensions" = "Extensions du noyau :";
 "loginitems" = "Éléments Ouverture :";
-"memory" = "L’utilisation de la mémoire par processus :";
+"memory" = "L’utilisation de la RAM par processus :";
 "preferencepanes" = "Panneaux de préférences tiers :";
 "safariextensions" = "Extensions de Safari :";
 "startupitems" = "Éléments de démarrage :";
@@ -34,3 +34,4 @@
 "systemlaunchagents" = "Agents de lancement systèmes avec un problème :";
 "systemlaunchdaemons" = "Daemons de lancement systèmes avec un problème :";
 "userlaunchagents" = "Agents de lancement pour l’utilisateur :";
+"adware" = "Adware :";

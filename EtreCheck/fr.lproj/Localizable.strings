@@ -41,6 +41,7 @@
 "Checking Gatekeeper information" = "Vérification des informations Gatekeeper";
 "Checking software" = "Vérification du logiciel";
 "Checking daemons and agents" = "Vérification des daemons et des agents";
+"Checking for adware" = "Vérification de l’adware";
 "model" = "modèle";
 "%@S.M.A.R.T. Status: %@\n" = "%@Statut S.M.A.R.T. : %@\n";
 "%@S.M.A.R.T. Status: Verified\n" = "%@Statut S.M.A.R.T. : Vérifié\n";
@@ -91,6 +92,7 @@
 "[running]" = "[en marche]";
 "[Unknown]" = "[Inconnu]";
 "[System]" = "[Système]";
+"\t[Adware!]\t" = "\t[Adware !]\t";
 "%@ (hidden)" = "%@ (caché)";
 "Hidden" = "Caché";
 "\tThere was a problem retrieving launchd job status.\n" = "\tImpossible de trouver le status des taches launchd\n";
@@ -122,7 +124,7 @@
 "applesupportforums" = "https://discussions.apple.com";
 " - Corrupt!" = " - Corrompu !";
 " - Count: %d" = " - Nombre : %d";
-"\t/etc/sysctl.conf - Exists\n" = "\t/etc/sysctl.conf - Existant\n";
+"\t%@ - Exists\n" = "\t%@ - Existant\n";
 "%@[redacted]%@" = "%@[expurgé]%@";
 "com.facebook.videochat.[redacted].plist" = "com.facebook.videochat.[expurgé].plist";
 "Oracle recommends %@" = "Oracle recommande %@";
@@ -188,3 +190,9 @@
 "%d error (plural rule: other)" = "%d erreurs\n";
 "Help for %@" = "Aide pour %@";
 "No help available" = "Aucune aide disponible";
+"About geneio adware" = "À propos de l’adware Geneio";
+"About conduit adware" = "À propos de l’adware Conduit";
+"About downlite adware" = "À propos de l’adware Downlite";
+"adwaredetails1" = "EtreCheck a détecté que votre Macintosh peut être infecté par adware. Apple a publié cette liste des fichiers installés par types communs d’adware :\n\n";
+"adwaredetails2" = "\n\nEtreCheck á trouvé les fichiers suivants qui correspondent à la liste d’Apple:\n\n";
+"adwaredetails3" = "\nLa meilleure façon de supprimer ce logiciel est de télécharger et lancer AdwareMedic, un programme écrit par un autre membre de longue séjour chez Apple Support Communities.";

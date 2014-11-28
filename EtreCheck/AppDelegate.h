@@ -9,6 +9,7 @@
 @class SlideshowView;
 @class DetailManager;
 @class HelpManager;
+@class AdwareManager;
 
 @interface AppDelegate : NSObject
   <NSApplicationDelegate, NSUserNotificationCenterDelegate>
@@ -46,6 +47,7 @@
   
   DetailManager * myDetailManager;
   HelpManager * myHelpManager;
+  AdwareManager * myAdwareManager;
   }
   
 @property (retain) IBOutlet NSWindow * window;
@@ -74,6 +76,7 @@
 @property (retain) IBOutlet NSWindow * userMessgePanel;
 @property (retain) IBOutlet DetailManager * detailManager;
 @property (retain) IBOutlet HelpManager * helpManager;
+@property (retain) IBOutlet AdwareManager * adwareManager;
 
 // Start the report.
 - (IBAction) start: (id) sender;

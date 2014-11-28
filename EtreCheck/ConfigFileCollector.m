@@ -30,15 +30,12 @@
 - (void) collect
   {
   [self
-    updateStatus:
-      NSLocalizedString(@"Checking configuration files", NULL)];
+    updateStatus: NSLocalizedString(@"Checking configuration files", NULL)];
 
-  // See if /etc/sysctl.conf exists.
-  BOOL haveSysctl =
-    [[NSFileManager defaultManager] fileExistsAtPath: @"/etc/sysctl.conf"];
+  NSArray * configFiles = [self existingConfigFiles];
   
-  BOOL haveChanges = haveSysctl;
-  
+  BOOL haveChanges = [configFiles count] > 0;
+    
   // See if /etc/hosts has any changes or is corrupt.
   BOOL corrupt = NO;
   
@@ -50,14 +47,14 @@
   // Only print this section if I have changes.
   if(haveChanges)
     {
-    [self.result
-      appendAttributedString: [self buildTitle]];
+    [self.result appendAttributedString: [self buildTitle]];
     
-    // Print changes to /etc/sysctl.conf.
-    if(haveSysctl)
+    // Print changes to configFiles.
+    for(NSString * configFile in configFiles)
       [self.result
         appendString:
-          NSLocalizedString(@"\t/etc/sysctl.conf - Exists\n", NULL)];
+          [NSString stringWithFormat:
+            NSLocalizedString(@"\t%@ - Exists\n", NULL), configFile]];
       
     // Print changes to /etc/hosts.
     [self printHostsStatus: corrupt count: hostsCount];
@@ -66,6 +63,24 @@
     }
     
   dispatch_semaphore_signal(self.complete);
+  }
+
+// Find existing configuration files.
+- (NSArray *) existingConfigFiles
+  {
+  NSMutableArray * files = [NSMutableArray array];
+  
+  NSFileManager * fileManager = [NSFileManager defaultManager];
+  
+  // See if /etc/sysctl.conf exists.
+  if([fileManager fileExistsAtPath: @"/etc/sysctl.conf"])
+    [files addObject: @"/etc/sysctl.conf"];
+  
+  // See if /etc/launchd.conf exists.
+  if([fileManager fileExistsAtPath: @"/etc/launchd.conf"])
+    [files addObject: @"/etc/launchd.conf"];
+    
+  return files;
   }
 
 // Collect the number of changes to /etc/hosts and its status.

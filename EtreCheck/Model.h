@@ -29,6 +29,7 @@
   NSDictionary * myProcesses;
   NSString * myModel;
   NSMutableDictionary * myDiagnosticEvents;
+  NSMutableDictionary * myAdwareFiles;
   }
 
 // Keep track of the OS version.
@@ -64,6 +65,9 @@
 // Diagnostic events.
 @property (retain) NSMutableDictionary * diagnosticEvents;
 
+// Adware files.
+@property (retain) NSMutableDictionary * adwareFiles;
+
 // Return the singeton of shared values.
 + (Model *) model;
 
@@ -75,5 +79,11 @@
 
 // Create a details URL for a query string.
 - (NSAttributedString *) getDetailsURLFor: (NSString *) query;
+
+// Is this file an adware file?
+- (BOOL) isAdware: (NSString *) path;
+
+// What kind of adware is this?
+- (NSString *) adwareType: (NSString *) path;
 
 @end

@@ -63,4 +63,7 @@
 // Find the maximum of two version number strings.
 - (NSString *) maxVersion: (NSArray *) versions;
 
+// Generate a "remove adware" link.
+- (NSAttributedString *) generateRemoveAdwareLink: (NSString *) name;
+
 @end

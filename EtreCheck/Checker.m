@@ -41,6 +41,7 @@
 #import "Utilities.h"
 #import "Model.h"
 #import "LogCollector.h"
+#import "AdwareCollector.h"
 
 // Perform the check.
 @implementation Checker
@@ -108,6 +109,7 @@
   [collectors addObject: [[LogCollector new] autorelease]];
   [collectors addObject: [[DiskCollector new] autorelease]];
   [collectors addObject: [[ApplicationsCollector new] autorelease]];
+  [collectors addObject: [[AdwareCollector new] autorelease]];
   
   // Start the machine animation.
   [self runMachineAnimation: hardwareCollector];
@@ -407,6 +409,7 @@
   [result appendAttributedString: [self getResult: @"configurationfiles"]];
   [result appendAttributedString: [self getResult: @"gatekeeper"]];
   [result appendAttributedString: [self getResult: @"applications"]];
+  [result appendAttributedString: [self getResult: @"adware"]];
   [result appendAttributedString: [self getResult: @"kernelextensions"]];
   [result appendAttributedString: [self getResult: @"startupitems"]];
   [result appendAttributedString: [self getResult: @"systemlaunchagents"]];

@@ -399,4 +399,26 @@
   return [value1 compare: value2];
   }
 
+// Generate a "remove adware" link.
+- (NSAttributedString *) generateRemoveAdwareLink: (NSString *) name
+  {
+  NSMutableAttributedString * urlString =
+    [[NSMutableAttributedString alloc] initWithString: @""];
+    
+  NSString * url =
+    [NSString
+      stringWithFormat: @"etrecheck://adware/%@", [name lowercaseString]];
+  
+  [urlString
+    appendString: NSLocalizedString(@" [Remove]", NULL)
+    attributes:
+      @{
+        NSFontAttributeName : [[Utilities shared] boldFont],
+        NSForegroundColorAttributeName : [[Utilities shared] red],
+        NSLinkAttributeName : url
+      }];
+    
+  return [urlString autorelease];
+  }
+
 @end

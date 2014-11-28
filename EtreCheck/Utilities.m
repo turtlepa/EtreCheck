@@ -280,4 +280,101 @@
   return [mutableParts componentsJoinedByString: @" "];
   }
 
+// Make a file name more presentable.
++ (NSString *) sanitizeFilename: (NSString *) file
+  {
+  NSString * prettyFile = file;
+  
+  // What are you trying to hide?
+  if([file hasPrefix: @"."])
+    prettyFile =
+      [NSString
+        stringWithFormat: NSLocalizedString(@"%@ (hidden)", NULL), file];
+
+  // Silly Apple.
+  else if([file hasPrefix: @"com.apple.CSConfigDotMacCert-"])
+    prettyFile = [self sanitizeMobileMe: file];
+
+  // What are you trying to expose?
+  else if([file hasPrefix: @"com.facebook.videochat."])
+    prettyFile = [self sanitizeFacebook: file];
+
+  // What are you trying to expose?
+  else if([file hasPrefix: @"com.adobe.ARM."])
+    prettyFile = @"com.adobe.ARM.[...].plist";
+
+  // I don't want to see it.
+  else if([file length] > 76)
+    {
+    NSString * extension = [file pathExtension];
+    
+    prettyFile =
+      [NSString
+        stringWithFormat:
+          @"%@...%@", [file substringToIndex: 40], extension];
+    }
+    
+  return prettyFile;
+  }
+
+// Apple used to put the user's name into a file name.
++ (NSString *) sanitizeMobileMe: (NSString *) file
+  {
+  NSScanner * scanner = [NSScanner scannerWithString: file];
+
+  BOOL found =
+    [scanner
+      scanString: @"com.apple.CSConfigDotMacCert-" intoString: NULL];
+
+  if(!found)
+    return file;
+    
+  found = [scanner scanUpToString: @"@" intoString: NULL];
+
+  if(!found)
+    return file;
+    
+  NSString * domain = nil;
+  
+  found = [scanner scanUpToString: @".com-" intoString: & domain];
+
+  if(!found)
+    return file;
+
+  found = [scanner scanString: @".com-" intoString: NULL];
+
+  if(!found)
+    return file;
+    
+  NSString * suffix = nil;
+
+  found = [scanner scanUpToString: @"\n" intoString: & suffix];
+
+  if(!found)
+    return file;
+    
+  return
+    [NSString
+      stringWithFormat:
+        @"com.apple.CSConfigDotMacCert-[...]%@.com-%@", domain, suffix];
+  }
+
+/* Facebook puts the users name in a filename too. */
++ (NSString *) sanitizeFacebook: (NSString *) file
+  {
+  NSScanner * scanner = [NSScanner scannerWithString: file];
+
+  BOOL found =
+    [scanner
+      scanString: @"com.facebook.videochat." intoString: NULL];
+
+  if(!found)
+    return file;
+    
+  [scanner scanUpToString: @".plist" intoString: NULL];
+
+  return
+    NSLocalizedString(@"com.facebook.videochat.[redacted].plist", NULL);
+  }
+
 @end
