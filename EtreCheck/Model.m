@@ -84,7 +84,7 @@
         {
         DiagnosticEvent * event = (DiagnosticEvent *)obj;
         
-        if([event.details containsString: name])
+        if([event.details rangeOfString: name].location != NSNotFound)
           matching = YES;
 
         else

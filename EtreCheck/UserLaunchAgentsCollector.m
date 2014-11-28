@@ -36,19 +36,22 @@
     [NSHomeDirectory()
       stringByAppendingPathComponent: @"Library/LaunchAgents"];
 
-  NSArray * args =
-    @[
-      launchAgentsDir,
-      @"-type", @"f",
-      @"-or",
-      @"-type", @"l"
-    ];
-  
-  NSData * result = [Utilities execute: @"/usr/bin/find" arguments: args];
-  
-  NSArray * files = [Utilities formatLines: result];
-  
-  [self printPropertyListFiles: files];
+  if([[NSFileManager defaultManager] fileExistsAtPath: launchAgentsDir])
+    {
+    NSArray * args =
+      @[
+        launchAgentsDir,
+        @"-type", @"f",
+        @"-or",
+        @"-type", @"l"
+      ];
+    
+    NSData * result = [Utilities execute: @"/usr/bin/find" arguments: args];
+    
+    NSArray * files = [Utilities formatLines: result];
+    
+    [self printPropertyListFiles: files];
+    }
     
   dispatch_semaphore_signal(self.complete);
   }
