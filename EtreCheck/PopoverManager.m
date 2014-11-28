@@ -30,7 +30,7 @@
     myMinPopoverSize = NSMakeSize(400, 200);
     myMaxPopoverSize = NSMakeSize(1000, 1000);
     
-    if(NO && [NSPopover class])
+    if([NSPopover class])
       {
       NSPopover * popover = [[NSPopover alloc] init];
       
