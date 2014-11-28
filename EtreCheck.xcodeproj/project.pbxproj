@@ -18,6 +18,7 @@
 		A50C9DC519A4052000BA6A25 /* LoginItemsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C9DC419A4052000BA6A25 /* LoginItemsCollector.m */; };
 		A50C9DC819A4063E00BA6A25 /* PlugInsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C9DC719A4063E00BA6A25 /* PlugInsCollector.m */; };
 		A50C9DCB19A4065B00BA6A25 /* InternetPlugInsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A50C9DCA19A4065B00BA6A25 /* InternetPlugInsCollector.m */; };
+		A52006A21A292A2200644C40 /* PopoverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A52006A11A292A2200644C40 /* PopoverManager.m */; };
 		A5257D2E19AB51BE003084C8 /* ProcessesCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D2D19AB51BE003084C8 /* ProcessesCollector.m */; };
 		A5257D3119AB5251003084C8 /* CPUUsageCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3019AB5251003084C8 /* CPUUsageCollector.m */; };
 		A5257D3419AB525D003084C8 /* MemoryUsageCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5257D3319AB525D003084C8 /* MemoryUsageCollector.m */; };
@@ -99,6 +100,8 @@
 		A50C9DC719A4063E00BA6A25 /* PlugInsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlugInsCollector.m; sourceTree = "<group>"; };
 		A50C9DC919A4065B00BA6A25 /* InternetPlugInsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InternetPlugInsCollector.h; sourceTree = "<group>"; };
 		A50C9DCA19A4065B00BA6A25 /* InternetPlugInsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InternetPlugInsCollector.m; sourceTree = "<group>"; };
+		A52006A01A292A2200644C40 /* PopoverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverManager.h; sourceTree = "<group>"; };
+		A52006A11A292A2200644C40 /* PopoverManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverManager.m; sourceTree = "<group>"; };
 		A5257D2C19AB51BE003084C8 /* ProcessesCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessesCollector.h; sourceTree = "<group>"; };
 		A5257D2D19AB51BE003084C8 /* ProcessesCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessesCollector.m; sourceTree = "<group>"; };
 		A5257D2F19AB5251003084C8 /* CPUUsageCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUUsageCollector.h; sourceTree = "<group>"; };
@@ -384,6 +387,8 @@
 				A5257D3F19AC10E3003084C8 /* Checker.m */,
 				A5C1492319B88192002890F1 /* SlideshowView.h */,
 				A5C1492419B88192002890F1 /* SlideshowView.m */,
+				A52006A01A292A2200644C40 /* PopoverManager.h */,
+				A52006A11A292A2200644C40 /* PopoverManager.m */,
 				A54B87331A1D4F1900F25213 /* HelpManager.h */,
 				A54B87341A1D4F1900F25213 /* HelpManager.m */,
 				A54B87361A1D4FED00F25213 /* DetailManager.h */,
@@ -522,6 +527,7 @@
 				A57516AF1A14D9E700F374FB /* DiagnosticsCollector.m in Sources */,
 				A5FC120319A5431D00E81E9C /* FontsCollector.m in Sources */,
 				A5FC11F719A4C02300E81E9C /* UserITunesPlugInsCollector.m in Sources */,
+				A52006A21A292A2200644C40 /* PopoverManager.m in Sources */,
 				A50C9DAD19A2ACB600BA6A25 /* StartupItemsCollector.m in Sources */,
 				A5C292E919A039CB00464E86 /* LaunchAgentsCollector.m in Sources */,
 				A5CF26EB1A27FB21002386F0 /* AdwareManager.m in Sources */,

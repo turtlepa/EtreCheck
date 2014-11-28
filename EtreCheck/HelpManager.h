@@ -5,23 +5,10 @@
  **********************************************************************/
 
 #import <Foundation/Foundation.h>
+#import "PopoverManager.h"
 
-@interface HelpManager : NSObject
+@interface HelpManager : PopoverManager
   {
-  NSView * myContentView;
-  
-  // My detail drawer.
-  NSDrawer * myDrawer;
-  
-  // My popover view controller.
-  NSViewController * myPopoverViewController;
-  
-  // My detail drawer/popover.
-  id myDetail;
-  
-  // My detail label.
-  NSTextField * myTitle;
-  
   // My text content.
   NSTextView * myTextView;
   
@@ -29,18 +16,7 @@
   NSString * myDetails;
   }
 
-@property (retain) IBOutlet NSView * contentView;
-@property (retain) IBOutlet NSDrawer * drawer;
-@property (retain) IBOutlet NSViewController * popoverViewController;
-@property (retain) IBOutlet id detail;
-@property (retain) IBOutlet NSTextField * title;
 @property (retain) IBOutlet NSTextView * textView;
 @property (retain) NSString * details;
-
-// Show detail.
-- (void) showDetail: (NSString *) content;
-
-// Close the detail.
-- (IBAction) closeDetail: (id) sender;
 
 @end

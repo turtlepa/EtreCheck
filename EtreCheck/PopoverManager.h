@@ -1,0 +1,50 @@
+/***********************************************************************
+ ** Etresoft
+ ** John Daniel
+ ** Copyright (c) 2012-2014. All rights reserved.
+ **********************************************************************/
+
+#import <Foundation/Foundation.h>
+
+@interface PopoverManager : NSObject
+  {
+  NSSize myMinDrawerSize;
+  NSSize myMaxDrawerSize;
+  NSSize myMinPopoverSize;
+  NSSize myMaxPopoverSize;
+  
+  NSView * myContentView;
+  
+  // My detail drawer.
+  NSDrawer * myDrawer;
+  
+  // My popover view controller.
+  NSViewController * myPopoverViewController;
+  
+  // My detail label.
+  NSTextField * myTitle;
+  
+  // My popover.
+  id myPopover;
+  }
+
+@property (assign) NSSize minDrawerSize;
+@property (assign) NSSize maxDrawerSize;
+@property (assign) NSSize minPopoverSize;
+@property (assign) NSSize maxPopoverSize;
+@property (retain) IBOutlet NSView * contentView;
+@property (retain) IBOutlet NSDrawer * drawer;
+@property (retain) IBOutlet NSViewController * popoverViewController;
+@property (retain) IBOutlet NSTextField * title;
+@property (retain) id popover;
+
+// Show detail.
+- (void) showDetail: (NSString *) content;
+
+// Close the detail.
+- (IBAction) closeDetail: (id) sender;
+
+// Resize the detail pane to match the content.
+- (void) resizeDetail: (NSTextStorage *) storage;
+
+@end
