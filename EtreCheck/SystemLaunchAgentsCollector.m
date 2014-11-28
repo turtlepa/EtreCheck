@@ -18,8 +18,6 @@
     {
     self.name = @"systemlaunchagents";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
-
-    self.progressEstimate = 1.9;
     }
     
   return self;

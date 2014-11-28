@@ -31,8 +31,6 @@
     {
     self.name = @"hardware";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
-
-    self.progressEstimate = 8;
     
     // Do this in the constructor so the data is available before
     // collection starts.

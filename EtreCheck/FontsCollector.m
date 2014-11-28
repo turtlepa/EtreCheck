@@ -21,8 +21,6 @@
     {
     self.name = @"fonts";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
-
-    self.progressEstimate = 3.0;
     }
     
   return self;

@@ -18,8 +18,6 @@
     {
     self.name = @"internetplugins";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
-
-    self.progressEstimate = 1.0;
     }
     
   return self;

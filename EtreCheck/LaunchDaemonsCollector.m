@@ -18,8 +18,6 @@
     {
     self.name = @"launchdaemons";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
-
-    self.progressEstimate = 0.3;
     }
     
   return self;

@@ -26,7 +26,7 @@
   NSButton * moreInfo;
   NSAttributedString * myDisplayStatus;
   NSMutableAttributedString * log;
-  double myCurrentProgressIncrement;
+  double myNextProgressIncrement;
   NSTimer * myProgressTimer;
   SlideshowView * myMachineIcon;
   SlideshowView * myApplicationIcon;
@@ -62,7 +62,7 @@
 @property (retain) IBOutlet NSButton * moreInfo;
 @property (retain) NSAttributedString * displayStatus;
 @property (retain) NSMutableAttributedString * log;
-@property (assign) double currentProgressIncrement;
+@property (assign) double nextProgressIncrement;
 @property (retain) NSTimer * progressTimer;
 @property (retain) IBOutlet SlideshowView * machineIcon;
 @property (retain) IBOutlet SlideshowView * applicationIcon;

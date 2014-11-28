@@ -14,7 +14,6 @@
 @synthesize name = myName;
 @synthesize title = myTitle;
 @synthesize result = myResult;
-@synthesize progressEstimate = myProgressEstimate;
 @synthesize complete = myComplete;
 @dynamic done;
 
@@ -32,7 +31,6 @@
   if(self)
     {
     myResult = [NSMutableAttributedString new];
-    myProgressEstimate = 0.1;
     myFormatter = [NSNumberFormatter new];
     myComplete = dispatch_semaphore_create(0);
     }

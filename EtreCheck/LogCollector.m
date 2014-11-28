@@ -22,8 +22,6 @@
     {
     self.name = @"log";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
-    self.progressEstimate = 1;
-
 
     aslLogDateFormatter = [[NSDateFormatter alloc] init];
    

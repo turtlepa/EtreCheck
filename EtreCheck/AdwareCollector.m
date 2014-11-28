@@ -24,7 +24,6 @@
     {
     self.name = @"adware";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
-    self.progressEstimate = 1;
     
     myAdwareFiles = [NSMutableDictionary new];
     }

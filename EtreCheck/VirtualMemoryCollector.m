@@ -22,8 +22,6 @@
     {
     self.name = @"vm";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
-
-    self.progressEstimate = 8;
     }
     
   return self;

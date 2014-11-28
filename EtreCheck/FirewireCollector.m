@@ -21,8 +21,6 @@
     {
     self.name = @"firewire";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
-
-    self.progressEstimate = 0.4;
     }
     
   return self;

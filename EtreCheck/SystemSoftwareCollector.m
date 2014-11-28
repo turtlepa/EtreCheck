@@ -23,8 +23,6 @@
     {
     self.name = @"systemsoftware";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
-
-    self.progressEstimate = 0.5;
     }
     
   return self;

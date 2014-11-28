@@ -21,8 +21,6 @@
     {
     self.name = @"usb";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
-
-    self.progressEstimate = 1.2;
     }
     
   return self;

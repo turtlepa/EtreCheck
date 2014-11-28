@@ -64,7 +64,7 @@
     object: NSLocalizedString(@"Checking hardware", NULL)];
 
   // Run stage 1.
-  double progress = [self checkStage1: 0.0];
+  [self checkStage1: 34.0];
     
   dispatch_barrier_sync(
     queue,
@@ -76,7 +76,7 @@
     });
   
   // Now do stage 2.
-  progress = [self checkStage2: progress];
+  [self checkStage2: 64.0];
   
   dispatch_barrier_sync(
     queue,
@@ -87,7 +87,7 @@
     });
 
   // Finally do stage 3.
-  [self checkStage3: progress];
+  [self checkStage3: 100.0];
   
   dispatch_release(queue);
   
@@ -95,7 +95,7 @@
   }
 
 // Check stage 1.
-- (double) checkStage1: (double) progress
+- (void) checkStage1: (double) progress
   {
   NSMutableArray * collectors = [NSMutableArray array];
   
@@ -114,9 +114,7 @@
   // Start the machine animation.
   [self runMachineAnimation: hardwareCollector];
   
-  progress = [self performCollections: collectors progress: progress];
-  
-  return progress;
+  [self performCollections: collectors progress: progress];
   }
 
 // Run the machine animation.
@@ -209,7 +207,7 @@
   }
 
 // Check stage 2.
-- (double) checkStage2: (double) progress
+- (void) checkStage2: (double) progress
   {
   NSMutableArray * collectors = [NSMutableArray array];
   
@@ -225,9 +223,7 @@
   // Start the machine animation.
   [self runApplicationsAnimation: kernelExtensionCollector];
   
-  progress = [self performCollections: collectors progress: progress];
-
-  return progress;
+  [self performCollections: collectors progress: progress];
   }
 
 // Run the applications animation.
@@ -303,7 +299,7 @@
   }
 
 // Check stage 3.
-- (double) checkStage3: (double) progress
+- (void) checkStage3: (double) progress
   {
   NSMutableArray * collectors = [NSMutableArray array];
   
@@ -339,14 +335,12 @@
   // Start the agents and daemons animation.
   dispatch_semaphore_t semaphore = [self runAgentsAndDaemonsAnimation];
     
-  progress = [self performCollections: collectors progress: progress];
+  [self performCollections: collectors progress: progress];
 
   // Wait for the animation to finish.
   dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
   
   dispatch_release(semaphore);
-  
-  return progress;
   }
 
 // Run the applications animation.
@@ -370,26 +364,22 @@
   }
 
 // Perform some collections.
-- (double) performCollections: (NSArray *) collectors
+- (void) performCollections: (NSArray *) collectors
   progress: (double) progress
   {
+  [[NSNotificationCenter defaultCenter]
+    postNotificationName: kProgressUpdate
+    object: [NSNumber numberWithDouble: progress]];
+    
   for(Collector * collector in collectors)
     {
     [collector collect];
     
     [results setObject: collector.result forKey: collector.name];
     
-    progress += collector.progressEstimate;
-    
-    [[NSNotificationCenter defaultCenter]
-      postNotificationName: kProgressUpdate
-      object: [NSNumber numberWithDouble: progress]];
-      
     // Keep a reference to the collector in case it is needed later.
     [completed setObject: collector forKey: collector.name];
     }
-    
-  return progress;
   }
 
 // Collect the results in report order.

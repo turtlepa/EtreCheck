@@ -31,8 +31,6 @@
     
     self.name = @"kernelextensions";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
-
-    self.progressEstimate = 25.0;
     }
     
   return self;

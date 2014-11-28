@@ -20,8 +20,6 @@
     {
     self.name = @"loginitems";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
-
-    self.progressEstimate = 1.6;
     }
     
   return self;

@@ -24,8 +24,6 @@
     self.name = @"applications";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
 
-    self.progressEstimate = 35.0;
-
     genericApplication =
       [[NSWorkspace sharedWorkspace] iconForFileType: @".app"];
     }

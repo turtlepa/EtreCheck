@@ -8,7 +8,6 @@
 
 #define kStatusUpdate @"statusupdate"
 #define kProgressUpdate @"progressupdate"
-#define kMinorProgressUpdate @"minorprogressupdate"
 #define kFoundApplication @"foundapplication"
 #define kShowMachineIcon @"showmachineicon"
 #define kCollectionStatus @"collectionstatus"

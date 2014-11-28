@@ -12,7 +12,6 @@
   {
   NSString * myName;
   NSString * myTitle;
-  double myProgressEstimate;
   NSMutableAttributedString * myResult;
   NSNumberFormatter * myFormatter;
   dispatch_semaphore_t myComplete;
@@ -23,9 +22,6 @@
 
 // The title for this collector.
 @property (retain) NSString * title;
-
-// An estimate of how long this collection will take.
-@property (assign) double progressEstimate;
 
 // Keep track of the results of this collector.
 @property (retain) NSMutableAttributedString * result;

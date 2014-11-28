@@ -11,17 +11,6 @@
 // Collect information about processes.
 @implementation ProcessesCollector
 
-// Constructor.
-- (id) init
-  {
-  self = [super init];
-  
-  if(self)
-    self.progressEstimate = 3.0;
-    
-  return self;
-  }
-
 // Collect running processes.
 - (NSMutableDictionary *) collectProcesses
   {

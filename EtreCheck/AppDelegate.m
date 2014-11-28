@@ -43,7 +43,7 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
 @synthesize moreInfo;
 @synthesize displayStatus = myDisplayStatus;
 @synthesize log;
-@synthesize currentProgressIncrement = myCurrentProgressIncrement;
+@synthesize nextProgressIncrement = myNextProgressIncrement;
 @synthesize progressTimer = myProgressTimer;
 @synthesize machineIcon = myMachineIcon;
 @synthesize applicationIcon = myApplicationIcon;
@@ -315,9 +315,9 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   {
   double current = [self.progress doubleValue];
   
-  current = current + 1;
-  
-  if(current > self.currentProgressIncrement)
+  current = current + 0.5;
+    
+  if(current > self.nextProgressIncrement)
     return;
     
   [self updateProgress: current];
@@ -446,12 +446,6 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
 
   [[NSNotificationCenter defaultCenter]
     addObserver: self
-    selector: @selector(minorProgressUpdated:)
-    name: kMinorProgressUpdate
-    object: nil];
-
-  [[NSNotificationCenter defaultCenter]
-    addObserver: self
     selector: @selector(applicationFound:)
     name: kFoundApplication
     object: nil];
@@ -506,17 +500,17 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   dispatch_async(
     dispatch_get_main_queue(),
     ^{
-      [self updateProgress: self.currentProgressIncrement];
+      [self updateProgress: self.nextProgressIncrement];
       
-      self.currentProgressIncrement = [[notification object] doubleValue];
+      self.nextProgressIncrement = [[notification object] doubleValue];
     });
   }
 
 - (void) updateProgress: (double) amount
   {
   // Try to make Snow Leopard update.
-  if((self.currentProgressIncrement - [self.progress doubleValue]) > 1)
-  [self.progress setNeedsDisplay: YES];
+  if((self.nextProgressIncrement - [self.progress doubleValue]) > 1)
+    [self.progress setNeedsDisplay: YES];
 
   if([self.progress isIndeterminate])
     [self.progress setIndeterminate: NO];
@@ -546,20 +540,6 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
     dispatch_get_main_queue(),
     ^{
       [self.machineIcon transitionToImage: [notification object]];
-    });
-  }
-
-// Handle a minor progress update.
-- (void) minorProgressUpdated: (NSNotification *) notification
-  {
-  double amount = [[notification object] doubleValue];
-  
-  amount = amount/100.0 * self.currentProgressIncrement;
-  
-  dispatch_async(
-    dispatch_get_main_queue(),
-    ^{
-      self.progress.doubleValue = self.currentProgressIncrement + amount;
     });
   }
 

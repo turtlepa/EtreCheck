@@ -20,8 +20,6 @@
     {
     self.name = @"video";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
-
-    self.progressEstimate = 1.5;
     }
     
   return self;

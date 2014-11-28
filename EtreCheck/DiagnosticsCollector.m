@@ -28,8 +28,6 @@
     self.name = @"diagnostics";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
 
-    self.progressEstimate = 1;
-    
     myDateFormatter = [[NSDateFormatter alloc] init];
    
     [myDateFormatter setDateFormat: @"yyyy-MM-dd_HHmmss"];
