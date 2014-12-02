@@ -181,7 +181,7 @@
             
             event.type = kASLLog;
             event.date = logDate;
-            event.details = line;
+            event.details = [Utilities cleanPath: line];
             
             [events addObject: event];
             
@@ -238,7 +238,7 @@
             
             event.type = kSystemLog;
             event.date = logDate;
-            event.details = line;
+            event.details = [Utilities cleanPath: line];
             
             [events addObject: event];
             

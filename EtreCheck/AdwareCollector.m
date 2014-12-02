@@ -71,7 +71,6 @@
       @"Slick Savings by Spigot Inc.",
       @"GoPhoto.It",
       @"Omnibar",
-      @"ClickToFlash",
       nil];
     
   for(NSString * extension in extensions)
