@@ -73,9 +73,9 @@
   }
 
 // Return true if there are log entries for a process.
-- (BOOL) hasLogEntries: (NSString *) name
+- (bool) hasLogEntries: (NSString *) name
   {
-  __block BOOL matching = NO;
+  __block bool matching = NO;
   __block NSMutableString * result = [NSMutableString string];
   
   [[self logEntries]
@@ -174,7 +174,7 @@
   }
 
 // Is this file an adware file?
-- (BOOL) isAdware: (NSString *) path
+- (bool) isAdware: (NSString *) path
   {
   return [self.adwareFiles objectForKey: path];
   }

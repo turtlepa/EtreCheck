@@ -42,9 +42,6 @@
   NSMutableDictionary * launchdStatus;
   NSMutableSet * appleLaunchd;
   
-  BOOL launchDFail;
-  BOOL launchDAvailable;
-  
   DetailManager * myDetailManager;
   HelpManager * myHelpManager;
   AdwareManager * myAdwareManager;

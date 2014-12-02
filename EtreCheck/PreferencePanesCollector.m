@@ -73,7 +73,7 @@
 
 // Print information for a preference pane.
 // Return YES if this is a 3rd party preference pane.
-- (BOOL) printPreferencePaneInformation: (NSDictionary *) item
+- (bool) printPreferencePaneInformation: (NSDictionary *) item
   {
   NSString * name = [item objectForKey: @"_name"];
   NSString * support = [item objectForKey: @"spprefpane_support"];

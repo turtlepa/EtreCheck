@@ -28,7 +28,7 @@
 
 // Allow people to know when a collection is complete.
 @property (assign) dispatch_semaphore_t complete;
-@property (readonly) BOOL done;
+@property (readonly) bool done;
 
 // Perform the collection.
 - (void) collect;

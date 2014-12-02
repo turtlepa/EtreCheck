@@ -449,8 +449,8 @@
         stringWithFormat:
           @"\t\t\t%@ %@ %@ %@\n", size, type, speed, status];
       
-    BOOL sameID = [lastBankID isEqualToString: currentBankID];
-    BOOL sameInfo = [lastBankInfo isEqualToString: currentBankInfo];
+    bool sameID = [lastBankID isEqualToString: currentBankID];
+    bool sameInfo = [lastBankInfo isEqualToString: currentBankInfo];
     
     if(sameID && sameInfo && (bank != [banks lastObject]))
       ++bankCount;
@@ -493,7 +493,7 @@
   }
 
 // Is continuity supported?
-- (BOOL) supportsContinuity
+- (bool) supportsContinuity
   {
   NSString * model = [[Model model] model];
   

@@ -71,11 +71,12 @@
       @"Slick Savings by Spigot Inc.",
       @"GoPhoto.It",
       @"Omnibar",
+      @"ClickToFlash",
       nil];
     
   for(NSString * extension in extensions)
     [[[Model model] adwareFiles]
-      setObject: @"Safari Extension" forKey: extension];
+      setObject: @"adwareextensions" forKey: extension];
   }
 
 // Collect known Downlite files.
@@ -196,7 +197,7 @@
     {
     NSString * fullPath = [base stringByAppendingPathComponent: file];
     
-    BOOL exists =
+    bool exists =
       [[NSFileManager defaultManager] fileExistsAtPath: fullPath];
       
     if(exists)

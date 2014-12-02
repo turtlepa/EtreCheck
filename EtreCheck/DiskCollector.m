@@ -170,10 +170,10 @@
   if(!smart_status)
     return;
     
-  BOOL smart_not_supported =
+  bool smart_not_supported =
     [smart_status isEqualToString: @"Not Supported"];
   
-  BOOL smart_verified =
+  bool smart_verified =
     [smart_status isEqualToString: @"Verified"];
 
   if(!smart_not_supported && !smart_verified)

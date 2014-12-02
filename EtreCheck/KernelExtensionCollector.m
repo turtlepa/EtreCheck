@@ -529,7 +529,7 @@
     if(![scanner scanUpToString: @" " intoString: NULL])
       return;
 
-  BOOL found = [scanner scanUpToString: @" (" intoString: label];
+  bool found = [scanner scanUpToString: @" (" intoString: label];
 
   if(!found)
     return;
@@ -539,7 +539,7 @@
   }
 
 // Should an extension be ignored if unloaded?
-- (BOOL) ignoreUnloadedExtension: (NSString *) label
+- (bool) ignoreUnloadedExtension: (NSString *) label
   {
   if([label hasPrefix: @"com.huawei.driver."])
     return YES;

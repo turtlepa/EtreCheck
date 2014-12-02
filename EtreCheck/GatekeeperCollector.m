@@ -49,7 +49,7 @@ GatekeeperSetting;
     
   [self.result appendAttributedString: [self buildTitle]];
 
-  BOOL gatekeeperExists =
+  bool gatekeeperExists =
     [[NSFileManager defaultManager] fileExistsAtPath: @"/usr/sbin/spctl"];
   
   if(!gatekeeperExists)

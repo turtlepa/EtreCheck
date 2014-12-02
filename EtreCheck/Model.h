@@ -72,7 +72,7 @@
 + (Model *) model;
 
 // Return true if there are log entries for a process.
-- (BOOL) hasLogEntries: (NSString *) name;
+- (bool) hasLogEntries: (NSString *) name;
 
 // Collect log entires matching a date.
 - (NSString *) logEntriesAround: (NSDate *) date;
@@ -81,7 +81,7 @@
 - (NSAttributedString *) getDetailsURLFor: (NSString *) query;
 
 // Is this file an adware file?
-- (BOOL) isAdware: (NSString *) path;
+- (bool) isAdware: (NSString *) path;
 
 // What kind of adware is this?
 - (NSString *) adwareType: (NSString *) path;

@@ -107,7 +107,7 @@
 
 // Print a top process.
 // Return YES if the process could be printed.
-- (BOOL) printTopProcess: (NSDictionary *) process
+- (bool) printTopProcess: (NSDictionary *) process
   formatter: (ByteCountFormatter *) formatter
   {
   NSArray * commands = [process allKeys];
@@ -122,7 +122,7 @@
       [NSString
         stringWithFormat:
           @"\t%-9@\t%@\n",
-          [formatter stringFromByteCount: mem],
+          [formatter stringFromByteCount: (unsigned long long)mem],
           command];
       
     if(mem > 1024 * 1024 * 1024)

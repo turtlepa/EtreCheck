@@ -18,7 +18,7 @@
 @dynamic done;
 
 // Is this collector complete?
-- (BOOL) done
+- (bool) done
   {
   return !dispatch_semaphore_wait(self.complete, DISPATCH_TIME_NOW);
   }
@@ -238,7 +238,7 @@
     
     int majorVersion = 0;
     
-    BOOL found = [scanner scanInt: & majorVersion];
+    bool found = [scanner scanInt: & majorVersion];
     
     if(found)
       {
@@ -277,7 +277,7 @@
     
     int majorVersion = 0;
     
-    BOOL found = [scanner scanInt: & majorVersion];
+    bool found = [scanner scanInt: & majorVersion];
     
     if(found)
       {
@@ -318,7 +318,7 @@
     
     int majorVersion = 0;
     
-    BOOL found = [scanner scanInt: & majorVersion];
+    bool found = [scanner scanInt: & majorVersion];
     
     if(found)
       {

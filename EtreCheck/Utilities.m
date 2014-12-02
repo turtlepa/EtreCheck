@@ -322,7 +322,7 @@
   {
   NSScanner * scanner = [NSScanner scannerWithString: file];
 
-  BOOL found =
+  bool found =
     [scanner
       scanString: @"com.apple.CSConfigDotMacCert-" intoString: NULL];
 
@@ -364,7 +364,7 @@
   {
   NSScanner * scanner = [NSScanner scannerWithString: file];
 
-  BOOL found =
+  bool found =
     [scanner
       scanString: @"com.facebook.videochat." intoString: NULL];
 

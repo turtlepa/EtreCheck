@@ -48,7 +48,7 @@
   
     if(plist && [plist count])
       {
-      BOOL found = NO;
+      bool found = NO;
       
       NSDictionary * devices =
         [[plist objectAtIndex: 0] objectForKey: @"_items"];
@@ -66,7 +66,7 @@
 
 // Collect information about a single Thunderbolt device.
 - (void) printThunderboltDevice: (NSDictionary *) device
-  indent: (NSString *) indent found: (BOOL *) found
+  indent: (NSString *) indent found: (bool *) found
   {
   NSString * name = [device objectForKey: @"_name"];
   NSString * vendor_name = [device objectForKey: @"vendor_name_key"];
@@ -97,7 +97,7 @@
 
 // Print more devices.
 - (void) printMoreDevices: (NSDictionary *) device
-  indent: (NSString *) indent found: (BOOL *) found
+  indent: (NSString *) indent found: (bool *) found
   {
   NSDictionary * devices = [device objectForKey: @"_items"];
   

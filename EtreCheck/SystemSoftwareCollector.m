@@ -109,7 +109,7 @@
     
     int majorVersion = 0;
     
-    BOOL found = [scanner scanInt: & majorVersion];
+    bool found = [scanner scanInt: & majorVersion];
     
     if(found)
       [[Model model]
@@ -118,12 +118,12 @@
   }
 
 // Parse system uptime.
-- (BOOL) parseUpTime: (NSString *) uptime
+- (bool) parseUpTime: (NSString *) uptime
   days: (int *) days time: (NSString **) time
   {
   NSScanner * scanner = [NSScanner scannerWithString: uptime];
 
-  BOOL found = [scanner scanString: @"up " intoString: NULL];
+  bool found = [scanner scanString: @"up " intoString: NULL];
 
   if(!found)
     return found;

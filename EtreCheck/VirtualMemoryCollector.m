@@ -169,7 +169,8 @@
     appendString:
       [NSString
         stringWithFormat:
-          @"\t%-9@\t%@\n", [formatter stringFromByteCount: value], key]];
+          @"\t%-9@\t%@\n",
+          [formatter stringFromByteCount: (unsigned long long)value], key]];
   }
 
 // Print a VM value.
@@ -182,7 +183,8 @@
     appendString:
       [NSString
         stringWithFormat:
-          @"\t%-9@\t%@\n", [formatter stringFromByteCount: value], key]
+          @"\t%-9@\t%@\n",
+          [formatter stringFromByteCount: (unsigned long long)value], key]
     attributes: attributes];
   }
 

@@ -260,7 +260,7 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
 // Collect the user message.
 - (void) collectUserMessage
   {
-  BOOL dontShowUserMessage =
+  bool dontShowUserMessage =
     [[NSUserDefaults standardUserDefaults]
       boolForKey: @"dontshowusermessage"];
 

@@ -66,7 +66,7 @@
 
   double memValue;
   
-  BOOL found = [scanner scanDouble: & memValue];
+  bool found = [scanner scanDouble: & memValue];
 
   if(!found)
     return;

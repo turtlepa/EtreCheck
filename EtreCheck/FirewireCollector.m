@@ -48,7 +48,7 @@
   
     if(plist && [plist count])
       {
-      BOOL found = NO;
+      bool found = NO;
       
       NSDictionary * devices =
         [[plist objectAtIndex: 0] objectForKey: @"_items"];
@@ -66,7 +66,7 @@
 
 // Print a single Firewire device.
 - (void) printFirewireDevice: (NSDictionary *) device
-  indent: (NSString *) indent found: (BOOL *) found
+  indent: (NSString *) indent found: (bool *) found
   {
   NSString * name = [device objectForKey: @"_name"];
   NSString * manufacturer = [device objectForKey: @"device_manufacturer"];
@@ -117,7 +117,7 @@
 
 // Print more devices.
 - (void) printMoreDevices: (NSDictionary *) device
-  indent: (NSString *) indent found: (BOOL *) found
+  indent: (NSString *) indent found: (bool *) found
   {
   NSDictionary * devices = [device objectForKey: @"_items"];
   

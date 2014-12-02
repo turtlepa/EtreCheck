@@ -32,10 +32,10 @@
 
   NSArray * configFiles = [self existingConfigFiles];
   
-  BOOL haveChanges = [configFiles count] > 0;
+  bool haveChanges = [configFiles count] > 0;
     
   // See if /etc/hosts has any changes or is corrupt.
-  BOOL corrupt = NO;
+  bool corrupt = NO;
   
   NSUInteger hostsCount = [self hostsStatus: & corrupt];
   
@@ -82,7 +82,7 @@
   }
 
 // Collect the number of changes to /etc/hosts and its status.
-- (NSUInteger) hostsStatus: (BOOL *) corrupt
+- (NSUInteger) hostsStatus: (bool *) corrupt
   {
   NSUInteger count = 0;
   
@@ -140,7 +140,7 @@
   
   NSString * address = nil;
   
-  BOOL scanned =
+  bool scanned =
     [scanner
       scanUpToCharactersFromSet:
         [NSCharacterSet whitespaceAndNewlineCharacterSet]
@@ -164,7 +164,7 @@
   }
 
 // Print the status of the hosts file.
-- (void) printHostsStatus: (BOOL) corrupt count: (NSUInteger) count
+- (void) printHostsStatus: (bool) corrupt count: (NSUInteger) count
   {
   NSString * corruptString = @"";
   

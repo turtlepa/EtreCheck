@@ -125,7 +125,7 @@
   dispatch_async(
     queue,
     ^{
-      BOOL once = NO;
+      bool once = NO;
       
       while(!once)
         {
@@ -138,7 +138,7 @@
           struct timespec tm;
           
           tm.tv_sec = 0;
-          tm.tv_nsec = NSEC_PER_SEC * .5;
+          tm.tv_nsec = (long)(NSEC_PER_SEC * .5);
           
           nanosleep(& tm, NULL);
           
@@ -187,7 +187,7 @@
   
   for(NSString * code in machines)
     {
-    BOOL showIcon = NO;
+    bool showIcon = NO;
     
     if([code hasPrefix: @"Mac"])
       showIcon = YES;
@@ -265,7 +265,7 @@
     struct timespec tm;
     
     tm.tv_sec = 0;
-    tm.tv_nsec = NSEC_PER_SEC * .5;
+    tm.tv_nsec = (long)(NSEC_PER_SEC * .5);
     
     nanosleep(& tm, NULL);
     

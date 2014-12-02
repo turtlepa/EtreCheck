@@ -169,8 +169,33 @@
     [extension objectForKey: kHumanReadableName];
   
   [self.result
-    appendString: [NSString stringWithFormat: @"\t%@ ", humanReadableName]];
+    appendString: [NSString stringWithFormat: @"\t%@", humanReadableName]];
     
+  // Safari extensions are stored under the "adwareextensions" category.
+  if([[Model model] isAdware: humanReadableName])
+    {
+    [self.result appendString: @" "];
+    
+    [self.result
+      appendString: NSLocalizedString(@"Adware!", NULL)
+      attributes:
+        @{
+          NSForegroundColorAttributeName : [[Utilities shared] red],
+          NSFontAttributeName : [[Utilities shared] boldFont]
+        }];
+
+    // Add this adware extension under the "extension" category so only it
+    // will be printed.
+    [[[Model model] adwareFiles]
+      setObject: @"extension" forKey: humanReadableName];
+
+    NSAttributedString * removeLink =
+      [self generateRemoveAdwareLink: @"extension"];
+
+    if(removeLink)
+      [self.result appendAttributedString: removeLink];
+    }
+
   [self.result appendString: @"\n"];
   }
 
@@ -208,17 +233,6 @@
       [parts removeLastObject];
     
   return [parts componentsJoinedByString: @"-"];
-  }
-
-// Get the human readable extension name from the plist dictionary.
-- (NSString *) humanReadableExtensionName: (NSDictionary *) plist
-  {
-  NSString * name = [plist objectForKey: @"CFBundleDisplayName"];
-    
-  if(name)
-    return name;
-  
-  return nil;
   }
 
 // Read a property list from a Safari extension.

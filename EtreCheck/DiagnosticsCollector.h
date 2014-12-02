@@ -9,7 +9,7 @@
 // Collect diagnostics information.
 @interface DiagnosticsCollector : Collector
   {
-  BOOL insufficientPermissions;
+  bool insufficientPermissions;
   
   NSDateFormatter * myDateFormatter;
   NSDateFormatter * myLogDateFormatter;

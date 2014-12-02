@@ -207,7 +207,7 @@
 
   [formattedOutput autorelease];
   
-  BOOL haveOutput = NO;
+  bool haveOutput = NO;
   
   for(NSString * path in paths)
     if([self formatPropertyListFile: path output: formattedOutput])
@@ -221,7 +221,7 @@
 
 // Format property list file.
 // Return YES if there was any output.
-- (BOOL) formatPropertyListFile: (NSString *) path
+- (bool) formatPropertyListFile: (NSString *) path
   output: (NSMutableAttributedString *) output
   {
   NSString * file = [path lastPathComponent];
@@ -340,7 +340,7 @@
   }
 
 // Should I ignore failures?
-- (BOOL) ignoreFailuresOnFile: (NSString *) file
+- (bool) ignoreFailuresOnFile: (NSString *) file
   {
   if([file isEqualToString: @"com.apple.xprotectupdater.plist"])
     return YES;
@@ -366,7 +366,7 @@
   }
 
 // Is this an Apple file that I expect to see?
-- (BOOL) isAppleFile: (NSString *) file
+- (bool) isAppleFile: (NSString *) file
   {
   if([file hasPrefix: @"com.apple."])
     return YES;
@@ -399,7 +399,7 @@
   }
 
 // Is the executable valid?
-- (BOOL) isValidExecutable: (NSArray *) executable
+- (bool) isValidExecutable: (NSArray *) executable
   {
   NSString * program = [executable firstObject];
   
@@ -482,20 +482,28 @@
   {
   if([[Model model] isAdware: path])
     {
+    NSMutableAttributedString * extra =
+      [[NSMutableAttributedString alloc] init];
+
+    [extra appendString: @" "];
+
+    [extra
+      appendString: NSLocalizedString(@"Adware!", NULL)
+      attributes:
+        @{
+          NSForegroundColorAttributeName : [[Utilities shared] red],
+          NSFontAttributeName : [[Utilities shared] boldFont]
+        }];
+      
     NSString * adware = [[[Model model] adwareFiles] objectForKey: path];
     
     NSAttributedString * removeLink =
       [self generateRemoveAdwareLink: adware];
 
     if(removeLink)
-      {
-      NSMutableAttributedString * extra =
-        [[NSMutableAttributedString alloc] init];
-  
       [extra appendAttributedString: removeLink];
       
-      return [extra autorelease];
-      }
+    return [extra autorelease];
     }
 
   return [self formatSupportLink: status];

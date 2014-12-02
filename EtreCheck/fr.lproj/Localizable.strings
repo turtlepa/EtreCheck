@@ -92,7 +92,6 @@
 "[running]" = "[en marche]";
 "[Unknown]" = "[Inconnu]";
 "[System]" = "[Système]";
-"\t[Adware!]\t" = "\t[Adware !]\t";
 "%@ (hidden)" = "%@ (caché)";
 "Hidden" = "Caché";
 "\tThere was a problem retrieving launchd job status.\n" = "\tImpossible de trouver le status des taches launchd\n";
@@ -191,6 +190,8 @@
 "About geneio adware" = "À propos de l’adware Geneio";
 "About conduit adware" = "À propos de l’adware Conduit";
 "About downlite adware" = "À propos de l’adware Downlite";
+"About extension adware" = "À propos de l’adware des extensions de Safari";
 "adwaredetails1" = "EtreCheck a détecté que votre Macintosh peut être infecté par adware. Apple a publié cette liste des fichiers installés par types communs d’adware :\n\n";
 "adwaredetails2" = "\n\nEtreCheck á trouvé les fichiers suivants qui correspondent à la liste d’Apple:\n\n";
 "adwaredetails3" = "\nLa meilleure façon de supprimer ce logiciel est de télécharger et lancer AdwareMedic, un programme écrit par un autre membre de longue séjour chez Apple Support Communities.";
+"Adware!" = "Adware !";

@@ -32,6 +32,9 @@
       NSString * version =
         [plugin objectForKey: @"CFBundleShortVersionString"];
 
+      if(!version)
+        version = NSLocalizedString(@"Unknown", NULL);
+        
       int age = 0;
       
       NSString * OSVersion = [self getOSVersion: plugin age: & age];
@@ -83,7 +86,10 @@
 
     if(!plist)
       plist =
-        @{ @"CFBundleShortVersionString" : @"Unknown" };
+        @{
+          @"CFBundleShortVersionString" :
+            NSLocalizedString(@"Unknown", NULL)
+          };
 
     [bundles setObject: plist forKey: filename];
     }
@@ -173,7 +179,7 @@
 
     NSString * currentVersion = nil;
     
-    BOOL scanned =
+    bool scanned =
       [scanner scanUpToString: @"</td>" intoString: & currentVersion];
     
     if(scanned)

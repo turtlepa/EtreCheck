@@ -125,7 +125,7 @@
   if(![kind length])
     kind = NSLocalizedString(@"Unknown", NULL);
 
-  BOOL isHidden = [hidden isEqualToString: @"true"];
+  bool isHidden = [hidden isEqualToString: @"true"];
   
   [self.result
     appendString:

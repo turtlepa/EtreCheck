@@ -66,7 +66,7 @@
     
   [self.result appendAttributedString: [self buildTitle]];
 
-  BOOL tmutilExists =
+  bool tmutilExists =
     [[NSFileManager defaultManager] fileExistsAtPath: @"/usr/bin/tmutil"];
   
   if(!tmutilExists)
@@ -387,7 +387,7 @@
   }
 
 // Is this volume a destination volume?
-- (BOOL) isDestinationVolume: (NSString *) UUID
+- (bool) isDestinationVolume: (NSString *) UUID
   {
   for(NSString * destinationID in destinations)
     {
@@ -427,7 +427,7 @@
 
   if(skipSystemFiles)
     {
-    BOOL skip = [skipSystemFiles boolValue];
+    bool skip = [skipSystemFiles boolValue];
 
     [self.result
       appendString: NSLocalizedString(@"\tSkip System Files: ", NULL)];
@@ -455,7 +455,7 @@
 
   if(mobileBackups)
     {
-    BOOL mobile = [mobileBackups boolValue];
+    bool mobile = [mobileBackups boolValue];
 
     [self.result
       appendString: NSLocalizedString(@"\tMobile backups: ", NULL)];
@@ -477,7 +477,7 @@
 
   if(autoBackup)
     {
-    BOOL backup = [autoBackup boolValue];
+    bool backup = [autoBackup boolValue];
 
     [self.result
       appendString: NSLocalizedString(@"\tAuto backup: ", NULL)];
@@ -749,13 +749,13 @@
   // These can show up as excluded at any time. Check three 3 times.
   for(int i = 0; i < 3; ++i)
     {
-    BOOL exclusions = NO;
+    bool exclusions = NO;
     
     for(NSString * importantPath in importantPaths)
       {
       NSURL * url = [NSURL fileURLWithPath: importantPath];
 
-      BOOL excluded = CSBackupIsItemExcluded((CFURLRef)url, NULL);
+      bool excluded = CSBackupIsItemExcluded((CFURLRef)url, NULL);
       
       if(excluded)
         {
