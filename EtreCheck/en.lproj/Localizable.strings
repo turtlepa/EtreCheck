@@ -14,7 +14,7 @@
 "gatekeeperneedslion" = "\tGatekeeper information requires OS X 10.7.5 \"Lion\" or later.\n\n";
 "machineattributes" = "/System/Library/PrivateFrameworks/ServerInformation.framework/Versions/A/Resources/English.lproj/SIMachineAttributes.plist";
 "oldmachineattributes" = "/System/Library/PrivateFrameworks/ServerKit.framework/Versions/A/Resources/English.lproj/XSMachineAttributes.plist";
-"info" = " ℹ️";
+"info" = "ℹ️";
 "startupitemsdeprecated" = "\tStartup items are obsolete in OS X Yosemite\n";
 "%d day (plural rule: zero)" = "";
 "%d day (plural rule: one)" = "one day ";

@@ -142,7 +142,7 @@
 "(Verified)" = "(Verifié)";
 "Gatekeeper:" = "Gatekeeper :";
 " [Recovery]" = " [Restauration]";
-"info" = " ℹ️";
+"info" = "ℹ️";
 "startupitemsdeprecated" = "\tLes éléments de démarrage sont obsolètes avec OS X Yosemite\n";
 "Quit and go to update" = "Qutter et mettre à jour";
 "EtreCheck Report" = "Rapport EtreCheck";
