@@ -96,13 +96,16 @@
 - (void) loadColours
   {
   myGreen =
-    [NSColor colorWithCalibratedRed: 0.2 green: 0.5 blue: 0.2 alpha: 0.0];
+    [NSColor
+      colorWithCalibratedRed: 0.2f green: 0.5f blue: 0.2f alpha: 0.0f];
     
   myBlue =
-    [NSColor colorWithCalibratedRed: 0.0 green: 0.0 blue: 0.6 alpha: 0.0];
+    [NSColor
+      colorWithCalibratedRed: 0.0f green: 0.0f blue: 0.6f alpha: 0.0f];
 
   myGray =
-    [NSColor colorWithCalibratedRed: 0.4 green: 0.4 blue: 0.4 alpha: 0.0];
+    [NSColor
+      colorWithCalibratedRed: 0.4f green: 0.4f blue: 0.4f alpha: 0.0f];
 
   myRed = [NSColor redColor];
   
