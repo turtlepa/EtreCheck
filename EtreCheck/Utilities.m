@@ -169,18 +169,34 @@
   
   [task setCurrentDirectoryPath: @"/"];
   
-  [task launch];
+  NSData * result = nil;
   
-  NSData * result =
-    [[[task standardOutput] fileHandleForReading] readDataToEndOfFile];
-  
-  NSData * error =
-    [[[task standardError] fileHandleForReading] readDataToEndOfFile];
+  NSData * error = nil;
 
-  [task release];
-  [errorPipe release];
-  [outputPipe release];
-  
+  @try
+    {
+    [task launch];
+    
+    result =
+      [[[task standardOutput] fileHandleForReading] readDataToEndOfFile];
+    
+    error =
+      [[[task standardError] fileHandleForReading] readDataToEndOfFile];
+
+    [task release];
+    [errorPipe release];
+    [outputPipe release];
+    }
+  @catch(NSException * exception)
+    {
+    error =
+      [[exception description] dataUsingEncoding: NSUTF8StringEncoding];
+    }
+  @catch(...)
+    {
+    error = [@"Unknown exception" dataUsingEncoding: NSUTF8StringEncoding];
+    }
+    
   if(![result length] && [error length])
     return error;
     
