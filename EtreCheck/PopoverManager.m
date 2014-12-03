@@ -17,6 +17,8 @@
 @synthesize popoverViewController = myPopoverViewController;
 @synthesize title = myTitle;
 @synthesize popover = myPopover;
+@synthesize textView = myTextView;
+@synthesize details = myDetails;
 
 // Constructor.
 - (id) init
@@ -25,9 +27,9 @@
   
   if(self)
     {
-    myMinDrawerSize = NSMakeSize(400, 200);
+    myMinDrawerSize = NSMakeSize(400, 100);
     myMaxDrawerSize = NSMakeSize(400, 1000);
-    myMinPopoverSize = NSMakeSize(400, 200);
+    myMinPopoverSize = NSMakeSize(400, 100);
     myMaxPopoverSize = NSMakeSize(1000, 1000);
     
     if([NSPopover class])
@@ -48,6 +50,8 @@
 // Destructor.
 - (void) dealloc
   {
+  self.details = nil;
+  
   if(self.popover)
     self.popover = nil;
     
@@ -66,7 +70,13 @@
   }
 
 // Show detail.
-- (void) showDetail: (NSString *) name
+- (void) showDetail: (NSString *) content
+  {
+  }
+
+// Show detail.
+- (void) showDetail: (NSString *) title
+  content: (NSAttributedString *) content
   {
   if(self.popover)
     {
@@ -99,6 +109,34 @@
         break;
       }
     }
+    
+  [self.title setStringValue: title];
+  
+  self.details = content;
+  
+  NSTextStorage * storage =
+    [[NSTextStorage alloc] initWithAttributedString: self.details];
+
+  [self resizeDetail: storage];
+  
+  [storage release];
+
+  NSData * rtfData =
+    [self.details
+      RTFFromRange: NSMakeRange(0, [self.details length])
+      documentAttributes: nil];
+
+  NSRange range = NSMakeRange(0, [[self.textView textStorage] length]);
+  
+  [self.textView replaceCharactersInRange: range withRTF: rtfData];
+  [self.textView setFont: [NSFont systemFontOfSize: 13]];
+  
+  [self.textView setEditable: YES];
+  [self.textView setEnabledTextCheckingTypes: NSTextCheckingTypeLink];
+  [self.textView checkTextInDocument: nil];
+  [self.textView setEditable: NO];
+
+  [self.textView scrollRangeToVisible: NSMakeRange(0, 1)];
   }
 
 // Resize the detail pane to match the content.
@@ -138,11 +176,22 @@
   
   size.width += 36;
   size.height = idealRect.size.height + 76;
+  size.height += 5;
     
   if(self.popover)
+    {
+    if(size.height < self.minPopoverSize.height)
+      size.height = self.minPopoverSize.height;
+      
     [self.popover setContentSize: size];
+    }
   else
+    {
+    if(size.height < self.minPopoverSize.height)
+      size.height = self.minPopoverSize.height;
+
     [self.drawer setContentSize: size];
+    }
   }
 
 // Close the detail.

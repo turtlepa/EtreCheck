@@ -65,6 +65,7 @@
                 <outlet property="contentView" destination="LrJ-81-PLR" id="WeX-ob-JLZ"/>
                 <outlet property="drawer" destination="cgp-eo-bq3" id="0tF-sk-xAS"/>
                 <outlet property="popoverViewController" destination="YSL-a6-4F4" id="icG-sM-o4U"/>
+                <outlet property="textView" destination="GrL-30-ddq" id="CV8-SX-cah"/>
                 <outlet property="title" destination="B64-4Y-HGo" id="My9-Dg-i1j"/>
             </connections>
         </customObject>
@@ -1075,18 +1076,35 @@ Gw
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="2ht-Co-VnW">
-                    <rect key="frame" x="18" y="41" width="205" height="185"/>
+                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" id="cLz-6q-iFv">
+                    <rect key="frame" x="20" y="46" width="201" height="180"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Multiline Label" id="Qgc-jY-jcQ">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="OAP-T5-MR2" name="value" keyPath="self.details" id="jhA-Fe-gjo"/>
-                    </connections>
-                </textField>
+                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="1QQ-5e-KWQ">
+                        <rect key="frame" x="1" y="1" width="223" height="133"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView editable="NO" drawsBackground="NO" importsGraphics="NO" findStyle="panel" verticallyResizable="YES" linkDetection="YES" id="GrL-30-ddq">
+                                <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="minSize" width="201" height="180"/>
+                                <size key="maxSize" width="463" height="10000000"/>
+                                <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <size key="minSize" width="201" height="180"/>
+                                <size key="maxSize" width="463" height="10000000"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="kks-SE-7QB">
+                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="GYX-C6-Ru7">
+                        <rect key="frame" x="224" y="1" width="15" height="133"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
             </subviews>
             <point key="canvasLocation" x="-244.5" y="234.5"/>
         </customView>

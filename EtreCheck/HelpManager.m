@@ -8,10 +8,15 @@
 #import "Model.h"
 #import "DiagnosticEvent.h"
 
-@implementation HelpManager
+@interface PopoverManager ()
 
-@synthesize textView = myTextView;
-@synthesize details = myDetails;
+// Show detail.
+- (void) showDetail: (NSString *) title
+  content: (NSAttributedString *) content;
+
+@end
+
+@implementation HelpManager
 
 // Constructor.
 - (id) init
@@ -20,43 +25,28 @@
   
   if(self)
     {
-    myMinDrawerSize = NSMakeSize(300, 200);
+    myMinDrawerSize = NSMakeSize(300, 100);
     }
   
   return self;
   }
 
-// Destructor.
-- (void) dealloc
-  {
-  self.details = nil;
-  
-  [super dealloc];
-  }
-
 // Show detail.
 - (void) showDetail: (NSString *) name
   {
-  [super showDetail: name];
+  NSString * helpText = NSLocalizedStringFromTable(name, @"Help", NULL);
+  
+  if(![helpText length])
+    helpText = NSLocalizedString(@"No help available", NULL);
     
-  [self.title
-    setStringValue: NSLocalizedStringFromTable(name, @"Collectors", NULL)];
-  
-  NSString * details = NSLocalizedStringFromTable(name, @"Help", NULL);
-  
-  if(![details length])
-    details = NSLocalizedString(@"No help available", NULL);
+  NSAttributedString * content =
+    [[NSAttributedString alloc] initWithString: helpText];
     
-  self.details = details;
-  
-  NSTextStorage * storage =
-    [[NSTextStorage alloc] initWithString: self.details];
-
-  [self resizeDetail: storage];
-  
-  [storage release];
-
-  [self.textView scrollRangeToVisible: NSMakeRange(0, 1)];
+  [super
+    showDetail: NSLocalizedStringFromTable(name, @"Collectors", NULL)
+    content: content];
+    
+  [content release];
   }
 
 @end

@@ -26,6 +26,12 @@
   
   // My popover.
   id myPopover;
+
+  // My text content.
+  NSTextView * myTextView;
+  
+  // The current details text.
+  NSAttributedString * myDetails;
   }
 
 @property (assign) NSSize minDrawerSize;
@@ -37,6 +43,8 @@
 @property (retain) IBOutlet NSViewController * popoverViewController;
 @property (retain) IBOutlet NSTextField * title;
 @property (retain) id popover;
+@property (retain) IBOutlet NSTextView * textView;
+@property (retain) NSAttributedString * details;
 
 // Show detail.
 - (void) showDetail: (NSString *) content;

@@ -8,46 +8,33 @@
 #import "Model.h"
 #import "DiagnosticEvent.h"
 
+@interface PopoverManager ()
+
+// Show detail.
+- (void) showDetail: (NSString *) title
+  content: (NSAttributedString *) content;
+
+@end
+
 @implementation DetailManager
-
-@synthesize textView = myTextView;
-@synthesize details = myDetails;
-
-// Destructor.
-- (void) dealloc
-  {
-  self.details = nil;
-  
-  [super dealloc];
-  }
 
 // Show detail.
 - (void) showDetail: (NSString *) name
   {
-  [super showDetail: name];
-    
-  [self.title setStringValue: name];
-  
   DiagnosticEvent * event =
     [[[Model model] diagnosticEvents] objectForKey: name];
   
-  NSString * details = event.details;
+  NSString * detailsText = event.details;
   
-  if(![details length])
-    details = NSLocalizedString(@"No details available", NULL);
+  if(![detailsText length])
+    detailsText = NSLocalizedString(@"No details available", NULL);
     
-  NSRange range = NSMakeRange(0, [[self.textView textStorage] length]);
-
-  [self.textView replaceCharactersInRange: range withString: details];
-  
-  NSTextStorage * storage =
-    [[NSTextStorage alloc] initWithString: self.details];
-
-  [self resizeDetail: storage];
-  
-  [storage release];
-
-  [self.textView scrollRangeToVisible: NSMakeRange(0, 1)];
+  NSAttributedString * content =
+    [[NSAttributedString alloc] initWithString: detailsText];
+    
+  [super showDetail: name content: content];
+    
+  [content release];
   }
   
 @end

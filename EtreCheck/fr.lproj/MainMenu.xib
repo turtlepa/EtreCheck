@@ -65,6 +65,7 @@
                 <outlet property="contentView" destination="LrJ-81-PLR" id="orN-ji-4m1"/>
                 <outlet property="drawer" destination="4kW-D2-LXT" id="Gqf-EE-LlU"/>
                 <outlet property="popoverViewController" destination="wbx-Ko-BGY" id="dxE-oO-Q4z"/>
+                <outlet property="textView" destination="9XL-Yg-zMZ" id="Cfl-SL-Il5"/>
                 <outlet property="title" destination="F91-PC-1AG" id="yuA-3K-9kg"/>
             </connections>
         </customObject>
@@ -1001,9 +1002,9 @@ Gw
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <button verticalHuggingPriority="750" id="CKR-xH-pGh">
-                    <rect key="frame" x="82" y="5" width="76" height="32"/>
+                    <rect key="frame" x="78" y="5" width="84" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pVH-bm-jyQ">
+                    <buttonCell key="cell" type="push" title="Fermer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pVH-bm-jyQ">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -1020,18 +1021,35 @@ Gw
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="8Ol-WL-vfY">
-                    <rect key="frame" x="18" y="41" width="205" height="185"/>
+                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" id="Ypx-es-oh5">
+                    <rect key="frame" x="20" y="48" width="201" height="178"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Multiline Label" id="Xpj-xO-QEf">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="E5E-Xh-gnk" name="value" keyPath="self.details" id="Q91-SP-0gI"/>
-                    </connections>
-                </textField>
+                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Rts-b0-4Ym">
+                        <rect key="frame" x="1" y="1" width="238" height="133"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView editable="NO" drawsBackground="NO" importsGraphics="NO" findStyle="panel" verticallyResizable="YES" linkDetection="YES" id="9XL-Yg-zMZ">
+                                <rect key="frame" x="0.0" y="0.0" width="238" height="133"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="minSize" width="201" height="178"/>
+                                <size key="maxSize" width="463" height="10000000"/>
+                                <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <size key="minSize" width="201" height="178"/>
+                                <size key="maxSize" width="463" height="10000000"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="jyj-x4-74i">
+                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="pNT-ib-3JD">
+                        <rect key="frame" x="223" y="1" width="16" height="133"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
             </subviews>
             <point key="canvasLocation" x="-244.5" y="234.5"/>
         </customView>
@@ -1069,9 +1087,9 @@ Gw
                     </scroller>
                 </scrollView>
                 <button verticalHuggingPriority="750" id="1xu-wk-6Yf">
-                    <rect key="frame" x="82" y="5" width="76" height="32"/>
+                    <rect key="frame" x="78" y="5" width="84" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ofe-M7-2VM">
+                    <buttonCell key="cell" type="push" title="Fermer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ofe-M7-2VM">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -1124,17 +1142,6 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <button verticalHuggingPriority="750" id="LBf-0y-YHh">
-                    <rect key="frame" x="231" y="7" width="76" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                    <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hPz-7R-Qi4">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="closeDetail:" target="PIp-F1-rtQ" id="7AY-DK-b0v"/>
-                    </connections>
-                </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="0OW-gg-1fA">
                     <rect key="frame" x="18" y="234" width="285" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -1153,6 +1160,17 @@ Gw
                     </buttonCell>
                     <connections>
                         <action selector="gotoAdwareMedic:" target="PIp-F1-rtQ" id="wY0-Lx-8Yy"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" id="LBf-0y-YHh">
+                    <rect key="frame" x="223" y="7" width="84" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="push" title="Fermer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hPz-7R-Qi4">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="closeDetail:" target="PIp-F1-rtQ" id="7AY-DK-b0v"/>
                     </connections>
                 </button>
             </subviews>

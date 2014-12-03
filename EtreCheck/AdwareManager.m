@@ -9,30 +9,19 @@
 #import "NSMutableAttributedString+Etresoft.h"
 #import "Utilities.h"
 
+@interface PopoverManager ()
+
+// Show detail.
+- (void) showDetail: (NSString *) title
+  content: (NSAttributedString *) content;
+
+@end
+
 @implementation AdwareManager
-
-@synthesize textView = myTextView;
-@synthesize details = myDetails;
-
-// Destructor.
-- (void) dealloc
-  {
-  self.details = nil;
-  
-  [super dealloc];
-  }
 
 // Show detail.
 - (void) showDetail: (NSString *) name
   {
-  [super showDetail: name];
-    
-  NSString * title =
-    [NSString
-      stringWithFormat: NSLocalizedString(@"About %@ adware", NULL), name];
-    
-  [self.title setStringValue: NSLocalizedString(title, NULL)];
-  
   NSMutableAttributedString * details = [NSMutableAttributedString new];
   
   [details appendString: NSLocalizedString(@"adwaredetails1", NULL)];
@@ -54,25 +43,15 @@
   
   [details appendString: NSLocalizedString(@"adwaredetails3", NULL)];
 
-  self.details = [details copy];
+  NSString * title =
+    [NSString
+      stringWithFormat: NSLocalizedString(@"About %@ adware", NULL), name];
+    
+  [self.title setStringValue: NSLocalizedString(title, NULL)];
   
+  [super showDetail: title content: details];
+    
   [details release];
-  
-  NSData * rtfData =
-    [self.details
-      RTFFromRange: NSMakeRange(0, [self.details length])
-      documentAttributes: nil];
-
-  NSRange range = NSMakeRange(0, [[self.textView textStorage] length]);
-
-  [self.textView replaceCharactersInRange: range withRTF: rtfData];
-  
-  NSTextStorage * storage =
-    [[NSTextStorage alloc] initWithAttributedString: self.details];
-
-  [self resizeDetail: storage];
-  
-  [storage release];
   }
 
 // Get a link to the Apple support document about adware.

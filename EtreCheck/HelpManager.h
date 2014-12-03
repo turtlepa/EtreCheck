@@ -8,15 +8,5 @@
 #import "PopoverManager.h"
 
 @interface HelpManager : PopoverManager
-  {
-  // My text content.
-  NSTextView * myTextView;
-  
-  // The current details text.
-  NSString * myDetails;
-  }
-
-@property (retain) IBOutlet NSTextView * textView;
-@property (retain) NSString * details;
 
 @end
