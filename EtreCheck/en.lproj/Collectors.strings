@@ -29,6 +29,7 @@
 "audioplugins" = "Audio Plug-ins:";
 "internetplugins" = "Internet Plug-ins:";
 "itunesplugins" = "iTunes Plug-ins:";
+"useritunesplugins" = "User iTunes Plug-ins:";
 "launchagents" = "Launch Agents:";
 "launchdaemons" = "Launch Daemons:";
 "systemlaunchagents" = "Problem System Launch Agents:";
