@@ -512,7 +512,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/bin/gzip --stdout $SRCROOT/$PRODUCT_NAME/adware.plist | tail -c 751 > $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/adware.plist";
+			shellScript = "SIZE=$(/usr/bin/gzip --stdout $SRCROOT/$PRODUCT_NAME/adware.plist | /usr/bin/wc -c)\nSHORT=`expr $SIZE - 3`\n/usr/bin/gzip --stdout $SRCROOT/$PRODUCT_NAME/adware.plist | tail -c $SHORT > $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/adware.plist";
 		};
 /* End PBXShellScriptBuildPhase section */
 

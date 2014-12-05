@@ -25,6 +25,8 @@
 @synthesize diagnosticEvents = myDiagnosticEvents;
 @synthesize adwareFiles = myAdwareFiles;
 @synthesize adwareExtensions = myAdwareExtensions;
+@synthesize computerName = myComputerName;
+@synthesize hostName = myHostName;
 
 // Return the singeton of shared values.
 + (Model *) model

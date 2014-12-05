@@ -31,6 +31,8 @@
   NSMutableDictionary * myDiagnosticEvents;
   NSMutableDictionary * myAdwareFiles;
   NSArray * myAdwareExtensions;
+  NSString * myComputerName;
+  NSString * myHostName;
   }
 
 // Keep track of the OS version.
@@ -71,6 +73,12 @@
 
 // Adware extensions.
 @property (retain) NSArray * adwareExtensions;
+
+// Localized host name.
+@property (retain) NSString * computerName;
+
+// Host name.
+@property (retain) NSString * hostName;
 
 // Return the singeton of shared values.
 + (Model *) model;

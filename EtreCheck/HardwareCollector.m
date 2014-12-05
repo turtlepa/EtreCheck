@@ -11,6 +11,7 @@
 #import "TTTLocalizedPluralString.h"
 #import "NSArray+Etresoft.h"
 #import "NSDictionary+Etresoft.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 
 // Some keys to be returned from machine lookuup.
 #define kMachineIcon @"machineicon"
@@ -66,6 +67,17 @@
     
   // Load a manual machine image lookup table.
   [self loadMachineImageLookupTable];
+  
+  // This is as good a place as any to collect this.
+  NSString * computerName = (NSString *)SCDynamicStoreCopyComputerName(NULL, NULL);
+
+  NSString * hostName = (NSString *)SCDynamicStoreCopyLocalHostName(NULL);
+
+  [[Model model] setComputerName: computerName];
+  [[Model model] setHostName: hostName];
+  
+  [computerName release];
+  [hostName release];
   }
 
 // Load a manual machine image lookup table in case there isn't a system-
