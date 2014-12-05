@@ -5,6 +5,7 @@
  **********************************************************************/
 
 #import "Utilities.h"
+#import "Model.h"
 
 // Assorted utilities.
 @implementation Utilities
@@ -278,6 +279,26 @@
     username = NSFullUserName();
     
     range = [path rangeOfString: username];
+    }
+    
+  if(range.location == NSNotFound)
+    {
+    NSString * computerName = [[Model model] computerName];
+    
+    BOOL redact = NO;
+    
+    if([computerName containsString: NSUserName()])
+      redact = YES;
+    else if([computerName containsString: NSFullUserName()])
+      redact = YES;
+      
+    if(redact)
+      {
+      range = [path rangeOfString: computerName];
+
+      if(range.location == NSNotFound)
+        range = [path rangeOfString: [[Model model] hostName]];
+      }
     }
     
   if(range.location == NSNotFound)

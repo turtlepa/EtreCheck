@@ -336,7 +336,7 @@
     {
     DiagnosticEvent * event = [DiagnosticEvent new];
     
-    event.name = [file lastPathComponent];
+    event.name = [Utilities sanitizeFilename: [file lastPathComponent]];
     event.date = date;
     event.type = type;
     event.file = file;
