@@ -30,7 +30,7 @@
 
     myDateFormatter = [[NSDateFormatter alloc] init];
    
-    [myDateFormatter setDateFormat: @"yyyy-MM-dd_HHmmss"];
+    [myDateFormatter setDateFormat: @"yyyy-MM-dd-HHmmss"];
     [myDateFormatter setLocale: [NSLocale systemLocale]];
 
     myLogDateFormatter = [[NSDateFormatter alloc] init];
@@ -282,7 +282,7 @@
   if([[files firstObject] isEqualToString: permissionsError])
     insufficientPermissions = YES;
   else
-    [self parseDiagnosticReports: [Utilities formatLines: data]];
+    [self parseDiagnosticReports: files];
   }
 
 // Collect CPU usage reports.
@@ -304,7 +304,7 @@
   if([[files firstObject] isEqualToString: permissionsError])
     insufficientPermissions = YES;
   else
-    [self parseDiagnosticReports: [Utilities formatLines: data]];
+    [self parseDiagnosticReports: files];
   }
 
 // Parse diagnostic reports.

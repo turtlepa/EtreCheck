@@ -283,14 +283,21 @@
     
   if(range.location == NSNotFound)
     {
+    username = NSUserName();
+    
     NSString * computerName = [[Model model] computerName];
     
     BOOL redact = NO;
     
-    if([computerName containsString: NSUserName()])
+    if([computerName rangeOfString: username].location != NSNotFound)
       redact = YES;
-    else if([computerName containsString: NSFullUserName()])
-      redact = YES;
+    else
+      {
+      username = NSFullUserName();
+      
+      if([computerName rangeOfString: username].location != NSNotFound)
+        redact = YES;
+      }
       
     if(redact)
       {

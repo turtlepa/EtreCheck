@@ -188,7 +188,7 @@
   NSString * search = [path lowercaseString];
   
   for(NSString * extension in self.adwareExtensions)
-    if([search containsString: extension])
+    if([search rangeOfString: extension].location != NSNotFound)
       return YES;
     
   return NO;
