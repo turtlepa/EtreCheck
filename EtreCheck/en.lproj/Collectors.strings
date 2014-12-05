@@ -27,7 +27,9 @@
 "video" = "Video Information:";
 "vm" = "Virtual Memory Information:";
 "audioplugins" = "Audio Plug-ins:";
+"useraudioplugins" = "User Audio Plug-ins:";
 "internetplugins" = "Internet Plug-ins:";
+"userinternetplugins" = "User internet Plug-ins:";
 "itunesplugins" = "iTunes Plug-ins:";
 "useritunesplugins" = "User iTunes Plug-ins:";
 "launchagents" = "Launch Agents:";

@@ -30,6 +30,7 @@
   NSString * myModel;
   NSMutableDictionary * myDiagnosticEvents;
   NSMutableDictionary * myAdwareFiles;
+  NSArray * myAdwareExtensions;
   }
 
 // Keep track of the OS version.
@@ -68,6 +69,9 @@
 // Adware files.
 @property (retain) NSMutableDictionary * adwareFiles;
 
+// Adware extensions.
+@property (retain) NSArray * adwareExtensions;
+
 // Return the singeton of shared values.
 + (Model *) model;
 
@@ -82,6 +86,9 @@
 
 // Is this file an adware file?
 - (bool) isAdware: (NSString *) path;
+
+// Is this file an adware extension?
+- (bool) isAdwareExtension: (NSString *) path;
 
 // What kind of adware is this?
 - (NSString *) adwareType: (NSString *) path;

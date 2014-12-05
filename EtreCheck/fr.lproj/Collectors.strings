@@ -27,9 +27,11 @@
 "video" = "Informations vidéo :";
 "vm" = "Informations de la mémoire virtuelle :";
 "audioplugins" = "Plug-ins audios :";
+"useraudioplugins" = "Plug-ins audios pour l’utilisateur :";
 "internetplugins" = "Plug-ins internets :";
+"userinternetplugins" = "Plug-ins internets pour l’utilisateur :";
 "itunesplugins" = "Plug-ins iTunes :";
-"itunesplugins" = "Plug-ins iTunes pour l’utilisateur :";
+"useritunesplugins" = "Plug-ins iTunes pour l’utilisateur :";
 "launchagents" = "Agents de lancement :";
 "launchdaemons" = "Daemons de lancements :";
 "systemlaunchagents" = "Agents de lancement systèmes avec un problème :";

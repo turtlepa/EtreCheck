@@ -24,6 +24,7 @@
 @synthesize model = myModel;
 @synthesize diagnosticEvents = myDiagnosticEvents;
 @synthesize adwareFiles = myAdwareFiles;
+@synthesize adwareExtensions = myAdwareExtensions;
 
 // Return the singeton of shared values.
 + (Model *) model
@@ -177,6 +178,18 @@
 - (bool) isAdware: (NSString *) path
   {
   return [self.adwareFiles objectForKey: path];
+  }
+
+// Is this file an adware extension?
+- (bool) isAdwareExtension: (NSString *) path
+  {
+  NSString * search = [path lowercaseString];
+  
+  for(NSString * extension in self.adwareExtensions)
+    if([search containsString: extension])
+      return YES;
+    
+  return NO;
   }
 
 // What kind of adware is this?

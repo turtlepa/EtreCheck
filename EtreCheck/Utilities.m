@@ -335,4 +335,51 @@
   return prettyFile;
   }
 
+// Uncompress some data.
++ (NSData *) ungzip: (NSData *) gzipData
+  {
+  // Create pipes for handling communication.
+  NSPipe * inputPipe = [NSPipe new];
+  NSPipe * outputPipe = [NSPipe new];
+  
+  // Create the task itself.
+  NSTask * task = [NSTask new];
+  
+  // Send all task output to the pipe.
+  [task setStandardInput: inputPipe];
+  [task setStandardOutput: outputPipe];
+  
+  [task setLaunchPath: @"/usr/bin/gunzip"];
+
+  [task setCurrentDirectoryPath: @"/"];
+  
+  NSData * result = nil;
+  
+  @try
+    {
+    [task launch];
+    
+    dispatch_async(
+      dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+      ^{
+        [[[task standardInput] fileHandleForWriting] writeData: gzipData];
+        [[[task standardInput] fileHandleForWriting] closeFile];
+      });
+    
+    result =
+      [[[task standardOutput] fileHandleForReading] readDataToEndOfFile];
+    
+    [task release];
+    [outputPipe release];
+    }
+  @catch(NSException * exception)
+    {
+    }
+  @catch(...)
+    {
+    }
+    
+  return result;
+  }
+
 @end

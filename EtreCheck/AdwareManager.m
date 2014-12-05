@@ -47,9 +47,7 @@
     [NSString
       stringWithFormat: NSLocalizedString(@"About %@ adware", NULL), name];
     
-  [self.title setStringValue: NSLocalizedString(title, NULL)];
-  
-  [super showDetail: title content: details];
+  [super showDetail: NSLocalizedString(title, NULL) content: details];
     
   [details release];
   }

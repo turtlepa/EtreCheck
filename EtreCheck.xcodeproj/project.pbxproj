@@ -123,6 +123,7 @@
 		A54B87341A1D4F1900F25213 /* HelpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpManager.m; sourceTree = "<group>"; };
 		A54B87361A1D4FED00F25213 /* DetailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailManager.h; sourceTree = "<group>"; };
 		A54B87371A1D4FED00F25213 /* DetailManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailManager.m; sourceTree = "<group>"; };
+		A54DA5711A3117E100F09B19 /* adware.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = adware.plist; sourceTree = "<group>"; };
 		A552A3161818BC7F00829BA3 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/CoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		A552A3181818BD1F00829BA3 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Carbon.framework; sourceTree = DEVELOPER_DIR; };
 		A552A31B1818BD8300829BA3 /* CarbonCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CarbonCore.framework; path = ../../../../System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework; sourceTree = "<group>"; };
@@ -408,6 +409,7 @@
 			children = (
 				A5B6BD5A19D7AAF900C48C37 /* Media.xcassets */,
 				A55BC17515BF987D00D42EF1 /* EtreCheck-Info.plist */,
+				A54DA5711A3117E100F09B19 /* adware.plist */,
 				A5E9E2C91A2669A600309185 /* Collectors.strings */,
 				A5E9E2C21A2522A600309185 /* Help.strings */,
 				A55BC17615BF987D00D42EF1 /* InfoPlist.strings */,
@@ -437,6 +439,7 @@
 			buildPhases = (
 				A55BC16515BF987D00D42EF1 /* Sources */,
 				A55BC16615BF987D00D42EF1 /* Frameworks */,
+				A54DA58D1A314C8C00F09B19 /* ShellScript */,
 				A55BC16715BF987D00D42EF1 /* Resources */,
 			);
 			buildRules = (
@@ -496,6 +499,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A54DA58D1A314C8C00F09B19 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/gzip --stdout $SRCROOT/$PRODUCT_NAME/adware.plist | tail -c 751 > $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/adware.plist";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A55BC16515BF987D00D42EF1 /* Sources */ = {

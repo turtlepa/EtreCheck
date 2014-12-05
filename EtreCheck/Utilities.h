@@ -69,4 +69,7 @@
 // Make a file name more presentable.
 + (NSString *) sanitizeFilename: (NSString *) file;
 
+// Uncompress some data.
++ (NSData *) ungzip: (NSData *) gzipData;
+
 @end
