@@ -105,7 +105,7 @@
   NSData * result =
     [Utilities execute: @"/usr/sbin/system_profiler" arguments: args];
   
-  if(!result)
+  if(![result length])
     return;
     
   NSArray * plist = [NSArray readPropertyListData: result];
@@ -158,47 +158,17 @@
 // Collect files in /Library/Logs/CrashReporter.
 - (void) collectCrashReporter
   {
-  NSArray * args =
-    @[
-      @"/Library/Logs/CrashReporter",
-      @"-iname",
-      @"*.crash"
-    ];
-  
-  NSData * data = [Utilities execute: @"/usr/bin/find" arguments: args];
-  
-  NSArray * files = [Utilities formatLines: data];
-  
-  NSString * permissionsError =
-    @"find: /Library/Logs/DiagnosticReports: Permission denied";
-
-  if([[files firstObject] isEqualToString: permissionsError])
-    insufficientPermissions = YES;
-  else
-    [self parseDiagnosticReports: files];
+  [self
+    collectDiagnosticDataFrom: @"/Library/Logs/CrashReporter"
+    type: @"crash"];
   }
 
 // Collect files in /Library/Logs/DiagnosticReports.
 - (void) collectDiagnosticReportCrashes
   {
-  NSArray * args =
-    @[
-      @"/Library/Logs/DiagnosticReports",
-      @"-iname",
-      @"*.crash"
-    ];
-  
-  NSData * data = [Utilities execute: @"/usr/bin/find" arguments: args];
-  
-  NSArray * files = [Utilities formatLines: data];
-  
-  NSString * permissionsError =
-    @"find: /Library/Logs/DiagnosticReports: Permission denied";
-
-  if([[files firstObject] isEqualToString: permissionsError])
-    insufficientPermissions = YES;
-  else
-    [self parseDiagnosticReports: files];
+  [self
+    collectDiagnosticDataFrom: @"/Library/Logs/DiagnosticReports"
+    type: @"crash"];
   }
 
 // Collect files in ~/Library/Logs/DiagnosticReports.
@@ -208,39 +178,17 @@
     [NSHomeDirectory()
       stringByAppendingPathComponent: @"Library/Logs/DiagnosticReports"];
 
-  NSArray * args =
-    @[
-      diagnosticReportsDir,
-      @"-iname",
-      @"*.crash"
-    ];
-  
-  NSData * data = [Utilities execute: @"/usr/bin/find" arguments: args];
-  
-  [self parseDiagnosticReports: [Utilities formatLines: data]];
+  [self
+    collectDiagnosticDataFrom: diagnosticReportsDir
+    type: @"crash"];
   }
 
 // Collect hang files in /Library/Logs/DiagnosticReports.
 - (void) collectDiagnosticReportHangs
   {
-  NSArray * args =
-    @[
-      @"/Library/Logs/DiagnosticReports",
-      @"-iname",
-      @"*.hang"
-    ];
-  
-  NSData * data = [Utilities execute: @"/usr/bin/find" arguments: args];
-  
-  NSArray * files = [Utilities formatLines: data];
-  
-  NSString * permissionsError =
-    @"find: /Library/Logs/DiagnosticReports: Permission denied";
-
-  if([[files firstObject] isEqualToString: permissionsError])
-    insufficientPermissions = YES;
-  else
-    [self parseDiagnosticReports: files];
+  [self
+    collectDiagnosticDataFrom: @"/Library/Logs/DiagnosticReports"
+    type: @"hang"];
   }
 
 // Collect hang files in ~/Library/Logs/DiagnosticReports.
@@ -250,67 +198,56 @@
     [NSHomeDirectory()
       stringByAppendingPathComponent: @"Library/Logs/DiagnosticReports"];
 
-  NSArray * args =
-    @[
-      diagnosticReportsDir,
-      @"-iname",
-      @"*.hang"
-    ];
-  
-  NSData * data = [Utilities execute: @"/usr/bin/find" arguments: args];
-  
-  [self parseDiagnosticReports: [Utilities formatLines: data]];
+  [self
+    collectDiagnosticDataFrom: diagnosticReportsDir
+    type: @"hang"];
   }
 
 // Collect panic files in ~/Library/Logs/DiagnosticReports.
 - (void) collectPanics
   {
-  NSArray * args =
-    @[
-      @"/Library/Logs/DiagnosticReports",
-      @"-iname",
-      @"*.panic"
-    ];
-  
-  NSData * data = [Utilities execute: @"/usr/bin/find" arguments: args];
-  
-  NSArray * files = [Utilities formatLines: data];
-  
-  NSString * permissionsError =
-    @"find: /Library/Logs/DiagnosticReports: Permission denied";
-
-  if([[files firstObject] isEqualToString: permissionsError])
-    insufficientPermissions = YES;
-  else
-    [self parseDiagnosticReports: files];
+  [self
+    collectDiagnosticDataFrom: @"/Library/Logs/DiagnosticReports"
+    type: @"panic"];
   }
 
 // Collect CPU usage reports.
 - (void) collectCPU
   {
-  NSArray * args =
-    @[
-      @"/Library/Logs/DiagnosticReports",
-      @"-iname",
-      @"*.cpu_resource.diag"];
-  
-  NSData * data = [Utilities execute: @"/usr/bin/find" arguments: args];
-  
-  NSArray * files = [Utilities formatLines: data];
-  
-  NSString * permissionsError =
-    @"find: /Library/Logs/DiagnosticReports: Permission denied";
-
-  if([[files firstObject] isEqualToString: permissionsError])
-    insufficientPermissions = YES;
-  else
-    [self parseDiagnosticReports: files];
+  [self
+    collectDiagnosticDataFrom: @"/Library/Logs/DiagnosticReports"
+    type: @"cpu_resource.diag"];
   }
 
-// Parse diagnostic reports.
-- (void) parseDiagnosticReports: (NSArray *) files
+// Collect diagnostic data.
+- (void) collectDiagnosticDataFrom: (NSString *) path
+  type: (NSString *) type
   {
-  for(NSString * file in files)
+  NSArray * args =
+    @[
+      path,
+      @"-iname",
+      [@"*." stringByAppendingString: type]
+    ];
+  
+  NSString * error = nil;
+  
+  NSData * data =
+    [Utilities execute: @"/usr/bin/find" arguments: args error: & error];
+  
+  if(![data length] && [error length])
+    {
+    NSString * permissionsError =
+      @"find: /Library/Logs/DiagnosticReports: Permission denied";
+
+    if([error hasPrefix: permissionsError])
+      insufficientPermissions = YES;
+      
+    return;
+    }
+    
+// Parse diagnostic reports.
+  for(NSString * file in [Utilities formatLines: data])
     [self createEventFromFile: file];
   }
 

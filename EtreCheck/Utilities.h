@@ -52,6 +52,10 @@
 // Execute an external program and return the results.
 + (NSData *) execute: (NSString *) program arguments: (NSArray *) args;
 
+// Execute an external program, return the results, and collect any errors.
++ (NSData *) execute: (NSString *) program
+  arguments: (NSArray *) args error: (NSString **) error;
+
 // Format text into an array of trimmed lines separated by newlines.
 + (NSArray *) formatLines: (NSData *) data;
 

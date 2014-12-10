@@ -152,6 +152,13 @@
 // Execute an external program and return the results.
 + (NSData *) execute: (NSString *) program arguments: (NSArray *) args
   {
+  return [self execute: program arguments: args error: NULL];
+  }
+
+// Execute an external program and return the results.
++ (NSData *) execute: (NSString *) program
+  arguments: (NSArray *) args error: (NSString **) error
+  {
   // Create pipes for handling communication.
   NSPipe * outputPipe = [NSPipe new];
   NSPipe * errorPipe = [NSPipe new];
@@ -170,9 +177,8 @@
   
   [task setCurrentDirectoryPath: @"/"];
   
-  NSData * result = nil;
-  
-  NSData * error = nil;
+  NSData * result = nil;  
+  NSData * errorData = nil;
 
   @try
     {
@@ -181,7 +187,7 @@
     result =
       [[[task standardOutput] fileHandleForReading] readDataToEndOfFile];
     
-    error =
+    errorData =
       [[[task standardError] fileHandleForReading] readDataToEndOfFile];
 
     [task release];
@@ -190,16 +196,20 @@
     }
   @catch(NSException * exception)
     {
-    error =
-      [[exception description] dataUsingEncoding: NSUTF8StringEncoding];
+    if(error)
+      *error = [exception description];
     }
   @catch(...)
     {
-    error = [@"Unknown exception" dataUsingEncoding: NSUTF8StringEncoding];
+    if(error)
+      *error = @"Unknown exception";
     }
     
-  if(![result length] && [error length])
-    return error;
+  if(![result length] && error && [errorData length])
+    *error =
+      [[[NSString alloc]
+        initWithData: errorData encoding: NSUTF8StringEncoding]
+        autorelease];
     
   return result;
   }
