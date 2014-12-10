@@ -249,6 +249,9 @@
               : NSLocalizedString(@"Unlocked", NULL)]];
 
     if(![state isEqualToString: @"Complete"])
+      {
+      [self.result appendString: @" "];
+      
       [self.result
         appendString: state
         attributes:
@@ -256,6 +259,7 @@
             NSForegroundColorAttributeName : [[Utilities shared] blue],
             NSFontAttributeName : [[Utilities shared] boldFont]
           }];
+      }
       
     [self.result appendCR];
     }
