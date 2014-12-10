@@ -281,40 +281,51 @@
 + (NSString *) cleanPath: (NSString *) path
   {
   NSString * username = NSUserName();
+  NSString * fullname = NSFullUserName();
   
+  if(![username length])
+    return path;
+    
   NSRange range = [path rangeOfString: username];
   
   if(range.location == NSNotFound)
     {
-    username = NSFullUserName();
-    
-    range = [path rangeOfString: username];
+    if([fullname length])
+      range = [path rangeOfString: username];
+    else
+      return path;
     }
     
+  // Now check for a hostname version.
   if(range.location == NSNotFound)
     {
-    username = NSUserName();
-    
+    // See if the full user name is in the computer name.
     NSString * computerName = [[Model model] computerName];
     
+    if(!computerName)
+      return path;
+      
     BOOL redact = NO;
     
     if([computerName rangeOfString: username].location != NSNotFound)
       redact = YES;
-    else
-      {
-      username = NSFullUserName();
-      
-      if([computerName rangeOfString: username].location != NSNotFound)
+    else if([fullname length])
+      if([computerName rangeOfString: fullname].location != NSNotFound)
         redact = YES;
-      }
       
     if(redact)
       {
       range = [path rangeOfString: computerName];
 
       if(range.location == NSNotFound)
-        range = [path rangeOfString: [[Model model] hostName]];
+        {
+        NSString * hostName = [[Model model] hostName];
+        
+        if(hostName)
+          range = [path rangeOfString: hostName];
+        else
+          range.location = NSNotFound;
+        }
       }
     }
     

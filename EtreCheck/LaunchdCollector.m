@@ -391,7 +391,7 @@
       
     NSArray * arguments = [plist objectForKey: @"ProgramArguments"];
     
-    if(arguments)
+    if([arguments respondsToSelector: @selector(isEqualToArray:)])
       [executable addObjectsFromArray: arguments];
     }
     
