@@ -13,6 +13,8 @@
   
   NSDateFormatter * myDateFormatter;
   NSDateFormatter * myLogDateFormatter;
+  
+  BOOL hasOutput;
   }
 
 @property (retain) NSDateFormatter * dateFormatter;

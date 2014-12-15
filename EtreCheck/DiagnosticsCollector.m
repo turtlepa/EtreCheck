@@ -70,12 +70,13 @@
   
   if([[[Model model] diagnosticEvents] count] || insufficientPermissions)
     {
-    [self.result appendAttributedString: [self buildTitle]];
-      
     [self printDiagnostics];
     
     if(insufficientPermissions)
       {
+      if(!hasOutput)
+        [self.result appendAttributedString: [self buildTitle]];
+      
       [self.result appendString: @"\n"];
       [self.result
         appendString:
@@ -382,6 +383,9 @@
 - (void) printDiagnosticEvent: (DiagnosticEvent *) event
   name: (NSString *) name
   {
+  if(!hasOutput)
+    [self.result appendAttributedString: [self buildTitle]];
+  
   if(event.type == kSelfTestFail)
     [self.result
       appendString:
@@ -418,6 +422,8 @@
     }
 
   [self.result appendString: @"\n"];
+  
+  hasOutput = YES;
   }
 
 @end
