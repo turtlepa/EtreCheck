@@ -132,6 +132,7 @@
   }
 
 // Collect extension caches.
+// TODO: Flag these as cached.
 - (void) collectCaches
   {
   NSString * userSafariExtensionsDir =

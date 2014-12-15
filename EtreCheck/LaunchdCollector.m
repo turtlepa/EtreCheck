@@ -322,6 +322,12 @@
       {
       NSDictionary * status = [self.launchdStatus objectForKey: label];
     
+      NSLog(@"Label: %@", label);
+      for(NSString * key in status)
+        {
+        NSLog(@"\t%@ = %@", key, [status objectForKey: key]);
+        }
+        
       NSNumber * pid = [status objectForKey: @"PID"];
       NSNumber * lastExitStatus = [status objectForKey: @"LastExitStatus"];
 

@@ -118,40 +118,59 @@
   for(NSString * line in lines)
     {
     if([line hasSuffix: @": I/O error."])
+      [self collectIOError: line];
+    else
       {
-      NSRange diskRange = [line rangeOfString: @": disk"];
-      
-      if(diskRange.location != NSNotFound)
-        {
-        diskRange.length = ([line length] - 12) - diskRange.location - 2;
-        diskRange.location += 2;
+      NSRange range =
+        [line rangeOfString: @"memorystatus_thread: idle exiting pid"];
         
-        if(diskRange.location < [line length])
-          if((diskRange.location + diskRange.length) < [line length])
-            {
-            NSString * disk = [line substringWithRange: diskRange];
-            
-            if(disk)
-              {
-              NSNumber * errorCount =
-                [[[Model model] diskErrors]
-                  objectForKey: disk];
-                
-              if(!errorCount)
-                errorCount = [NSNumber numberWithUnsignedInteger: 0];
-                
-              errorCount =
-                [NSNumber
-                  numberWithUnsignedInteger:
-                    [errorCount unsignedIntegerValue] + 1];
-                
-              [[[Model model] diskErrors]
-                setObject: errorCount forKey: disk];
-              }
-            }
-        }
+      if(range.location != NSNotFound)
+        [self collectMemoryStatusError: line range: range];
       }
     }
+  }
+
+// Collect I/O errors.
+// 17 Nov 2014 10:06:15 kernel[0]: disk0s2: I/O error.
+- (void) collectIOError: (NSString *) line
+  {
+  NSRange diskRange = [line rangeOfString: @": disk"];
+  
+  if(diskRange.location != NSNotFound)
+    {
+    diskRange.length = ([line length] - 12) - diskRange.location - 2;
+    diskRange.location += 2;
+    
+    if(diskRange.location < [line length])
+      if((diskRange.location + diskRange.length) < [line length])
+        {
+        NSString * disk = [line substringWithRange: diskRange];
+        
+        if(disk)
+          {
+          NSNumber * errorCount =
+            [[[Model model] diskErrors]
+              objectForKey: disk];
+            
+          if(!errorCount)
+            errorCount = [NSNumber numberWithUnsignedInteger: 0];
+            
+          errorCount =
+            [NSNumber
+              numberWithUnsignedInteger:
+                [errorCount unsignedIntegerValue] + 1];
+            
+          [[[Model model] diskErrors]
+            setObject: errorCount forKey: disk];
+          }
+        }
+    }
+  }
+
+// Collect memory status errors.
+// Dec 12 14:44:26 Macintosh-4 kernel[0]: memorystatus_thread: idle exiting pid 18164 [recentsd]
+- (void) collectMemoryStatusError: (NSString *) line range: (NSRange) range
+  {
   }
 
 // Collect results from the asl log entry.
