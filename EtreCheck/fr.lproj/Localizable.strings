@@ -195,3 +195,5 @@
 "adwaredetails2" = "\n\nEtreCheck á trouvé les fichiers suivants qui correspondent à la liste d’Apple:\n\n";
 "adwaredetails3" = "\nLa meilleure façon de supprimer ce logiciel est de télécharger et lancer AdwareMedic, un programme écrit par un autre membre de longue séjour chez Apple Support Communities.";
 "Adware!" = "Adware !";
+"[Installed]" = "[Installé]";
+"[Cache]" = "[En cache]";

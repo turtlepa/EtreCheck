@@ -169,8 +169,16 @@
   NSString * humanReadableName =
     [extension objectForKey: kHumanReadableName];
   
+  NSString * status = @"";
+  
+  if([[extension objectForKey: kArchive] boolValue])
+    status = NSLocalizedString(@"[Installed]", NULL);
+  else if([[extension objectForKey: kCache] boolValue])
+    status = NSLocalizedString(@"[Cached]", NULL);
+    
   [self.result
-    appendString: [NSString stringWithFormat: @"\t%@", humanReadableName]];
+    appendString:
+      [NSString stringWithFormat: @"\t%@ %@", humanReadableName, status]];
     
   // Safari extensions are stored under the "adwareextensions" category.
   if([[Model model] isAdwareExtension: humanReadableName])
