@@ -171,6 +171,22 @@
 // Dec 12 14:44:26 Macintosh-4 kernel[0]: memorystatus_thread: idle exiting pid 18164 [recentsd]
 - (void) collectMemoryStatusError: (NSString *) line range: (NSRange) range
   {
+  NSScanner * scanner =
+    [NSScanner
+      scannerWithString:
+        [line substringFromIndex: range.location + range.length]];
+    
+  int pid;
+  
+  [scanner scanInt: & pid];
+  
+  [scanner scanString: @"[" intoString: NULL];
+  
+  NSString * processName = nil;
+  
+  if([scanner scanUpToString: @"]" intoString: & processName])
+    if([processName length])
+      [[[Model model] memoryStatusErrors] addObject: processName];
   }
 
 // Collect results from the asl log entry.

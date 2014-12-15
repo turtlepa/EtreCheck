@@ -26,6 +26,7 @@
 #define kStatusRunning @"running"
 #define kStatusFailed @"failed"
 #define kStatusInvalid @"invalid"
+#define kStatusKilled @"killed"
 
 @implementation LaunchdCollector
 
@@ -282,10 +283,14 @@
   
   NSAttributedString * detailsURL = nil;
   
-  if([jobStatus isEqualToString: kStatusFailed])
-    if([[Model model] hasLogEntries: name])
+  if([name length] && [jobStatus isEqualToString: kStatusFailed])
+    {
+    if([[[Model model] memoryStatusErrors] containsObject: name])
+      jobStatus = kStatusKilled;
+    else if([[Model model] hasLogEntries: name])
       detailsURL = [[Model model] getDetailsURLFor: name];
-  
+    }
+    
   if(detailsURL)
     return
       @{
@@ -322,12 +327,6 @@
       {
       NSDictionary * status = [self.launchdStatus objectForKey: label];
     
-      NSLog(@"Label: %@", label);
-      for(NSString * key in status)
-        {
-        NSLog(@"\t%@ = %@", key, [status objectForKey: key]);
-        }
-        
       NSNumber * pid = [status objectForKey: @"PID"];
       NSNumber * lastExitStatus = [status objectForKey: @"LastExitStatus"];
 
@@ -466,6 +465,11 @@
   else if([statusCode isEqualToString: kStatusInvalid])
     {
     statusString = NSLocalizedString(@"[invalid?]", NULL);
+    color = [[Utilities shared] red];
+    }
+  else if([statusCode isEqualToString: kStatusKilled])
+    {
+    statusString = NSLocalizedString(@"[killed]", NULL);
     color = [[Utilities shared] red];
     }
   

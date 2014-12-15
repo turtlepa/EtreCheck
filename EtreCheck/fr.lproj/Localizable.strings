@@ -89,6 +89,7 @@
 "[not loaded]" = "[désengagé]";
 "[failed]" = "[échec]";
 "[invalid]" = "[invalide ?]";
+"[killed]" = "[tué]";
 "[running]" = "[en marche]";
 "[Unknown]" = "[Inconnu]";
 "[System]" = "[Système]";

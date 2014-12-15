@@ -55,7 +55,7 @@
     myVolumes = [NSMutableDictionary new];
     myCoreStorageVolumes = [NSMutableDictionary new];
     myDiskErrors = [NSMutableDictionary new];
-    myMemoryStatusErrors = [NSMutableDictionary new];
+    myMemoryStatusErrors = [NSMutableSet new];
     myDiagnosticEvents = [NSMutableDictionary new];
     myAdwareFiles = [NSMutableDictionary new];
     }
