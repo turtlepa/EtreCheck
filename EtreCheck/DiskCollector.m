@@ -187,13 +187,6 @@
         [NSDictionary
           dictionaryWithObjectsAndKeys:
             [NSColor redColor], NSForegroundColorAttributeName, nil]];
-  else
-    [self.result
-      appendString:
-        [NSString
-          stringWithFormat:
-            NSLocalizedString(@"%@S.M.A.R.T. Status: Verified\n", NULL),
-            indent]];
   }
 
 // Print information about a Core Storage volume.

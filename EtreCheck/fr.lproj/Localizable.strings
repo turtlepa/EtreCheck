@@ -44,7 +44,6 @@
 "Checking for adware" = "Vérification de l’adware";
 "model" = "modèle";
 "%@S.M.A.R.T. Status: %@\n" = "%@Statut S.M.A.R.T. : %@\n";
-"%@S.M.A.R.T. Status: Verified\n" = "%@Statut S.M.A.R.T. : Vérifié\n";
 "<not mounted>" = "<non monté>";
 "Low!" = "Faible !";
 "\tNone\n" = "\tAucun\n";
