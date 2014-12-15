@@ -149,10 +149,11 @@
           *stop = YES;
         
         else if([startDate compare: event.date] == NSOrderedAscending)
-          {
-          [result appendString: event.details];
-          [result appendString: @"\n"];
-          }
+          if([event.details length])
+            {
+            [result appendString: event.details];
+            [result appendString: @"\n"];
+            }
         }];
     
   return result;
