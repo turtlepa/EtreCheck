@@ -80,7 +80,7 @@
           stringWithFormat:
             @"\t%@%@%@\n",
             name ? name : @"",
-            name ? @" - " : @"",
+            vram ? @" - " : @"",
             vram]];
       
     NSArray * displays = [info objectForKey: @"spdisplays_ndrvs"];
