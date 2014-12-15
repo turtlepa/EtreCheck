@@ -244,6 +244,9 @@
       if([self ignoreFailuresOnFile: file])
         return NO;
       }
+    else if([[status objectForKey: kStatus] isEqualToString: kStatusKilled])
+      {
+      }
     else
       return NO;
     }
