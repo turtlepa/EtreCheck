@@ -224,9 +224,6 @@
   if(!encryptionType)
     encryptionType = @"";
     
-  if(!state)
-    state = @"";
-    
   if([encrypted isEqualToString: @"yes"])
     {
     [self.result
@@ -241,23 +238,44 @@
               ? NSLocalizedString(@"Locked", NULL)
               : NSLocalizedString(@"Unlocked", NULL)]];
 
-    if(![state isEqualToString: @"Complete"])
-      {
-      [self.result appendString: @" "];
-      
-      [self.result
-        appendString: state
-        attributes:
-          @{
-            NSForegroundColorAttributeName : [[Utilities shared] blue],
-            NSFontAttributeName : [[Utilities shared] boldFont]
-          }];
-      }
+    [self printCoreStorageState: state];
       
     [self.result appendCR];
     }
   }
 
+// Print the Core Storage state.
+- (void) printCoreStorageState: (NSString *) state
+  {
+  if(!state)
+    return;
+    
+  if([state isEqualToString: @"Failed"])
+    {
+    [self.result appendString: @" "];
+    
+    [self.result
+      appendString: state
+      attributes:
+        @{
+          NSForegroundColorAttributeName : [[Utilities shared] red],
+          NSFontAttributeName : [[Utilities shared] boldFont]
+        }];
+    }
+  else if(![state isEqualToString: @"Complete"])
+    {
+    [self.result appendString: @" "];
+    
+    [self.result
+      appendString: state
+      attributes:
+        @{
+          NSForegroundColorAttributeName : [[Utilities shared] blue],
+          NSFontAttributeName : [[Utilities shared] boldFont]
+        }];
+    }
+  }
+  
 // Print Core Storage "pv" information about a volume.
 - (void) printCoreStoragePvInformation: (NSArray *) pvs
   indent: (NSString *) indent
