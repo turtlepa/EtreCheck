@@ -286,14 +286,10 @@
   
   NSAttributedString * detailsURL = nil;
   
-  if([name length] && [jobStatus isEqualToString: kStatusFailed])
-    {
-    if([[[Model model] memoryStatusErrors] containsObject: name])
-      jobStatus = kStatusKilled;
-    else if([[Model model] hasLogEntries: name])
+  if([jobStatus isEqualToString: kStatusFailed])
+    if([[Model model] hasLogEntries: name])
       detailsURL = [[Model model] getDetailsURLFor: name];
-    }
-    
+  
   if(detailsURL)
     return
       @{
@@ -333,9 +329,13 @@
       NSNumber * pid = [status objectForKey: @"PID"];
       NSNumber * lastExitStatus = [status objectForKey: @"LastExitStatus"];
 
+      long exitStatus = [lastExitStatus intValue];
+      
       if(pid)
         jobStatus = kStatusRunning;
-      else if([lastExitStatus intValue] != 0)
+      else if(exitStatus == 172)
+        jobStatus = kStatusKilled;
+      else if(exitStatus != 0)
         jobStatus = kStatusFailed;
       else if(status)
         jobStatus = kStatusLoaded;

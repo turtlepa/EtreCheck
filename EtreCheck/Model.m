@@ -16,7 +16,6 @@
 @synthesize volumes = myVolumes;
 @synthesize coreStorageVolumes = myCoreStorageVolumes;
 @synthesize diskErrors = myDiskErrors;
-@synthesize memoryStatusErrors = myMemoryStatusErrors;
 @synthesize logEntries = myLogEntries;
 @synthesize applications = myApplications;
 @synthesize physicalRAM = myPhysicalRAM;
@@ -55,7 +54,6 @@
     myVolumes = [NSMutableDictionary new];
     myCoreStorageVolumes = [NSMutableDictionary new];
     myDiskErrors = [NSMutableDictionary new];
-    myMemoryStatusErrors = [NSMutableSet new];
     myDiagnosticEvents = [NSMutableDictionary new];
     myAdwareFiles = [NSMutableDictionary new];
     }
@@ -68,7 +66,6 @@
   {
   self.adwareFiles = nil;
   self.diagnosticEvents = nil;
-  self.memoryStatusErrors = nil;
   self.diskErrors = nil;
   self.volumes = nil;
   self.applications = nil;

@@ -22,7 +22,6 @@
   NSMutableDictionary * myVolumes;
   NSMutableDictionary * myCoreStorageVolumes;
   NSMutableDictionary * myDiskErrors;
-  NSMutableSet * myMemoryStatusErrors;
   NSArray * myLogEntries;
   NSDictionary * myApplications;
   int myPhysicalRAM;
@@ -47,9 +46,6 @@
 
 // Keep track of disk errors.
 @property (retain) NSMutableDictionary * diskErrors;
-
-// Keep track of memory status killings.
-@property (retain) NSMutableSet * memoryStatusErrors;
 
 // Keep track of log content.
 @property (retain) NSArray * logEntries;
