@@ -335,8 +335,9 @@
   return
     [NSString
       stringWithFormat:
-        NSLocalizedString(@"%@[redacted]%@", NULL),
+        @"%@%@%@",
         [path substringToIndex: range.location],
+        NSLocalizedString(@"[redacted]", NULL),
         [path substringFromIndex: range.location + range.length]];
   }
 
