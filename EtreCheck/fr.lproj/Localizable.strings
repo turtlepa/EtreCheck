@@ -124,7 +124,7 @@
 " - Corrupt!" = " - Corrompu !";
 " - Count: %d" = " - Nombre : %d";
 "\t%@ - Exists\n" = "\t%@ - Existant\n";
-"%@[redacted]%@" = "%@[expurgé]%@";
+"[redacted]" = "[expurgé]";
 "com.facebook.videochat.[redacted].plist" = "com.facebook.videochat.[expurgé].plist";
 "Oracle recommends %@" = "Oracle recommande %@";
 "Adobe recommends %@" = "Adobe recommande %@";
