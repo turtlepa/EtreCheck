@@ -268,13 +268,16 @@
   else if([typeString isEqualToString: @"diag"])
     type = kCPU;
 
-  NSDate * date = [self parseFileDate: file];
+  NSArray * parts =
+    [[file lastPathComponent] componentsSeparatedByString: @"_"];
+  
+  NSDate * date = [self parseFileDate: parts];
   
   if((type != kUnknown) && date)
     {
     DiagnosticEvent * event = [DiagnosticEvent new];
     
-    event.name = [Utilities sanitizeFilename: [file lastPathComponent]];
+    event.name = [self obfuscateFilename: parts];
     event.date = date;
     event.type = type;
     event.file = file;
@@ -300,15 +303,28 @@
   }
 
 // Parse a log file date.
-- (NSDate *) parseFileDate: (NSString *) path
+- (NSDate *) parseFileDate: (NSArray *) parts
   {
-  NSArray * parts =
-    [[path lastPathComponent] componentsSeparatedByString: @"_"];
-  
   if([parts count] > 1)
     return [self.dateFormatter dateFromString: [parts objectAtIndex: 1]];
     
   return nil;
+  }
+
+// Obfuscate the file name.
+- (NSString *) obfuscateFilename: (NSArray *) parts
+  {
+  NSMutableArray * safeParts = [NSMutableArray arrayWithArray: parts];
+  
+  NSString * extension = [[safeParts lastObject] pathExtension];
+  
+  [safeParts removeLastObject];
+  [safeParts
+    addObject:
+      [NSLocalizedString(@"[redacted]", NULL)
+        stringByAppendingPathExtension: extension]];
+  
+  return [safeParts componentsJoinedByString: @"_"];
   }
 
 // Collect just the first section for a CPU report header.
