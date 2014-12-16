@@ -30,7 +30,7 @@
     myMinDrawerSize = NSMakeSize(400, 100);
     myMaxDrawerSize = NSMakeSize(400, 1000);
     myMinPopoverSize = NSMakeSize(400, 100);
-    myMaxPopoverSize = NSMakeSize(1000, 1000);
+    myMaxPopoverSize = NSMakeSize(400, 600);
     
     if([NSPopover class])
       {

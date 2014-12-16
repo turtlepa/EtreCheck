@@ -247,7 +247,7 @@
     return;
     }
     
-// Parse diagnostic reports.
+  // Parse diagnostic reports.
   for(NSString * file in [Utilities formatLines: data])
     [self createEventFromFile: file];
   }
