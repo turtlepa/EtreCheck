@@ -394,6 +394,13 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
       [NSDictionary
        dictionaryWithObjectsAndKeys:
          [[Utilities shared] boldFont], NSFontAttributeName, nil]];
+
+  [self.log
+    appendString: NSLocalizedString(@"linkhelp", NULL)
+    attributes:
+      [NSDictionary
+       dictionaryWithObjectsAndKeys:
+         [[Utilities shared] boldFont], NSFontAttributeName, nil]];
   }
 
 // Print the problem description.
