@@ -33,3 +33,6 @@
 "adwaredetails1" = "EtreCheck has detected that your Macintosh may be infected with adware. Apple has published the following list of files installed by common types of adware: ";
 "adwaredetails2" = "\n\nEtreCheck found the following files that match Apple's list:\n\n";
 "adwaredetails3" = "\nThe easiest way to remove this adware is by downloading and running AdwareMedic, a program written by another long-time member of Apple Support Communities.";
+"%d pressurekilledcount (plural rule: zero)" = "\tno processes killed due to memory pressure\n";
+"%d pressurekilledcount (plural rule: one)" = "\tone process killed due to memory pressure\n";
+"%d pressurekilledcount (plural rule: other)" = "\t%d processes killed due to memory pressure\n";

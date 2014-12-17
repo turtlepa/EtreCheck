@@ -197,3 +197,6 @@
 "Adware!" = "Adware !";
 "[Installed]" = "[Installé]";
 "[Cache]" = "[En cache]";
+"%d pressurekilledcount (plural rule: zero)" = "\taucun processus tué à cause de la pression de mémoire\n";
+"%d pressurekilledcount (plural rule: one)" = "\tone processus tué à cause de la pression de mémoire\n";
+"%d pressurekilledcount (plural rule: other)" = "\t%d processus tués à cause de la pression de mémoire\n";

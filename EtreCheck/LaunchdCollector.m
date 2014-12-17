@@ -10,6 +10,7 @@
 #import "Model.h"
 #import "Utilities.h"
 #import "NSDictionary+Etresoft.h"
+#import "TTTLocalizedPluralString.h"
 
 #define kStatus @"status"
 #define kHidden @"hidden"
@@ -34,6 +35,7 @@
 @dynamic launchdStatus;
 @dynamic appleLaunchd;
 @synthesize showExecutable = myShowExecutable;
+@synthesize pressureKilledCount = myPressureKilledCount;
 
 // Property accessors to route through a singleton.
 - (NSMutableDictionary *) launchdStatus
@@ -187,6 +189,17 @@
       setTabs: @[@28, @112, @196]
       forRange: NSMakeRange(start, [self.result length] - start)];
 
+    if(self.pressureKilledCount)
+      [self.result
+        appendString:
+          TTTLocalizedPluralString(
+            self.pressureKilledCount, @"pressurekilledcount", nil)
+        attributes:
+          @{
+            NSForegroundColorAttributeName : [[Utilities shared] red],
+            NSFontAttributeName : [[Utilities shared] boldFont]
+          }];
+    
     if(!self.launchdStatus)
       [self.result
         appendString:
@@ -195,7 +208,7 @@
           [NSDictionary
             dictionaryWithObjectsAndKeys:
               [NSColor redColor], NSForegroundColorAttributeName, nil]];
-      
+    
     [self.result appendCR];
     }
   }
@@ -334,7 +347,11 @@
       if(pid)
         jobStatus = kStatusRunning;
       else if(exitStatus == 172)
+        {
         jobStatus = kStatusKilled;
+        
+        self.pressureKilledCount = self.pressureKilledCount + 1;
+        }
       else if(exitStatus != 0)
         jobStatus = kStatusFailed;
       else if(status)
