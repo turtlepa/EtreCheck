@@ -336,7 +336,8 @@
         stringByAppendingPathExtension: extension]];
   
   if(name)
-    *name = [safeParts componentsJoinedByString: @"_"];
+    *name =
+      [Utilities cleanPath: [safeParts componentsJoinedByString: @"_"]];
   }
 
 // Collect just the first section for a CPU report header.
