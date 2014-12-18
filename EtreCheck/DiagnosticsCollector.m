@@ -268,16 +268,16 @@
   else if([typeString isEqualToString: @"diag"])
     type = kCPU;
 
-  NSArray * parts =
-    [[file lastPathComponent] componentsSeparatedByString: @"_"];
+  NSDate * date = nil;
+  NSString * sanitizedName = nil;
   
-  NSDate * date = [self parseFileDate: parts];
+  [self parseFileName: file date: & date name: & sanitizedName];
   
   if((type != kUnknown) && date)
     {
     DiagnosticEvent * event = [DiagnosticEvent new];
     
-    event.name = [self obfuscateFilename: parts];
+    event.name = sanitizedName;
     event.date = date;
     event.type = type;
     event.file = file;
@@ -302,21 +302,32 @@
     }
   }
 
-// Parse a log file date.
-- (NSDate *) parseFileDate: (NSArray *) parts
+// Parse a file name and extract the date and sanitized name.
+- (void) parseFileName: (NSString *) file
+  date: (NSDate **) date
+  name: (NSString **) name
   {
-  if([parts count] > 1)
-    return [self.dateFormatter dateFromString: [parts objectAtIndex: 1]];
-    
-  return nil;
-  }
-
-// Obfuscate the file name.
-- (NSString *) obfuscateFilename: (NSArray *) parts
-  {
-  NSMutableArray * safeParts = [NSMutableArray arrayWithArray: parts];
+  NSString * extension = [file pathExtension];
+  NSString * base = [file stringByDeletingPathExtension];
   
-  NSString * extension = [[safeParts lastObject] pathExtension];
+  // Everybody loves double extensions!
+  NSString * extension2 = [base pathExtension];
+  
+  if([extension2 length])
+    {
+    base = [base stringByDeletingPathExtension];
+    extension = [extension2 stringByAppendingPathExtension: extension];
+    }
+  
+  // First the 2nd portion of the file name that contains the date.
+  NSArray * parts = [base componentsSeparatedByString: @"_"];
+
+  if([parts count] > 1)
+    if(date)
+      *date = [self.dateFormatter dateFromString: [parts objectAtIndex: 1]];
+
+  // Now construct a safe file name.
+  NSMutableArray * safeParts = [NSMutableArray arrayWithArray: parts];
   
   [safeParts removeLastObject];
   [safeParts
@@ -324,7 +335,8 @@
       [NSLocalizedString(@"[redacted]", NULL)
         stringByAppendingPathExtension: extension]];
   
-  return [safeParts componentsJoinedByString: @"_"];
+  if(name)
+    *name = [safeParts componentsJoinedByString: @"_"];
   }
 
 // Collect just the first section for a CPU report header.
