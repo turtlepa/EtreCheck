@@ -385,7 +385,7 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
       [NSString
         stringWithFormat:
           NSLocalizedString(
-            @"EtreCheck version: %@ (%@)\nReport generated %@\n\n", NULL),
+            @"EtreCheck version: %@ (%@)\nReport generated %@\n", NULL),
             [bundle
               objectForInfoDictionaryKey: @"CFBundleShortVersionString"],
             [bundle objectForInfoDictionaryKey: @"CFBundleVersion"],
@@ -394,6 +394,21 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
       [NSDictionary
        dictionaryWithObjectsAndKeys:
          [[Utilities shared] boldFont], NSFontAttributeName, nil]];
+    
+  [self.log
+    appendString: NSLocalizedString(@"downloadetrecheck", NULL)
+    attributes:
+      [NSDictionary
+       dictionaryWithObjectsAndKeys:
+         [[Utilities shared] boldFont], NSFontAttributeName, nil]];
+
+  [self.log
+    appendAttributedString:
+      [Utilities
+        buildURL: @"http://etresoft.com/etrecheck"
+        title: @"http://etresoft.com/etrecheck"]];
+    
+  [self.log appendString: @"\n\n"];
 
   [self.log
     appendString: NSLocalizedString(@"linkhelp", NULL)

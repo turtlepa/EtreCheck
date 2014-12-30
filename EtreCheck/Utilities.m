@@ -6,6 +6,7 @@
 
 #import "Utilities.h"
 #import "Model.h"
+#import "NSMutableAttributedString+Etresoft.h"
 
 // Assorted utilities.
 @implementation Utilities
@@ -498,6 +499,25 @@
     }
     
   return result;
+  }
+
+// Build a URL.
++ (NSAttributedString *) buildURL: (NSString *) url
+  title: (NSString *) title
+  {
+  NSMutableAttributedString * urlString =
+    [[NSMutableAttributedString alloc] initWithString: @""];
+    
+  [urlString
+    appendString: title
+    attributes:
+      @{
+        NSFontAttributeName : [[Utilities shared] boldFont],
+        NSForegroundColorAttributeName : [[Utilities shared] blue],
+        NSLinkAttributeName : url
+      }];
+  
+  return [urlString autorelease];
   }
 
 @end

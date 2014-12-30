@@ -37,3 +37,4 @@
 "%d pressurekilledcount (plural rule: one)" = "\tone process killed due to memory pressure\n";
 "%d pressurekilledcount (plural rule: other)" = "\t%d processes killed due to memory pressure\n";
 "linkhelp" = "Click the [Support] links for help with non-Apple products.\nClick the [Details] links for more information about that line.\nClick the [Adware] links for help removing adware.\n\n";
+"downloadetrecheck" = "Download EtreCheck from ";
