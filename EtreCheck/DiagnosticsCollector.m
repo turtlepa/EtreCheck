@@ -48,6 +48,7 @@
 - (void) dealloc
   {
   self.dateFormatter = nil;
+  self.logDateFormatter = nil;
   
   [super dealloc];
   }

@@ -110,12 +110,12 @@
 - (void) collectLaunchdStatus: (CFStringRef) domain
   {
   // Get the last exist result for all jobs in this domain.
-  NSArray * jobs = (NSArray *)SMCopyAllJobDictionaries(domain);
+  CFArrayRef jobs = SMCopyAllJobDictionaries(domain);
 
   if(!jobs)
     return;
 
-  for(NSDictionary * job in jobs)
+  for(NSDictionary * job in (NSArray *)jobs)
     {
     NSString * label = [job objectForKey: @"Label"];
     
@@ -123,7 +123,7 @@
       [self.launchdStatus setObject: job forKey: label];
     }
     
-  [jobs release];
+  CFRelease(jobs);
   }
 
 // Setup launchd items that are expected because they ship with the OS.

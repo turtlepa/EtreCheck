@@ -373,12 +373,16 @@
     
   for(Collector * collector in collectors)
     {
+    NSAutoreleasePool * pool = [NSAutoreleasePool new];
+    
     [collector collect];
     
     [results setObject: collector.result forKey: collector.name];
     
     // Keep a reference to the collector in case it is needed later.
     [completed setObject: collector forKey: collector.name];
+    
+    [pool drain];
     }
   }
 

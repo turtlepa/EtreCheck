@@ -35,7 +35,8 @@
 // Destructor.
 - (void) dealloc
   {
-  [myAdwareFiles release];
+  self.adwareFiles = nil;
+  self.adwareSignatures = nil;
   
   [super dealloc];
   }
@@ -106,7 +107,7 @@
       if(geneio)
         [signatures setObject: geneio forKey: @"Geneio"];
         
-      self.adwareSignatures = [signatures copy];
+      self.adwareSignatures = signatures;
       }
     }
   }
