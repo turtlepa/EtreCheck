@@ -46,4 +46,18 @@
   [attributedString release];
   }
   
+// Append RTF content.
+- (void) appendRTFData: (NSData *) data
+  {
+  if(!data)
+    return;
+    
+  NSAttributedString * attributedString =
+    [[NSAttributedString alloc] initWithRTF: data documentAttributes: NULL];
+    
+  [self appendAttributedString: attributedString];
+  
+  [attributedString release];
+  }
+
 @end

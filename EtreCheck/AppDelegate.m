@@ -411,11 +411,11 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   [self.log appendString: @"\n\n"];
 
   [self.log
-    appendString: NSLocalizedString(@"linkhelp", NULL)
-    attributes:
-      [NSDictionary
-       dictionaryWithObjectsAndKeys:
-         [[Utilities shared] boldFont], NSFontAttributeName, nil]];
+    appendRTFData:
+      [NSData
+        dataWithContentsOfFile:
+          [[NSBundle mainBundle]
+            pathForResource: @"linkhelp" ofType: @"rtf"]]];
   }
 
 // Print the problem description.

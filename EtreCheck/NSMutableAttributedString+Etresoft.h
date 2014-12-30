@@ -19,4 +19,7 @@
 - (void) appendString: (NSString *) string
   attributes: (NSDictionary *) attributes;
 
+// Append RTF content.
+- (void) appendRTFData: (NSData *) data;
+
 @end
