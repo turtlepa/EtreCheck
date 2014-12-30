@@ -131,7 +131,7 @@
     appendString:
       [NSString
         stringWithFormat:
-          @"\t%@\t%@%@ (%@)\n",
+          @"\t%@\t%@ %@ (%@)\n",
           name,
           kind,
           isHidden ? NSLocalizedString(@"Hidden", NULL) : @"",
