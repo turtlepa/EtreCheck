@@ -28,7 +28,7 @@
 // Perform the collection.
 - (void) collect
   {
-  [self updateStatus: NSLocalizedString(@"Sampling processes", NULL)];
+  [self updateStatus: NSLocalizedString(@"Sampling processes for memory", NULL)];
 
   // Collect the average memory usage usage for all processes (5 times).
   NSDictionary * avgMemory = [self collectAverageMemory];
