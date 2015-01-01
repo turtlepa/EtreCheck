@@ -143,6 +143,8 @@
   
   myEtreCheckIcon = [NSImage imageNamed: @"AppIcon"];
   
+  [myEtreCheckIcon setSize: NSMakeSize(128, 128)];
+  
   myFinderIcon =
     [[NSImage alloc]
       initWithContentsOfFile:
