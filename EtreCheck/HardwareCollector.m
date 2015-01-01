@@ -611,6 +611,8 @@
     [self.result
       appendString:
         [NSString stringWithFormat: @"%@%@: %@\n", indent, name, modes]];
+  else
+    [self.result appendString: NSLocalizedString(@"Unknown", NULL)];
   }
 
 @end
