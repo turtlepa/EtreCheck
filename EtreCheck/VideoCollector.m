@@ -64,6 +64,10 @@
   for(NSDictionary * info in infos)
     {
     NSString * name = [info objectForKey: @"sppci_model"];
+    
+    if(![name length])
+      name = NSLocalizedString(@"Unknown", NULL);
+      
     NSString * vramAmount = [info objectForKey: @"spdisplays_vram"];
 
     NSString * vram = @"";
@@ -96,6 +100,10 @@
 - (void) printDisplayInfo: (NSDictionary *) display
   {
   NSString * name = [display objectForKey: @"_name"];
+  
+  if([name isEqualToString: @"spdisplays_display"])
+    name = NSLocalizedString(@"Display", NULL);
+    
   NSString * resolution = [display objectForKey: @"spdisplays_resolution"];
 
   if(name || resolution)

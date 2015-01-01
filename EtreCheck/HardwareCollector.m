@@ -607,7 +607,7 @@
   NSString * modes =
     [interface objectForKey: @"spairport_supported_phymodes"];
 
-  if(modes)
+  if([modes length])
     [self.result
       appendString:
         [NSString stringWithFormat: @"%@%@: %@\n", indent, name, modes]];
