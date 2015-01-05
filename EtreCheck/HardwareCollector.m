@@ -137,6 +137,7 @@
           
         [self printBluetoothInformation];
         [self printWirelessInformation];
+        [self printBatteryInformation];
         
         [self.result appendCR];
         }
@@ -613,6 +614,55 @@
         [NSString stringWithFormat: @"%@%@: %@\n", indent, name, modes]];
   else
     [self.result appendString: NSLocalizedString(@"Unknown", NULL)];
+  }
+
+// Print battery information.
+- (void) printBatteryInformation
+  {
+  NSArray * args =
+    @[
+      @"-xml",
+      @"SPPowerDataType"
+    ];
+  
+  NSData * result =
+    [Utilities execute: @"/usr/sbin/system_profiler" arguments: args];
+  
+  if(result)
+    {
+    NSArray * plist = [NSArray readPropertyListData: result];
+  
+    if(plist && [plist count])
+      {
+      NSArray * infos =
+        [[plist objectAtIndex: 0] objectForKey: @"_items"];
+        
+      if([infos count])
+        {
+        for(NSDictionary * info in infos)
+          {
+          NSDictionary * healthInfo =
+            [info objectForKey: @"sppower_battery_health_info"];
+            
+          if(healthInfo)
+            {
+            NSNumber * cycleCount =
+              [healthInfo objectForKey: @"sppower_battery_cycle_count"];
+            NSString * health =
+              [healthInfo objectForKey: @"sppower_battery_health"];
+            
+            if(cycleCount && [health length])
+              [self.result
+                appendString:
+                  [NSString
+                    stringWithFormat:
+                      @"\tBattery Health: %@ - Cycle count %@",
+                      NSLocalizedString(health, NULL), cycleCount]];
+            }
+          }
+        }
+      }
+    }
   }
 
 @end
