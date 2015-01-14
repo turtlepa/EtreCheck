@@ -22,6 +22,8 @@
 
 @synthesize properties = myProperties;
 @synthesize machineIcon = myMachineIcon;
+@synthesize marketingName = myMarketingName;
+@synthesize EnglishMarketingName = myEnglishMarketingName;
 
 // Constructor.
 - (id) init
@@ -209,18 +211,17 @@
   code: (NSString *) code
   {
   // Try to get the marketing name from Apple.
-  NSString * marketingName = [self askAppleForMarketingName: serial];
+  [self askAppleForMarketingName: serial];
   
   NSString * verified = @"";
   
   NSString * technicalSpecificationsURL = nil;
   
-  if([marketingName length])
+  if([self.EnglishMarketingName length])
     {
     verified = NSLocalizedString(@"(Verified)", NULL);
   
-    technicalSpecificationsURL =
-      [self getTechnicalSpecificationsURL: marketingName];
+    technicalSpecificationsURL = [self getTechnicalSpecificationsURL];
     }
     
   // Get information on my own.
@@ -228,8 +229,8 @@
   
   if(machineProperties)
     {
-    if(![marketingName length])
-      marketingName = [machineProperties objectForKey: kMachineName];
+    if(![self.marketingName length])
+      self.marketingName = [machineProperties objectForKey: kMachineName];
 
     [[Model model]
       setMachineIcon: [machineProperties objectForKey: kMachineIcon]];
@@ -238,7 +239,7 @@
   [self.result
     appendString:
       [NSString
-        stringWithFormat: @"\t%@ ", marketingName]];
+        stringWithFormat: @"\t%@ ", self.marketingName]];
       
   if(technicalSpecificationsURL)
     [self.result
@@ -254,28 +255,44 @@
 
 // Get a technical specifications URL, falling back to English,
 // if necessary.
-- (NSString *) getTechnicalSpecificationsURL: (NSString *) marketingName
+- (NSString *) getTechnicalSpecificationsURL
   {
   NSString * url =
     NSLocalizedStringFromTable(
-      marketingName, @"TechnicalSpecifications", NULL);
+      self.marketingName, @"TechnicalSpecifications", NULL);
     
-  if([url isEqualToString: marketingName])
+  if([url isEqualToString: self.marketingName])
     url =
       NSLocalizedStringFromTableInBundle(
-        marketingName,
+        self.EnglishMarketingName,
         @"TechnicalSpecifications",
         [[Utilities shared] EnglishBundle],
         NULL);
     
-  if([url isEqualToString: marketingName])
+  if([url isEqualToString: self.marketingName])
     return nil;
     
   return url;
   }
 
 // Try to get the marketing name directly from Apple.
+- (void) askAppleForMarketingName: (NSString *) serial
+  {
+  NSString * language = NSLocalizedString(@"en", NULL);
+  
+  self.marketingName =
+    [self askAppleForMarketingName: serial language: language];
+  
+  if([language isEqualToString: @"en"])
+    self.EnglishMarketingName = self.marketingName;
+  else
+    self.EnglishMarketingName =
+      [self askAppleForMarketingName: serial language: @"en"];
+  }
+
+// Try to get the marketing name directly from Apple.
 - (NSString *) askAppleForMarketingName: (NSString *) serial
+  language: (NSString *) language
   {
   NSString * marketingName = @"";
   
@@ -283,15 +300,13 @@
     {
     NSString * code = [serial substringFromIndex: 8];
 
-    NSString * lang = NSLocalizedString(@"en", NULL);
-    
     NSURL * url =
       [NSURL
         URLWithString:
           [NSString
             stringWithFormat:
               @"http://support-sp.apple.com/sp/product?cc=%@&lang=%@",
-              code, lang]];
+              code, language]];
     
     NSError * error = nil;
     

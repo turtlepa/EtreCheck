@@ -12,6 +12,8 @@
   NSDictionary * myProperties;
   NSImage * myMachineIcon;
   NSDictionary * myMachineImageLookup;
+  NSString * myMarketingName;
+  NSString * myEnglishMarketingName;
   }
 
 // Machine properties.
@@ -19,6 +21,13 @@
 
 // The machine icon.
 @property (retain) NSImage * machineIcon;
+
+// The Apple Marketing name.
+@property (retain) NSString * marketingName;
+
+// English version of Apple Marketing name for the technical specifications
+// fallback.
+@property (retain) NSString * EnglishMarketingName;
 
 // Find a machine icon.
 - (NSImage *) findMachineIcon: (NSString *) code;
