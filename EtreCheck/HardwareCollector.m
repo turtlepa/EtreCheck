@@ -702,7 +702,8 @@
                 appendString:
                   [NSString
                     stringWithFormat:
-                      @"\tBattery Health: %@ - Cycle count %@",
+                      NSLocalizedString(
+                        @"\tBattery Health: %@ - Cycle count %@\n", NULL),
                       NSLocalizedString(health, NULL), cycleCount]];
             }
           }

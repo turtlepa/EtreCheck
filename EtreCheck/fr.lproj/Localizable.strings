@@ -204,7 +204,7 @@
 "linkhelp" = "Cliquez sur les liens [Aide] pour l’assistance avec les produits non-Apple.\nCliquez sur les liens [Détails] pour plus d'informations sur cette ligne.\nCliquez sur les liens [Adware] pour l’assistance avec la supression d’adware.\n\n";
 "downloadetrecheck" = "Télécharger EtreCheck à ";
 "Display" = "Écran";
-"\tBattery Health: %@ - Cycle count %@" = "\tLa santé de la batterie : %@ - Comptage de cycles %@";
+"\tBattery Health: %@ - Cycle count %@\n" = "\tLa santé de la batterie : %@ - Comptage de cycles %@\n";
 "Good" = "Normal";
 "Fair" = "Remplacer bientôt";
 "Poor" = "Remplacer maintenant";
