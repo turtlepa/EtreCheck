@@ -29,6 +29,8 @@
   NSImage * myGenericApplicationIcon;
   NSImage * myEtreCheckIcon;
   NSImage * myFinderIcon;
+  
+  NSBundle * myEnglishBundle;
   }
 
 // Make some handy shared values available to all collectors.
