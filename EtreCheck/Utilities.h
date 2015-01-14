@@ -84,4 +84,7 @@
 + (NSAttributedString *) buildURL: (NSString *) url
   title: (NSString *) title;
 
+// Look for attributes from a file that might depend on the PATH.
++ (NSDictionary *) lookForFileAttributes: (NSString *) path;
+
 @end

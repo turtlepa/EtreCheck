@@ -430,9 +430,7 @@
   
   if(program)
     {
-    NSDictionary * attributes =
-      [[NSFileManager defaultManager]
-        attributesOfItemAtPath: program error: NULL];
+    NSDictionary * attributes = [Utilities lookForFileAttributes: program];
     
     if(attributes)
       {

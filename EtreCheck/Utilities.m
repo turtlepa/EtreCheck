@@ -543,4 +543,35 @@
   return [urlString autorelease];
   }
 
+// Look for attributes from a file that might depend on the PATH.
++ (NSDictionary *) lookForFileAttributes: (NSString *) path
+  {
+  NSDictionary * attributes =
+    [[NSFileManager defaultManager]
+      attributesOfItemAtPath: path error: NULL];
+    
+  if(attributes)
+    return attributes;
+    
+  NSDictionary * environment = [[NSProcessInfo processInfo] environment];
+  
+  NSString * PATH = [environment objectForKey: @"PATH"];
+  
+  NSArray * pathParts = [PATH componentsSeparatedByString: @":"];
+  
+  for(NSString * dir in pathParts)
+    {
+    NSString * searchPath = [dir stringByAppendingPathComponent: path];
+    
+    attributes =
+      [[NSFileManager defaultManager]
+        attributesOfItemAtPath: searchPath error: NULL];
+    
+    if(attributes)
+      return attributes;
+    }
+    
+  return nil;
+  }
+
 @end
