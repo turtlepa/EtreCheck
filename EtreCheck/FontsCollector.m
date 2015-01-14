@@ -49,7 +49,8 @@
           appendString:
             [NSString
               stringWithFormat:
-                NSLocalizedString(@"\t%@: %@\n", NULL), name, path]];
+                NSLocalizedString(
+                  @"\t%@: %@\n", NULL), name, [Utilities cleanPath: path]]];
                                  
         [self.result appendString: @"\n"];
         }

@@ -1,0 +1,87 @@
+/* 
+  TechnicalSpecifications.strings
+  EtreCheck
+
+  Created by John Daniel on 2015-01-13.
+  Copyright (c) 2015 Etresoft. All rights reserved.
+*/
+"iMac (21,5 pouces, fin 2009)" = "http://support.apple.com/kb/SP576?viewlocale=fr_FR";
+"iMac (21,5 pouces, fin 2011)" = "http://support.apple.com/kb/SP634?viewlocale=fr_FR";
+"iMac (21,5 pouces, fin 2012)" = "http://support.apple.com/kb/SP665?viewlocale=fr_FR";
+"iMac (21,5 pouces, mi-2010)" = "http://support.apple.com/kb/SP588?viewlocale=fr_FR";
+"iMac (21,5 pouces, mi-2011)" = "http://support.apple.com/kb/SP623?viewlocale=fr_FR";
+"iMac (21,5 pouces, mi-2014)" = "http://support.apple.com/kb/SP701?viewlocale=fr_FR";
+"iMac (21.5 pouces, fin 2013)" = "http://support.apple.com/kb/SP687?viewlocale=fr_FR";
+"iMac (27 pouces, fin 2009)" = "http://support.apple.com/kb/SP696?viewlocale=fr_FR";
+"iMac (27 pouces, fin 2012)" = "http://support.apple.com/kb/SP667?viewlocale=fr_FR";
+"iMac (27 pouces, fin 2013)" = "http://support.apple.com/kb/SP688?viewlocale=fr_FR";
+"iMac (27 pouces, mi-2010)" = "http://support.apple.com/kb/SP695?viewlocale=fr_FR";
+"iMac (27 pouces, mi-2011)" = "http://support.apple.com/kb/SP689?viewlocale=fr_FR";
+"iMac (début 2008)" = "http://support.apple.com/kb/SP485?viewlocale=fr_FR";
+"iMac (début 2009)" = "http://support.apple.com/kb/SP507?viewlocale=fr_FR";
+"iMac (écran plat)" = "http://support.apple.com/kb/SP93?viewlocale=fr_FR";
+"iMac (mi-2007)" = "http://support.apple.com/kb/SP16?viewlocale=fr_FR";
+"iMac (Retina 5K, 27 pouces, fin 2014)" = "http://support.apple.com/kb/SP707?viewlocale=fr_FR";
+"Mac mini (début 2009)" = "http://support.apple.com/kb/SP505?viewlocale=fr_FR";
+"Mac mini (fin 2009)" = "http://support.apple.com/kb/SP577?viewlocale=fr_FR";
+"Mac mini (fin 2012)" = "http://support.apple.com/kb/SP659?viewlocale=fr_FR";
+"Mac mini (fin 2014)" = "http://support.apple.com/kb/SP710?viewlocale=fr_FR";
+"Mac mini (mi-2007)" = "http://support.apple.com/kb/SP7?viewlocale=fr_FR";
+"Mac mini (mi-2010)" = "http://support.apple.com/kb/SP585?viewlocale=fr_FR";
+"Mac mini (mi-2011)" = "http://support.apple.com/kb/SP632?viewlocale=fr_FR";
+"Mac mini Server (fin 2012)" = "http://support.apple.com/kb/SP660?viewlocale=fr_FR";
+"Mac mini Server (mi-2010)" = "http://support.apple.com/kb/SP586?viewlocale=fr_FR";
+"Mac mini Server (mi-2011)" = "http://support.apple.com/kb/SP633?viewlocale=fr_FR";
+"Mac OS X v10.5 Leopard" = "http://support.apple.com/kb/SP517?viewlocale=fr_FR";
+"Mac OS X v10.6 Snow Leopard" = "http://support.apple.com/kb/SP575?viewlocale=fr_FR";
+"Mac Pro (début 2008)" = "http://support.apple.com/kb/SP11?viewlocale=fr_FR";
+"Mac Pro (début 2009)" = "http://support.apple.com/kb/SP506?viewlocale=fr_FR";
+"Mac Pro (fin 2013)" = "http://support.apple.com/kb/SP697?viewlocale=fr_FR";
+"Mac Pro (mi-2010)" = "http://support.apple.com/kb/SP589?viewlocale=fr_FR";
+"Mac Pro (mi-2012)" = "http://support.apple.com/kb/SP652?viewlocale=fr_FR";
+"MacBook (13 pouces, Aluminium, fin 2008)" = "http://support.apple.com/kb/SP500?viewlocale=fr_FR";
+"MacBook (13 pouces, début 2009)" = "http://support.apple.com/kb/SP504?viewlocale=fr_FR";
+"MacBook (13 pouces, fin 2009)" = "http://support.apple.com/kb/SP579?viewlocale=fr_FR";
+"MacBook (13 pouces, mi-2009)" = "http://support.apple.com/kb/SP512?viewlocale=fr_FR";
+"MacBook (13 pouces, mi-2010)" = "http://support.apple.com/kb/SP584?viewlocale=fr_FR";
+"MacBook (début 2008)" = "http://support.apple.com/kb/SP5?viewlocale=fr_FR";
+"MacBook Air" = "http://support.apple.com/kb/SP8?viewlocale=fr_FR";
+"MacBook Air (11 pouces, début 2014)" = "http://support.apple.com/kb/SP699?viewlocale=fr_FR";
+"MacBook Air (11 pouces, fin 2010)" = "http://support.apple.com/kb/SP617?viewlocale=fr_FR";
+"MacBook Air (11 pouces, mi-2011)" = "http://support.apple.com/kb/SP631?viewlocale=fr_FR";
+"MacBook Air (11 pouces, mi-2012)" = "http://support.apple.com/kb/SP650?viewlocale=fr_FR";
+"MacBook Air (11 pouces, mi-2013)" = "http://support.apple.com/kb/SP677?viewlocale=fr_FR";
+"MacBook Air (13 pouces, début 2014)" = "http://support.apple.com/kb/SP700?viewlocale=fr_FR";
+"MacBook Air (13 pouces, fin 2010)" = "http://support.apple.com/kb/SP618?viewlocale=fr_FR";
+"MacBook Air (13 pouces, mi-2011)" = "http://support.apple.com/kb/SP683?viewlocale=fr_FR";
+"MacBook Air (13 pouces, mi-2012)" = "http://support.apple.com/kb/SP670?viewlocale=fr_FR";
+"MacBook Air (13 pouces, mi-2013)" = "http://support.apple.com/kb/SP678?viewlocale=fr_FR";
+"MacBook Air (fin 2008)" = "http://support.apple.com/kb/SP501?viewlocale=fr_FR";
+"MacBook Air (mi-2009)" = "http://support.apple.com/kb/SP548?viewlocale=fr_FR";
+"MacBook Pro (13 pouces, début 2011)" = "http://support.apple.com/kb/SP619?viewlocale=fr_FR";
+"MacBook Pro (13 pouces, fin 2011)" = "http://support.apple.com/kb/SP645?viewlocale=fr_FR";
+"MacBook Pro (13 pouces, mi-2009)" = "http://support.apple.com/kb/SP541?viewlocale=fr_FR";
+"MacBook Pro (13 pouces, mi-2010)" = "http://support.apple.com/kb/SP583?viewlocale=fr_FR";
+"MacBook Pro (13 pouces, mi-2012)" = "http://support.apple.com/kb/SP649?viewlocale=fr_FR";
+"MacBook Pro (15 pouces, début 2011)" = "http://support.apple.com/kb/SP620?viewlocale=fr_FR";
+"MacBook Pro (15 pouces, fin 2008)" = "http://support.apple.com/kb/SP499?viewlocale=fr_FR";
+"MacBook Pro (15 pouces, fin 2011)" = "http://support.apple.com/kb/SP644?viewlocale=fr_FR";
+"MacBook Pro (15 pouces, mi-2009) et (15 pouces, 2,53 GHz, mi-2009)" = "http://support.apple.com/kb/SP544?viewlocale=fr_FR";
+"MacBook Pro (15 pouces, mi-2010)" = "http://support.apple.com/kb/SP582?viewlocale=fr_FR";
+"MacBook Pro (15 pouces, mi-2012)" = "http://support.apple.com/kb/SP694?viewlocale=fr_FR";
+"MacBook Pro (17 pouces, début 2009)" = "http://support.apple.com/kb/SP503?viewlocale=fr_FR";
+"MacBook Pro (17 pouces, début 2011)" = "http://support.apple.com/kb/SP621?viewlocale=fr_FR";
+"MacBook Pro (17 pouces, fin 2011)" = "http://support.apple.com/kb/SP646?viewlocale=fr_FR";
+"MacBook Pro (17 pouces, mi-2009)" = "http://support.apple.com/kb/SP546?viewlocale=fr_FR";
+"MacBook Pro (17 pouces, mi-2010)" = "http://support.apple.com/kb/SP581?viewlocale=fr_FR";
+"MacBook Pro (début 2008)" = "http://support.apple.com/kb/SP4?viewlocale=fr_FR";
+"MacBook Pro (Retina, 13 pouces, début 2013)" = "http://support.apple.com/kb/SP668?viewlocale=fr_FR";
+"MacBook Pro (Retina, 13 pouces, fin 2012)" = "http://support.apple.com/kb/SP658?viewlocale=fr_FR";
+"MacBook Pro (Retina, 13 pouces, fin 2013)" = "http://support.apple.com/kb/SP691?viewlocale=fr_FR";
+"MacBook Pro (Retina, 13 pouces, mi-2014)" = "http://support.apple.com/kb/SP703?viewlocale=fr_FR";
+"MacBook Pro (Retina, 15 pouces, début 2013)" = "http://support.apple.com/kb/SP669?viewlocale=fr_FR";
+"MacBook Pro (Retina, 15 pouces, fin 2013)" = "http://support.apple.com/kb/SP690?viewlocale=fr_FR";
+"MacBook Pro (Retina, 15 pouces, mi-2014)" = "http://support.apple.com/kb/SP704?viewlocale=fr_FR";
+"MacBook Pro (Retina)" = "http://support.apple.com/kb/SP653?viewlocale=fr_FR";
+"Xserve" = "http://support.apple.com/kb/SP72?viewlocale=fr_FR";
+"Xserve (chargement frontal)" = "http://support.apple.com/kb/SP102?viewlocale=fr_FR";

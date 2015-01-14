@@ -55,6 +55,7 @@
 		A5C292F219A13D0800464E86 /* HardwareCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292F119A13D0800464E86 /* HardwareCollector.m */; };
 		A5C292F519A2214E00464E86 /* VideoCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292F419A2214E00464E86 /* VideoCollector.m */; };
 		A5C292F819A2220400464E86 /* SystemSoftwareCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C292F719A2220400464E86 /* SystemSoftwareCollector.m */; };
+		A5C4878C1A65FA5900AA42C9 /* TechnicalSpecifications.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5C4878E1A65FA5900AA42C9 /* TechnicalSpecifications.strings */; };
 		A5C9FC041A1AADA200C1EAA5 /* LogCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C9FC031A1AADA200C1EAA5 /* LogCollector.m */; };
 		A5CC608F19B4BF9E006D7E94 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55BC1AF15C0901800D42EF1 /* ServiceManagement.framework */; };
 		A5CF26E81A279DAD002386F0 /* AdwareCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CF26E71A279DAD002386F0 /* AdwareCollector.m */; };
@@ -179,6 +180,8 @@
 		A5C292F419A2214E00464E86 /* VideoCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCollector.m; sourceTree = "<group>"; };
 		A5C292F619A2220400464E86 /* SystemSoftwareCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemSoftwareCollector.h; sourceTree = "<group>"; };
 		A5C292F719A2220400464E86 /* SystemSoftwareCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemSoftwareCollector.m; sourceTree = "<group>"; };
+		A5C4878D1A65FA5900AA42C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TechnicalSpecifications.strings; sourceTree = "<group>"; };
+		A5C4878F1A65FA5A00AA42C9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/TechnicalSpecifications.strings; sourceTree = "<group>"; };
 		A5C9FC021A1AADA200C1EAA5 /* LogCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogCollector.h; sourceTree = "<group>"; };
 		A5C9FC031A1AADA200C1EAA5 /* LogCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogCollector.m; sourceTree = "<group>"; };
 		A5CC608C19B4BF52006D7E94 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
@@ -417,6 +420,7 @@
 				A5E9E2C21A2522A600309185 /* Help.strings */,
 				A55BC17615BF987D00D42EF1 /* InfoPlist.strings */,
 				A540C7001873D5F800497BDE /* Localizable.strings */,
+				A5C4878E1A65FA5900AA42C9 /* TechnicalSpecifications.strings */,
 				A55BC17915BF987D00D42EF1 /* main.m */,
 				A55BC17B15BF987D00D42EF1 /* EtreCheck-Prefix.pch */,
 				A55BC17C15BF987D00D42EF1 /* Credits.rtf */,
@@ -492,6 +496,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5C4878C1A65FA5900AA42C9 /* TechnicalSpecifications.strings in Resources */,
 				A5B6BD5B19D7AAF900C48C37 /* Media.xcassets in Resources */,
 				A540C6FE1873D5F800497BDE /* Localizable.strings in Resources */,
 				A5E9E2C71A2669A600309185 /* Collectors.strings in Resources */,
@@ -631,6 +636,15 @@
 				A55BC1C815C0F4FA00D42EF1 /* fr */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		A5C4878E1A65FA5900AA42C9 /* TechnicalSpecifications.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5C4878D1A65FA5900AA42C9 /* en */,
+				A5C4878F1A65FA5A00AA42C9 /* fr */,
+			);
+			name = TechnicalSpecifications.strings;
 			sourceTree = "<group>";
 		};
 		A5E9E2C21A2522A600309185 /* Help.strings */ = {

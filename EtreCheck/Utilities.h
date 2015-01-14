@@ -46,6 +46,8 @@
 @property (readonly) NSImage * EtreCheckIcon;
 @property (readonly) NSImage * FinderIcon;
 
+@property (readonly) NSBundle * EnglishBundle;
+
 // Return the singeton of shared utilities.
 + (Utilities *) shared;
 

@@ -35,7 +35,7 @@
     
     // Do this in the constructor so the data is available before
     // collection starts.
-    [self loadProperties];
+    [self loadProperties];    
     }
     
   return self;
@@ -211,11 +211,18 @@
   // Try to get the marketing name from Apple.
   NSString * marketingName = [self askAppleForMarketingName: serial];
   
-  NSString * verified =
-    [marketingName length]
-      ? NSLocalizedString(@"(Verified)", NULL)
-      : @"";
+  NSString * verified = @"";
   
+  NSString * technicalSpecificationsURL = nil;
+  
+  if([marketingName length])
+    {
+    verified = NSLocalizedString(@"(Verified)", NULL);
+  
+    technicalSpecificationsURL =
+      [self getTechnicalSpecificationsURL: marketingName];
+    }
+    
   // Get information on my own.
   NSDictionary * machineProperties = [self lookupMachineProperties: code];
   
@@ -231,7 +238,40 @@
   [self.result
     appendString:
       [NSString
-        stringWithFormat: @"\t%@ %@\n", marketingName, verified]];
+        stringWithFormat: @"\t%@ ", marketingName]];
+      
+  if(technicalSpecificationsURL)
+    [self.result
+      appendAttributedString:
+        [Utilities
+          buildURL: technicalSpecificationsURL
+          title: NSLocalizedString(@"(Technical Specifications)", NULL)]];
+  else
+    [self.result appendString: verified];
+      
+  [self.result appendString: @"\n"];
+  }
+
+// Get a technical specifications URL, falling back to English,
+// if necessary.
+- (NSString *) getTechnicalSpecificationsURL: (NSString *) marketingName
+  {
+  NSString * url =
+    NSLocalizedStringFromTable(
+      marketingName, @"TechnicalSpecifications", NULL);
+    
+  if([url isEqualToString: marketingName])
+    url =
+      NSLocalizedStringFromTableInBundle(
+        marketingName,
+        @"TechnicalSpecifications",
+        [[Utilities shared] EnglishBundle],
+        NULL);
+    
+  if([url isEqualToString: marketingName])
+    return nil;
+    
+  return url;
   }
 
 // Try to get the marketing name directly from Apple.
@@ -243,7 +283,7 @@
     {
     NSString * code = [serial substringFromIndex: 8];
 
-    NSString * lang = NSLocalizedString(@"en_US", NULL);
+    NSString * lang = NSLocalizedString(@"en", NULL);
     
     NSURL * url =
       [NSURL
@@ -268,7 +308,13 @@
         {
         NSXMLNode * configCodeNode = [nodes objectAtIndex: 0];
         
-        marketingName = [configCodeNode stringValue];
+        // Apple has non-breaking spaces in the results, especially in
+        // French but sometimes in English too.
+        NSString * nbsp = @"\u00A0";
+        
+        marketingName =
+          [[configCodeNode stringValue]
+            stringByReplacingOccurrencesOfString: nbsp withString: @" "];
         }
       
       [document release];

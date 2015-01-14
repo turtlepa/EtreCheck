@@ -26,6 +26,8 @@
 @synthesize EtreCheckIcon = myEtreCheckIcon;
 @synthesize FinderIcon = myFinderIcon;
 
+@synthesize EnglishBundle = myEnglishBundle;
+
 // Return the singeton of shared values.
 + (Utilities *) shared
   {
@@ -52,6 +54,7 @@
     [self loadFonts];
     [self loadColours];
     [self loadIcons];
+    [self loadEnglishStrings];
     }
     
   return self;
@@ -60,6 +63,8 @@
 // Destructor.
 - (void) dealloc
   {
+  [myEnglishBundle release];
+  
   [myBoldFont release];
   [myBoldItalicFont release];
 
@@ -151,7 +156,23 @@
         [resourceDirectory
           stringByAppendingPathComponent: @"FinderIcon.icns"]];
   }
-  
+
+// Load English strings.
+- (void) loadEnglishStrings
+  {
+  NSString * EnglishBundlePath =
+    [[NSBundle mainBundle]
+      pathForResource: @"Localizable"
+      ofType: @"strings"
+      inDirectory: nil
+      forLocalization: @"en"];
+
+
+  myEnglishBundle =
+    [[NSBundle alloc]
+      initWithPath: [EnglishBundlePath stringByDeletingLastPathComponent]];
+  }
+
 // Execute an external program and return the results.
 + (NSData *) execute: (NSString *) program arguments: (NSArray *) args
   {
