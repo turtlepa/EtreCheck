@@ -574,4 +574,41 @@
   return nil;
   }
 
+// Compare versions.
++ (NSComparisonResult) compareVersion: (NSString *) version1
+  withVersion: (NSString *) version2
+  {
+  NSArray * version1Parts = [version1 componentsSeparatedByString: @"."];
+  NSArray * version2Parts = [version2 componentsSeparatedByString: @"."];
+  
+  int index = 0;
+  
+  while(YES)
+    {
+    if(index >= [version1Parts count])
+      {
+      if(index >= [version2Parts count])
+        break;
+        
+      else
+        return NSOrderedAscending;
+      }
+      
+    if(index >= [version2Parts count])
+      return NSOrderedDescending;
+    
+    NSString * segment1 = [version1Parts objectAtIndex: index];
+    NSString * segment2 = [version2Parts objectAtIndex: index];
+    
+    NSComparisonResult result = [segment1 compare: segment2];
+    
+    if(result != NSOrderedSame)
+      return result;
+      
+    ++index;
+    }
+    
+  return NSOrderedSame;
+  }
+
 @end

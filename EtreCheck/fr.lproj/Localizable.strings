@@ -128,7 +128,6 @@
 "[redacted]" = "[expurgé]";
 "com.facebook.videochat.[redacted].plist" = "com.facebook.videochat.[expurgé].plist";
 "Oracle recommends %@" = "Oracle recommande %@";
-"Adobe recommends %@" = "Adobe recommande %@";
 "Anywhere" = "N’importe où";
 "Mac App Store and identified developers" = "Mac App Store et développeurs identifiés";
 "Mac App Store" = "Mac App Store";
@@ -155,7 +154,6 @@
 "%@%@ (%@) %@ %@: %@ %@%@\n" = "%@%@ (%@) %@ %@ : %@ %@%@\n";
 " (Low!)" = " (Fabile !)";
 "\tLaunchd job status not available.\n" = "État du travail de ​​Launchd pas disponible.\n";
-"Mismatch!" = "Incompatibilité !";
 "\tDestinations:\n" = "\tDestinations :\n";
 "\t%@ - Uptime: %@%@\n" = "\t%@ - Temps depuis le démarrage : %@%@\n";
 "%d day (plural rule: zero)" = "";

@@ -87,4 +87,8 @@
 // Look for attributes from a file that might depend on the PATH.
 + (NSDictionary *) lookForFileAttributes: (NSString *) path;
 
+// Compare versions.
++ (NSComparisonResult) compareVersion: (NSString *) version1
+  withVersion: (NSString *) version2;
+
 @end

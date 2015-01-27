@@ -142,15 +142,13 @@
               [NSColor redColor], NSForegroundColorAttributeName, nil]]
         autorelease];
     
-  if([version isEqualToString: currentVersion])
-    return [self getSupportLink: plugin];
-    
-  NSString * maxVersion = [self maxVersion: @[version, currentVersion]];
+  NSComparisonResult result =
+    [Utilities compareVersion: version withVersion: currentVersion];
   
-  if([maxVersion isEqualToString: currentVersion])
+  if(result == NSOrderedAscending)
     return [self outdatedFlash];
-    
-  return [self mismatchedFlash: currentVersion];
+  else
+    return [self getSupportLink: plugin];
   }
 
 // Get the current Flash version.
@@ -218,42 +216,6 @@
         NSLinkAttributeName : @"http://get.adobe.com/flashplayer/"
       }];
   
-  [outdated release];
-  
-  return [string autorelease];
-  }
-
-// Return a mismatched Flash version.
-- (NSAttributedString *) mismatchedFlash: (NSString *) currentVersion
-  {
-  NSMutableAttributedString * string =
-    [[NSMutableAttributedString alloc] initWithString: @""];
-  
-  NSAttributedString * outdated =
-    [[NSAttributedString alloc]
-      initWithString: NSLocalizedString(@"Mismatch!", NULL)
-      attributes:
-        [NSDictionary
-          dictionaryWithObjectsAndKeys:
-            [NSColor redColor], NSForegroundColorAttributeName, nil]];
-
-  [string appendString: @" "];
-  [string appendAttributedString: outdated];
-  [string appendString: @" "];
-
-  [string
-    appendString:
-      [NSString
-        stringWithFormat:
-          NSLocalizedString(@"Adobe recommends %@", NULL),
-          currentVersion]
-    attributes:
-      @{
-        NSFontAttributeName : [[Utilities shared] boldFont],
-        NSForegroundColorAttributeName : [[Utilities shared] red],
-        NSLinkAttributeName : @"http://get.adobe.com/flashplayer/"
-      }];
-   
   [outdated release];
   
   return [string autorelease];
