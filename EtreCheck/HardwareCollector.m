@@ -512,8 +512,12 @@
     NSString * currentBankID =
       [NSString stringWithFormat: @"        %@", name];
       
-    if([size isEqualToString: @"emtpy"])
+    if([size isEqualToString: @"(empty)"])
+      size = @"empty";
+      
+    if([size isEqualToString: @"empty"])
       {
+      size = @"";
       type = @"";
       speed = @"";
       status = @"";
