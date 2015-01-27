@@ -128,7 +128,7 @@
 
   [self.result
     appendString:
-      NSLocalizedString(@"\tTime Machine not configured!\n\n", NULL)
+      NSLocalizedString(@"    Time Machine not configured!\n\n", NULL)
     attributes:
       [NSDictionary
         dictionaryWithObjectsAndKeys:
@@ -376,7 +376,7 @@
       [NSString
         stringWithFormat:
           NSLocalizedString(
-            @"\t\t%@: Disk size: %@ Disk used: %@\n", NULL),
+            @"        %@: Disk size: %@ Disk used: %@\n", NULL),
           name, diskSize, spaceRequired]];
 
   if(size)
@@ -430,7 +430,7 @@
     bool skip = [skipSystemFiles boolValue];
 
     [self.result
-      appendString: NSLocalizedString(@"\tSkip System Files: ", NULL)];
+      appendString: NSLocalizedString(@"    Skip System Files: ", NULL)];
 
     if(!skip)
       [self.result appendString: NSLocalizedString(@"NO\n", NULL)];
@@ -458,7 +458,7 @@
     bool mobile = [mobileBackups boolValue];
 
     [self.result
-      appendString: NSLocalizedString(@"\tMobile backups: ", NULL)];
+      appendString: NSLocalizedString(@"    Mobile backups: ", NULL)];
 
     if(mobile)
       [self.result appendString: NSLocalizedString(@"ON\n", NULL)];
@@ -480,7 +480,7 @@
     bool backup = [autoBackup boolValue];
 
     [self.result
-      appendString: NSLocalizedString(@"\tAuto backup: ", NULL)];
+      appendString: NSLocalizedString(@"    Auto backup: ", NULL)];
 
     if(backup)
       [self.result appendString: NSLocalizedString(@"YES\n", NULL)];
@@ -528,7 +528,7 @@
     {
     [self.result
       appendString:
-        NSLocalizedString(@"\tVolumes being backed up:\n", NULL)];
+        NSLocalizedString(@"    Volumes being backed up:\n", NULL)];
 
     for(NSString * UUID in backedupVolumeUUIDs)
       {
@@ -545,7 +545,7 @@
 - (void) printDestinations: (NSDictionary *) settings
   {
   [self.result
-    appendString: NSLocalizedString(@"\tDestinations:\n", NULL)];
+    appendString: NSLocalizedString(@"    Destinations:\n", NULL)];
 
   for(NSString * destinationID in destinations)
     [self printDestination: [destinations objectForKey: destinationID]];
@@ -590,7 +590,7 @@
   [self.result
     appendString:
       [NSString
-        stringWithFormat: @"\t\t%@ [%@] %@\n", name, kind, lastused]];
+        stringWithFormat: @"        %@ [%@] %@\n", name, kind, lastused]];
   }
 
 // Print the total size of the backup.
@@ -603,7 +603,8 @@
     appendString:
       [NSString
         stringWithFormat:
-          NSLocalizedString(@"\t\tTotal size: %@ \n", NULL), totalSize]];
+          NSLocalizedString(@"        Total size: %@ \n", NULL),
+          totalSize]];
   }
 
 // Print information about snapshots.
@@ -614,7 +615,7 @@
       [NSString
         stringWithFormat:
           NSLocalizedString(
-            @"\t\tTotal number of backups: %@ \n", NULL),
+            @"        Total number of backups: %@ \n", NULL),
           [destination objectForKey: kSnapshotcount]]];
   
   NSDate * oldestBackup = [destination objectForKey: kOldestBackup];
@@ -625,14 +626,14 @@
       [NSString
         stringWithFormat:
           NSLocalizedString(
-            @"\t\tOldest backup: %@ \n", NULL),
+            @"        Oldest backup: %@ \n", NULL),
           oldestBackup ? oldestBackup : @"-"]];
 
   [self.result
     appendString:
       [NSString
         stringWithFormat:
-          NSLocalizedString(@"\t\tLast backup: %@ \n", NULL),
+          NSLocalizedString(@"        Last backup: %@ \n", NULL),
           lastBackup ? lastBackup : @"-"]];
   }
 
@@ -641,7 +642,7 @@
   {
   [self.result
     appendString:
-      NSLocalizedString(@"\t\tSize of backup disk: ", NULL)];
+      NSLocalizedString(@"        Size of backup disk: ", NULL)];
 
   NSString * analysis = nil;
   
@@ -650,7 +651,7 @@
       [NSString
         stringWithFormat:
           NSLocalizedString(
-            @"\t\t\tBackup size %@ > (Disk size %@ X 3)", NULL),
+            @"            Backup size %@ > (Disk size %@ X 3)", NULL),
           [formatter stringFromByteCount: totalSizeValue],
           [formatter stringFromByteCount: maximumBackupSize]];
     
@@ -659,7 +660,7 @@
       [NSString
         stringWithFormat:
           NSLocalizedString(
-            @"\t\t\tBackup size %@ > (Disk used %@ X 3)", NULL),
+            @"            Backup size %@ > (Disk used %@ X 3)", NULL),
           [formatter stringFromByteCount: totalSizeValue],
           [formatter stringFromByteCount: minimumBackupSize]];
     
@@ -668,7 +669,7 @@
       [NSString
         stringWithFormat:
           NSLocalizedString(
-            @"\t\t\tBackup size %@ < (Disk used %@ X 3)", NULL),
+            @"            Backup size %@ < (Disk used %@ X 3)", NULL),
           [formatter stringFromByteCount: totalSizeValue],
           [formatter stringFromByteCount: minimumBackupSize]];
   
@@ -729,7 +730,7 @@
       NSString * exclusion =
         [NSString
           stringWithFormat:
-            NSLocalizedString(@"\t%@ excluded from backup!\n", NULL),
+            NSLocalizedString(@"    %@ excluded from backup!\n", NULL),
             importantPath];
 
       [self.result

@@ -184,7 +184,7 @@
     for(NSString * adware in self.adwareFiles)
       {
       [self.result
-        appendString: [NSString stringWithFormat: @"\t%@", adware]
+        appendString: [NSString stringWithFormat: @"    %@", adware]
         attributes:
           @{
             NSForegroundColorAttributeName : [[Utilities shared] red],

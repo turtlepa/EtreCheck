@@ -169,7 +169,7 @@
     appendString:
       [NSString
         stringWithFormat:
-          @"\t%-9@\t%@\n",
+          @"    %-9@    %@\n",
           [formatter stringFromByteCount: (unsigned long long)value], key]];
   }
 
@@ -183,7 +183,7 @@
     appendString:
       [NSString
         stringWithFormat:
-          @"\t%-9@\t%@\n",
+          @"    %-9@    %@\n",
           [formatter stringFromByteCount: (unsigned long long)value], key]
     attributes: attributes];
   }

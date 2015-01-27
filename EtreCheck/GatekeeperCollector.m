@@ -155,14 +155,14 @@ GatekeeperSetting;
         appendString:
           [NSString
             stringWithFormat:
-              @"\t%@\n", NSLocalizedString(@"Mac App Store", NULL)]];
+              @"    %@\n", NSLocalizedString(@"Mac App Store", NULL)]];
       break;
     case kDeveloperID:
       [self.result
         appendString:
           [NSString
             stringWithFormat:
-              @"\t%@\n",
+              @"    %@\n",
               NSLocalizedString(
                 @"Mac App Store and identified developers", NULL)]];
       break;
@@ -171,7 +171,7 @@ GatekeeperSetting;
         appendString:
           [NSString
             stringWithFormat:
-              @"\t%@\n", NSLocalizedString(@"Anywhere", NULL)]
+              @"    %@\n", NSLocalizedString(@"Anywhere", NULL)]
         attributes:
           [NSDictionary
             dictionaryWithObjectsAndKeys:
@@ -184,7 +184,7 @@ GatekeeperSetting;
         appendString:
           [NSString
             stringWithFormat:
-              @"\t%@\n", NSLocalizedString(@"Unknown!", NULL)]
+              @"    %@\n", NSLocalizedString(@"Unknown!", NULL)]
         attributes:
           [NSDictionary
             dictionaryWithObjectsAndKeys:

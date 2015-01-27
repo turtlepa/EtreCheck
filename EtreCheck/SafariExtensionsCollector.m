@@ -178,7 +178,7 @@
     
   [self.result
     appendString:
-      [NSString stringWithFormat: @"\t%@ %@", humanReadableName, status]];
+      [NSString stringWithFormat: @"    %@ %@", humanReadableName, status]];
     
   // Safari extensions are stored under the "adwareextensions" category.
   if([[Model model] isAdwareExtension: humanReadableName])

@@ -202,7 +202,7 @@
             appendString:
               [NSString
                 stringWithFormat:
-                  @"\t%@\n", [Utilities cleanPath: parent]]];
+                  @"    %@\n", [Utilities cleanPath: parent]]];
 
         ++count;
         
@@ -245,7 +245,7 @@
     appendString:
       [NSString
         stringWithFormat:
-          NSLocalizedString(@"\t\t%@%@", NULL),
+          NSLocalizedString(@"        %@%@", NULL),
           name, [self formatVersionString: application]]];
     
   [output appendAttributedString: supportLink];

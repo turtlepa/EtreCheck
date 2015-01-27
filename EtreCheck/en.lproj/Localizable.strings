@@ -6,23 +6,23 @@
   Copyright (c) 2013 Etresoft. All rights reserved.
 */
 
-"timemachineneedslion" = "\tTime Machine information requires OS X 10.7 \"Lion\" or later.\n\n";
+"timemachineneedslion" = "    Time Machine information requires OS X 10.7 \"Lion\" or later.\n\n";
 "linkstyle" = "<head><style>a { font-family: sans-serif; } a:active { color: blue; } a:hover { color: blue; } </style></head>";
 "updateavailable" = "There is a new version of EtreCheck available. Do you want to quit now and download the new version?";
 "etrecheckreport" = "The EtreCheck report is most useful as a snapshot of the overall state of your system. If you are having problems, the best course of action is to go to the Apple support forums, post a detailed description of your problem, explain what is happening, explain what you would like to see happen, and include this report.";
 "applesupportforums" = "https://discussions.apple.com";
-"gatekeeperneedslion" = "\tGatekeeper information requires OS X 10.7.5 \"Lion\" or later.\n\n";
+"gatekeeperneedslion" = "    Gatekeeper information requires OS X 10.7.5 \"Lion\" or later.\n\n";
 "machineattributes" = "/System/Library/PrivateFrameworks/ServerInformation.framework/Versions/A/Resources/English.lproj/SIMachineAttributes.plist";
 "oldmachineattributes" = "/System/Library/PrivateFrameworks/ServerKit.framework/Versions/A/Resources/English.lproj/XSMachineAttributes.plist";
 "info" = "ℹ️";
-"startupitemsdeprecated" = "\tStartup items are obsolete in OS X Yosemite\n";
+"startupitemsdeprecated" = "    Startup items are obsolete in OS X Yosemite\n";
 "%d day (plural rule: zero)" = "";
 "%d day (plural rule: one)" = "one day ";
 "%d day (plural rule: other)" = "%d days ";
 "%d interface (plural rule: zero)" = "no interfaces\n";
 "%d interface (plural rule: one)" = "";
 "%d interface (plural rule: other)" = "%d interfaces\n";
-"/Library/Logs/DiagnosticReports permissions" = "\tStandard users cannot read /Library/Logs/DiagnosticReports.\n\tRun as an administrator account to see more information.";
+"/Library/Logs/DiagnosticReports permissions" = "    Standard users cannot read /Library/Logs/DiagnosticReports.\n    Run as an administrator account to see more information.";
 "%d error (plural rule: zero)" = "no errors\n";
 "%d error (plural rule: one)" = "one error";
 "%d error (plural rule: other)" = "%d errors\n";
@@ -33,12 +33,12 @@
 "adwaredetails1" = "EtreCheck has detected that your Macintosh may be infected with adware. Apple has published the following list of files installed by common types of adware: ";
 "adwaredetails2" = "\n\nEtreCheck found the following files that match Apple's list:\n\n";
 "adwaredetails3" = "\nThe easiest way to remove this adware is by downloading and running AdwareMedic, a program written by another long-time member of Apple Support Communities.";
-"%d pressurekilledcount (plural rule: zero)" = "\tno processes killed due to memory pressure\n";
-"%d pressurekilledcount (plural rule: one)" = "\tone process killed due to memory pressure\n";
-"%d pressurekilledcount (plural rule: other)" = "\t%d processes killed due to memory pressure\n";
+"%d pressurekilledcount (plural rule: zero)" = "    no processes killed due to memory pressure\n";
+"%d pressurekilledcount (plural rule: one)" = "    one process killed due to memory pressure\n";
+"%d pressurekilledcount (plural rule: other)" = "    %d processes killed due to memory pressure\n";
 "linkhelp" = "Click the [Support] links for help with non-Apple products.\nClick the [Details] links for more information about that line.\nClick the [Adware] links for help removing adware.\n\n";
 "downloadetrecheck" = "Download EtreCheck from ";
 "Good" = "Normal";
 "Fair" = "Replace Soon";
 "Poor" = "Replace Now";
-"\t%@ - Uptime: %@%@\n" = "\t%@ - Time since boot: %@%@\n";
+"    %@ - Uptime: %@%@\n" = "    %@ - Time since boot: %@%@\n";

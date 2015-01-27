@@ -53,7 +53,7 @@
     }
     
   if(!count)
-    [self.result appendString: NSLocalizedString(@"\tNone\n", NULL)];
+    [self.result appendString: NSLocalizedString(@"    None\n", NULL)];
   
   [self
     setTabs: @[@28, @112, @196]
@@ -131,7 +131,7 @@
     appendString:
       [NSString
         stringWithFormat:
-          @"\t%@\t%@ %@ (%@)\n",
+          @"    %@    %@ %@ (%@)\n",
           name,
           kind,
           isHidden ? NSLocalizedString(@"Hidden", NULL) : @"",

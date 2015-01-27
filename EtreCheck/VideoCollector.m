@@ -82,7 +82,7 @@
       appendString:
         [NSString
           stringWithFormat:
-            @"\t%@%@%@\n",
+            @"    %@%@%@\n",
             name ? name : @"",
             [vram length] ? @" - " : @"",
             vram]];
@@ -111,7 +111,7 @@
       appendString:
         [NSString
           stringWithFormat:
-            @"\t\t%@ %@\n",
+            @"        %@ %@\n",
             name ? name : @"Unknown",
             resolution ? resolution : @""]];
   }

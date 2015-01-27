@@ -176,7 +176,7 @@
     appendString:
       [NSString
         stringWithFormat:
-          NSLocalizedString(@"\t%@ - %@: %@\n", NULL),
+          NSLocalizedString(@"    %@ - %@: %@\n", NULL),
           name, NSLocalizedString(@"model", NULL), model]];
     
   [self.result
@@ -184,7 +184,7 @@
       [NSString
         stringWithFormat:
           NSLocalizedString(
-            @"\t%@ %@ %@ CPU: %@-core\n", NULL),
+            @"    %@ %@ %@ CPU: %@-core\n", NULL),
           cpu_count,
           speed,
           cpu_type ? cpu_type : @"",
@@ -239,7 +239,7 @@
   [self.result
     appendString:
       [NSString
-        stringWithFormat: @"\t%@ ", self.marketingName]];
+        stringWithFormat: @"    %@ ", self.marketingName]];
       
   if(technicalSpecificationsURL)
     [self.result
@@ -445,7 +445,7 @@
     {
     [self.result
       appendString:
-        [NSString stringWithFormat: @"\t%@ RAM %@\n", memory, upgradeable]
+        [NSString stringWithFormat: @"    %@ RAM %@\n", memory, upgradeable]
       attributes:
         [NSDictionary
           dictionaryWithObjectsAndKeys:
@@ -454,7 +454,8 @@
   else
     [self.result
       appendString:
-        [NSString stringWithFormat: @"\t%@ RAM %@\n", memory, upgradeable]];
+        [NSString
+          stringWithFormat: @"    %@ RAM %@\n", memory, upgradeable]];
 
   if(details)
     {
@@ -509,7 +510,7 @@
     NSString * status = [bank objectForKey: @"dimm_status"];
     
     NSString * currentBankID =
-      [NSString stringWithFormat: @"\t\t%@", name];
+      [NSString stringWithFormat: @"        %@", name];
       
     if([size isEqualToString: @"emtpy"])
       {
@@ -521,7 +522,7 @@
     NSString * currentBankInfo =
       [NSString
         stringWithFormat:
-          @"\t\t\t%@ %@ %@ %@\n", size, type, speed, status];
+          @"            %@ %@ %@ %@\n", size, type, speed, status];
       
     bool sameID = [lastBankID isEqualToString: currentBankID];
     bool sameInfo = [lastBankInfo isEqualToString: currentBankInfo];
@@ -554,7 +555,7 @@
     appendString:
       [NSString
         stringWithFormat:
-          @"\tBluetooth: %@\n", [self collectBluetoothInformation]]];
+          @"    Bluetooth: %@\n", [self collectBluetoothInformation]]];
   }
 
 // Collect bluetooth information.
@@ -648,13 +649,13 @@
               appendString:
                 [NSString
                   stringWithFormat:
-                    @"\tWireless: %@",
+                    @"    Wireless: %@",
                     TTTLocalizedPluralString(count, @"interface", nil)]];
           
           for(NSDictionary * interface in interfaces)
             [self
               printWirelessInterface: interface
-              indent: count > 1 ? @"\t\t" : @" "];
+              indent: count > 1 ? @"        " : @" "];
           }
         }
       }
@@ -718,7 +719,7 @@
                   [NSString
                     stringWithFormat:
                       NSLocalizedString(
-                        @"\tBattery Health: %@ - Cycle count %@\n", NULL),
+                        @"    Battery Health: %@ - Cycle count %@\n", NULL),
                       NSLocalizedString(health, NULL), cycleCount]];
             }
           }

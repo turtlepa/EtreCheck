@@ -61,7 +61,8 @@
             ++count;
           
         if(!count)
-          [self.result appendString: NSLocalizedString(@"\tNone\n", NULL)];
+          [self.result
+            appendString: NSLocalizedString(@"    None\n", NULL)];
           
         [self.result appendCR];
         }
@@ -83,7 +84,7 @@
   if([support isEqualToString: @"spprefpane_support_3rdParty"])
     {
     [self.result
-      appendString: [NSString stringWithFormat: @"\t%@ ", name]];
+      appendString: [NSString stringWithFormat: @"    %@ ", name]];
       
     NSAttributedString * supportLink =
       [self getSupportURL: name bundleID: bundleID];

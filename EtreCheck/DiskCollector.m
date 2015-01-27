@@ -116,10 +116,10 @@
       appendString:
         [NSString
           stringWithFormat:
-            @"\t%@ %@ %@\n",
+            @"    %@ %@ %@\n",
             diskName ? diskName : @"-", diskDevice, diskSize]];
     
-    [self collectSMARTStatus: disk indent: @"\t"];
+    [self collectSMARTStatus: disk indent: @"    "];
     
     [self printDiskVolumes: disk];
     
@@ -147,7 +147,7 @@
         }
         
       else
-        [self printVolume: volume indent: @"\t\t"];
+        [self printVolume: volume indent: @"        "];
       }
       
     for(NSDictionary * name in coreStorageVolumeNames)
@@ -156,7 +156,8 @@
         [self.coreStorageVolumes objectForKey: name];
         
       if(coreStorageVolume)
-        [self printCoreStorageVolume: coreStorageVolume indent: @"\t\t"];
+        [self
+          printCoreStorageVolume: coreStorageVolume indent: @"        "];
       }
     }
   }
@@ -195,7 +196,7 @@
   {
   [self printVolume: volume indent: indent];
   
-  indent = [indent stringByAppendingString: @"\t"];
+  indent = [indent stringByAppendingString: @"    "];
   
   NSDictionary * lv = [volume objectForKey: @"com.apple.corestorage.lv"];
   

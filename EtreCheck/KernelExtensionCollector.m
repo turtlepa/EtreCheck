@@ -627,7 +627,7 @@
     [string
       appendString:
         [NSString
-          stringWithFormat: @"\t\t%@", [Utilities cleanPath: directory]]
+          stringWithFormat: @"        %@", [Utilities cleanPath: directory]]
       attributes:
         @{
           NSFontAttributeName : [[Utilities shared] boldFont],
@@ -690,7 +690,7 @@
     appendString:
       [NSString
         stringWithFormat:
-          @"\t%@\t", status]
+          @"    %@    ", status]
     attributes:
       [NSDictionary
         dictionaryWithObjectsAndKeys:

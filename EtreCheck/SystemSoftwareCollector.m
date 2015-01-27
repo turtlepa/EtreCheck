@@ -82,7 +82,7 @@
       appendString:
         [NSString
           stringWithFormat:
-            NSLocalizedString(@"\t%@ - Uptime: %@%@\n", NULL),
+            NSLocalizedString(@"    %@ - Uptime: %@%@\n", NULL),
             version,
             TTTLocalizedPluralString(days, @"day", nil),
             time]];
@@ -91,7 +91,7 @@
       appendString:
         [NSString
           stringWithFormat:
-            NSLocalizedString(@"\t%@ - Uptime: %@%@\n", NULL),
+            NSLocalizedString(@"    %@ - Uptime: %@%@\n", NULL),
             version,
             @"",
             uptime]];

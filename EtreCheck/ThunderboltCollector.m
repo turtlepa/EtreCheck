@@ -54,7 +54,8 @@
         [[plist objectAtIndex: 0] objectForKey: @"_items"];
         
       for(NSDictionary * device in devices)
-        [self printThunderboltDevice: device indent: @"\t" found: & found];
+        [self
+          printThunderboltDevice: device indent: @"    " found: & found];
         
       if(found)
         [self.result appendCR];
@@ -86,7 +87,7 @@
           stringWithFormat:
             @"%@%@ %@\n", indent, vendor_name, name]];
             
-    indent = [NSString stringWithFormat: @"%@\t", indent];
+    indent = [NSString stringWithFormat: @"%@    ", indent];
     }
   
   [self collectSMARTStatus: device indent: indent];

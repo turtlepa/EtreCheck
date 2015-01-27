@@ -203,7 +203,8 @@
     if(!self.launchdStatus)
       [self.result
         appendString:
-          NSLocalizedString(@"\tLaunchd job status not available.\n", NULL)
+          NSLocalizedString(
+            @"    Launchd job status not available.\n", NULL)
         attributes:
           [NSDictionary
             dictionaryWithObjectsAndKeys:
@@ -495,7 +496,7 @@
     [[NSMutableAttributedString alloc] init];
     
   [output
-    appendString: [NSString stringWithFormat: @"\t%@\t", statusString]
+    appendString: [NSString stringWithFormat: @"    %@    ", statusString]
     attributes:
       [NSDictionary
         dictionaryWithObjectsAndKeys:
@@ -572,7 +573,7 @@
     [extra appendString:
       [NSString
         stringWithFormat:
-          @"\n\t\t%@",
+          @"\n        %@",
           [Utilities
             formatExecutable: [status objectForKey: kExecutable]]]];
     

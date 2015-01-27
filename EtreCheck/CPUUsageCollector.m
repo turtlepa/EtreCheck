@@ -27,7 +27,8 @@
 // Perform the collection.
 - (void) collect
   {
-  [self updateStatus: NSLocalizedString(@"Sampling processes for CPU", NULL)];
+  [self
+    updateStatus: NSLocalizedString(@"Sampling processes for CPU", NULL)];
 
   // Collect the average CPU usage for all processes (5 times).
   NSDictionary * avgCPU = [self collectAverageCPU];
@@ -98,7 +99,7 @@
       double cpu = [[cpus objectAtIndex: 0] doubleValue];
 
       NSString * output =
-        [NSString stringWithFormat: @"\t%6.0lf%%\t%@\n", cpu, command];
+        [NSString stringWithFormat: @"    %6.0lf%%    %@\n", cpu, command];
         
       if(cpu > 50.0)
         [self.result

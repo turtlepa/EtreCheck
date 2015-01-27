@@ -52,7 +52,7 @@
       [self.result
         appendString:
           [NSString stringWithFormat:
-            NSLocalizedString(@"\t%@ - Exists\n", NULL), configFile]];
+            NSLocalizedString(@"    %@ - Exists\n", NULL), configFile]];
       
     // Print changes to /etc/hosts.
     [self printHostsStatus: corrupt count: hostsCount];
@@ -184,7 +184,7 @@
       appendString:
         [NSString
           stringWithFormat:
-            NSLocalizedString(@"\t/etc/hosts%@%@\n", NULL),
+            NSLocalizedString(@"    /etc/hosts%@%@\n", NULL),
             countString, corruptString]
       attributes:
         [NSDictionary
@@ -195,7 +195,7 @@
       appendString:
         [NSString
           stringWithFormat:
-            NSLocalizedString(@"\t/etc/hosts%@%@\n", NULL),
+            NSLocalizedString(@"    /etc/hosts%@%@\n", NULL),
             countString, corruptString]];
   }
 

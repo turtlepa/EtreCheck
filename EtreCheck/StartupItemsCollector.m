@@ -145,7 +145,7 @@
     appendString:
       [NSString
         stringWithFormat:
-          NSLocalizedString(@"\t%@: %@Path: %@\n", NULL),
+          NSLocalizedString(@"    %@: %@Path: %@\n", NULL),
           name, version, path]
     attributes:
       @{

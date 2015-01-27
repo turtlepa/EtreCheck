@@ -421,7 +421,7 @@
       appendString:
         [NSString
           stringWithFormat:
-            @"\t%@ \t- %@",
+            @"    %@     - %@",
             [self.logDateFormatter stringFromDate: event.date],
             event.name]
       attributes:
@@ -435,7 +435,7 @@
       appendString:
         [NSString
           stringWithFormat:
-            @"\t%@\t%@",
+            @"    %@    %@",
             [self.logDateFormatter stringFromDate: event.date],
             event.name]];
   
