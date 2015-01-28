@@ -99,6 +99,11 @@
       persistentDomainForName:
         @"/Library/Preferences/com.apple.TimeMachine.plist"];
 
+  // settings =
+  //   [defaults
+  //     persistentDomainForName:
+  //       @"/tmp/com.apple.TimeMachine.plist"];
+
   [defaults release];
   
   if(settings)
@@ -238,6 +243,8 @@
   
   NSData * result = [Utilities execute: @"/usr/bin/tmutil" arguments: args];
 
+  // result = [NSData dataWithContentsOfFile: @"/tmp/tm.xml"];
+  
   if(result)
     {
     NSDictionary * destinationinfo  =
@@ -501,12 +508,20 @@
   {
   NSMutableSet * backedupVolumeUUIDs = [NSMutableSet set];
   
+  // Root always gets backed up.
+  // It can be specified directly in settings.
+  NSString * root = [settings objectForKey: @"RootVolumeUUID"];
+
+  if(root)
+    [backedupVolumeUUIDs addObject: root];
+
+  // Or it can be in each destination.
   for(NSString * destinationID in destinations)
     {
     NSDictionary * destination = [destinations objectForKey: destinationID];
     
     // Root always gets backed up.
-    NSString * root = [destination objectForKey: @"RootVolumeUUID"];
+    root = [destination objectForKey: @"RootVolumeUUID"];
   
     if(root)
       [backedupVolumeUUIDs addObject: root];

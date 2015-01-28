@@ -64,6 +64,8 @@
   NSData * result =
     [Utilities execute: @"/usr/sbin/system_profiler" arguments: args];
   
+  // result = [NSData dataWithContentsOfFile: @"/tmp/serialata.xml"];
+  
   if(result)
     {
     NSArray * plist = [NSArray readPropertyListData: result];
