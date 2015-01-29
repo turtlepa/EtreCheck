@@ -517,7 +517,7 @@
       
     if([size isEqualToString: @"empty"])
       {
-      size = @"";
+      size = NSLocalizedString(@"Empty", NULL);
       type = @"";
       speed = @"";
       status = @"";
