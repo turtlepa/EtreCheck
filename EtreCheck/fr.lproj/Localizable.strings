@@ -96,7 +96,7 @@
 "%@ (hidden)" = "%@ (caché)";
 "Hidden" = "Caché";
 "    There was a problem retrieving launchd job status.\n" = "    Impossible de trouver le status des taches launchd\n";
-"[Support]" = "[Aide]";
+"[Click for Support]" = "[Cliquer pour l’aide]";
 "Version: %@" = "Version : %@";
 "    %@:    Version: %@%@" = "    %@ :    Version : %@%@";
 "    %@ - %@: %@\n" = "    %@ - %@ : %@\n";
