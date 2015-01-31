@@ -407,7 +407,7 @@
       stringWithFormat: @"etrecheck://adware/%@", [name lowercaseString]];
   
   [urlString
-    appendString: NSLocalizedString(@" [Remove]", NULL)
+    appendString: NSLocalizedString(@" [Adware! - Remove]", NULL)
     attributes:
       @{
         NSFontAttributeName : [[Utilities shared] boldFont],

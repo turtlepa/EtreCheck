@@ -20,6 +20,7 @@
 		<string>/Library/LaunchDaemons/Jack.plist</string>
 		<string>/Library/PrivilegedHelperTools/Jack</string>
 		<string>/Library/Frameworks/VSearch.framework</string>
+		<string>/Library/Frameworks/v.framework</string>
 	</array>
 	<key>item3</key>
 	<array>
@@ -46,6 +47,7 @@
 		<string>/Library/LaunchAgents/com.genieoinnovation.macextension.client.plist</string>
 		<string>/Library/LaunchAgents/com.genieo.engine.plist</string>
 		<string>/Library/LaunchAgents/com.genieo.completer.update.plist</string>
+		<string>/Library/LaunchAgents/com.genieo.completer.ltvbit.plist</string>
 		<string>/Library/LaunchDaemons/com.genieoinnovation.macextension.client.plist</string>
 		<string>/Library/PrivilegedHelperTools/com.genieoinnovation.macextension.client</string>
 		<string>/usr/lib/libgenkit.dylib</string>
@@ -57,6 +59,7 @@
 		<string>/Library/Application Support/Genieo</string>
 		<string>/Library/Application Support/com.genieoinnovation.Installer</string>
 		<string>/Library/Frameworks/GenieoExtra.framework</string>
+		<string>/Library/Saved Application State/com.genieo.RemoveGenieoMac.savedState</string>
 	</array>
 </dict>
 </plist>

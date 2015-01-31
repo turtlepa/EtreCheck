@@ -353,17 +353,19 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
       [self.spinner startAnimation: self];
     });
 
-  [self printEtreCheckHeader];
-  
   [self setupNotificationHandlers];
   
   Checker * checker = [Checker new];
   
-  [self.log appendAttributedString: [checker check]];
+  NSAttributedString * results = [checker check];
   
   dispatch_async(
     dispatch_get_main_queue(),
     ^{
+      [self printEtreCheckHeader];
+  
+      [self.log appendAttributedString: results];
+  
       [self displayOutput];
     });
     
@@ -409,13 +411,8 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
         title: @"http://etresoft.com/etrecheck"]];
     
   [self.log appendString: @"\n\n"];
-
-  [self.log
-    appendRTFData:
-      [NSData
-        dataWithContentsOfFile:
-          [[NSBundle mainBundle]
-            pathForResource: @"linkhelp" ofType: @"rtf"]]];
+  
+  [self printLinkInstructions];
   }
 
 // Print the problem description.
@@ -438,6 +435,27 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
     }
   }
 
+// Print link instructions.
+- (void) printLinkInstructions
+  {
+  [self.log
+    appendRTFData:
+      [NSData
+        dataWithContentsOfFile:
+          [[NSBundle mainBundle]
+            pathForResource: @"linkhelp" ofType: @"rtf"]]];
+
+  if([[Model model] adwareFound])
+    [self.log
+      appendRTFData:
+        [NSData
+          dataWithContentsOfFile:
+            [[NSBundle mainBundle]
+              pathForResource: @"adwarehelp" ofType: @"rtf"]]];
+
+  [self.log appendString: @"\n"];
+  }
+  
 // Get the current date as a string.
 - (NSString *) currentDate
   {

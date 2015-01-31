@@ -33,6 +33,7 @@
   NSArray * myAdwareExtensions;
   NSString * myComputerName;
   NSString * myHostName;
+  bool myAdwareFound;
   }
 
 // Keep track of the OS version.
@@ -79,6 +80,9 @@
 
 // Host name.
 @property (retain) NSString * hostName;
+
+// Did I find any adware?
+@property (assign) bool adwareFound;
 
 // Return the singeton of shared values.
 + (Model *) model;

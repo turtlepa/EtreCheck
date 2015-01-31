@@ -516,14 +516,6 @@
 
     [extra appendString: @" "];
 
-    [extra
-      appendString: NSLocalizedString(@"Adware!", NULL)
-      attributes:
-        @{
-          NSForegroundColorAttributeName : [[Utilities shared] red],
-          NSFontAttributeName : [[Utilities shared] boldFont]
-        }];
-      
     NSString * adware = [[[Model model] adwareFiles] objectForKey: path];
     
     NSAttributedString * removeLink =
@@ -531,6 +523,14 @@
 
     if(removeLink)
       [extra appendAttributedString: removeLink];
+    else
+      [extra
+        appendString: NSLocalizedString(@"Adware!", NULL)
+        attributes:
+          @{
+            NSForegroundColorAttributeName : [[Utilities shared] red],
+            NSFontAttributeName : [[Utilities shared] boldFont]
+          }];      
       
     return [extra autorelease];
     }

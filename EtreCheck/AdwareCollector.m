@@ -128,6 +128,8 @@
   
   if([foundFiles count])
     {
+    [[Model model] setAdwareFound: YES];
+
     [self.adwareFiles setObject: foundFiles forKey: adware];
     
     for(NSString * path in foundFiles)

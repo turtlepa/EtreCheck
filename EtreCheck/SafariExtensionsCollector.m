@@ -185,14 +185,6 @@
     {
     [self.result appendString: @" "];
     
-    [self.result
-      appendString: NSLocalizedString(@"Adware!", NULL)
-      attributes:
-        @{
-          NSForegroundColorAttributeName : [[Utilities shared] red],
-          NSFontAttributeName : [[Utilities shared] boldFont]
-        }];
-
     // Add this adware extension under the "extension" category so only it
     // will be printed.
     [[[Model model] adwareFiles]
@@ -203,6 +195,14 @@
 
     if(removeLink)
       [self.result appendAttributedString: removeLink];
+    else
+      [self.result
+        appendString: NSLocalizedString(@"Adware!", NULL)
+        attributes:
+          @{
+            NSForegroundColorAttributeName : [[Utilities shared] red],
+            NSFontAttributeName : [[Utilities shared] boldFont]
+          }];
     }
 
   [self.result appendString: @"\n"];
