@@ -55,7 +55,8 @@
 
   [self collectArchives];
 
-  [self collectCaches];
+  // Don't bother.
+  // [self collectCaches];
 
   // Print the extensions.
   if([self.extensions count])
@@ -132,7 +133,6 @@
   }
 
 // Collect extension caches.
-// TODO: Flag these as cached.
 - (void) collectCaches
   {
   NSString * userSafariExtensionsDir =
@@ -169,16 +169,9 @@
   NSString * humanReadableName =
     [extension objectForKey: kHumanReadableName];
   
-  NSString * status = @"";
-  
-  if([[extension objectForKey: kArchive] boolValue])
-    status = NSLocalizedString(@"[Installed]", NULL);
-  else if([[extension objectForKey: kCache] boolValue])
-    status = NSLocalizedString(@"[Cached]", NULL);
-    
   [self.result
     appendString:
-      [NSString stringWithFormat: @"    %@ %@", humanReadableName, status]];
+      [NSString stringWithFormat: @"    %@", humanReadableName]];
     
   // Safari extensions are stored under the "adwareextensions" category.
   if([[Model model] isAdwareExtension: humanReadableName])
