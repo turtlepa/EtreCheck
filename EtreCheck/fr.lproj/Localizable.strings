@@ -96,7 +96,7 @@
 "%@ (hidden)" = "%@ (caché)";
 "Hidden" = "Caché";
 "    There was a problem retrieving launchd job status.\n" = "    Impossible de trouver le status des taches launchd\n";
-"[Click for Support]" = "[Cliquer pour l’aide]";
+"[Click for support]" = "[Cliquer pour l’aide]";
 "Version: %@" = "Version : %@";
 "    %@:    Version: %@%@" = "    %@ :    Version : %@%@";
 "    %@ - %@: %@\n" = "    %@ - %@ : %@\n";
@@ -176,7 +176,7 @@
 "NO\n" = "NON\n";
 "YES - System files not being backed up\n" = "OUI - Les fichiers du système ne sont pas sauvegardés\n";
 "/Library/Logs/DiagnosticReports permissions" = "    Les utilisateurs standard ne peuvent pas lire /Library/Logs/DiagnosticReports.\n    Lancer EtreCheck comme un utilisateur administrateur pour voir plus d'informations.";
-"[Details]" = "[Détails]";
+"[Cliok for details]" = "[Cliquer pour les détails]";
 "Checking information from log files" = "Vérification des informations des fichiers journaux";
 "Self test - passed" = "Examen de soi - succès";
 "Self test - failed" = "Examen de soi - échec";

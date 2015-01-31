@@ -167,7 +167,7 @@
     [NSString stringWithFormat: @"etrecheck://detail/%@", query];
   
   [urlString
-    appendString: NSLocalizedString(@"[Details]", NULL)
+    appendString: NSLocalizedString(@"[Click for details]", NULL)
     attributes:
       @{
         NSFontAttributeName : [[Utilities shared] boldFont],
