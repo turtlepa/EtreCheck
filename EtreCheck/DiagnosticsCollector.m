@@ -311,21 +311,23 @@
   NSString * extension = [file pathExtension];
   NSString * base = [file stringByDeletingPathExtension];
   
-  // Everybody loves double extensions!
-  NSString * extension2 = [base pathExtension];
-  
-  if([extension2 length])
+  // Special case for cpu_resource.diag
+  if([file hasSuffix: @".cpu_resource.diag"])
     {
     base = [base stringByDeletingPathExtension];
-    extension = [extension2 stringByAppendingPathExtension: extension];
+    extension = @"cpu_resource.diag";
     }
   
   // First the 2nd portion of the file name that contains the date.
   NSArray * parts = [base componentsSeparatedByString: @"_"];
 
-  if([parts count] > 1)
+  NSUInteger count = [parts count];
+  
+  if(count > 1)
     if(date)
-      *date = [self.dateFormatter dateFromString: [parts objectAtIndex: 1]];
+      *date =
+        [self.dateFormatter
+          dateFromString: [parts objectAtIndex: count - 2]];
 
   // Now construct a safe file name.
   NSMutableArray * safeParts = [NSMutableArray arrayWithArray: parts];

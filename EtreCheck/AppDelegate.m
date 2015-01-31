@@ -139,11 +139,11 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
     NSString * manager = [url host];
     
     if([manager isEqualToString: @"detail"])
-      [self.detailManager showDetail: [[url path] lastPathComponent]];
+      [self.detailManager showDetail: [[url path] substringFromIndex: 1]];
     else if([manager isEqualToString: @"help"])
-      [self.helpManager showDetail: [[url path] lastPathComponent]];
+      [self.helpManager showDetail: [[url path] substringFromIndex: 1]];
     else if([manager isEqualToString: @"adware"])
-      [self.adwareManager showDetail: [[url path] lastPathComponent]];
+      [self.adwareManager showDetail: [[url path] substringFromIndex: 1]];
     }
   }
 
