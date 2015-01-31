@@ -293,8 +293,9 @@
   NSArray * executable = [self collectLaunchdItemExecutable: plist];
   
   // See if the executable is valid.
-  if(![self isValidExecutable: executable])
-    jobStatus = kStatusInvalid;
+  // Don't bother with this.
+  //if(![self isValidExecutable: executable])
+  //  jobStatus = kStatusInvalid;
     
   NSString * name = [[executable firstObject] lastPathComponent];
   
