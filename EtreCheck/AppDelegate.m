@@ -717,29 +717,27 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   [self.logView
     replaceCharactersInRange: range withRTF: rtfData];
     
-  [self.reportView setAlphaValue: 0.0];
-  
   [NSAnimationContext beginGrouping];
   
   [[NSAnimationContext currentContext] setDuration: 1.0];
   
+  [self.window.contentView addSubview: self.reportView];
+  
   [[self.animationView animator] removeFromSuperview];
-  
-  [[self.window.contentView animator] addSubview: self.reportView];
-  
-  [[self.reportView animator] setAlphaValue: 1.0];
   
   [NSAnimationContext endGrouping];
   
-  [self resizeReportView];
+  dispatch_after(
+    dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
+    dispatch_get_main_queue(),
+    ^{
+      [self resizeReportView];
+    });
   }
 
 // Resize the report view.
 - (void) resizeReportView
   {
-  [[self.logView enclosingScrollView] setDrawsBackground: YES];
-  [[self.logView enclosingScrollView] setBorderType: NSBezelBorder];
-  
   [[NSNotificationCenter defaultCenter]
     addObserver: self
     selector: @selector(didScroll:)

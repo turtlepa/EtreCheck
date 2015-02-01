@@ -1165,21 +1165,21 @@ Gw
                         <action selector="moreInfo:" target="Voe-Tx-rLC" id="UmM-qu-EJz"/>
                     </connections>
                 </button>
-                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" id="hwZ-jL-7ud">
+                <scrollView borderType="groove" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" id="hwZ-jL-7ud">
                     <rect key="frame" x="20" y="59" width="570" height="185"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="b89-E1-VpO">
+                    <clipView key="contentView" copiesOnScroll="NO" id="b89-E1-VpO">
                         <rect key="frame" x="0.0" y="0.0" width="570" height="180"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView editable="NO" drawsBackground="NO" importsGraphics="NO" findStyle="panel" verticallyResizable="YES" id="rRU-vM-wce">
+                            <textView editable="NO" importsGraphics="NO" findStyle="panel" verticallyResizable="YES" id="rRU-vM-wce">
                                 <rect key="frame" x="0.0" y="0.0" width="570" height="185"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="570" height="185"/>
+                                <size key="minSize" width="566" height="181"/>
                                 <size key="maxSize" width="1097" height="10000000"/>
                                 <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="570" height="185"/>
+                                <size key="minSize" width="566" height="181"/>
                                 <size key="maxSize" width="1097" height="10000000"/>
                                 <connections>
                                     <binding destination="Voe-Tx-rLC" name="attributedString" keyPath="self.log" id="qbH-eg-dBA">
