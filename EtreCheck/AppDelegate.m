@@ -74,6 +74,8 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   {
   [self checkForUpdates];
   
+  [self.window.contentView addSubview: self.animationView];
+  
   myDisplayStatus = [NSAttributedString new];
   self.log = [[NSMutableAttributedString new] autorelease];
 
@@ -98,7 +100,7 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   [self.demonImage setHidden: NO];
   [self.agentImage setHidden: NO];
   
-  [self.logView setHidden: YES];
+  //[self.logView setHidden: YES];
   
   [self.animationView
     sortSubviewsUsingFunction: compareViews context: self];
@@ -715,41 +717,25 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   [self.logView
     replaceCharactersInRange: range withRTF: rtfData];
     
-  [self hideAnimationView];
+  [self.reportView setAlphaValue: 0.0];
   
-  [self showReportView];
+  [NSAnimationContext beginGrouping];
+  
+  [[NSAnimationContext currentContext] setDuration: 1.0];
+  
+  [[self.animationView animator] removeFromSuperview];
+  
+  [[self.window.contentView animator] addSubview: self.reportView];
+  
+  [[self.reportView animator] setAlphaValue: 1.0];
+  
+  [NSAnimationContext endGrouping];
+  
+  [self resizeReportView];
   }
 
-// Hide the animation view.
-- (void) hideAnimationView
-  {
-  dispatch_async(
-    dispatch_get_main_queue(),
-    ^{
-      [self.progress stopAnimation: self];
-      [self.spinner stopAnimation: self];
-      
-      [self.logView setHidden: NO];
-    });
-  
-  dispatch_after(
-    dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)),
-    dispatch_get_main_queue(),
-    ^{
-      [NSAnimationContext beginGrouping];
-      
-      [[NSAnimationContext currentContext] setDuration: 1.0];
-      
-      [[self.animationView animator] setAlphaValue: 0];
-        
-      [[self.reportView animator] setAlphaValue: 1];
-
-      [NSAnimationContext endGrouping];
-    });
-  }
-
-// Show the report view.
-- (void) showReportView
+// Resize the report view.
+- (void) resizeReportView
   {
   [[self.logView enclosingScrollView] setDrawsBackground: YES];
   [[self.logView enclosingScrollView] setBorderType: NSBezelBorder];
@@ -762,45 +748,29 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   
   [[[self.logView enclosingScrollView] contentView]
     setPostsBoundsChangedNotifications: YES];
-  
-  dispatch_after(
-    dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
-    dispatch_get_main_queue(),
-    ^{
-      //[NSAnimationContext beginGrouping];
-      
-      //[[NSAnimationContext currentContext] setDuration: 1.0];
-      
-      [self.window makeFirstResponder: self.logView];
-      
-      NSRect frame = [self.window frame];
-      
-      if(frame.size.height < 512)
-        {
-        frame.origin.y -= (512 - frame.size.height)/4;
-        frame.size.height = 512;
-        }
-        
-      [window setFrame: frame display: YES animate: YES];
-      
-      //[NSAnimationContext endGrouping];
-      
-      [[self.logView enclosingScrollView] setHasVerticalScroller: YES];
-      [self.window setShowsResizeIndicator: YES];
-      [self.window
-        setStyleMask: [self.window styleMask] | NSResizableWindowMask];
-      
-      [self notify];
-    });
 
-  dispatch_after(
-    dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)),
-    dispatch_get_main_queue(),
-    ^{
-      [self.logView
-        scrollRangeToVisible: NSMakeRange([self.log length] - 2, 1)];
-      [self.logView scrollRangeToVisible: NSMakeRange(0, 1)];
-    });
+  [self.window makeFirstResponder: self.logView];
+  
+  NSRect frame = [self.window frame];
+  
+  if(frame.size.height < 512)
+    {
+    frame.origin.y -= (512 - frame.size.height)/2;
+    frame.size.height = 512;
+    }
+    
+  [window setFrame: frame display: YES animate: YES];
+  
+  [[self.logView enclosingScrollView] setHasVerticalScroller: YES];
+  [self.window setShowsResizeIndicator: YES];
+  [self.window
+    setStyleMask: [self.window styleMask] | NSResizableWindowMask];
+  
+  [self notify];
+
+  [self.logView
+    scrollRangeToVisible: NSMakeRange([self.log length] - 2, 1)];
+  [self.logView scrollRangeToVisible: NSMakeRange(0, 1)];
   }
 
 // Handle a scroll change in the report view.

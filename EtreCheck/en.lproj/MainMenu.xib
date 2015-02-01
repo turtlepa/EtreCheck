@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C106a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
@@ -160,6 +160,7 @@
                     <menu key="submenu" title="File" id="bib-Uj-vzu">
                         <items>
                             <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
+                                <accessibility description="Save EtreCheck report to RTF file"/>
                                 <connections>
                                     <action selector="saveReport:" target="Voe-Tx-rLC" id="utn-Fk-5JP"/>
                                 </connections>
@@ -167,11 +168,13 @@
                             <menuItem isSeparatorItem="YES" id="aJh-i4-bef"/>
                             <menuItem title="Page Setup…" keyEquivalent="P" id="qIS-W8-SiK">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <accessibility description="Setup printer"/>
                                 <connections>
                                     <action selector="runPageLayout:" target="-1" id="Din-rz-gC5"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Print…" keyEquivalent="p" id="aTl-1u-JFS">
+                                <accessibility description="Print EtreCheck report"/>
                                 <connections>
                                     <action selector="print:" target="-1" id="qaZ-4w-aoO"/>
                                 </connections>
@@ -671,6 +674,7 @@
                         <items>
                             <menuItem title="Show Log" id="snW-S8-Cw5">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <accessibility description="Show EtreCheck log"/>
                                 <connections>
                                     <action selector="showLog:" target="Voe-Tx-rLC" id="30S-4u-cfR"/>
                                 </connections>
@@ -733,6 +737,9 @@
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <outlet property="nextKeyView" destination="yAn-LB-NTZ" id="O98-SP-mJ3"/>
+                        </connections>
                     </textField>
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="ge8-79-855">
                         <rect key="frame" x="20" y="55" width="504" height="137"/>
@@ -769,6 +776,9 @@
                             <rect key="frame" x="487" y="1" width="16" height="117"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
+                        <connections>
+                            <outlet property="nextKeyView" destination="pUo-Nx-msa" id="TYk-5O-fj0"/>
+                        </connections>
                     </scrollView>
                     <button verticalHuggingPriority="750" id="lrR-aP-PG2">
                         <rect key="frame" x="392" y="13" width="137" height="32"/>
@@ -793,10 +803,14 @@ DQ
                         </buttonCell>
                         <connections>
                             <binding destination="HgC-29-4Qk" name="value" keyPath="values.dontshowusermessage" id="VSt-Sg-kSQ"/>
+                            <outlet property="nextKeyView" destination="lrR-aP-PG2" id="6Td-Ju-M0R"/>
                         </connections>
                     </button>
                 </subviews>
             </view>
+            <connections>
+                <outlet property="initialFirstResponder" destination="CYc-qI-gT3" id="OoA-vb-jaA"/>
+            </connections>
             <point key="canvasLocation" x="139" y="119"/>
         </window>
         <window title="Log" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="LC3-aK-O61" userLabel="Window - Log">
@@ -851,148 +865,9 @@ DQ
             <rect key="contentRect" x="0.0" y="0.0" width="610" height="265"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <value key="minSize" type="size" width="512" height="265"/>
-            <view key="contentView" id="LrJ-81-PLR">
+            <view key="contentView" wantsLayer="YES" id="LrJ-81-PLR">
                 <rect key="frame" x="0.0" y="0.0" width="610" height="265"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <customView wantsLayer="YES" alphaValue="0.0" id="Rah-Ot-abL" userLabel="Report View">
-                        <rect key="frame" x="0.0" y="0.0" width="610" height="265"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button verticalHuggingPriority="750" id="QVn-0L-cY0">
-                                <rect key="frame" x="105" y="11" width="196" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <buttonCell key="cell" type="push" title="Copy report to clipboard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZFx-vl-2mp">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="copyToClipboard:" target="Voe-Tx-rLC" id="xNB-95-oHw"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" id="Ug4-cp-4Rv">
-                                <rect key="frame" x="344" y="11" width="161" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <buttonCell key="cell" type="push" title="About these results" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="a4e-yt-Dsj">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="moreInfo:" target="Voe-Tx-rLC" id="UmM-qu-EJz"/>
-                                </connections>
-                            </button>
-                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" id="hwZ-jL-7ud">
-                                <rect key="frame" x="20" y="59" width="570" height="185"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="b89-E1-VpO">
-                                    <rect key="frame" x="0.0" y="0.0" width="570" height="180"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <textView editable="NO" drawsBackground="NO" importsGraphics="NO" findStyle="panel" verticallyResizable="YES" id="rRU-vM-wce">
-                                            <rect key="frame" x="0.0" y="0.0" width="570" height="185"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="570" height="185"/>
-                                            <size key="maxSize" width="1097" height="10000000"/>
-                                            <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="570" height="185"/>
-                                            <size key="maxSize" width="1097" height="10000000"/>
-                                            <connections>
-                                                <binding destination="Voe-Tx-rLC" name="attributedString" keyPath="self.log" id="qbH-eg-dBA">
-                                                    <dictionary key="options">
-                                                        <bool key="NSConditionallySetsEditable" value="NO"/>
-                                                    </dictionary>
-                                                </binding>
-                                            </connections>
-                                        </textView>
-                                    </subviews>
-                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="tCa-LM-4UN">
-                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="ecj-hG-za1">
-                                    <rect key="frame" x="-100" y="-100" width="16" height="180"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
-                        </subviews>
-                    </customView>
-                    <customView wantsLayer="YES" id="cs1-k8-fgW" userLabel="Animation View">
-                        <rect key="frame" x="0.0" y="0.0" width="610" height="265"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <progressIndicator maxValue="100" displayedWhenStopped="NO" indeterminate="YES" style="bar" id="tDb-Al-O2y">
-                                <rect key="frame" x="20" y="19" width="491" height="20"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </progressIndicator>
-                            <button verticalHuggingPriority="750" id="mIX-Fq-FhE">
-                                <rect key="frame" x="513" y="11" width="82" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eNg-Ev-1vb">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="cancel:" target="Voe-Tx-rLC" id="e1z-dj-zru"/>
-                                </connections>
-                            </button>
-                            <customView id="kxf-sE-hK4" userLabel="Machine" customClass="SlideshowView">
-                                <rect key="frame" x="44" y="92" width="143" height="143"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
-                            </customView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Uie-H3-jyY">
-                                <rect key="frame" x="18" y="53" width="574" height="17"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="BsZ-8w-6MC">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="Voe-Tx-rLC" name="value" keyPath="self.collectionStatus" id="pcg-kt-gaz"/>
-                                </connections>
-                            </textField>
-                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="Udp-hz-whF">
-                                <rect key="frame" x="297" y="52" width="16" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressIndicator>
-                            <customView wantsLayer="YES" id="24p-7h-cH3" userLabel="Apps" customClass="SlideshowView">
-                                <rect key="frame" x="263" y="131" width="86" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </customView>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" alphaValue="0.70000000000000007" id="PHl-IL-fhi" userLabel="Mask">
-                                <rect key="frame" x="203" y="80" width="230" height="147"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="MagnifyingGlassShade" id="h2p-bx-vsM"/>
-                            </imageView>
-                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="unu-XY-TZC" userLabel="Magnifying Glass">
-                                <rect key="frame" x="203" y="80" width="230" height="147"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="MagnifyingGlass" id="U0y-89-Dyg"/>
-                            </imageView>
-                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="PBo-4n-aK2" userLabel="Demon">
-                                <rect key="frame" x="453" y="131" width="64" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Demon" id="dk0-Hu-pih"/>
-                            </imageView>
-                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="X6k-bh-0bO" userLabel="Agent">
-                                <rect key="frame" x="453" y="131" width="64" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Agent" id="ah4-O9-s19"/>
-                            </imageView>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="YNi-t0-nyG" userLabel="Finder">
-                                <rect key="frame" x="441" y="117" width="88" height="95"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="I43-rE-5l3"/>
-                            </imageView>
-                        </subviews>
-                    </customView>
-                </subviews>
             </view>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="HgC-29-4Qk"/>
@@ -1028,6 +903,7 @@ Gw
                         <rect key="frame" x="224" y="1" width="15" height="133"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
+                    <accessibility description="Detail contents"/>
                 </scrollView>
                 <button verticalHuggingPriority="750" id="PKc-FO-wiI">
                     <rect key="frame" x="82" y="5" width="76" height="32"/>
@@ -1036,6 +912,7 @@ Gw
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <accessibility description="Close the detail window"/>
                     <connections>
                         <action selector="closeDetail:" target="91K-cv-wWe" id="6IB-IR-bct"/>
                     </connections>
@@ -1063,6 +940,7 @@ Gw
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <accessibility description="Close the help window"/>
                     <connections>
                         <action selector="closeDetail:" target="OAP-T5-MR2" id="mZn-Vf-SWb"/>
                     </connections>
@@ -1148,6 +1026,7 @@ Gw
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <accessibility description="Close the adware window"/>
                     <connections>
                         <action selector="closeDetail:" target="Vj9-lq-jPe" id="NWD-iJ-Uwp"/>
                     </connections>
@@ -1174,6 +1053,156 @@ Gw
                 </button>
             </subviews>
             <point key="canvasLocation" x="-152" y="92.5"/>
+        </customView>
+        <customView wantsLayer="YES" id="cs1-k8-fgW" userLabel="Animation View">
+            <rect key="frame" x="0.0" y="0.0" width="610" height="265"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <progressIndicator maxValue="100" displayedWhenStopped="NO" indeterminate="YES" style="bar" id="tDb-Al-O2y">
+                    <rect key="frame" x="20" y="19" width="491" height="20"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <accessibility description="EtreCheck progress"/>
+                    <connections>
+                        <outlet property="nextKeyView" destination="mIX-Fq-FhE" id="1ws-wP-Yh2"/>
+                    </connections>
+                </progressIndicator>
+                <button verticalHuggingPriority="750" id="mIX-Fq-FhE">
+                    <rect key="frame" x="513" y="11" width="82" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eNg-Ev-1vb">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                    </buttonCell>
+                    <accessibility description="Cancel EtreCheck report"/>
+                    <connections>
+                        <action selector="cancel:" target="Voe-Tx-rLC" id="e1z-dj-zru"/>
+                    </connections>
+                </button>
+                <customView id="kxf-sE-hK4" userLabel="Machine" customClass="SlideshowView">
+                    <rect key="frame" x="44" y="92" width="143" height="143"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                    <accessibility description="Picture of identified Macintosh model"/>
+                </customView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Uie-H3-jyY">
+                    <rect key="frame" x="18" y="53" width="574" height="17"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="BsZ-8w-6MC">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="Voe-Tx-rLC" name="value" keyPath="self.collectionStatus" id="pcg-kt-gaz"/>
+                        <outlet property="nextKeyView" destination="tDb-Al-O2y" id="V4b-sd-SHK"/>
+                    </connections>
+                </textField>
+                <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="Udp-hz-whF">
+                    <rect key="frame" x="297" y="52" width="16" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </progressIndicator>
+                <customView wantsLayer="YES" id="24p-7h-cH3" userLabel="Apps" customClass="SlideshowView">
+                    <rect key="frame" x="263" y="131" width="86" height="64"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </customView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" alphaValue="0.70000000000000007" id="PHl-IL-fhi" userLabel="Mask">
+                    <rect key="frame" x="203" y="80" width="230" height="147"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="MagnifyingGlassShade" id="h2p-bx-vsM"/>
+                </imageView>
+                <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="unu-XY-TZC" userLabel="Magnifying Glass">
+                    <rect key="frame" x="203" y="80" width="230" height="147"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="MagnifyingGlass" id="U0y-89-Dyg"/>
+                    <accessibility description="Checking software animation"/>
+                </imageView>
+                <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="PBo-4n-aK2" userLabel="Demon">
+                    <rect key="frame" x="453" y="131" width="64" height="64"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Demon" id="dk0-Hu-pih"/>
+                </imageView>
+                <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="X6k-bh-0bO" userLabel="Agent">
+                    <rect key="frame" x="453" y="131" width="64" height="64"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Agent" id="ah4-O9-s19"/>
+                </imageView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="YNi-t0-nyG" userLabel="Finder">
+                    <rect key="frame" x="441" y="117" width="88" height="95"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="I43-rE-5l3"/>
+                    <accessibility description="Daemons and agents animation"/>
+                </imageView>
+            </subviews>
+            <connections>
+                <outlet property="nextKeyView" destination="Uie-H3-jyY" id="RoK-tL-RhT"/>
+            </connections>
+        </customView>
+        <customView wantsLayer="YES" id="Rah-Ot-abL" userLabel="Report View">
+            <rect key="frame" x="0.0" y="0.0" width="610" height="265"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" id="QVn-0L-cY0">
+                    <rect key="frame" x="105" y="11" width="196" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="push" title="Copy report to clipboard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZFx-vl-2mp">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="copyToClipboard:" target="Voe-Tx-rLC" id="xNB-95-oHw"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" id="Ug4-cp-4Rv">
+                    <rect key="frame" x="344" y="11" width="161" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="push" title="About these results" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="a4e-yt-Dsj">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="moreInfo:" target="Voe-Tx-rLC" id="UmM-qu-EJz"/>
+                    </connections>
+                </button>
+                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" id="hwZ-jL-7ud">
+                    <rect key="frame" x="20" y="59" width="570" height="185"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="b89-E1-VpO">
+                        <rect key="frame" x="0.0" y="0.0" width="570" height="180"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView editable="NO" drawsBackground="NO" importsGraphics="NO" findStyle="panel" verticallyResizable="YES" id="rRU-vM-wce">
+                                <rect key="frame" x="0.0" y="0.0" width="570" height="185"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="minSize" width="570" height="185"/>
+                                <size key="maxSize" width="1097" height="10000000"/>
+                                <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="minSize" width="570" height="185"/>
+                                <size key="maxSize" width="1097" height="10000000"/>
+                                <connections>
+                                    <binding destination="Voe-Tx-rLC" name="attributedString" keyPath="self.log" id="qbH-eg-dBA">
+                                        <dictionary key="options">
+                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="tCa-LM-4UN">
+                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="ecj-hG-za1">
+                        <rect key="frame" x="-100" y="-100" width="16" height="180"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <accessibility description="EtreCheck report"/>
+                </scrollView>
+            </subviews>
         </customView>
     </objects>
     <resources>
