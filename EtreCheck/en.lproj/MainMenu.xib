@@ -713,7 +713,7 @@
                         <items>
                             <menuItem title="EtreCheck Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                 <connections>
-                                    <action selector="showHelp:" target="-1" id="y7X-2Q-9no"/>
+                                    <action selector="moreInfo:" target="Voe-Tx-rLC" id="gH7-dl-sT9"/>
                                 </connections>
                             </menuItem>
                         </items>
