@@ -91,4 +91,7 @@
 + (NSComparisonResult) compareVersion: (NSString *) version1
   withVersion: (NSString *) version2;
 
+// Scan a string from top output.
++ (double) scanTopMemory: (NSString *) memoryString;
+
 @end

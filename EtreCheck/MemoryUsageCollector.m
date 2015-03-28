@@ -36,7 +36,7 @@
   NSDictionary * avgMemory = [self collectAverageMemory];
   
   // Sort the result by average value.
-  NSArray * processesMemory = [self sortProcesses: avgMemory];
+  NSArray * processesMemory = [self sortProcesses: avgMemory by: @"mem"];
   
   // Print the top processes.
   [self printTopProcesses: processesMemory];
@@ -47,37 +47,42 @@
 // Collect the average CPU usage of all processes.
 - (NSDictionary *) collectAverageMemory
   {
-  NSMutableDictionary * avgMem = [NSMutableDictionary dictionary];
+  NSMutableDictionary * averageProcesses = [NSMutableDictionary dictionary];
   
   for(NSUInteger i = 0; i < 5; ++i)
     {
     usleep(500000);
     
-    NSDictionary * current = [self collectProcesses];
+    NSDictionary * currentProcesses = [self collectProcesses];
     
-    for(NSString * command in current)
+    for(NSString * command in currentProcesses)
       {
-      NSNumber * currentMem =
-        [[current objectForKey: command] objectForKey: @"mem"];
-      NSNumber * previousMem = [avgMem objectForKey: command];
-
-      if(!previousMem)
-        [avgMem setObject: currentMem forKey: command];
-      else if(previousMem && currentMem)
+      NSMutableDictionary * currentProcess =
+        [currentProcesses objectForKey: command];
+      NSMutableDictionary * averageProcess =
+        [averageProcesses objectForKey: command];
+        
+      if(!averageProcess)
+        [averageProcesses setObject: currentProcess forKey: command];
+        
+      else if(currentProcess && averageProcess)
         {
-        double totalMem = [previousMem doubleValue] * i;
+        double totalMemory =
+          [[averageProcess objectForKey: @"mem"] doubleValue] * i;
         
-        double averageMem =
-          (totalMem + [currentMem doubleValue]) / (double)(i + 1);
+        double averageMemory =
+          [[averageProcess objectForKey: @"mem"] doubleValue];
         
-        [avgMem
-          setObject: [NSNumber numberWithDouble: averageMem]
-          forKey: command];
+        averageMemory = (totalMemory + averageMemory) / (double)(i + 1);
+        
+        [averageProcess
+          setObject: [NSNumber numberWithDouble: averageMemory]
+          forKey: @"mem"];
         }
       }
     }
   
-  return avgMem;
+  return averageProcesses;
   }
 
 // Print top processes by memory.
@@ -89,14 +94,17 @@
   
   ByteCountFormatter * formatter = [[ByteCountFormatter alloc] init];
 
+  formatter.k1000 = 1024.0;
+  
   for(NSDictionary * process in processes)
-    if([self printTopProcess: process formatter: formatter])
-      {
-      ++count;
-            
-      if(count >= 5)
-        break;
-      }
+    {
+    [self printTopProcess: process formatter: formatter];
+    
+    ++count;
+          
+    if(count >= 5)
+      break;
+    }
 
   [self
     setTabs: @[@28, @112, @196]
@@ -109,38 +117,35 @@
 
 // Print a top process.
 // Return YES if the process could be printed.
-- (bool) printTopProcess: (NSDictionary *) process
+- (void) printTopProcess: (NSDictionary *) process
   formatter: (ByteCountFormatter *) formatter
   {
-  NSArray * commands = [process allKeys];
-  NSArray * mems = [process allValues];
+  double mem = [[process objectForKey: @"mem"] doubleValue];
 
-  if(commands && mems && [commands count] && [mems count])
-    {
-    NSString * command = [commands objectAtIndex: 0];
-    double mem = [[mems objectAtIndex: 0] doubleValue];
+  int count = [[process objectForKey: @"count"] intValue];
+  
+  NSString * countString =
+    (count > 1)
+      ? [NSString stringWithFormat: @"(%d)", count]
+      : @"";
 
-    NSString * output =
-      [NSString
-        stringWithFormat:
-          @"    %-9@    %@\n",
-          [formatter stringFromByteCount: (unsigned long long)mem],
-          command];
-      
-    if(mem > 1024 * 1024 * 1024)
-      [self.result
-        appendString: output
-        attributes:
-          [NSDictionary
-            dictionaryWithObjectsAndKeys:
-              [NSColor redColor], NSForegroundColorAttributeName, nil]];      
-    else
-      [self.result appendString: output];
-      
-    return YES;
-    }
+  NSString * output =
+    [NSString
+      stringWithFormat:
+        @"    %-9@    %@%@\n",
+        [formatter stringFromByteCount: (unsigned long long)mem],
+        [process objectForKey: @"command"],
+        countString];
     
-  return NO;
+  if(mem > 1024 * 1024 * 1024)
+    [self.result
+      appendString: output
+      attributes:
+        [NSDictionary
+          dictionaryWithObjectsAndKeys:
+            [NSColor redColor], NSForegroundColorAttributeName, nil]];      
+  else
+    [self.result appendString: output];
   }
 
 @end

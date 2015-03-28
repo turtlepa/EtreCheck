@@ -6,10 +6,22 @@
 
 #import "ByteCountFormatter.h"
 
-#define k1000 1000.0 // 1024
-
 @implementation ByteCountFormatter
 
+@synthesize k1000 = myK1000;
+
+// Constructor.
+- (id) init
+  {
+  self = [super init];
+  
+  if(self)
+    myK1000 = 1000.0;
+    
+  return self;
+  }
+
+// Convert a byte count to a string.
 - (NSString *) stringFromByteCount: (unsigned long long) byteCount
   {
   NSArray * unitValues =
@@ -24,7 +36,7 @@
   
   while(YES)
     {
-    if(value < k1000)
+    if(value < self.k1000)
       {
       int precision = 0;
       NSString * units = @"";
@@ -43,7 +55,7 @@
       
     ++unitsIndex;
     
-    value /= k1000;
+    value /= self.k1000;
     }
     
   return displayMem;

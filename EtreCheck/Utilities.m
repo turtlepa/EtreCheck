@@ -611,4 +611,39 @@
   return NSOrderedSame;
   }
 
+// Scan a string from top output.
++ (double) scanTopMemory: (NSString *) memoryString
+  {
+  NSScanner * scanner = [NSScanner scannerWithString: memoryString];
+  
+  double memValue;
+  
+  bool found = [scanner scanDouble: & memValue];
+
+  if(!found)
+    return 0;
+
+  NSString * units;
+  
+  found =
+    [scanner
+      scanCharactersFromSet:
+        [NSCharacterSet characterSetWithCharactersInString: @"BKMGT"]
+      intoString: & units];
+
+  if(found)
+    {
+    if([units isEqualToString: @"K"])
+      memValue *= 1024;
+    else if([units isEqualToString: @"M"])
+      memValue *= 1024 * 1024;
+    else if([units isEqualToString: @"G"])
+      memValue *= 1024 * 1024 * 1024;
+    else if([units isEqualToString: @"T"])
+      memValue *= 1024 * 1024 * 1024 * 1024;
+    }
+    
+  return memValue;
+  }
+
 @end

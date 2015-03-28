@@ -40,24 +40,25 @@
 
   formatter = [[ByteCountFormatter alloc] init];
 
+  formatter.k1000 = 1024.0;
+  
   [self printVM: vminfo forKey: NSLocalizedString(@"Free RAM", NULL)];
-  [self printVM: vminfo forKey: NSLocalizedString(@"Active RAM", NULL)];
-  [self printVM: vminfo forKey: NSLocalizedString(@"Inactive RAM", NULL)];
+  [self printVM: vminfo forKey: NSLocalizedString(@"Used RAM", NULL)];
   [self printVM: vminfo forKey: NSLocalizedString(@"Wired RAM", NULL)];
-  [self printVM: vminfo forKey: NSLocalizedString(@"Page-ins", NULL)];
+  [self printVM: vminfo forKey: NSLocalizedString(@"File Cache", NULL)];
   
   NSUInteger GB = 1024 * 1024 * 1024;
 
   if(pageouts > (GB * 1))
     [self
       printVM: vminfo
-      forKey: NSLocalizedString(@"Page-outs", NULL)
+      forKey: NSLocalizedString(@"Swap Used", NULL)
       attributes:
         @{
           NSForegroundColorAttributeName : [[Utilities shared] red]
         }];
   else
-    [self printVM: vminfo forKey: NSLocalizedString(@"Page-outs", NULL)];
+    [self printVM: vminfo forKey: NSLocalizedString(@"Swap Used", NULL)];
 
   [self
     setTabs: @[@28, @112, @196]
@@ -75,6 +76,16 @@
   {
   NSMutableDictionary * vminfo = [NSMutableDictionary dictionary];
   
+  [self collectvm_stat: vminfo];
+  [self collecttop: vminfo];
+  [self collectsysctl: vminfo];
+  
+  return vminfo;
+  }
+
+// Collect information from vm_stat.
+- (void) collectvm_stat: (NSMutableDictionary *) vminfo
+  {
   NSData * data = [Utilities execute: @"/usr/bin/vm_stat" arguments: nil];
   
   if(data)
@@ -100,8 +111,36 @@
     // Format the values into something I can use.
     [vminfo addEntriesFromDictionary: [self formatVMStats: vm_stats]];
     }
-    
-  return vminfo;
+  }
+
+// Collect information from top.
+- (void) collecttop: (NSMutableDictionary *) vminfo
+  {
+  NSArray * args = @[@"-c", @"/usr/bin/top -l 1 -stats pid,cpu,mem"];
+  
+  NSData * result = [Utilities execute: @"/bin/sh" arguments: args];
+  
+  NSArray * lines = [Utilities formatLines: result];
+  
+  for(NSString * line in lines)
+    if([line hasPrefix: @"PhysMem: "])
+      // Format the values into something I can use.
+      [vminfo addEntriesFromDictionary: [self formatTop: line]];
+  }
+
+// Collect information from sysctl.
+- (void) collectsysctl: (NSMutableDictionary *) vminfo
+  {
+  NSArray * args = @[@"-a"];
+  
+  NSData * data = [Utilities execute: @"/usr/sbin/sysctl" arguments: args];
+  
+  NSArray * lines = [Utilities formatLines: data];
+  
+  for(NSString * line in lines)
+    if([line hasPrefix: @"vm.swapusage:"])
+      // Format the values into something I can use.
+      [vminfo addEntriesFromDictionary: [self formatSysctl: line]];
   }
 
 // Format output from vm_stats into something useable.
@@ -109,41 +148,16 @@
   {
   NSString * statisticsValue =
     [vm_stats objectForKey: @"Mach Virtual Memory Statistics"];
-  NSString * freeValue = [vm_stats objectForKey: @"Pages free"];
-  NSString * activeValue = [vm_stats objectForKey: @"Pages active"];
-  NSString * inactiveValue = [vm_stats objectForKey: @"Pages inactive"];
-  NSString * speculativeValue =
-    [vm_stats objectForKey: @"Pages speculative"];
-  NSString * wiredValue = [vm_stats objectForKey: @"Pages wired down"];
-  NSString * pageinsValue = [vm_stats objectForKey: @"Pageins"];
-  NSString * pageoutsValue = [vm_stats objectForKey: @"Pageouts"];
+  NSString * cachedValue = [vm_stats objectForKey: @"File-backed pages"];
 
   double pageSize = [self parsePageSize: statisticsValue];
   
-  double free = [freeValue doubleValue] * pageSize;
-  double active = [activeValue doubleValue]  * pageSize;
-  double inactive = [inactiveValue doubleValue] * pageSize;
-  double speculative = [speculativeValue doubleValue] * pageSize;
-  double wired = [wiredValue doubleValue] * pageSize;
-  double pageins = [pageinsValue doubleValue] * pageSize;
-  pageouts = [pageoutsValue doubleValue] * pageSize;
-
-  free += speculative;
+  double cached = [cachedValue doubleValue] * pageSize;
   
   return
     @{
-      NSLocalizedString(@"Free RAM", NULL) :
-        [NSNumber numberWithDouble: free],
-      NSLocalizedString(@"Active RAM", NULL) :
-        [NSNumber numberWithDouble: active],
-      NSLocalizedString(@"Inactive RAM", NULL) :
-        [NSNumber numberWithDouble: inactive],
-      NSLocalizedString(@"Wired RAM", NULL) :
-        [NSNumber numberWithDouble: wired],
-      NSLocalizedString(@"Page-ins", NULL) :
-        [NSNumber numberWithDouble: pageins],
-      NSLocalizedString(@"Page-outs", NULL) :
-        [NSNumber numberWithDouble: pageouts]
+      NSLocalizedString(@"File Cache", NULL) :
+        [NSNumber numberWithDouble: cached],
     };
   }
   
@@ -158,6 +172,84 @@
     return size;
 
   return 4096;
+  }
+
+// Format output from top into something useable.
+- (NSDictionary *) formatTop: (NSString *) line
+  {
+  NSScanner * scanner = [NSScanner scannerWithString: line];
+  
+  [scanner scanString: @"PhysMem:" intoString: NULL];
+  
+  NSString * usedString;
+  
+  [scanner
+    scanUpToCharactersFromSet: [NSCharacterSet whitespaceCharacterSet]
+    intoString: & usedString];
+  
+  double used = [Utilities scanTopMemory: usedString];
+  
+  [scanner scanString: @"used (" intoString: NULL];
+
+  NSString * wiredString;
+  
+  [scanner
+    scanUpToCharactersFromSet: [NSCharacterSet whitespaceCharacterSet]
+    intoString: & wiredString];
+  
+  double wired = [Utilities scanTopMemory: wiredString];
+
+  [scanner scanString: @"wired)," intoString: NULL];
+
+  NSString * freeString;
+  
+  [scanner
+    scanUpToCharactersFromSet: [NSCharacterSet whitespaceCharacterSet]
+    intoString: & freeString];
+  
+  double free = [Utilities scanTopMemory: freeString];
+  
+  [scanner scanString: @"unused." intoString: NULL];
+
+  return
+    @{
+      NSLocalizedString(@"Used RAM", NULL) :
+        [NSNumber numberWithDouble: used],
+      NSLocalizedString(@"Wired RAM", NULL) :
+        [NSNumber numberWithDouble: wired],
+      NSLocalizedString(@"Free RAM", NULL) :
+        [NSNumber numberWithDouble: free],
+    };
+  }
+
+// Format output from sysctl into something useable.
+- (NSDictionary *) formatSysctl: (NSString *) line
+  {
+  NSScanner * scanner = [NSScanner scannerWithString: line];
+  
+  [scanner scanString: @"vm.swapusage: total =" intoString: NULL];
+  
+  NSString * totalString;
+  
+  [scanner
+    scanUpToCharactersFromSet: [NSCharacterSet whitespaceCharacterSet]
+    intoString: & totalString];
+  
+  [scanner scanString: @"used =" intoString: NULL];
+
+  NSString * usedString;
+  
+  [scanner
+    scanUpToCharactersFromSet: [NSCharacterSet whitespaceCharacterSet]
+    intoString: & usedString];
+  
+  double used = [Utilities scanTopMemory: usedString];
+  
+  return
+    @{
+      NSLocalizedString(@"Swap Used", NULL) :
+        [NSNumber numberWithDouble: used]
+    };
   }
 
 // Print a VM value.

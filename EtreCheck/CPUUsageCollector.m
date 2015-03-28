@@ -34,7 +34,7 @@
   NSDictionary * avgCPU = [self collectAverageCPU];
   
   // Sort the result by average value.
-  NSArray * processesCPU = [self sortProcesses: avgCPU];
+  NSArray * processesCPU = [self sortProcesses: avgCPU by: @"cpu"];
   
   // Print the top processes.
   [self printTopProcesses: processesCPU];
@@ -47,78 +47,87 @@
 // Collect the average CPU usage of all processes.
 - (NSDictionary *) collectAverageCPU
   {
-  NSMutableDictionary * avgCPU = [NSMutableDictionary dictionary];
+  NSMutableDictionary * averageProcesses = [NSMutableDictionary dictionary];
   
   for(NSUInteger i = 0; i < 5; ++i)
     {
     usleep(500000);
     
-    NSDictionary * current = [self collectProcesses];
+    NSDictionary * currentProcesses = [self collectProcesses];
     
-    for(NSString * command in current)
+    for(NSString * command in currentProcesses)
       {
-      NSNumber * currentCPU =
-        [[current objectForKey: command] objectForKey: @"cpu"];
-      NSNumber * previousCPU = [avgCPU objectForKey: command];
-      
-      if(!previousCPU)
-        [avgCPU setObject: currentCPU forKey: command];
-      else if(previousCPU && currentCPU)
+      NSMutableDictionary * currentProcess =
+        [currentProcesses objectForKey: command];
+      NSMutableDictionary * averageProcess =
+        [averageProcesses objectForKey: command];
+        
+      if(!averageProcess)
+        [averageProcesses setObject: currentProcess forKey: command];
+        
+      else if(currentProcess && averageProcess)
         {
-        double totalCPU = [previousCPU doubleValue] * i;
+        double totalCPU =
+          [[averageProcess objectForKey: @"cpu"] doubleValue] * i;
         
         double averageCPU =
-          (totalCPU + [currentCPU doubleValue]) / (double)(i + 1);
+          [[averageProcess objectForKey: @"cpu"] doubleValue];
         
-        [avgCPU
+        averageCPU = (totalCPU + averageCPU) / (double)(i + 1);
+        
+        [averageProcess
           setObject: [NSNumber numberWithDouble: averageCPU]
-          forKey: command];
+          forKey: @"cpu"];
         }
       }
     }
   
-  return avgCPU;
+  return averageProcesses;
   }
 
 // Print top processes by CPU.
 - (void) printTopProcesses: (NSArray *) processes
   {
-  [self.result
-    appendAttributedString: [self buildTitle]];
+  [self.result appendAttributedString: [self buildTitle]];
   
-  NSUInteger count = 0;
+  NSUInteger topCount = 0;
   
   for(NSDictionary * process in processes)
     {
-    NSArray * commands = [process allKeys];
-    NSArray * cpus = [process allValues];
+    double cpu = [[process objectForKey: @"cpu"] doubleValue];
 
-    if(commands && cpus && [commands count] && [cpus count])
-      {
-      NSString * command = [commands objectAtIndex: 0];
-      double cpu = [[cpus objectAtIndex: 0] doubleValue];
+    int count = [[process objectForKey: @"count"] intValue];
+    
+    NSString * countString =
+      (count > 1)
+        ? [NSString stringWithFormat: @"(%d)", count]
+        : @"";
 
-      NSString * output =
-        [NSString stringWithFormat: @"    %6.0lf%%    %@\n", cpu, command];
-        
-      if(cpu > 50.0)
-        [self.result
-          appendString: output
-          attributes:
-            [NSDictionary
-              dictionaryWithObjectsAndKeys:
-                [NSColor redColor], NSForegroundColorAttributeName, nil]];      
-      else
-        [self.result appendString: output];
-            
-      ++count;
-            
-      if(cpu == 0.0)
-        count = 10;
+    NSString * output =
+      [NSString
+        stringWithFormat:
+          @"    %6.0lf%%    %@%@\n",
+          cpu,
+          [process objectForKey: @"command"],
+          countString];
       
-      if(count >= 5)
-        break;
-      }
+    if(cpu > 50.0)
+      [self.result
+        appendString: output
+        attributes:
+          [NSDictionary
+            dictionaryWithObjectsAndKeys:
+              [NSColor redColor], NSForegroundColorAttributeName, nil]];      
+    else
+      [self.result appendString: output];
+          
+    ++topCount;
+          
+    if(cpu == 0.0)
+      topCount = 10;
+    
+    if(topCount >= 5)
+      break;
     }
   }
 

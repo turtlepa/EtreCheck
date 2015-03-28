@@ -13,6 +13,7 @@
 - (NSMutableDictionary *) collectProcesses;
 
 // Sort process names by some values measurement.
-- (NSArray *) sortProcesses: (NSDictionary *) processes;
+- (NSArray *) sortProcesses: (NSDictionary *) processes
+  by: (NSString *) key;
 
 @end
