@@ -10,10 +10,9 @@
 @interface AdwareCollector : Collector
   {
   NSDictionary * myAdwareSignatures;
-  NSMutableDictionary * myAdwareFiles;
   }
 
 @property (retain) NSDictionary * adwareSignatures;
-@property (retain) NSMutableDictionary * adwareFiles;
+@property (readonly) NSMutableDictionary * adwareFiles;
 
 @end

@@ -14,7 +14,12 @@
 @implementation AdwareCollector
 
 @synthesize adwareSignatures = myAdwareSignatures;
-@synthesize adwareFiles = myAdwareFiles;
+@dynamic adwareFiles;
+
+- (NSMutableDictionary *) adwareFiles
+  {
+  return [[Model model] adwareFiles];
+  }
 
 // Constructor.
 - (id) init
@@ -26,7 +31,7 @@
     self.name = @"adware";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
     
-    myAdwareFiles = [NSMutableDictionary new];
+    [self loadSignatures];
     }
     
   return self;
@@ -35,7 +40,6 @@
 // Destructor.
 - (void) dealloc
   {
-  self.adwareFiles = nil;
   self.adwareSignatures = nil;
   
   [super dealloc];
@@ -56,8 +60,6 @@
 // Collect adware.
 - (void) collectAdware
   {
-  [self loadSignatures];
-  
   [self
     searchForAdware:
       @"Downlite, VSearch, Conduit, Trovi, MyBrand, Search Protect"];

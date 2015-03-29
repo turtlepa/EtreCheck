@@ -109,6 +109,11 @@
   [collectors addObject: [[LogCollector new] autorelease]];
   [collectors addObject: [[DiskCollector new] autorelease]];
   [collectors addObject: [[ApplicationsCollector new] autorelease]];
+  
+  // In order to find adware in Safari extensions, the Adware collector has
+  // to be created first, but then the Safari extension collection has to
+  // run fist. Such is life.
+  [collectors addObject: [[SafariExtensionsCollector new] autorelease]];
   [collectors addObject: [[AdwareCollector new] autorelease]];
   
   // Start the machine animation.
@@ -319,7 +324,6 @@
   [collectors addObject: [[LoginItemsCollector new] autorelease]];
   [collectors addObject: [[InternetPlugInsCollector new] autorelease]];
   [collectors addObject: [[UserInternetPlugInsCollector new] autorelease]];
-  [collectors addObject: [[SafariExtensionsCollector new] autorelease]];
   [collectors addObject: [[AudioPlugInsCollector new] autorelease]];
   [collectors addObject: [[UserAudioPlugInsCollector new] autorelease]];
   [collectors addObject: [[ITunesPlugInsCollector new] autorelease]];

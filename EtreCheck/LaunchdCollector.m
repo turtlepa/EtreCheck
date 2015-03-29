@@ -174,8 +174,6 @@
 // Format a list of files.
 - (void) printPropertyListFiles: (NSArray *) paths
   {
-  NSUInteger start = [self.result length];
-  
   NSMutableAttributedString * formattedOutput =
     [self formatPropertyListFiles: paths];
 
