@@ -462,10 +462,12 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
 - (NSString *) currentDate
   {
   NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-  [dateFormatter setDateStyle: NSDateFormatterLongStyle];
-  [dateFormatter setTimeStyle: NSDateFormatterLongStyle];
-  [dateFormatter setLocale: [NSLocale currentLocale]];
+  [dateFormatter setDateStyle: NSDateFormatterShortStyle];
+  [dateFormatter setTimeStyle: NSDateFormatterShortStyle];
+  [dateFormatter setLocale: [NSLocale localeWithLocaleIdentifier: @"en"]];
+  
   NSString * dateString = [dateFormatter stringFromDate: [NSDate date]];
+  
   [dateFormatter release];
 
   return dateString;

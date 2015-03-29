@@ -704,32 +704,47 @@
         [[plist objectAtIndex: 0] objectForKey: @"_items"];
         
       if([infos count])
-        {
-        for(NSDictionary * info in infos)
-          {
-          NSDictionary * healthInfo =
-            [info objectForKey: @"sppower_battery_health_info"];
-            
-          if(healthInfo)
-            {
-            NSNumber * cycleCount =
-              [healthInfo objectForKey: @"sppower_battery_cycle_count"];
-            NSString * health =
-              [healthInfo objectForKey: @"sppower_battery_health"];
-            
-            if(cycleCount && [health length])
-              [self.result
-                appendString:
-                  [NSString
-                    stringWithFormat:
-                      NSLocalizedString(
-                        @"    Battery Health: %@ - Cycle count %@\n", NULL),
-                      NSLocalizedString(health, NULL), cycleCount]];
-            }
-          }
-        }
+        [self printBatteryInformation: infos];
       }
     }
+  }
+
+// Print battery information.
+- (void) printBatteryInformation: (NSArray *) infos
+  {
+  NSNumber * cycleCount = nil;
+  NSString * health = nil;
+  NSString * serialNumber = @"";
+  
+  for(NSDictionary * info in infos)
+    {
+    NSDictionary * healthInfo =
+      [info objectForKey: @"sppower_battery_health_info"];
+      
+    if(healthInfo)
+      {
+      cycleCount =
+        [healthInfo objectForKey: @"sppower_battery_cycle_count"];
+      health = [healthInfo objectForKey: @"sppower_battery_health"];
+      }
+
+    NSDictionary * modelInfo =
+      [info objectForKey: @"sppower_battery_model_info"];
+      
+    if(modelInfo)
+      serialNumber =
+        [modelInfo objectForKey: @"sppower_battery_serial_number"];
+    }
+    
+  if(cycleCount && [health length])
+    [self.result
+      appendString:
+          [NSString
+            stringWithFormat:
+              NSLocalizedString(
+                @"    Battery: Health = %@ - Cycle count = %@ - SN = %@\n",
+                NULL),
+              NSLocalizedString(health, NULL), cycleCount, serialNumber]];
   }
 
 @end
