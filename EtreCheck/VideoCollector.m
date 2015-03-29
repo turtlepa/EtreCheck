@@ -106,6 +106,14 @@
     
   NSString * resolution = [display objectForKey: @"spdisplays_resolution"];
 
+  if([resolution hasPrefix: @"spdisplays_"])
+    {
+    NSString * pixels = [display objectForKey: @"_spdisplays_pixels"];
+    
+    if(pixels)
+      resolution = pixels;
+    }
+    
   if(name || resolution)
     [self.result
       appendString:
