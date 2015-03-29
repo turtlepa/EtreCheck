@@ -176,7 +176,7 @@
 "NO\n" = "NON\n";
 "YES - System files not being backed up\n" = "OUI - Les fichiers du système ne sont pas sauvegardés\n";
 "/Library/Logs/DiagnosticReports permissions" = "    Les utilisateurs standard ne peuvent pas lire /Library/Logs/DiagnosticReports.\n    Lancer EtreCheck comme un utilisateur administrateur pour voir plus d'informations.";
-"[Cliok for details]" = "[Cliquer pour les détails]";
+"[Click for details]" = "[Cliquer pour les détails]";
 "Checking information from log files" = "Vérification des informations des fichiers journaux";
 "Self test - passed" = "Examen de soi - succès";
 "Self test - failed" = "Examen de soi - échec";
@@ -186,10 +186,7 @@
 "%d error (plural rule: one)" = "une erreur";
 "%d error (plural rule: other)" = "%d erreurs\n";
 "No help available" = "Aucune aide disponible";
-"About geneio adware" = "À propos de l’adware Geneio";
-"About conduit adware" = "À propos de l’adware Conduit";
-"About downlite adware" = "À propos de l’adware Downlite";
-"About extension adware" = "À propos de l’adware des extensions de Safari";
+"About adware" = "À propos de l’adware";
 "adwaredetails1" = "EtreCheck a détecté que votre Macintosh peut être infecté par adware. Apple a publié cette liste des fichiers installés par types communs d’adware :\n\n";
 "adwaredetails2" = "\n\nEtreCheck á trouvé les fichiers suivants qui correspondent à la liste d’Apple:\n\n";
 "adwaredetails3" = "\nLa meilleure façon de supprimer ce logiciel est de télécharger et lancer AdwareMedic, un programme écrit par un autre membre de longue séjour chez Apple Support Communities.";

@@ -13,53 +13,52 @@
 	</array>
 	<key>item2</key>
 	<array>
-		<string>/Library/Application Support/VSearch</string>
-		<string>/Library/LaunchAgents/com.vsearch.agent.plist</string>
-		<string>/Library/LaunchDaemons/com.vsearch.daemon.plist</string>
-		<string>/Library/LaunchDaemons/com.vsearch.helper.plist</string>
-		<string>/Library/LaunchDaemons/Jack.plist</string>
+		<string>/System/Library/Frameworks/v.framework</string>
+		<string>/System/Library/Frameworks/VSearch.framework</string>
 		<string>/Library/PrivilegedHelperTools/Jack</string>
-		<string>/Library/Frameworks/VSearch.framework</string>
-		<string>/Library/Frameworks/v.framework</string>
+		<string>/Library/InputManagers/CTLoader</string>
+		<string>/Library/Application Support/Conduit</string>
+		<string>~/Library/Internet Plug-Ins/ConduitNPAPIPlugin.plugin</string>
+		<string>~/Library/Internet Plug-Ins/TroviNPAPIPlugin.plugin</string>
+		<string>/Applications/SearchProtect.app</string>
 	</array>
 	<key>item3</key>
 	<array>
-		<string>/Applications/SearchProtect.app</string>
-		<string>/Library/LaunchAgents/com.conduit.loader.agent.plist</string>
-		<string>/Library/LaunchDaemons/com.perion.searchprotectd.plst</string>
-		<string>/Library/Application Support/SIMBL/Plugins/CT2285220.bundle</string>
-		<string>/Library/Internet Plug-Ins/ConduitNPAPIPlugin.plugin</string>
-		<string>/Library/Internet Plug-Ins/TroviNPAPIPlugin.plugin</string>
-		<string>/Library/InputManagers/CTLoader</string>
-		<string>/Library/Application Support/Conduit</string>
-		<string>/Conduit</string>
-		<string>/Trovi</string>
-	</array>
-	<key>item4</key>
-	<array>
-		<string>/Applications/Geneio</string>
+		<string>/private/etc/launchd.conf</string>
+		<string>/Applications/Genieo</string>
 		<string>/Applications/InstallMac</string>
 		<string>/Applications/Uninstall Genieo</string>
 		<string>/Applications/Uninstall IM Completer.app</string>
-		<string>/Library/LaunchAgents/com.genieo.completer.download.plist</string>
-		<string>/Library/LaunchAgents/com.genieo.completer.update.plist</string>
-		<string>/Library/LaunchAgents/com.genieoinnovation.macextension.plist</string>
-		<string>/Library/LaunchAgents/com.genieoinnovation.macextension.client.plist</string>
-		<string>/Library/LaunchAgents/com.genieo.engine.plist</string>
-		<string>/Library/LaunchAgents/com.genieo.completer.update.plist</string>
-		<string>/Library/LaunchAgents/com.genieo.completer.ltvbit.plist</string>
-		<string>/Library/LaunchDaemons/com.genieoinnovation.macextension.client.plist</string>
-		<string>/Library/PrivilegedHelperTools/com.genieoinnovation.macextension.client</string>
 		<string>/usr/lib/libgenkit.dylib</string>
 		<string>/usr/lib/libgenkitsa.dylib</string>
 		<string>/usr/lib/libimckit.dylib</string>
 		<string>/usr/lib/libimckitsa.dylib</string>
-		<string>/Preferences/com.apple.genieo.global.settings.plist</string>
-		<string>/SavedState/com.genie.RemoveGenieoMac.savedState</string>
-		<string>/Library/Application Support/Genieo</string>
-		<string>/Library/Application Support/com.genieoinnovation.Installer</string>
+		<string>/Library/PrivilegedHelperTools/com.genieoinnovation.macextension.client</string>
+		<string>~/Library/Application Support/Genieo</string>
+		<string>~/Library/Application Support/com.genieoinnovation.Installer</string>
 		<string>/Library/Frameworks/GenieoExtra.framework</string>
-		<string>/Library/Saved Application State/com.genieo.RemoveGenieoMac.savedState</string>
 	</array>
+	<key>item4</key>
+	<array>
+    <string>/Library/LaunchAgents/com.genieo.completer.update.plist</string>
+    <string>/Library/LaunchAgents/com.genieo.engine.plist</string>
+    <string>/Library/LaunchAgents/com.genieoinnovation.macextension.client.plist</string>
+    <string>/Library/LaunchAgents/com.genieoinnovation.macextension.plist</string>
+    <string>/Library/LaunchDaemons/com.genieoinnovation.macextension.client.plist</string>
+    <string>/Library/LaunchDaemons/Jack.plist</string>
+    <string>~/Conduit</string>
+    <string>~/Trovi</string>
+    <string>~/Library/Caches/com.Conduit.takeOverSearchAssetsMac</string>
+    <string>~/Library/Caches/com.VSearch.bulk.installer</string>
+    <string>~/Library/Caches/com.VSearch.VSinstaller</string>
+    <string>~/Library/LaunchAgents/com.genieo.completer.download.plist</string>
+    <string>~/Library/LaunchAgents/com.genieo.completer.ltvbit.plist</string>
+    <string>~/Library/LaunchAgents/com.genieo.completer.update.plist</string>
+    <string>~/Library/Preferences/com.genieo.global.settings.plist.lockfile</string>
+    <string>~/Library/Preferences/com.geneio.settings.plist.lockfile</string>
+    <string>~/Library/Preferences/com.geneio.global.settings.plist</string>
+    <string>~/Library/Saved Application State/com.genieo.RemoveGenieoMac.savedState</string>
+    <string>~/Library/Saved Application State/com.VSearch.bulk.installer.savedstate</string>
+  </array>
 </dict>
 </plist>

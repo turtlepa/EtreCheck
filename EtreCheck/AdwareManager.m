@@ -43,11 +43,8 @@
   
   [details appendString: NSLocalizedString(@"adwaredetails3", NULL)];
 
-  NSString * title =
-    [NSString
-      stringWithFormat: NSLocalizedString(@"About %@ adware", NULL), name];
-    
-  [super showDetail: NSLocalizedString(title, NULL) content: details];
+  [super
+    showDetail: NSLocalizedString(@"About adware", NULL) content: details];
     
   [details release];
   }
@@ -58,7 +55,7 @@
   NSMutableAttributedString * urlString =
     [[NSMutableAttributedString alloc] initWithString: @""];
     
-  NSString * appleURL = @"http://support.apple.com/HT6506";
+  NSString * appleURL = @"http://support.apple.com/HT203987";
   
   [urlString
     appendString: appleURL

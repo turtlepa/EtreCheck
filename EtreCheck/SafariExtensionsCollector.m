@@ -11,15 +11,11 @@
 
 #define kIdentifier @"identifier"
 #define kHumanReadableName @"humanreadablename"
-#define kArchive @"archived"
-#define kCache @"cached"
-#define kDefaults @"defaults"
-#define kEnabled @"enabled"
+#define kFileName @"filename"
 
 // Collect Safari extensions.
 @implementation SafariExtensionsCollector
 
-@synthesize updates = myUpdates;
 @synthesize extensions = myExtensions;
 
 // Constructor.
@@ -42,7 +38,6 @@
 - (void) dealloc
   {
   self.extensions = nil;
-  self.updates = nil;
   
   [super dealloc];
   }
@@ -54,9 +49,6 @@
     updateStatus: NSLocalizedString(@"Checking Safari extensions", NULL)];
 
   [self collectArchives];
-
-  // Don't bother.
-  // [self collectCaches];
 
   // Print the extensions.
   if([self.extensions count])
@@ -95,15 +87,32 @@
       
     NSDictionary * plist = [self readSafariExtensionPropertyList: path];
 
-    NSMutableDictionary * extension =
-      [self createExtensionsFromPlist: plist name: name];
-
-    [extension setObject: @YES forKey: kArchive];
+    [self createExtensionsFromPlist: plist name: name];
     }
   }
 
+// Get the extension name, less the uniquifier.
+- (NSString *) extensionName: (NSString *) path
+  {
+  if(!path)
+    return nil;
+    
+  NSString * name =
+    [[path lastPathComponent] stringByDeletingPathExtension];
+    
+  NSMutableArray * parts =
+    [NSMutableArray
+      arrayWithArray: [name componentsSeparatedByString: @"-"]];
+    
+  if([parts count] > 1)
+    if([[parts lastObject] integerValue] > 1)
+      [parts removeLastObject];
+    
+  return [parts componentsJoinedByString: @"-"];
+  }
+
 // Create an extension dictionary from a plist.
-- (NSMutableDictionary *) createExtensionsFromPlist: (NSDictionary *) plist
+- (void) createExtensionsFromPlist: (NSDictionary *) plist
   name: (NSString *) name
   {
   NSString * humanReadableName =
@@ -128,39 +137,7 @@
     
   [extension setObject: humanReadableName forKey: kHumanReadableName];
   [extension setObject: identifier forKey: kIdentifier];
-  
-  return extension;
-  }
-
-// Collect extension caches.
-- (void) collectCaches
-  {
-  NSString * userSafariExtensionsDir =
-    [NSHomeDirectory()
-      stringByAppendingPathComponent:
-        @"Library/Caches/com.apple.Safari/Extensions"];
-
-  NSArray * args =
-    @[
-      userSafariExtensionsDir,
-      @"-iname",
-      @"*.safariextension"];
-
-  NSData * data = [Utilities execute: @"/usr/bin/find" arguments: args];
-  
-  NSArray * paths = [Utilities formatLines: data];
-
-  for(NSString * path in paths)
-    {
-    NSString * name = [self extensionName: path];
-      
-    NSDictionary * plist = [self readSafariExtensionPropertyList: path];
-
-    NSMutableDictionary * extension =
-      [self createExtensionsFromPlist: plist name: name];
-
-    [extension setObject: @YES forKey: kCache];
-    }
+  [extension setObject: name forKey: kFileName];
   }
 
 // Print a Safari extension.
@@ -173,8 +150,12 @@
     appendString:
       [NSString stringWithFormat: @"    %@", humanReadableName]];
     
-  // Safari extensions are stored under the "adwareextensions" category.
-  if([[Model model] isAdwareExtension: humanReadableName])
+  bool adware = [[Model model] isAdwareExtension: humanReadableName];
+  
+  if([[Model model] isAdwareExtension: [extension objectForKey: kFileName]])
+    adware = true;
+    
+  if(adware)
     {
     [self.result appendString: @" "];
     
@@ -182,6 +163,7 @@
     // will be printed.
     [[[Model model] adwareFiles]
       setObject: @"extension" forKey: humanReadableName];
+    [[Model model] setAdwareFound: YES];
 
     NSAttributedString * removeLink =
       [self generateRemoveAdwareLink: @"extension"];
@@ -215,26 +197,6 @@
     [self
       readSafariExtensionPropertyList:
         [extensionPath stringByAppendingPathExtension: @"safariextz"]];
-  }
-
-// Get the extension name, less the uniquifier.
-- (NSString *) extensionName: (NSString *) path
-  {
-  if(!path)
-    return nil;
-    
-  NSString * name =
-    [[path lastPathComponent] stringByDeletingPathExtension];
-    
-  NSMutableArray * parts =
-    [NSMutableArray
-      arrayWithArray: [name componentsSeparatedByString: @"-"]];
-    
-  if([parts count] > 1)
-    if([[parts lastObject] integerValue] > 1)
-      [parts removeLastObject];
-    
-  return [parts componentsJoinedByString: @"-"];
   }
 
 // Read a property list from a Safari extension.

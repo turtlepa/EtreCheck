@@ -58,9 +58,10 @@
   {
   [self loadSignatures];
   
-  [self searchForAdware: @"Downlite"];
-  [self searchForAdware: @"Conduit"];
-  [self searchForAdware: @"Geneio"];
+  [self
+    searchForAdware:
+      @"Downlite, VSearch, Conduit, Trovi, MyBrand, Search Protect"];
+  [self searchForAdware: @"Genieo, InstallMac"];
   }
 
 // Load signatures from an obfuscated list of signatures.
@@ -84,6 +85,9 @@
     
     NSData * plistData = [Utilities ungzip: plistGzipData];
     
+    [[NSFileManager defaultManager]
+      removeItemAtPath: @"/tmp/out.bin" error: NULL];
+    
     NSDictionary * plist = [Utilities readPropertyListData: plistData];
   
     if(plist)
@@ -91,22 +95,25 @@
       NSMutableDictionary * signatures = [NSMutableDictionary dictionary];
   
       NSArray * extensions = [plist objectForKey: @"item1"];
-      NSArray * downlite = [plist objectForKey: @"item2"];
-      NSArray * conduit = [plist objectForKey: @"item3"];
-      NSArray * geneio = [plist objectForKey: @"item4"];
+      NSArray * dvctmsp = [plist objectForKey: @"item2"];
+      NSArray * gi = [plist objectForKey: @"item3"];
+      NSArray * optional = [plist objectForKey: @"item4"];
       
       if(extensions)
         [[Model model] setAdwareExtensions: extensions];
 
-      if(downlite)
-        [signatures setObject: downlite forKey: @"Downlite"];
+      if(dvctmsp)
+        [signatures
+          setObject: dvctmsp
+          forKey:
+            @"Downlite, VSearch, Conduit, Trovi, MyBrand, Search Protect"];
 
-      if(conduit)
-        [signatures setObject: conduit forKey: @"Conduit"];
-
-      if(geneio)
-        [signatures setObject: geneio forKey: @"Geneio"];
+      if(gi)
+        [signatures setObject: gi forKey: @"Genieo, InstallMac"];
         
+      if(optional)
+        [signatures setObject: optional forKey: @"Optional"];
+
       self.adwareSignatures = signatures;
       }
     }
@@ -119,12 +126,7 @@
   
   NSMutableArray * foundFiles = [NSMutableArray array];
   
-  [foundFiles
-    addObjectsFromArray: [self searchForDomainAdwareFiles: files]];
-  [foundFiles
-    addObjectsFromArray: [self searchForSystemDomainAdwareFiles: files]];
-  [foundFiles
-    addObjectsFromArray: [self searchForUserDomainAdwareFiles: files]];
+  [foundFiles addObjectsFromArray: [self identifyAdwareFiles: files]];
   
   if([foundFiles count])
     {
@@ -138,33 +140,14 @@
     }
   }
 
-// Search for existing adware files.
-- (NSArray *) searchForDomainAdwareFiles: (NSArray *) files
-  {
-  return [self identifyAdwareFiles: files relativeTo: @""];
-  }
-
-// Search for existing adware files in /System.
-- (NSArray *) searchForSystemDomainAdwareFiles: (NSArray *) files
-  {
-  return [self identifyAdwareFiles: files relativeTo: @"/System"];
-  }
-
-// Search for existing adware files in ~
-- (NSArray *) searchForUserDomainAdwareFiles: (NSArray *) files
-  {
-  return [self identifyAdwareFiles: files relativeTo: NSHomeDirectory()];
-  }
-
 // Identify adware files.
 - (NSArray *) identifyAdwareFiles: (NSArray *) files
-  relativeTo: (NSString *) base
   {
   NSMutableArray * adwareFiles = [NSMutableArray array];
   
   for(NSString * file in files)
     {
-    NSString * fullPath = [base stringByAppendingPathComponent: file];
+    NSString * fullPath = [file stringByExpandingTildeInPath];
     
     bool exists =
       [[NSFileManager defaultManager] fileExistsAtPath: fullPath];

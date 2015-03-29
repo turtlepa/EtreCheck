@@ -26,10 +26,7 @@
 "%d error (plural rule: zero)" = "no errors\n";
 "%d error (plural rule: one)" = "one error";
 "%d error (plural rule: other)" = "%d errors\n";
-"About geneio adware" = "About Geneio adware";
-"About conduit adware" = "About Conduit adware";
-"About downlite adware" = "About Downlite adware";
-"About extension adware" = "About Safari extensions adware";
+"About adware" = "About adware";
 "adwaredetails1" = "EtreCheck has detected that your Macintosh may be infected with adware. Apple has published the following list of files installed by common types of adware: ";
 "adwaredetails2" = "\n\nEtreCheck found the following files that match Apple's list:\n\n";
 "adwaredetails3" = "\nThe easiest way to remove this adware is by downloading and running AdwareMedic, a program written by another long-time member of Apple Support Communities.";

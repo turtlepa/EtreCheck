@@ -25,4 +25,4 @@
 "vm" = "Des informations détaillées sur votre comportement de la mémoire virtuelle. Une valeur élevée pour «Page Outs» signifie que vous avez probablement besoin de plus de mémoire.";
 "gatekeeper" = "Vos paramètres de Gatekeeper actuelles.";
 "diagnostics" = "Fichiers de diagnostic récents générés par votre système. EtreCheck comprend crash, hang, et les rapports de CPU pour les trois derniers jours. Tous les rapports de panique noyau sont également inclus, ainsi que vos plus récents résultats d‘examen de soi. Pour de meilleurs résultats, exécutez EtreCheck comme un utilisateur administrateur (ce est le réglage par défaut).";
-"adware" = "Logiciel qui ajoute des advertisements, comme identifié par Apple.\nVoir http://support.apple.com/HT6506";
+"adware" = "Logiciel qui ajoute des advertisements, comme identifié par Apple.\nVoir http://support.apple.com/HT203987";

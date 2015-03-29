@@ -10,13 +10,9 @@
 @interface SafariExtensionsCollector : Collector
   {
   NSMutableDictionary * myExtensions;
-  NSMutableDictionary * myUpdates;
   }
 
 // Key is extension name.
 @property (retain) NSMutableDictionary * extensions;
-
-// Available updates.
-@property (retain) NSMutableDictionary * updates;
 
 @end

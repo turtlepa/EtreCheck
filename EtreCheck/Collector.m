@@ -406,14 +406,8 @@
     [NSString
       stringWithFormat: @"etrecheck://adware/%@", [name lowercaseString]];
   
-  [urlString
-    appendString: NSLocalizedString(@" [", NULL)
-    attributes:
-      @{
-        NSFontAttributeName : [[Utilities shared] boldFont],
-        NSForegroundColorAttributeName : [[Utilities shared] red]
-      }];
-
+  [urlString appendString: @" "];
+  
   [urlString
     appendString: NSLocalizedString(@"Adware!", NULL)
     attributes:
@@ -422,16 +416,10 @@
         NSForegroundColorAttributeName : [[Utilities shared] red]
       }];
 
+  [urlString appendString: @" "];
+  
   [urlString
-    appendString: NSLocalizedString(@"] - [", NULL)
-    attributes:
-      @{
-        NSFontAttributeName : [[Utilities shared] boldFont],
-        NSForegroundColorAttributeName : [[Utilities shared] red]
-      }];
-
-  [urlString
-    appendString: NSLocalizedString(@"Remove", NULL)
+    appendString: NSLocalizedString(@"[Click to remove]", NULL)
     attributes:
       @{
         NSFontAttributeName : [[Utilities shared] boldFont],
@@ -439,14 +427,6 @@
         NSLinkAttributeName : url
       }];
     
-  [urlString
-    appendString: NSLocalizedString(@"]", NULL)
-    attributes:
-      @{
-        NSFontAttributeName : [[Utilities shared] boldFont],
-        NSForegroundColorAttributeName : [[Utilities shared] red]
-      }];
-
   return [urlString autorelease];
   }
 
