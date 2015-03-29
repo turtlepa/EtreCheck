@@ -75,10 +75,6 @@
       }
     }
 
-  [self
-    setTabs: @[@28, @112, @196]
-    forRange: NSMakeRange(0, [self.result length])];
-    
   dispatch_semaphore_signal(self.complete);
   }
 

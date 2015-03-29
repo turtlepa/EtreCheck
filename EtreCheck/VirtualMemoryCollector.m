@@ -22,9 +22,21 @@
     {
     self.name = @"vm";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
+
+    formatter = [[ByteCountFormatter alloc] init];
+
+    formatter.k1000 = 1024.0;
     }
     
   return self;
+  }
+
+// Destructor.
+- (void) dealloc
+  {
+  [formatter release];
+    
+  [super dealloc];
   }
 
 // Perform the collection.
@@ -38,14 +50,24 @@
     
   [self.result appendAttributedString: [self buildTitle]];
 
-  formatter = [[ByteCountFormatter alloc] init];
-
-  formatter.k1000 = 1024.0;
+  [self
+    printVM: vminfo
+    forKey: NSLocalizedString(@"Free RAM", NULL)
+    indent: @"    "];
+  [self
+    printVM: vminfo
+    forKey: NSLocalizedString(@"Used RAM", NULL)
+    indent: @"    "];
+  [self
+    printVM: vminfo
+    forKey: NSLocalizedString(@"Wired RAM", NULL)
+    indent: @"        "];
+  [self
+    printVM: vminfo
+    forKey: NSLocalizedString(@"File Cache", NULL)
+    indent: @"        "];
   
-  [self printVM: vminfo forKey: NSLocalizedString(@"Free RAM", NULL)];
-  [self printVM: vminfo forKey: NSLocalizedString(@"Used RAM", NULL)];
-  [self printVM: vminfo forKey: NSLocalizedString(@"Wired RAM", NULL)];
-  [self printVM: vminfo forKey: NSLocalizedString(@"File Cache", NULL)];
+  [self.result appendCR];
   
   NSUInteger GB = 1024 * 1024 * 1024;
 
@@ -56,18 +78,16 @@
       attributes:
         @{
           NSForegroundColorAttributeName : [[Utilities shared] red]
-        }];
+        }
+      indent: @"    "];
   else
-    [self printVM: vminfo forKey: NSLocalizedString(@"Swap Used", NULL)];
-
-  [self
-    setTabs: @[@28, @112, @196]
-    forRange: NSMakeRange(0, [self.result length])];
+    [self
+      printVM: vminfo
+      forKey: NSLocalizedString(@"Swap Used", NULL)
+      indent: @"    "];
 
   [self.result appendCR];
 
-  [formatter release];
-    
   dispatch_semaphore_signal(self.complete);
   }
 
@@ -253,7 +273,8 @@
   }
 
 // Print a VM value.
-- (void) printVM: (NSDictionary *) vminfo forKey: (NSString *) key
+- (void) printVM: (NSDictionary *) vminfo
+  forKey: (NSString *) key indent: (NSString *) indent
   {
   double value = [[vminfo objectForKey: key] doubleValue];
   
@@ -261,13 +282,17 @@
     appendString:
       [NSString
         stringWithFormat:
-          @"    %-9@    %@\n",
-          [formatter stringFromByteCount: (unsigned long long)value], key]];
+          @"%@%@    %@\n",
+          indent,
+          [formatter stringFromByteCount: (unsigned long long)value],
+          key]];
   }
 
 // Print a VM value.
 - (void) printVM: (NSDictionary *) vminfo
-  forKey: (NSString *) key attributes: (NSDictionary *) attributes
+  forKey: (NSString *) key
+  attributes: (NSDictionary *) attributes
+  indent: (NSString *) indent
   {
   double value = [[vminfo objectForKey: key] doubleValue];
   
@@ -275,8 +300,10 @@
     appendString:
       [NSString
         stringWithFormat:
-          @"    %-9@    %@\n",
-          [formatter stringFromByteCount: (unsigned long long)value], key]
+          @"%@%@    %@\n",
+          indent,
+          [formatter stringFromByteCount: (unsigned long long)value],
+          key]
     attributes: attributes];
   }
 

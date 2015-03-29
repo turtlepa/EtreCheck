@@ -55,10 +55,6 @@
   if(!count)
     [self.result appendString: NSLocalizedString(@"    None\n", NULL)];
   
-  [self
-    setTabs: @[@28, @112, @196]
-    forRange: NSMakeRange(0, [self.result length])];
-
   [self.result appendCR];
     
   dispatch_semaphore_signal(self.complete);

@@ -94,37 +94,6 @@
   return [string autorelease];
   }
 
-// Set tabs in the result.
-- (void) setTabs: (NSArray *) stops forRange: (NSRange) range
-  {
-  // Setup some tab stops to use.
-  NSMutableArray * tabStops = [NSMutableArray array];
-  
-  for(NSNumber * stop in stops)
-    {
-    NSTextTab * tab =
-      [[NSTextTab alloc]
-        initWithType: NSLeftTabStopType location: [stop intValue]];
-      
-    [tabStops addObject: tab];
-
-    [tab release];
-    }
-
-  // Setup some paragraph sytles.
-  NSMutableParagraphStyle * paragraphStyle =
-    [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-   
-  [paragraphStyle setTabStops: tabStops];
-      
-  [self.result
-    addAttribute: NSParagraphStyleAttributeName
-    value: paragraphStyle
-    range: range];
-
-  [paragraphStyle release];
-  }
-
 // Convert a program name and optional bundle ID into a DNS-style URL.
 - (NSAttributedString *) getSupportURL: (NSString *) name
   bundleID: (NSString *) path

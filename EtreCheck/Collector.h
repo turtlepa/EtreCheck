@@ -40,9 +40,6 @@
 // the online help.
 - (NSAttributedString *) buildTitle;
   
-// Set tabs in the result.
-- (void) setTabs: (NSArray *) stops forRange: (NSRange) range;
-
 // Convert a program name and optional bundle ID into a DNS-style URL.
 - (NSAttributedString *) getSupportURL: (NSString *) name
   bundleID: (NSString *) path;
