@@ -137,7 +137,7 @@
         [process objectForKey: @"command"],
         countString];
     
-  if(mem > 1024 * 1024 * 1024)
+  if(mem > 1024 * 1024 * 1024 * 2.0)
     [self.result
       appendString: output
       attributes:
