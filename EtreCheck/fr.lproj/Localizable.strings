@@ -49,12 +49,11 @@
 "Low!" = "Faible !";
 "    None\n" = "    Aucun\n";
 "Free RAM" = "RAM Disponible";
+"Used RAM" = "RAM Utilisée";
+"Swap Used" = "Fichier d’échange utilisé";
 "(%@ free)" = "(%@ libre)";
 "Wired RAM" = "RAM Résidente";
-"Active RAM" = "RAM Active";
-"Inactive RAM" = "RAM Inactive";
-"Page-ins" = "Pages entrants";
-"Page-outs" = "Sorties pages";
+"(%@ Wired - %@ Cached)" = "(%@ Résidente - %@ En Cache)";
 "Time Machine:" = "Time Machine :";
 "timemachineneedslion" = "    Informations Time Machine nécessitent OS X 10.7 \"Lion\" ou plus tard.\n\n";
 "    Mobile backups: " = "    Sauvegardes mobiles : ";

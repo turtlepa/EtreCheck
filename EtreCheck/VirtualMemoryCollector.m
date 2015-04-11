@@ -54,21 +54,9 @@
     printVM: vminfo
     forKey: NSLocalizedString(@"Free RAM", NULL)
     indent: @"    "];
-  [self
-    printVM: vminfo
-    forKey: NSLocalizedString(@"Used RAM", NULL)
-    indent: @"    "];
-  [self
-    printVM: vminfo
-    forKey: NSLocalizedString(@"Wired RAM", NULL)
-    indent: @"        "];
-  [self
-    printVM: vminfo
-    forKey: NSLocalizedString(@"File Cache", NULL)
-    indent: @"        "];
-  
-  [self.result appendCR];
-  
+    
+  [self printUsedVM: vminfo];
+    
   NSUInteger GB = 1024 * 1024 * 1024;
 
   if(pageouts > (GB * 1))
@@ -89,6 +77,75 @@
   [self.result appendCR];
 
   dispatch_semaphore_signal(self.complete);
+  }
+
+// Print a VM value.
+- (void) printVM: (NSDictionary *) vminfo
+  forKey: (NSString *) key indent: (NSString *) indent
+  {
+  [self printVM: vminfo forKey: key indent: indent extra: @""];
+  }
+
+// Print a VM value.
+- (void) printVM: (NSDictionary *) vminfo
+  forKey: (NSString *) key
+  indent: (NSString *) indent
+  extra: (NSString *) extra
+  {
+  double value = [[vminfo objectForKey: key] doubleValue];
+  
+  [self.result
+    appendString:
+      [NSString
+        stringWithFormat:
+          @"%@%@    %@ %@\n",
+          indent,
+          [formatter stringFromByteCount: (unsigned long long)value],
+          key,
+          extra]];
+  }
+
+// Print a VM value.
+- (void) printVM: (NSDictionary *) vminfo
+  forKey: (NSString *) key
+  attributes: (NSDictionary *) attributes
+  indent: (NSString *) indent
+  {
+  double value = [[vminfo objectForKey: key] doubleValue];
+  
+  [self.result
+    appendString:
+      [NSString
+        stringWithFormat:
+          @"%@%@    %@\n",
+          indent,
+          [formatter stringFromByteCount: (unsigned long long)value],
+          key]
+    attributes: attributes];
+  }
+
+// Print the used VM value.
+- (void) printUsedVM: (NSDictionary *) vminfo
+  {
+  double wired =
+    [[vminfo objectForKey: NSLocalizedString(@"Wired RAM", NULL)]
+      doubleValue];
+  double cached =
+    [[vminfo objectForKey: NSLocalizedString(@"File Cache", NULL)]
+      doubleValue];
+
+  NSString * extra =
+    [NSString
+      stringWithFormat:
+        NSLocalizedString(@"(%@ Wired - %@ Cached)", NULL),
+        [formatter stringFromByteCount: (unsigned long long)wired],
+        [formatter stringFromByteCount: (unsigned long long)cached]];
+
+  [self
+    printVM: vminfo
+    forKey: NSLocalizedString(@"Used RAM", NULL)
+    indent: @"    "
+    extra: extra];
   }
 
 // Collect virtual memory information.
@@ -270,41 +327,6 @@
       NSLocalizedString(@"Swap Used", NULL) :
         [NSNumber numberWithDouble: used]
     };
-  }
-
-// Print a VM value.
-- (void) printVM: (NSDictionary *) vminfo
-  forKey: (NSString *) key indent: (NSString *) indent
-  {
-  double value = [[vminfo objectForKey: key] doubleValue];
-  
-  [self.result
-    appendString:
-      [NSString
-        stringWithFormat:
-          @"%@%@    %@\n",
-          indent,
-          [formatter stringFromByteCount: (unsigned long long)value],
-          key]];
-  }
-
-// Print a VM value.
-- (void) printVM: (NSDictionary *) vminfo
-  forKey: (NSString *) key
-  attributes: (NSDictionary *) attributes
-  indent: (NSString *) indent
-  {
-  double value = [[vminfo objectForKey: key] doubleValue];
-  
-  [self.result
-    appendString:
-      [NSString
-        stringWithFormat:
-          @"%@%@    %@\n",
-          indent,
-          [formatter stringFromByteCount: (unsigned long long)value],
-          key]
-    attributes: attributes];
   }
 
 @end
