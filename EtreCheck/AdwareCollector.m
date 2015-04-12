@@ -99,7 +99,7 @@
       NSArray * extensions = [plist objectForKey: @"item1"];
       NSArray * dvctmsp = [plist objectForKey: @"item2"];
       NSArray * gi = [plist objectForKey: @"item3"];
-      NSArray * optional = [plist objectForKey: @"item4"];
+      NSArray * more = [plist objectForKey: @"item4"];
       
       if(extensions)
         [[Model model] setAdwareExtensions: extensions];
@@ -113,8 +113,10 @@
       if(gi)
         [signatures setObject: gi forKey: @"Genieo, InstallMac"];
         
-      if(optional)
-        [signatures setObject: optional forKey: @"Optional"];
+      if(more)
+        [signatures
+          setObject: more
+          forKey: NSLocalizedString(@"More adware files", NULL)];
 
       self.adwareSignatures = signatures;
       }

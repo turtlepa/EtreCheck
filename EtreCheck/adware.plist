@@ -40,25 +40,28 @@
 	</array>
 	<key>item4</key>
 	<array>
-    <string>/Library/LaunchAgents/com.genieo.completer.update.plist</string>
-    <string>/Library/LaunchAgents/com.genieo.engine.plist</string>
-    <string>/Library/LaunchAgents/com.genieoinnovation.macextension.client.plist</string>
-    <string>/Library/LaunchAgents/com.genieoinnovation.macextension.plist</string>
-    <string>/Library/LaunchDaemons/com.genieoinnovation.macextension.client.plist</string>
-    <string>/Library/LaunchDaemons/Jack.plist</string>
-    <string>~/Conduit</string>
-    <string>~/Trovi</string>
-    <string>~/Library/Caches/com.Conduit.takeOverSearchAssetsMac</string>
-    <string>~/Library/Caches/com.VSearch.bulk.installer</string>
-    <string>~/Library/Caches/com.VSearch.VSinstaller</string>
-    <string>~/Library/LaunchAgents/com.genieo.completer.download.plist</string>
-    <string>~/Library/LaunchAgents/com.genieo.completer.ltvbit.plist</string>
-    <string>~/Library/LaunchAgents/com.genieo.completer.update.plist</string>
-    <string>~/Library/Preferences/com.genieo.global.settings.plist.lockfile</string>
-    <string>~/Library/Preferences/com.geneio.settings.plist.lockfile</string>
-    <string>~/Library/Preferences/com.geneio.global.settings.plist</string>
-    <string>~/Library/Saved Application State/com.genieo.RemoveGenieoMac.savedState</string>
-    <string>~/Library/Saved Application State/com.VSearch.bulk.installer.savedstate</string>
-  </array>
+		<string>/Library/LaunchAgents/com.genieo.completer.update.plist</string>
+		<string>/Library/LaunchAgents/com.genieo.engine.plist</string>
+		<string>/Library/LaunchAgents/com.genieoinnovation.macextension.client.plist</string>
+		<string>/Library/LaunchAgents/com.genieoinnovation.macextension.plist</string>
+		<string>/Library/LaunchDaemons/com.genieoinnovation.macextension.client.plist</string>
+		<string>/Library/LaunchDaemons/Jack.plist</string>
+		<string>~/Library/LaunchAgents/com.genieo.completer.download.plist</string>
+		<string>~/Library/LaunchAgents/com.genieo.completer.ltvbit.plist</string>
+		<string>~/Library/LaunchAgents/com.genieo.completer.update.plist</string>
+	</array>
+	<key>item5</key>
+	<array>
+		<string>~/Conduit</string>
+		<string>~/Trovi</string>
+		<string>~/Library/Caches/com.Conduit.takeOverSearchAssetsMac</string>
+		<string>~/Library/Caches/com.VSearch.bulk.installer</string>
+		<string>~/Library/Caches/com.VSearch.VSinstaller</string>
+		<string>~/Library/Preferences/com.genieo.global.settings.plist.lockfile</string>
+		<string>~/Library/Preferences/com.geneio.settings.plist.lockfile</string>
+		<string>~/Library/Preferences/com.geneio.global.settings.plist</string>
+		<string>~/Library/Saved Application State/com.genieo.RemoveGenieoMac.savedState</string>
+		<string>~/Library/Saved Application State/com.VSearch.bulk.installer.savedstate</string>
+	</array>
 </dict>
 </plist>
