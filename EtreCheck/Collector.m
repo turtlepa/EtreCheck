@@ -247,12 +247,10 @@
     
     bool found = [scanner scanInt: & majorVersion];
     
-    if(found)
+    if(found && (majorVersion > 3))
       {
       if(age)
-        *age =
-          ([[Model model] majorOSVersion] -
-            majorVersion);
+        *age = ([[Model model] majorOSVersion] - majorVersion);
         
       NSString * minorVersion = nil;
       
