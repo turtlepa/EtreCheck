@@ -133,13 +133,32 @@
   double cached =
     [[vminfo objectForKey: NSLocalizedString(@"File Cache", NULL)]
       doubleValue];
-
-  NSString * extra =
-    [NSString
-      stringWithFormat:
-        NSLocalizedString(@"(%@ Wired - %@ Cached)", NULL),
-        [formatter stringFromByteCount: (unsigned long long)wired],
-        [formatter stringFromByteCount: (unsigned long long)cached]];
+ 
+  NSMutableString * extra = [NSMutableString string];
+  
+  if(wired || cached)
+    {
+    [extra appendString: @"("];
+    
+    if(wired)
+      {
+      [extra
+        appendFormat:
+          @"%@ Wired",
+          [formatter stringFromByteCount: (unsigned long long)wired]];
+        
+      if(cached)
+        [extra appendString: @" - "];
+      }
+      
+    if(cached)
+      [extra
+        appendFormat:
+          @"%@ Cached",
+          [formatter stringFromByteCount: (unsigned long long)cached]];
+      
+    [extra appendString: @")"];
+    }
 
   [self
     printVM: vminfo
@@ -254,8 +273,6 @@
 // Format output from top into something useable.
 - (NSDictionary *) formatTop: (NSString *) line
   {
-  NSLog(@"top line: %@", line);
-  NSLog(@"major OS version: %d", [[Model model] majorOSVersion]);
   if([[Model model] majorOSVersion] >= kMavericks)
     return [self formatTop9: line];
   
