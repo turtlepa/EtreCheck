@@ -173,17 +173,9 @@
 
   *cpu = [NSNumber numberWithDouble: cpuValue];
 
-  // The memory value from top is a stringn with funky formatting.
-  NSString * memString;
-  
-  found = [scanner scanUpToString: @"\n" intoString: & memString];
-
-  if(found)
-    {
-    double memValue = [Utilities scanTopMemory: memString];
+  double memValue = [Utilities scanTopMemory: scanner];
     
-    *mem = [NSNumber numberWithDouble: memValue];
-    }
+  *mem = [NSNumber numberWithDouble: memValue];
   }
 
 // Sort process names by some values measurement.

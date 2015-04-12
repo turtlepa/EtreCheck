@@ -92,6 +92,6 @@
   withVersion: (NSString *) version2;
 
 // Scan a string from top output.
-+ (double) scanTopMemory: (NSString *) memoryString;
++ (double) scanTopMemory: (NSScanner *) scanner;
 
 @end

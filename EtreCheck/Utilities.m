@@ -208,6 +208,16 @@
     {
     [task launch];
     
+    dispatch_after(
+      dispatch_time(DISPATCH_TIME_NOW, (int64_t)(120 * NSEC_PER_SEC)),
+      dispatch_get_main_queue(),
+      ^{
+        if([task isRunning])
+          {
+          [task terminate];
+          }
+      });
+      
     result =
       [[[task standardOutput] fileHandleForReading] readDataToEndOfFile];
     
@@ -612,10 +622,8 @@
   }
 
 // Scan a string from top output.
-+ (double) scanTopMemory: (NSString *) memoryString
++ (double) scanTopMemory: (NSScanner *) scanner
   {
-  NSScanner * scanner = [NSScanner scannerWithString: memoryString];
-  
   double memValue;
   
   bool found = [scanner scanDouble: & memValue];

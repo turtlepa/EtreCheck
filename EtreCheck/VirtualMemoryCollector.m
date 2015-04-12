@@ -193,7 +193,7 @@
 // Collect information from top.
 - (void) collecttop: (NSMutableDictionary *) vminfo
   {
-  NSArray * args = @[@"-c", @"/usr/bin/top -l 1 -stats pid,cpu,mem"];
+  NSArray * args = @[@"-c", @"/usr/bin/top -l 1 -stats pid,cpu,rsize"];
   
   NSData * result = [Utilities execute: @"/bin/sh" arguments: args];
   
@@ -234,7 +234,7 @@
   return
     @{
       NSLocalizedString(@"File Cache", NULL) :
-        [NSNumber numberWithDouble: cached],
+        [NSNumber numberWithDouble: cached]
     };
   }
   
@@ -254,37 +254,68 @@
 // Format output from top into something useable.
 - (NSDictionary *) formatTop: (NSString *) line
   {
+  NSLog(@"top line: %@", line);
+  NSLog(@"major OS version: %d", [[Model model] majorOSVersion]);
+  if([[Model model] majorOSVersion] >= kMavericks)
+    return [self formatTop9: line];
+  
+  return [self formatTop6: line];
+  }
+
+// Format output from top (OS X 10.6 or later) into something useable.
+- (NSDictionary *) formatTop6: (NSString *) line
+  {
   NSScanner * scanner = [NSScanner scannerWithString: line];
   
   [scanner scanString: @"PhysMem:" intoString: NULL];
   
-  NSString * usedString;
+  double wired = [Utilities scanTopMemory: scanner];
+
+  [scanner scanString: @"wired," intoString: NULL];
+
+  [Utilities scanTopMemory: scanner];
   
-  [scanner
-    scanUpToCharactersFromSet: [NSCharacterSet whitespaceCharacterSet]
-    intoString: & usedString];
+  [scanner scanString: @"active," intoString: NULL];
+
+  [Utilities scanTopMemory: scanner];
   
-  double used = [Utilities scanTopMemory: usedString];
+  [scanner scanString: @"inactive," intoString: NULL];
+
+  double used = [Utilities scanTopMemory: scanner];
+  
+  [scanner scanString: @"used," intoString: NULL];
+
+  double free = [Utilities scanTopMemory: scanner];
+  
+  [scanner scanString: @"free." intoString: NULL];
+
+  return
+    @{
+      NSLocalizedString(@"Used RAM", NULL) :
+        [NSNumber numberWithDouble: used],
+      NSLocalizedString(@"Wired RAM", NULL) :
+        [NSNumber numberWithDouble: wired],
+      NSLocalizedString(@"Free RAM", NULL) :
+        [NSNumber numberWithDouble: free],
+    };
+  }
+
+// Format output from top (OS X 10.9 or later) into something useable.
+- (NSDictionary *) formatTop9: (NSString *) line
+  {
+  NSScanner * scanner = [NSScanner scannerWithString: line];
+  
+  [scanner scanString: @"PhysMem:" intoString: NULL];
+  
+  double used = [Utilities scanTopMemory: scanner];
   
   [scanner scanString: @"used (" intoString: NULL];
 
-  NSString * wiredString;
-  
-  [scanner
-    scanUpToCharactersFromSet: [NSCharacterSet whitespaceCharacterSet]
-    intoString: & wiredString];
-  
-  double wired = [Utilities scanTopMemory: wiredString];
+  double wired = [Utilities scanTopMemory: scanner];
 
   [scanner scanString: @"wired)," intoString: NULL];
 
-  NSString * freeString;
-  
-  [scanner
-    scanUpToCharactersFromSet: [NSCharacterSet whitespaceCharacterSet]
-    intoString: & freeString];
-  
-  double free = [Utilities scanTopMemory: freeString];
+  double free = [Utilities scanTopMemory: scanner];
   
   [scanner scanString: @"unused." intoString: NULL];
 
@@ -314,13 +345,7 @@
   
   [scanner scanString: @"used =" intoString: NULL];
 
-  NSString * usedString;
-  
-  [scanner
-    scanUpToCharactersFromSet: [NSCharacterSet whitespaceCharacterSet]
-    intoString: & usedString];
-  
-  double used = [Utilities scanTopMemory: usedString];
+  double used = [Utilities scanTopMemory: scanner];
   
   return
     @{
