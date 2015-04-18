@@ -24,7 +24,6 @@
 	</array>
 	<key>item3</key>
 	<array>
-		<string>/private/etc/launchd.conf</string>
 		<string>/Applications/Genieo</string>
 		<string>/Applications/InstallMac</string>
 		<string>/Applications/Uninstall Genieo</string>
@@ -52,6 +51,7 @@
 	</array>
 	<key>item5</key>
 	<array>
+		<string>/private/etc/launchd.conf</string>
 		<string>~/Conduit</string>
 		<string>~/Trovi</string>
 		<string>~/Library/Caches/com.Conduit.takeOverSearchAssetsMac</string>

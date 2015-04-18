@@ -239,6 +239,14 @@
   if([file isEqualToString: @".DS_Store"])
     return NO;
     
+  // Ignore zero-byte files.
+  NSDictionary * attributes =
+    [[NSFileManager defaultManager]
+      attributesOfItemAtPath: path error: NULL];
+  
+  if([attributes fileSize] == 0)
+    return NO;
+    
   // Get the status.
   NSDictionary * status = [self collectLaunchdItemStatus: path];
     

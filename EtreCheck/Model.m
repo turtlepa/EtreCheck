@@ -28,6 +28,7 @@
 @synthesize computerName = myComputerName;
 @synthesize hostName = myHostName;
 @synthesize adwareFound = myAdwareFound;
+@synthesize terminatedTasks = myTerminatedTasks;
 
 // Return the singeton of shared values.
 + (Model *) model
@@ -57,6 +58,7 @@
     myDiskErrors = [NSMutableDictionary new];
     myDiagnosticEvents = [NSMutableDictionary new];
     myAdwareFiles = [NSMutableDictionary new];
+    myTerminatedTasks = [NSMutableArray new];
     }
     
   return self;
@@ -65,6 +67,7 @@
 // Destructor.
 - (void) dealloc
   {
+  self.terminatedTasks = nil;
   self.adwareFiles = nil;
   self.diagnosticEvents = nil;
   self.diskErrors = nil;
@@ -200,6 +203,22 @@
 - (NSString *) adwareType: (NSString *) path
   {
   return [self.adwareFiles objectForKey: path];
+  }
+
+// Handle a task that takes too long to complete.
+- (void) taskTerminated: (NSString *) program arguments: (NSArray *) args
+  {
+  NSMutableString * command = [NSMutableString string];
+  
+  [command appendString: program];
+  
+  for(NSString * argument in args)
+    {
+    [command appendString: @" "];
+    [command appendString: argument];
+    }
+    
+  [self.terminatedTasks addObject: command];
   }
 
 @end

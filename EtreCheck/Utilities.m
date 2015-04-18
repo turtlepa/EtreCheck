@@ -208,13 +208,16 @@
     {
     [task launch];
     
+    // Timeout after 5 minutes.
     dispatch_after(
-      dispatch_time(DISPATCH_TIME_NOW, (int64_t)(120 * NSEC_PER_SEC)),
+      dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * 5 * NSEC_PER_SEC)),
       dispatch_get_main_queue(),
       ^{
         if([task isRunning])
           {
           [task terminate];
+          
+          [[Model model] taskTerminated: program arguments: args];
           }
       });
       

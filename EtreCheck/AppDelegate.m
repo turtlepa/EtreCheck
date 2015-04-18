@@ -415,6 +415,8 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   [self.log appendString: @"\n\n"];
   
   [self printLinkInstructions];
+  
+  [self printErrors];
   }
 
 // Print the problem description.
@@ -457,7 +459,17 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
 
   [self.log appendString: @"\n"];
   }
+
+// Print errors during EtreCheck itself.
+- (void) printErrors
+  {
+  NSArray * terminatedTasks = [[Model model] terminatedTasks];
   
+  if(terminatedTasks.count)
+    {
+    }
+  }
+
 // Get the current date as a string.
 - (NSString *) currentDate
   {

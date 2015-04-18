@@ -34,6 +34,7 @@
   NSString * myComputerName;
   NSString * myHostName;
   bool myAdwareFound;
+  NSMutableArray * myTerminatedTasks;
   }
 
 // Keep track of the OS version.
@@ -84,6 +85,9 @@
 // Did I find any adware?
 @property (assign) bool adwareFound;
 
+// Which tasks had to be terminated.
+@property (retain) NSMutableArray * terminatedTasks;
+
 // Return the singeton of shared values.
 + (Model *) model;
 
@@ -104,5 +108,8 @@
 
 // What kind of adware is this?
 - (NSString *) adwareType: (NSString *) path;
+
+// Handle a task that takes too long to complete.
+- (void) taskTerminated: (NSString *) program arguments: (NSArray *) args;
 
 @end
