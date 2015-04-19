@@ -127,13 +127,12 @@
 // Print the used VM value.
 - (void) printUsedVM: (NSDictionary *) vminfo
   {
-  NSString * extra = [self formatUsedVM: vminfo];
+  //NSString * extra = [self formatUsedVM: vminfo];
   
   [self
     printVM: vminfo
     forKey: NSLocalizedString(@"Used RAM", NULL)
-    indent: @"    "
-    extra: extra];
+    indent: @"    "];
   }
 
 // Format used memory.
