@@ -465,8 +465,32 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   {
   NSArray * terminatedTasks = [[Model model] terminatedTasks];
   
-  if(terminatedTasks.count)
+  if(terminatedTasks.count > 0)
     {
+    [self.log
+      appendString:
+        NSLocalizedString(
+          @"The following internal tasks failed to complete:\n", NULL)
+      attributes:
+        @{
+          NSForegroundColorAttributeName : [[Utilities shared] red],
+          NSFontAttributeName : [[Utilities shared] boldFont]
+        }];
+
+    for(NSString * task in terminatedTasks)
+      {
+      [self.log
+        appendString: task
+        attributes:
+          @{
+            NSForegroundColorAttributeName : [[Utilities shared] red],
+            NSFontAttributeName : [[Utilities shared] boldFont]
+          }];
+      
+      [self.log appendString: @"\n"];
+      }
+
+    [self.log appendString: @"\n"];
     }
   }
 
