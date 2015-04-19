@@ -127,11 +127,26 @@
 // Print the used VM value.
 - (void) printUsedVM: (NSDictionary *) vminfo
   {
+  NSString * extra = [self formatUsedVM: vminfo];
+  
+  [self
+    printVM: vminfo
+    forKey: NSLocalizedString(@"Used RAM", NULL)
+    indent: @"    "
+    extra: extra];
+  }
+
+// Format used memory.
+- (NSString *) formatUsedVM: (NSDictionary *) vminfo
+  {
   double wired =
     [[vminfo objectForKey: NSLocalizedString(@"Wired RAM", NULL)]
       doubleValue];
   double cached =
     [[vminfo objectForKey: NSLocalizedString(@"File Cache", NULL)]
+      doubleValue];
+  double compressed =
+    [[vminfo objectForKey: NSLocalizedString(@"Compressed", NULL)]
       doubleValue];
  
   NSMutableString * extra = [NSMutableString string];
@@ -147,7 +162,7 @@
           @"%@ Wired",
           [formatter stringFromByteCount: (unsigned long long)wired]];
         
-      if(cached)
+      if(cached || compressed)
         [extra appendString: @" - "];
       }
       
@@ -157,14 +172,19 @@
           @"%@ Cached",
           [formatter stringFromByteCount: (unsigned long long)cached]];
       
+    if(compressed)
+      [extra appendString: @" - "];
+      
+    if(compressed)
+      [extra
+        appendFormat:
+          @"%@ Compressed",
+          [formatter stringFromByteCount: (unsigned long long)compressed]];
+
     [extra appendString: @")"];
     }
-
-  [self
-    printVM: vminfo
-    forKey: NSLocalizedString(@"Used RAM", NULL)
-    indent: @"    "
-    extra: extra];
+    
+  return extra;
   }
 
 // Collect virtual memory information.
@@ -245,15 +265,20 @@
   NSString * statisticsValue =
     [vm_stats objectForKey: @"Mach Virtual Memory Statistics"];
   NSString * cachedValue = [vm_stats objectForKey: @"File-backed pages"];
+  NSString * compressedValue =
+    [vm_stats objectForKey: @"Pages occupied by compressor"];
 
   double pageSize = [self parsePageSize: statisticsValue];
   
   double cached = [cachedValue doubleValue] * pageSize;
+  double compressed = [compressedValue doubleValue] * pageSize;
   
   return
     @{
       NSLocalizedString(@"File Cache", NULL) :
-        [NSNumber numberWithDouble: cached]
+        [NSNumber numberWithDouble: cached],
+      NSLocalizedString(@"Compressed", NULL) :
+        [NSNumber numberWithDouble: compressed]
     };
   }
   
