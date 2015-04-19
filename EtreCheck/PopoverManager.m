@@ -78,6 +78,40 @@
 - (void) showDetail: (NSString *) title
   content: (NSAttributedString *) content
   {
+  [self showDetailWindow];
+  
+  [self.title setStringValue: title];
+  
+  self.details = content;
+  
+  NSTextStorage * storage =
+    [[NSTextStorage alloc] initWithAttributedString: self.details];
+
+  [self resizeDetail: storage];
+  
+  [storage release];
+
+  NSData * rtfData =
+    [self.details
+      RTFFromRange: NSMakeRange(0, [self.details length])
+      documentAttributes: nil];
+
+  NSRange range = NSMakeRange(0, [[self.textView textStorage] length]);
+  
+  [self.textView replaceCharactersInRange: range withRTF: rtfData];
+  [self.textView setFont: [NSFont systemFontOfSize: 13]];
+  
+  [self.textView setEditable: YES];
+  [self.textView setEnabledTextCheckingTypes: NSTextCheckingTypeLink];
+  [self.textView checkTextInDocument: nil];
+  [self.textView setEditable: NO];
+
+  [self.textView scrollRangeToVisible: NSMakeRange(0, 1)];
+  }
+
+// Show the detail window.
+- (void) showDetailWindow
+  {
   if(self.popover)
     {
     NSPoint clickPoint =
@@ -109,34 +143,6 @@
         break;
       }
     }
-    
-  [self.title setStringValue: title];
-  
-  self.details = content;
-  
-  NSTextStorage * storage =
-    [[NSTextStorage alloc] initWithAttributedString: self.details];
-
-  [self resizeDetail: storage];
-  
-  [storage release];
-
-  NSData * rtfData =
-    [self.details
-      RTFFromRange: NSMakeRange(0, [self.details length])
-      documentAttributes: nil];
-
-  NSRange range = NSMakeRange(0, [[self.textView textStorage] length]);
-  
-  [self.textView replaceCharactersInRange: range withRTF: rtfData];
-  [self.textView setFont: [NSFont systemFontOfSize: 13]];
-  
-  [self.textView setEditable: YES];
-  [self.textView setEnabledTextCheckingTypes: NSTextCheckingTypeLink];
-  [self.textView checkTextInDocument: nil];
-  [self.textView setEditable: NO];
-
-  [self.textView scrollRangeToVisible: NSMakeRange(0, 1)];
   }
 
 // Resize the detail pane to match the content.
@@ -152,6 +158,39 @@
   size.width = minWidth.width - 36;
   size.height = FLT_MAX;
   
+  NSRect idealRect = [self idealRectForStorage: storage size: size];
+    
+  size.width += 36;
+  size.height = idealRect.size.height + 76;
+  size.height += 5;
+    
+  NSRect textViewFrame = [self.textView frame];
+  
+  textViewFrame.size.width = size.width - 45;
+  textViewFrame.size.height = size.height - 20;
+  
+  [self.textView setFrame: textViewFrame];
+  
+  if(self.popover)
+    {
+    if(size.height < self.minPopoverSize.height)
+      size.height = self.minPopoverSize.height;
+      
+    [self.popover setContentSize: size];
+    }
+  else
+    {
+    if(size.height < self.minPopoverSize.height)
+      size.height = self.minPopoverSize.height;
+
+    [self.drawer setContentSize: size];
+    }
+  }
+
+// Get the ideal rect size.
+- (NSRect) idealRectForStorage: (NSTextStorage *) storage
+  size: (NSSize) size
+  {
   NSTextContainer * container =
     [[NSTextContainer alloc] initWithContainerSize: size];
   NSLayoutManager * manager = [[NSLayoutManager alloc] init];
@@ -170,28 +209,11 @@
   [manager glyphRangeForTextContainer: container];
   
   NSRect idealRect = [manager usedRectForTextContainer: container];
-    
+
   [manager release];
   [container release];
   
-  size.width += 36;
-  size.height = idealRect.size.height + 76;
-  size.height += 5;
-    
-  if(self.popover)
-    {
-    if(size.height < self.minPopoverSize.height)
-      size.height = self.minPopoverSize.height;
-      
-    [self.popover setContentSize: size];
-    }
-  else
-    {
-    if(size.height < self.minPopoverSize.height)
-      size.height = self.minPopoverSize.height;
-
-    [self.drawer setContentSize: size];
-    }
+  return idealRect;
   }
 
 // Close the detail.

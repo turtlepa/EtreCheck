@@ -14,6 +14,7 @@
 "userlaunchagents" = "Ce sont toutes les parties de votre système d’exploitation de bas niveau qui marchent cachés quand l‘utilisateur est connecté. Ces logiciel peut inclure divers types de «nettoyage» ou logiciel-fraude que vous n'avez pas besoin.";
 "loginitems" = "Ce sont les logiciels qui se démarrent aussitôt que vous faites une connexion au ordinateur. S’il y en a beaucoup, vous pouvez manquer de mémoire.";
 "internetplugins" = "Ces articles pourraient influer sur votre navigation sur le Web. Les plug-ins Flash et Java sont particulièrement importants parce qu’ils ont une histoire de mauvaise sécurité. Pour Flash, EtreCheck se connecte au site web d’Adobe pour obtenir la version de Flash préférée pour votre ordinateur. Si votre versions de Flash est trop vieille, EtreCheck l’indiquera en rouge. Mais si vous avez installer une version avant-première de Flash, EtreCheck vous dira que votre version n’est pas recommandée. Malheureusement, il n’est pas possible de déterminer avec précision la dernière version de Java. EtreCheck fournit un lien où vous pouvez vérifier votre version de Java.";
+"userinternetplugins" = "Ces articles pourraient influer sur votre navigation sur le Web.";
 "startupitems" = "Ces logiciels démarrent avec votre Macintosh. Ils ne fonctionnent plus sur OS X 10.10 «Yosemite».";
 "safariextensions" = "Ces articles pourraient influer sur votre navigation sur le Web.";
 "audioplugins" = "Logiciel qui pourrait changer le comportement du son sur votre Macintosh.";
@@ -22,7 +23,7 @@
 "timemachine" = "Des informations détaillées sur votre sauvegarde Time Machine. Si vous ne utilisez pas Time Machine, cette section sera en rouge.";
 "cpu" = "Ce sont les tâches qui utilisent actuellement la majorité de votre capacité de traitement. C’est pourquoi il est préférable d’exécuter EtreCheck pendant que votre ordinateur fonctionne lentement. EtreCheck essaie plusieurs fois d’identifier correctement les processus utilisant le plus de votre CPU.";
 "memory" = "Ce sont les tâches qui utilisent actuellement la majorité de votre mémoire. C’est pourquoi il est préférable d’exécuter EtreCheck pendant que votre ordinateur fonctionne lentement. EtreCheck essaie plusieurs fois d’identifier correctement les processus utilisant le plus de votre mémoire.";
-"vm" = "Des informations détaillées sur votre comportement de la mémoire virtuelle. Une valeur élevée pour «Page Outs» signifie que vous avez probablement besoin de plus de mémoire.";
+"vm" = "Des informations détaillées sur votre comportement de la mémoire virtuelle. Une valeur élevée pour «Fichier d’échange utilisé» signifie que vous avez probablement besoin de plus de mémoire.";
 "gatekeeper" = "Vos paramètres de Gatekeeper actuelles.";
 "diagnostics" = "Fichiers de diagnostic récents générés par votre système. EtreCheck comprend crash, hang, et les rapports de CPU pour les trois derniers jours. Tous les rapports de panique noyau sont également inclus, ainsi que vos plus récents résultats d‘examen de soi. Pour de meilleurs résultats, exécutez EtreCheck comme un utilisateur administrateur (ce est le réglage par défaut).";
 "adware" = "Logiciel qui ajoute des advertisements, comme identifié par Apple.\nVoir http://support.apple.com/HT203987";
