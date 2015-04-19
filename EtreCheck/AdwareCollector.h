@@ -9,10 +9,11 @@
 // Collect information about adware.
 @interface AdwareCollector : Collector
   {
-  NSDictionary * myAdwareSignatures;
+  NSMutableDictionary * myAdwareSignatures;
+  NSMutableDictionary * myAdwareFound;
   }
 
-@property (retain) NSDictionary * adwareSignatures;
-@property (readonly) NSMutableDictionary * adwareFiles;
+@property (retain) NSMutableDictionary * adwareSignatures;
+@property (retain) NSMutableDictionary * adwareFound;
 
 @end

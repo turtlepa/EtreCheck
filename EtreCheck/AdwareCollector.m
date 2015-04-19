@@ -10,16 +10,17 @@
 #import "NSMutableAttributedString+Etresoft.h"
 #import "Utilities.h"
 
+#define kExtensionsKey @"extensions"
+#define kGroup2Key \
+  @"Downlite, VSearch, Conduit, Trovi, MyBrand, Search Protect"
+#define kGroup3Key @"Genieo, InstallMac"
+#define kGroup4Key @"More adware files"
+
 // Collect information about adware.
 @implementation AdwareCollector
 
 @synthesize adwareSignatures = myAdwareSignatures;
-@dynamic adwareFiles;
-
-- (NSMutableDictionary *) adwareFiles
-  {
-  return [[Model model] adwareFiles];
-  }
+@synthesize adwareFound = myAdwareFound;
 
 // Constructor.
 - (id) init
@@ -31,6 +32,9 @@
     self.name = @"adware";
     self.title = NSLocalizedStringFromTable(self.name, @"Collectors", NULL);
     
+    myAdwareSignatures = [NSMutableDictionary new];
+    myAdwareFound = [NSMutableDictionary new];
+  
     [self loadSignatures];
     }
     
@@ -40,6 +44,7 @@
 // Destructor.
 - (void) dealloc
   {
+  self.adwareFound = nil;
   self.adwareSignatures = nil;
   
   [super dealloc];
@@ -60,10 +65,9 @@
 // Collect adware.
 - (void) collectAdware
   {
-  [self
-    searchForAdware:
-      @"Downlite, VSearch, Conduit, Trovi, MyBrand, Search Protect"];
-  [self searchForAdware: @"Genieo, InstallMac"];
+  [self searchForAdware: NSLocalizedString(kGroup2Key, NULL)];
+  [self searchForAdware: NSLocalizedString(kGroup3Key, NULL)];
+  [self searchForAdware: NSLocalizedString(kGroup4Key, NULL)];
   }
 
 // Load signatures from an obfuscated list of signatures.
@@ -94,33 +98,49 @@
   
     if(plist)
       {
-      NSMutableDictionary * signatures = [NSMutableDictionary dictionary];
-  
-      NSArray * extensions = [plist objectForKey: @"item1"];
-      NSArray * dvctmsp = [plist objectForKey: @"item2"];
-      NSArray * gi = [plist objectForKey: @"item3"];
-      NSArray * more = [plist objectForKey: @"item4"];
+      [self
+        addSignatures: [plist objectForKey: @"item1"]
+          forKey: kExtensionsKey];
       
-      if(extensions)
-        [[Model model] setAdwareExtensions: extensions];
-
-      if(dvctmsp)
-        [signatures
-          setObject: dvctmsp
-          forKey:
-            @"Downlite, VSearch, Conduit, Trovi, MyBrand, Search Protect"];
-
-      if(gi)
-        [signatures setObject: gi forKey: @"Genieo, InstallMac"];
-        
-      if(more)
-        [signatures
-          setObject: more
-          forKey: NSLocalizedString(@"More adware files", NULL)];
-
-      self.adwareSignatures = signatures;
+      [self
+        addSignatures: [plist objectForKey: @"item2"] forKey: kGroup2Key];
+      
+      [self
+        addSignatures: [plist objectForKey: @"item3"] forKey: kGroup3Key];
+      
+      [self
+        addSignatures: [plist objectForKey: @"item4"] forKey: kGroup4Key];
       }
     }
+  }
+
+// Add signatures that match a given key.
+- (void) addSignatures: (NSArray *) signatures forKey: (NSString *) key
+  {
+  if(signatures)
+    {
+    NSString * localizedKey = NSLocalizedString(key, NULL);
+    
+    if([key isEqualToString: @"extensions"])
+      [[Model model] setAdwareExtensions: signatures];
+      
+    else
+      [myAdwareSignatures
+        setObject: [self expandSignatures: signatures]
+        forKey: localizedKey];
+    }
+  }
+
+// Expand adware signatures.
+- (NSArray *) expandSignatures: (NSArray *) signatures
+  {
+  NSMutableArray * expandedSignatures = [NSMutableArray array];
+  
+  for(NSString * signature in signatures)
+    [expandedSignatures
+      addObject: [signature stringByExpandingTildeInPath]];
+    
+  return expandedSignatures;
   }
 
 // Search for existing adware files.
@@ -136,7 +156,7 @@
     {
     [[Model model] setAdwareFound: YES];
 
-    [self.adwareFiles setObject: foundFiles forKey: adware];
+    [self.adwareFound setObject: foundFiles forKey: adware];
     
     for(NSString * path in foundFiles)
       [[[Model model] adwareFiles]
@@ -166,11 +186,11 @@
 // Print any adware found.
 - (void) printAdware
   {
-  if([self.adwareFiles count])
+  if([self.adwareFound count])
     {
     [self.result appendAttributedString: [self buildTitle]];
     
-    for(NSString * adware in self.adwareFiles)
+    for(NSString * adware in self.adwareFound)
       {
       [self.result
         appendString: [NSString stringWithFormat: @"    %@", adware]

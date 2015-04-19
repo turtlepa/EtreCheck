@@ -778,6 +778,13 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   [self.window
     setStyleMask: [self.window styleMask] | NSResizableWindowMask];
   
+  // Adjust the size of the content frame to prevent horizontal scrolling.
+  NSRect contentFrame = [self.logView frame];
+    
+  contentFrame.size.width -= 20;
+  
+  [self.logView setFrame: contentFrame];
+  
   [self notify];
 
   [self.logView
