@@ -144,7 +144,7 @@
 " [Recovery]" = " [Restauration]";
 "info" = "ℹ️";
 "startupitemsdeprecated" = "    Les éléments de démarrage sont obsolètes avec OS X Yosemite\n";
-"Quit and go to update" = "Qutter et mettre à jour";
+"Quit and go to update" = "Quitter et mettre à jour";
 "EtreCheck Report" = "Rapport EtreCheck";
 "Problem description:\n" = "Description du problème :\n";
 "Confirm cancellation" = "Confirmer l'annulation";
