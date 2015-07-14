@@ -148,6 +148,7 @@
   [self.appleLaunchd addObject: @"org.ntp.ntpd.plist"];
   [self.appleLaunchd addObject: @"org.openldap.slapd.plist"];
   [self.appleLaunchd addObject: @"org.postfix.master.plist"];
+  [self.appleLaunchd addObject: @"org.postfix.newaliases.plist"];
   [self.appleLaunchd addObject: @"org.postgresql.postgres_alt.plist"];
   [self.appleLaunchd addObject: @"shell.plist"];
   [self.appleLaunchd addObject: @"ssh.plist"];
@@ -371,7 +372,19 @@
 // Should I ignore failures?
 - (bool) ignoreFailuresOnFile: (NSString *) file
   {
-  if([file isEqualToString: @"com.apple.xprotectupdater.plist"])
+  if([file isEqualToString: @"com.apple.mtrecorder.plist"])
+    return YES;
+  else if([file isEqualToString: @"com.apple.spirecorder.plist"])
+    return YES;
+  else if([file isEqualToString: @"com.apple.MRTd.plist"])
+    return YES;
+  else if([file isEqualToString: @"com.apple.MRTa.plist"])
+    return YES;
+  else if([file isEqualToString: @"com.apple.logd.plist"])
+    return YES;
+  else if([file isEqualToString: @"com.apple.xprotectupdater.plist"])
+    return YES;
+  else if([file isEqualToString: @"com.apple.xprotectupdater.plist"])
     return YES;
   else if([file isEqualToString: @"com.apple.afpstat.plist"])
     return YES;
