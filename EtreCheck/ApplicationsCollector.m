@@ -108,6 +108,12 @@
   if(!path)
     path = NSLocalizedString(@"[Unknown]", NULL);
     
+  // TODO: Grep executable for SMLoginItemSetEnabled
+  // Perform /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -dump
+  // and look for
+  // 	flags:         apple-internal  has-display-name  ui-element  has-entitlements  
+  // 	flags:         apple-internal  has-display-name  bg-only  launch-disabled  incomplete  requires-iphone-simulator  
+  // See Antidote as example.
   NSString * versionPlist =
     [path stringByAppendingPathComponent: @"Contents/Info.plist"];
 

@@ -5,6 +5,9 @@
 	<key>item1</key>
 	<array>
 		<string>shopping assistant</string>
+		<string>cinema-plus</string>
+		<string>cinema +</string>
+		<string>cinema ploos</string>
 		<string>searchme</string>
 		<string>slick savings</string>
 		<string>spigot</string>
@@ -12,7 +15,6 @@
 		<string>gophoto.it</string>
 		<string>omnibar</string>
 		<string>shopy mate</string>
-		<string>cinema</string>
 	</array>
 	<key>item2</key>
 	<array>
