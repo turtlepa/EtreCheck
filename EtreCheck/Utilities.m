@@ -317,20 +317,22 @@
 // Redact any user names in a path.
 + (NSString *) cleanPath: (NSString *) path
   {
+  NSString * abbreviated = [path stringByAbbreviatingWithTildeInPath];
+  
   NSString * username = NSUserName();
   NSString * fullname = NSFullUserName();
   
-  if(![username length])
-    return path;
+  if([username length] < 4)
+    return abbreviated;
     
-  NSRange range = [path rangeOfString: username];
+  NSRange range = [abbreviated rangeOfString: username];
   
   if(range.location == NSNotFound)
     {
     if([fullname length])
-      range = [path rangeOfString: username];
+      range = [abbreviated rangeOfString: username];
     else
-      return path;
+      return abbreviated;
     }
     
   // Now check for a hostname version.
@@ -340,7 +342,7 @@
     NSString * computerName = [[Model model] computerName];
     
     if(!computerName)
-      return path;
+      return abbreviated;
       
     BOOL redact = NO;
     
@@ -352,14 +354,14 @@
       
     if(redact)
       {
-      range = [path rangeOfString: computerName];
+      range = [abbreviated rangeOfString: computerName];
 
       if(range.location == NSNotFound)
         {
         NSString * hostName = [[Model model] hostName];
         
         if(hostName)
-          range = [path rangeOfString: hostName];
+          range = [abbreviated rangeOfString: hostName];
         else
           range.location = NSNotFound;
         }
@@ -367,15 +369,15 @@
     }
     
   if(range.location == NSNotFound)
-    return path;
+    return abbreviated;
     
   return
     [NSString
       stringWithFormat:
         @"%@%@%@",
-        [path substringToIndex: range.location],
+        [abbreviated substringToIndex: range.location],
         NSLocalizedString(@"[redacted]", NULL),
-        [path substringFromIndex: range.location + range.length]];
+        [abbreviated substringFromIndex: range.location + range.length]];
   }
 
 // Format an exectuable array for printing, redacting any user names in
