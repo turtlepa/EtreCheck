@@ -59,6 +59,7 @@
     myDiagnosticEvents = [NSMutableDictionary new];
     myAdwareFiles = [NSMutableDictionary new];
     myTerminatedTasks = [NSMutableArray new];
+    mySeriousProblems = [NSMutableSet new];
     }
     
   return self;
@@ -67,6 +68,7 @@
 // Destructor.
 - (void) dealloc
   {
+  self.seriousProblems = nil;
   self.terminatedTasks = nil;
   self.adwareFiles = nil;
   self.diagnosticEvents = nil;

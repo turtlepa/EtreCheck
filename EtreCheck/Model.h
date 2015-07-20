@@ -13,6 +13,16 @@
 #define kMavericks    13
 #define kYosemite     14
 
+// Critical errors
+#define kHardDiskFailure @"harddiskfailure"
+#define kNoBackups @"nobackup"
+#define kLowHardDisk @"lowharddisk"
+#define kLowRAM @"lowram"
+#define kMemoryPressure @"memorypressure"
+#define kAdware @"adware"
+#define kOutdatedOS @"outdatedos"
+#define kHighCache @"highcache"
+
 @class DiagnosticEvent;
 
 // A singleton to keep track of system information.
@@ -35,6 +45,7 @@
   NSString * myHostName;
   bool myAdwareFound;
   NSMutableArray * myTerminatedTasks;
+  NSMutableSet * mySeriousProblems;
   }
 
 // Keep track of the OS version.
@@ -87,6 +98,9 @@
 
 // Which tasks had to be terminated.
 @property (retain) NSMutableArray * terminatedTasks;
+
+// What serious problems were found?
+@property (retain) NSMutableSet * seriousProblems;
 
 // Return the singeton of shared values.
 + (Model *) model;

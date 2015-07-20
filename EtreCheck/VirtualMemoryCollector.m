@@ -127,12 +127,13 @@
 // Print the used VM value.
 - (void) printUsedVM: (NSDictionary *) vminfo
   {
-  //NSString * extra = [self formatUsedVM: vminfo];
+  NSString * extra = [self formatUsedVM: vminfo];
   
   [self
     printVM: vminfo
     forKey: NSLocalizedString(@"Used RAM", NULL)
-    indent: @"    "];
+    indent: @"    "
+    extra: extra];
   }
 
 // Format used memory.
@@ -154,7 +155,7 @@
     {
     [extra appendString: @"("];
     
-    if(wired)
+    if(NO && wired)
       {
       [extra
         appendFormat:
@@ -171,10 +172,10 @@
           @"%@ Cached",
           [formatter stringFromByteCount: (unsigned long long)cached]];
       
-    if(compressed)
+    if(NO && compressed)
       [extra appendString: @" - "];
       
-    if(compressed)
+    if(NO && compressed)
       [extra
         appendFormat:
           @"%@ Compressed",
