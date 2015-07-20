@@ -76,9 +76,11 @@
 "MacBook Pro (Retina, 13 pouces, fin 2012)" = "https://support.apple.com/kb/SP658?locale=fr_FR";
 "MacBook Pro (Retina, 13 pouces, fin 2013)" = "https://support.apple.com/kb/SP691?locale=fr_FR";
 "MacBook Pro (Retina, 13 pouces, mi-2014)" = "https://support.apple.com/kb/SP703?locale=fr_FR";
+"MacBook Pro (Retina, 13 pouces, début 2015)" = "https://support.apple.com/kb/SP715?locale=fr_FR";
 "MacBook Pro (Retina, 15 pouces, début 2013)" = "https://support.apple.com/kb/SP669?locale=fr_FR";
 "MacBook Pro (Retina, 15 pouces, fin 2013)" = "https://support.apple.com/kb/SP690?locale=fr_FR";
 "MacBook Pro (Retina, 15 pouces, mi-2014)" = "https://support.apple.com/kb/SP704?locale=fr_FR";
+"MacBook Pro (Retina, 15 pouces, mi-2015)" = "https://support.apple.com/kb/SP719?locale=fr_FR";
 "MacBook Pro (début 2008)" = "https://support.apple.com/kb/SP4?locale=fr_FR";
 "MacBook Pro (original)" = "https://support.apple.com/kb/SP36?locale=fr_FR";
 "MacBook" = "https://support.apple.com/kb/SP31?locale=fr_FR";
@@ -101,6 +103,7 @@
 "iMac (Early 2006)" = "https://support.apple.com/kb/SP35?locale=fr_FR";
 "iMac (Late 2006)" = "https://support.apple.com/kb/SP28?locale=fr_FR";
 "iMac (Retina 5K, 27 pouces, fin 2014)" = "https://support.apple.com/kb/SP707?locale=fr_FR";
+"iMac (Retina 5K, 27 pouces, mi-2015)" = "https://support.apple.com/kb/SP718?locale=fr_FR";
 "iMac (Slot Loading)" = "https://support.apple.com/kb/SP121?locale=fr_FR";
 "iMac (Summer 2000)" = "https://support.apple.com/kb/SP64?locale=fr_FR";
 "iMac (Summer 2001)" = "https://support.apple.com/kb/SP109?locale=fr_FR";

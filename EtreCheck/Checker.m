@@ -182,6 +182,8 @@
       @"Macmini1,1",
       @"Macmini4,1",
       @"Macmini5,1",
+      @"MacBook5,2",
+      @"MacBook8,1",
       @"MacPro2,1",
       @"MacPro6,1",
       @"MacBookAir3,1",

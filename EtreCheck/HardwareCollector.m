@@ -98,6 +98,8 @@
       @"Macmini1,1" :     @"com.apple.macmini.icns",
       @"Macmini4,1" :     @"com.apple.macmini-unibody.icns",
       @"Macmini5,1" :     @"com.apple.macmini-unibody-no-optical.icns",
+      @"MacBook5,2" :     @"com.apple.macbook-unibody-plastic.icns",
+      @"MacBook8,1" :     @"com.apple.macbookair-13-unibody.icns",
       @"MacPro2,1" :      @"com.apple.macpro.icns",
       @"MacPro6,1" :      @"com.apple.macpro-cylinder.icns",
       @"MacBookAir3,1" :  @"com.apple.macbookair-11-unibody.icns",
