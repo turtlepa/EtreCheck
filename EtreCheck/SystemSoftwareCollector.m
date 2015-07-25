@@ -75,26 +75,35 @@
   [self parseOSVersion: version];
   
   int days = 0;
-  NSString * time = nil;
+  int hours = 0;
 
-  if([self parseUpTime: uptime days: & days time: & time])
-    [self.result
-      appendString:
-        [NSString
-          stringWithFormat:
-            NSLocalizedString(@"    %@ - Uptime: %@%@\n", NULL),
-            version,
-            TTTLocalizedPluralString(days, @"day", nil),
-            time]];
-  else
-    [self.result
-      appendString:
-        [NSString
-          stringWithFormat:
-            NSLocalizedString(@"    %@ - Uptime: %@%@\n", NULL),
-            version,
-            @"",
-            uptime]];
+  BOOL parsed = [self parseUpTime: uptime days: & days hours: & hours];
+  
+  if(!parsed)
+    return
+      [self.result
+        appendString:
+          [NSString
+            stringWithFormat:
+              NSLocalizedString(@"    %@ - Uptime: %@%@\n", NULL),
+              version,
+              @"",
+              uptime]];
+    
+  NSString * dayString = TTTLocalizedPluralString(days, @"day", nil);
+  NSString * hourString = TTTLocalizedPluralString(hours, @"hour", nil);
+  
+  if(days > 0)
+    hourString = @"";
+    
+  [self.result
+    appendString:
+      [NSString
+        stringWithFormat:
+          NSLocalizedString(@"    %@ - Uptime: %@%@\n", NULL),
+          version,
+          dayString,
+          hourString]];
   }
 
 // Parse the OS version.
@@ -119,7 +128,7 @@
 
 // Parse system uptime.
 - (bool) parseUpTime: (NSString *) uptime
-  days: (int *) days time: (NSString **) time
+  days: (int *) days hours: (int *) hours
   {
   NSScanner * scanner = [NSScanner scannerWithString: uptime];
 
@@ -138,7 +147,12 @@
   if(!found)
     return found;
 
-  return [scanner scanUpToString: @"\n" intoString: time];
+  found = [scanner scanInt: hours];
+  
+  if(*hours >= 18)
+    ++*days;
+    
+  return found;
   }
 
 @end

@@ -159,6 +159,12 @@
 "%d day (plural rule: zero)" = "";
 "%d day (plural rule: one)" = "un jour ";
 "%d day (plural rule: other)" = "%d jours ";
+"%d day (plural rule: zero)" = "";
+"%d day (plural rule: one)" = "environ un jour ";
+"%d day (plural rule: other)" = "environ %d jours ";
+"%d hour (plural rule: zero)" = "moins d’une heure";
+"%d hour (plural rule: one)" = "environ d’une heure";
+"%d hour (plural rule: other)" = "environ %d heures";
 "Upgradeable" = "Extensible";
 "Not upgradeable" = "Pas extensible";
 "Good - Handoff/Airdrop2 supported" = "Bon - Handoff/Airdrop2 disponible";

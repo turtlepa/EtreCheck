@@ -98,7 +98,24 @@
     NSString * diskDevice = [disk objectForKey: @"bsd_name"];
     NSString * diskSize = [disk objectForKey: @"size"];
     NSString * UUID = [disk objectForKey: @"volume_uuid"];
+    NSString * medium = [disk objectForKey: @"spsata_medium_type"];
+    NSString * trim = [disk objectForKey: @"spsata_trim_support"];
     
+    NSString * trimString =
+      [NSString
+        stringWithFormat: @" - TRIM: %@", NSLocalizedString(trim, NULL)];
+    
+    NSString * info =
+      [NSString
+        stringWithFormat:
+          @"(%@%@)",
+          medium
+            ? medium
+            : @"",
+          ([medium isEqualToString: @"Solid State"] && [trim length])
+            ? trimString
+            : @""];
+      
     if(!diskDevice)
       diskDevice = @"";
       
@@ -114,8 +131,8 @@
       appendString:
         [NSString
           stringWithFormat:
-            @"    %@ %@ %@\n",
-            diskName ? diskName : @"-", diskDevice, diskSize]];
+            @"    %@ %@ %@ %@\n",
+            diskName ? diskName : @"-", diskDevice, diskSize, info]];
     
     [self collectSMARTStatus: disk indent: @"    "];
     

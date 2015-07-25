@@ -490,6 +490,11 @@
 				TargetAttributes = {
 					A55BC16815BF987D00D42EF1 = {
 						DevelopmentTeam = P599JYY9LT;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
