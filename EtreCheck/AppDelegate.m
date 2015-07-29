@@ -229,36 +229,6 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
   [alert release];
   }
 
-// Instruct the user.
-- (void) showInstructions
-  {
-  NSAlert * alert = [[NSAlert alloc] init];
-
-  [alert
-    setMessageText: NSLocalizedString(@"EtreCheck Report", NULL)];
-    
-  [alert setAlertStyle: NSInformationalAlertStyle];
-
-  [alert setInformativeText: NSLocalizedString(@"etrecheckreport", NULL)];
-
-  // This is the rightmost, first, default button.
-  [alert
-    addButtonWithTitle:
-      NSLocalizedString(@"Go to Apple support forums", NULL)];
-
-  [alert addButtonWithTitle: NSLocalizedString(@"Continue", NULL)];
-
-  NSInteger result = [alert runModal];
-
-  if(result == NSAlertFirstButtonReturn)
-    [[NSWorkspace sharedWorkspace]
-      openURL:
-        [NSURL
-          URLWithString: NSLocalizedString(@"applesupportforums", NULL)]];
-    
-  [alert release];
-  }
-
 // Collect the user message.
 - (void) collectUserMessage
   {
@@ -876,8 +846,6 @@ NSComparisonResult compareViews(id view1, id view2, void * context);
       error: & error];
 
   [pasteboard setData: rtfData forType: NSPasteboardTypeRTF];
-  
-  [self showInstructions];
   }
   
 // Show a custom about panel.

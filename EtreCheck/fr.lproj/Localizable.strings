@@ -118,10 +118,7 @@
 "Skip" = "Ignorer";
 "Invalid" = "Non-valide";
 "EtreCheck Report" = "Rapport d’EtreCheck"; 
-"etrecheckreport" = "Le rapport EtreCheck est plus utile comme une image complète de l'état général de votre système. Si vous rencontrez des problèmes, le meilleur plan d'action est d'aller aux forums de support Apple, écrire une description détaillée de votre problème, expliquer ce qui se passe, expliquer ce que vous aimeriez voir se produire, et inclure ce rapport.";
-"Go to Apple support forums" = "Aller aux forums de support Apple";
 "Continue" = "Continuer";
-"applesupportforums" = "https://discussions.apple.com";
 " - Corrupt!" = " - Corrompu !";
 " - Count: %d" = " - Nombre : %d";
 "    %@ - Exists\n" = "    %@ - Existant\n";
