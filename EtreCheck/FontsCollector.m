@@ -53,12 +53,10 @@
                   @"    %@: %@\n", NULL),
                 name,
                 [Utilities cleanPath: path]]];
-                                 
-        [self.result appendString: @"\n"];
         }
-
-      [self.result appendCR];
       }
+      
+    [self.result appendCR];
     }
     
   dispatch_semaphore_signal(self.complete);
