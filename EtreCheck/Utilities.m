@@ -13,6 +13,7 @@
 
 // Create some dynamic properties for the singleton.
 @synthesize boldFont = myBoldFont;
+@synthesize italicFont = myItalicFont;
 @synthesize boldItalicFont = myBoldItalicFont;
 
 @synthesize green = myGreen;
@@ -66,6 +67,7 @@
   [myEnglishBundle release];
   
   [myBoldFont release];
+  [myItalicFont release];
   [myBoldItalicFont release];
 
   [myGreen release];
@@ -92,10 +94,16 @@
       convertFont: labelFont
       toHaveTrait: NSBoldFontMask];
     
+  myItalicFont =
+    [[NSFontManager sharedFontManager]
+      convertFont: labelFont
+      toHaveTrait: NSItalicFontMask];
+
   myBoldItalicFont =
     [NSFont fontWithName: @"Helvetica-BoldOblique" size: 12.0];
     
   [myBoldFont retain];
+  [myItalicFont retain];
   [myBoldItalicFont retain];
   }
 

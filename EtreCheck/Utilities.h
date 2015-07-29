@@ -17,6 +17,7 @@
 @interface Utilities : NSObject
   {
   NSFont * myBoldFont;
+  NSFont * myItalicFont;
   NSFont * myBoldItalicFont;
   
   NSColor * myGreen;
@@ -35,6 +36,7 @@
 
 // Make some handy shared values available to all collectors.
 @property (readonly) NSFont * boldFont;
+@property (readonly) NSFont * italicFont;
 @property (readonly) NSFont * boldItalicFont;
 
 @property (readonly) NSColor * green;

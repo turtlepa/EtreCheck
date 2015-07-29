@@ -67,13 +67,6 @@
   {
   NSMutableAttributedString * string = [NSMutableAttributedString new];
     
-  NSString * title =
-    [NSString
-      stringWithFormat:
-        @"%@ %@",
-        NSLocalizedString(self.title, NULL),
-        NSLocalizedString(@"info", NULL)];
-    
   NSString * url =
     [NSString
       stringWithFormat:
@@ -82,10 +75,20 @@
   url = [NSString stringWithFormat: @"etrecheck://help/%@", self.name];
 
   [string
-    appendString: title
+    appendString: NSLocalizedString(self.title, NULL)
     attributes:
       @{
         NSFontAttributeName : [[Utilities shared] boldFont],
+        NSLinkAttributeName : url
+      }];
+    
+  [string appendString: @" "];
+  
+  [string
+    appendString: NSLocalizedString(@"info", NULL)
+    attributes:
+      @{
+        NSFontAttributeName : [[Utilities shared] italicFont],
         NSLinkAttributeName : url
       }];
     
